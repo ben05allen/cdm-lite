@@ -1,0 +1,26 @@
+[project]
+name = "cdm-lite"
+version = "0.1.0"
+description = "Python CDM Models"
+readme = "README.md"
+authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
+requires-python = ">=3.14"
+dependencies = ["pydantic>=2.13.4"]
+
+[project.scripts]
+try = "cdm_lite:main"
+
+[build-system]
+requires = ["uv_build>=0.11.7,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+ignore = [
+  "E741", # ambiguous-variable-name
+]
+
+[dependency-groups]
+dev = ["datamodel-code-generator[ruff]>=0.56.1", "ruff>=0.15.12"]
