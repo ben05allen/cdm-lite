@@ -8,5 +8,6 @@ uv run datamodel-codegen \
   --reuse-model \
   --use-standard-collections \
   --snake-case-field \
+  --capitalise-enum-members \
   --formatter ruff-format \
   --target-python-version 3.14

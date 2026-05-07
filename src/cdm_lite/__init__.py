@@ -70,10 +70,7 @@ def main() -> None:
                 rollConvention=RollConventionEnum._15,
             ),
         },
-        payerReceiver={
-            "payer": CounterpartyRoleEnum.party1,
-            "receiver": CounterpartyRoleEnum.party2,
-        },
+        payerReceiver=PayerReceiver(payer=CounterpartyRoleEnum.party1, receiver=CounterpartyRoleEnum.party2),
     )
 
     # Floating leg
@@ -102,12 +99,9 @@ def main() -> None:
             "endDate": AdjustableDate(unadjustedDate=datetime.date(2029, 1, 15)),
             "calculationPeriodFrequency": CalculationPeriodFrequency(
                 periodMultiplier=3,
-                period=PeriodEnum.M,
+                period=PeriodEnum.m,
                 rollConvention=RollConventionEnum._15,
             ),
         },
-        payerReceiver={
-            "payer": CounterpartyRoleEnum.PARTY_2,
-            "receiver": CounterpartyRoleEnum.PARTY_1,
-        },
+        payerReceiver=PayerReceiver(payer=CounterpartyRoleEnum.party2, receiver=CounterpartyRoleEnum.party1),
     )
