@@ -23,4 +23,8 @@ ignore = [
 ]
 
 [dependency-groups]
-dev = ["datamodel-code-generator[ruff]>=0.56.1", "ruff>=0.15.12"]
+dev = [
+    "datamodel-code-generator[ruff]>=0.56.1",
+    "ruff>=0.15.12",
+    "ty>=0.0.34",
+]
