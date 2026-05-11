@@ -1,6 +1,8 @@
 import json
 
-path = "./lib/cdm-schema/cdm-product-collateral-RatingPriorityResolutionEnum.schema.json"  # put the failing file path here
+path = (
+    "./lib/cdm-schema/cdm-product-collateral-RatingPriorityResolutionEnum.schema.json"  # put the failing file path here
+)
 
 with open(path, encoding="utf-8") as f:
     content = f.read()

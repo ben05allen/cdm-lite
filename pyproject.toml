@@ -5,7 +5,9 @@ description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
 requires-python = ">=3.14"
-dependencies = ["pydantic>=2.13.4"]
+dependencies = [
+    "pydantic>=2.13.4",
+]
 
 [project.scripts]
 try = "cdm_lite:main"
