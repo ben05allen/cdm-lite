@@ -39,6 +39,7 @@ def process_directory(input_dir: str, output_dir: str):
                 cleaned_content = cleaned_content.replace("\n", " ")
                 schema = json.loads(cleaned_content)
                 fixed += 1
+                print(in_path)
 
             if is_enum_schema(schema) and "oneOf" in schema:
                 schema = clean_enum_schema(schema)
