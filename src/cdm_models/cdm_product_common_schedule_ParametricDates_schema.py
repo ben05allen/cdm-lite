@@ -18,10 +18,12 @@ class ParametricDates(BaseModel):
         alias="dayType",
         description="Denotes the enumerated values to specify the day type classification used in counting the number of days between two dates.",
     )
-    day_distribution: cdm_product_asset_DayDistributionEnum_schema.DayDistributionEnum | None = Field(
-        None,
-        alias="dayDistribution",
-        description="Denotes the method by which the pricing days are distributed across the pricing period.",
+    day_distribution: cdm_product_asset_DayDistributionEnum_schema.DayDistributionEnum | None = (
+        Field(
+            None,
+            alias="dayDistribution",
+            description="Denotes the method by which the pricing days are distributed across the pricing period.",
+        )
     )
     day_of_week: list[cdm_base_datetime_DayOfWeekEnum_schema.DayOfWeekEnum] | None = Field(
         None,
@@ -40,5 +42,7 @@ class ParametricDates(BaseModel):
         description="The pricing period per calculation period if the pricing days do not wholly fall within the respective calculation period.",
     )
     business_centers: cdm_base_datetime_BusinessCenters_schema.BusinessCenters = Field(
-        ..., alias="businessCenters", description="The enumerated values to specify the business centers."
+        ...,
+        alias="businessCenters",
+        description="The enumerated values to specify the business centers.",
     )

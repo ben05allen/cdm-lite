@@ -23,28 +23,36 @@ class VolatilityReturnTerms(BaseModel):
         alias="annualizationFactor",
         description="This specifies the numerator of an annualization factor. Frequently this number is equal to the number of observations of prices in a year e.g. 252.",
     )
-    dividend_applicability: cdm_observable_asset_DividendApplicability_schema.DividendApplicability | None = Field(
-        None, alias="dividendApplicability", description="The parameters which define whether dividends are applicable"
+    dividend_applicability: (
+        cdm_observable_asset_DividendApplicability_schema.DividendApplicability | None
+    ) = Field(
+        None,
+        alias="dividendApplicability",
+        description="The parameters which define whether dividends are applicable",
     )
-    equity_underlier_provisions: cdm_product_asset_EquityUnderlierProvisions_schema.EquityUnderlierProvisions | None = (
-        Field(
-            None,
-            alias="equityUnderlierProvisions",
-            description="Contains Equity Underlyer provisions regarding jurisdiction and fallbacks.",
-        )
+    equity_underlier_provisions: (
+        cdm_product_asset_EquityUnderlierProvisions_schema.EquityUnderlierProvisions | None
+    ) = Field(
+        None,
+        alias="equityUnderlierProvisions",
+        description="Contains Equity Underlyer provisions regarding jurisdiction and fallbacks.",
     )
     share_price_dividend_adjustment: bool | None = Field(
         None,
         alias="sharePriceDividendAdjustment",
         description="Indicates whether the price of shares is adjusted for dividends or not.",
     )
-    expected_n: int | None = Field(None, alias="expectedN", description="Expected number of trading days.")
+    expected_n: int | None = Field(
+        None, alias="expectedN", description="Expected number of trading days."
+    )
     initial_level: float | None = Field(
         None,
         alias="initialLevel",
         description="Contract will strike off this initial level. Providing just the initialLevel without initialLevelSource, infers that this is AgreedInitialPrice - a specified Initial Index Level.",
     )
-    initial_level_source: cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None = Field(
+    initial_level_source: (
+        cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None
+    ) = Field(
         None,
         alias="initialLevelSource",
         description="In this context, this is AgreedInitialPrice - a specified Initial Index Level.",
@@ -63,8 +71,8 @@ class VolatilityReturnTerms(BaseModel):
         alias="volatilityStrikePrice",
         description="Volatility Strike Price in accordance with the ISDA 2011 Equity Derivatives Definitions.",
     )
-    volatility_cap_floor: cdm_product_asset_VolatilityCapFloor_schema.VolatilityCapFloor | None = Field(
-        None, alias="volatilityCapFloor", description="Contains volatility-based barriers"
+    volatility_cap_floor: cdm_product_asset_VolatilityCapFloor_schema.VolatilityCapFloor | None = (
+        Field(None, alias="volatilityCapFloor", description="Contains volatility-based barriers")
     )
     exchange_traded_contract_nearest: (
         cdm_base_staticdata_asset_common_ListedDerivative_schema.ListedDerivative | None

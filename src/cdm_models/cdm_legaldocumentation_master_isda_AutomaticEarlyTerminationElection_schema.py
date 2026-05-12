@@ -8,7 +8,8 @@ from . import cdm_base_staticdata_party_Party_schema
 
 class AutomaticEarlyTerminationElection(BaseModel):
     party: cdm_base_staticdata_party_Party_schema.Party = Field(
-        ..., description="The party for which the Automatic Early Termination provisions are being specified."
+        ...,
+        description="The party for which the Automatic Early Termination provisions are being specified.",
     )
     is_applicable: bool = Field(
         ...,

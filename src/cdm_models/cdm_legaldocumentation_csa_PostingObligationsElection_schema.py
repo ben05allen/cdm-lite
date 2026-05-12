@@ -19,7 +19,8 @@ class PostingObligationsElection(BaseModel):
         description="If set to True, the Control Agreement is a Credit Support Document with respect to the party(ies).",
     )
     eligible_collateral: (
-        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria] | None
+        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria]
+        | None
     ) = Field(
         None,
         alias="eligibleCollateral",

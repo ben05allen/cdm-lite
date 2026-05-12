@@ -11,11 +11,16 @@ from . import (
 
 
 class ApplicableRegime(BaseModel):
-    regime: cdm_legaldocumentation_csa_RegulatoryRegimeEnum_schema.RegulatoryRegimeEnum | None = Field(
-        None, description="The applicable regulatory regime, as specified through an enumeration."
+    regime: cdm_legaldocumentation_csa_RegulatoryRegimeEnum_schema.RegulatoryRegimeEnum | None = (
+        Field(
+            None,
+            description="The applicable regulatory regime, as specified through an enumeration.",
+        )
     )
     additional_regime: str | None = Field(
-        None, alias="additionalRegime", description="The additional regulatory regime as specified by the parties."
+        None,
+        alias="additionalRegime",
+        description="The additional regulatory regime as specified by the parties.",
     )
     regime_terms: list[cdm_legaldocumentation_csa_RegimeTerms_schema.RegimeTerms] | None = Field(
         None,
@@ -24,9 +29,9 @@ class ApplicableRegime(BaseModel):
         max_length=2,
         min_length=2,
     )
-    additional_type: cdm_legaldocumentation_csa_AdditionalTypeEnum_schema.AdditionalTypeEnum | None = Field(
-        None, alias="additionalType"
-    )
+    additional_type: (
+        cdm_legaldocumentation_csa_AdditionalTypeEnum_schema.AdditionalTypeEnum | None
+    ) = Field(None, alias="additionalType")
     additional_terms: str | None = Field(
         None,
         alias="additionalTerms",

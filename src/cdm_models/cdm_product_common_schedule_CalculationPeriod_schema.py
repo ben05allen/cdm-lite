@@ -33,7 +33,9 @@ class CalculationPeriod(BaseModel):
         description="The number of days from the adjusted effective / start date to the adjusted termination / end date calculated in accordance with the applicable day count fraction.",
     )
     notional_amount: float | None = Field(
-        None, alias="notionalAmount", description="The amount that a cashflow will accrue interest on."
+        None,
+        alias="notionalAmount",
+        description="The amount that a cashflow will accrue interest on.",
     )
     fx_linked_notional_amount: (
         cdm_product_common_schedule_FxLinkedNotionalAmount_schema.FxLinkedNotionalAmount | None
@@ -42,7 +44,9 @@ class CalculationPeriod(BaseModel):
         alias="fxLinkedNotionalAmount",
         description="The amount that a cashflow will accrue interest on. This is the calculated amount of the FX linked - i.e. the other currency notional amount multiplied by the appropriate FX spot rate.",
     )
-    floating_rate_definition: cdm_product_asset_FloatingRateDefinition_schema.FloatingRateDefinition | None = Field(
+    floating_rate_definition: (
+        cdm_product_asset_FloatingRateDefinition_schema.FloatingRateDefinition | None
+    ) = Field(
         None,
         alias="floatingRateDefinition",
         description="The floating rate reset information for the calculation period.",

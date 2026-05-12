@@ -20,17 +20,23 @@ class CreditDefaultPayout(BaseModel):
         alias="payerReceiver",
         description="Canonical representation of the payer and receiver parties applicable to each payout leg.",
     )
-    price_quantity: cdm_product_common_settlement_ResolvablePriceQuantity_schema.ResolvablePriceQuantity | None = Field(
+    price_quantity: (
+        cdm_product_common_settlement_ResolvablePriceQuantity_schema.ResolvablePriceQuantity | None
+    ) = Field(
         None,
         alias="priceQuantity",
         description="Each payout leg must implement the quantity concept as a 'resolvable' type, which allows for different payout legs to be linked to each other (e.g. in the case of cross-curreny products).",
     )
-    principal_payment: cdm_product_common_settlement_PrincipalPayments_schema.PrincipalPayments | None = Field(
+    principal_payment: (
+        cdm_product_common_settlement_PrincipalPayments_schema.PrincipalPayments | None
+    ) = Field(
         None,
         alias="principalPayment",
         description="The specification of the principal exchange. Optional as only applicable in the case of cross-currency or zero-coupon swaps with a final payment.",
     )
-    settlement_terms: cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None = Field(
+    settlement_terms: (
+        cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None
+    ) = Field(
         None,
         alias="settlementTerms",
         description="Each payout leg must specifies its settlement terms, including the delivery type (i.e. cash vs physical, and their respective terms), the transfer type (DvP etc.) and settlement date, if any.",

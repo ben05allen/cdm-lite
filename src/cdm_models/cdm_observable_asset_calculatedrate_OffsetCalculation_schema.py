@@ -6,4 +6,6 @@ from pydantic import BaseModel, Field
 
 
 class OffsetCalculation(BaseModel):
-    offset_days: int | None = Field(None, alias="offsetDays", description="The number of business days offset.")
+    offset_days: int | None = Field(
+        None, alias="offsetDays", description="The number of business days offset."
+    )

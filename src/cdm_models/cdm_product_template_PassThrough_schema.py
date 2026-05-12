@@ -7,6 +7,11 @@ from . import cdm_product_template_PassThroughItem_schema
 
 
 class PassThrough(BaseModel):
-    pass_through_item: list[cdm_product_template_PassThroughItem_schema.PassThroughItem] | None = Field(
-        None, alias="passThroughItem", description="One to many pass through payment items.", min_length=1
+    pass_through_item: list[cdm_product_template_PassThroughItem_schema.PassThroughItem] | None = (
+        Field(
+            None,
+            alias="passThroughItem",
+            description="One to many pass through payment items.",
+            min_length=1,
+        )
     )

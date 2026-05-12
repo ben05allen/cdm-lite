@@ -11,7 +11,9 @@ from . import (
 
 
 class Instrument(BaseModel):
-    listed_derivative: cdm_base_staticdata_asset_common_ListedDerivative_schema.ListedDerivative | None = Field(
+    listed_derivative: (
+        cdm_base_staticdata_asset_common_ListedDerivative_schema.ListedDerivative | None
+    ) = Field(
         None,
         alias="ListedDerivative",
         description="A securitized derivative on another asset that is created by an exchange.",
@@ -20,5 +22,7 @@ class Instrument(BaseModel):
         None, alias="Loan", description="An Asset that represents a loan or borrow obligation."
     )
     security: cdm_base_staticdata_asset_common_Security_schema.Security | None = Field(
-        None, alias="Security", description="An Asset that is issued by a party to be held by or transferred to others."
+        None,
+        alias="Security",
+        description="An Asset that is issued by a party to be held by or transferred to others.",
     )

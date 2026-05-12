@@ -10,9 +10,9 @@ from . import (
 
 
 class DividendPaymentDate(BaseModel):
-    dividend_date_reference: cdm_product_asset_DividendDateReference_schema.DividendDateReference | None = Field(
-        None, alias="dividendDateReference"
-    )
+    dividend_date_reference: (
+        cdm_product_asset_DividendDateReference_schema.DividendDateReference | None
+    ) = Field(None, alias="dividendDateReference")
     dividend_date: (
         cdm_base_datetime_metafields_ReferenceWithMetaAdjustableOrRelativeDate_schema.ReferenceWithMetaAdjustableOrRelativeDate
         | None

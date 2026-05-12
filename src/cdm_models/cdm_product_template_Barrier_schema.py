@@ -8,8 +8,14 @@ from . import cdm_observable_event_TriggerEvent_schema
 
 class Barrier(BaseModel):
     barrier_cap: list[cdm_observable_event_TriggerEvent_schema.TriggerEvent] | None = Field(
-        None, alias="barrierCap", description="A trigger level approached from beneath.", min_length=0
+        None,
+        alias="barrierCap",
+        description="A trigger level approached from beneath.",
+        min_length=0,
     )
     barrier_floor: list[cdm_observable_event_TriggerEvent_schema.TriggerEvent] | None = Field(
-        None, alias="barrierFloor", description="A trigger level approached from above.", min_length=0
+        None,
+        alias="barrierFloor",
+        description="A trigger level approached from above.",
+        min_length=0,
     )

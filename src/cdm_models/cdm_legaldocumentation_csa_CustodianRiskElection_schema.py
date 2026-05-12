@@ -7,10 +7,14 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 
 class CustodianRiskElection(BaseModel):
-    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None, description="The elective party."
+    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(None, description="The elective party.")
     )
     is_specified: bool = Field(
-        ..., alias="isSpecified", description="The qualification as to whether the risk is deemed as Specified."
+        ...,
+        alias="isSpecified",
+        description="The qualification as to whether the risk is deemed as Specified.",
     )
-    qualification: str | None = Field(None, description="The Custodian Risk or Collateral Manager Risk qualification.")
+    qualification: str | None = Field(
+        None, description="The Custodian Risk or Collateral Manager Risk qualification."
+    )

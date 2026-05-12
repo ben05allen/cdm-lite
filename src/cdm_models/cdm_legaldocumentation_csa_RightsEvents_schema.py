@@ -34,6 +34,8 @@ class RightsEvents(BaseModel):
         alias="deliveryInLieuRight",
         description="The specification of whether Delivery In Lieu language is applicable to the agreement (true) or not (false).",
     )
-    additional_rights_event: cdm_legaldocumentation_csa_AdditionalRightsEvent_schema.AdditionalRightsEvent | None = (
-        Field(None, alias="additionalRightsEvent", description="The Additional Rights Event election.")
+    additional_rights_event: (
+        cdm_legaldocumentation_csa_AdditionalRightsEvent_schema.AdditionalRightsEvent | None
+    ) = Field(
+        None, alias="additionalRightsEvent", description="The Additional Rights Event election."
     )

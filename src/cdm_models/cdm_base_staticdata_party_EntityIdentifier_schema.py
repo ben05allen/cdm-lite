@@ -13,6 +13,6 @@ class EntityIdentifier(BaseModel):
     identifier: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
         ..., description="Provides an identifier associated with a legal entity."
     )
-    identifier_type: cdm_base_staticdata_party_EntityIdentifierTypeEnum_schema.EntityIdentifierTypeEnum | None = Field(
-        None, alias="identifierType", description="Defines the source of the identifier."
-    )
+    identifier_type: (
+        cdm_base_staticdata_party_EntityIdentifierTypeEnum_schema.EntityIdentifierTypeEnum | None
+    ) = Field(None, alias="identifierType", description="Defines the source of the identifier.")

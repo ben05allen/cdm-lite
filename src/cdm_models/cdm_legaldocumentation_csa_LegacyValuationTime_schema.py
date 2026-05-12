@@ -16,13 +16,16 @@ class LegacyValuationTime(BaseModel):
         description="The day in respect of which the Valuation Time is being specified. If not specified, addional language must be used to define the methodology.",
     )
     location: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = Field(
-        None, description="The location relevant to the timezone for the Valuation Time.", min_length=0
+        None,
+        description="The location relevant to the timezone for the Valuation Time.",
+        min_length=0,
     )
     time: cdm_legaldocumentation_csa_ValuationTimeEnum_schema.ValuationTimeEnum | None = Field(
         None, description="The type of time specified for the Valuation Time."
     )
     hourminutetime: str | None = Field(
-        None, description="A time specified in a 24-hour notation, e.g. 3pm would be represented as 15:00."
+        None,
+        description="A time specified in a 24-hour notation, e.g. 3pm would be represented as 15:00.",
     )
     timezone: cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum | None = Field(
         None, description="Any relevant time zone where specified."

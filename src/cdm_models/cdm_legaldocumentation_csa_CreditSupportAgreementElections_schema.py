@@ -48,7 +48,9 @@ class CreditSupportAgreementElections(BaseModel):
         alias="oneWayProvisions",
         description="The determination of whether the One Way Provisions are applicable (true) or not applicable (false).",
     )
-    general_simm_elections: cdm_legaldocumentation_csa_GeneralSimmElections_schema.GeneralSimmElections | None = Field(
+    general_simm_elections: (
+        cdm_legaldocumentation_csa_GeneralSimmElections_schema.GeneralSimmElections | None
+    ) = Field(
         None,
         alias="generalSimmElections",
         description="The specification of the ISDA SIMM Method for all Covered Transactions with respect to all Regimes.",
@@ -58,22 +60,28 @@ class CreditSupportAgreementElections(BaseModel):
         alias="identifiedCrossCurrencySwap",
         description="The qualification of whether cross-currency swaps need to be identified in the Confirmation so that the obligations to exchange principal be disregarded for the purpose of determining the Delivery Amount or Return Amount.",
     )
-    sensitivity_methodologies: cdm_legaldocumentation_csa_SensitivityMethodologies_schema.SensitivityMethodologies = (
-        Field(
-            ...,
-            alias="sensitivityMethodologies",
-            description="The specification of methodologies to compute sensitivities specific to the agreement.",
-        )
+    sensitivity_methodologies: cdm_legaldocumentation_csa_SensitivityMethodologies_schema.SensitivityMethodologies = Field(
+        ...,
+        alias="sensitivityMethodologies",
+        description="The specification of methodologies to compute sensitivities specific to the agreement.",
     )
-    fx_haircut_currency: cdm_legaldocumentation_csa_FxHaircutCurrency_schema.FxHaircutCurrency | None = Field(
+    fx_haircut_currency: (
+        cdm_legaldocumentation_csa_FxHaircutCurrency_schema.FxHaircutCurrency | None
+    ) = Field(
         None,
         alias="fxHaircutCurrency",
         description="The reference currency for the purpose of specifying the FX Haircut relating to a posting obligation, as being either the Termination Currency or an FX Designated Currency.",
     )
-    posting_obligations: cdm_legaldocumentation_csa_PostingObligations_schema.PostingObligations = Field(
-        ..., alias="postingObligations", description="The security providers posting obligations."
+    posting_obligations: cdm_legaldocumentation_csa_PostingObligations_schema.PostingObligations = (
+        Field(
+            ...,
+            alias="postingObligations",
+            description="The security providers posting obligations.",
+        )
     )
-    substituted_regime: list[cdm_legaldocumentation_csa_SubstitutedRegime_schema.SubstitutedRegime] | None = Field(
+    substituted_regime: (
+        list[cdm_legaldocumentation_csa_SubstitutedRegime_schema.SubstitutedRegime] | None
+    ) = Field(
         None,
         alias="substitutedRegime",
         description="The specification of Additional regimes for purposes of determining whether a Regulatory Event has occurred.",
@@ -94,12 +102,10 @@ class CreditSupportAgreementElections(BaseModel):
         alias="coveredTransactions",
         description="The specification of transactions covered by the terms of the agreement.",
     )
-    credit_support_obligations: cdm_legaldocumentation_csa_CreditSupportObligations_schema.CreditSupportObligations = (
-        Field(
-            ...,
-            alias="creditSupportObligations",
-            description="The Credit Support Obligations applicable to the agreement.",
-        )
+    credit_support_obligations: cdm_legaldocumentation_csa_CreditSupportObligations_schema.CreditSupportObligations = Field(
+        ...,
+        alias="creditSupportObligations",
+        description="The Credit Support Obligations applicable to the agreement.",
     )
     exchange_date: str | None = Field(
         None,
@@ -111,13 +117,16 @@ class CreditSupportAgreementElections(BaseModel):
         alias="calculationAndTiming",
         description="The set of elections for determining Valuation and Timing terms specific to the agreement.",
     )
-    conditions_precedent: cdm_legaldocumentation_csa_ConditionsPrecedent_schema.ConditionsPrecedent | None = Field(
+    conditions_precedent: (
+        cdm_legaldocumentation_csa_ConditionsPrecedent_schema.ConditionsPrecedent | None
+    ) = Field(
         None,
         alias="conditionsPrecedent",
         description="The set of elections that may overwrite the default Condition Precedent provision, and the set of provisions that are deemed Access Condition.",
     )
     substitution: cdm_legaldocumentation_csa_Substitution_schema.Substitution = Field(
-        ..., description="The conditions under which the Security Provider can substitute posted collateral."
+        ...,
+        description="The conditions under which the Security Provider can substitute posted collateral.",
     )
     dispute_resolution: cdm_legaldocumentation_csa_DisputeResolution_schema.DisputeResolution = Field(
         ...,
@@ -134,13 +143,16 @@ class CreditSupportAgreementElections(BaseModel):
         alias="rightsEvents",
         description="The bespoke provisions that might be specified by the parties to the agreement to specify the rights of Security Taker and/or Security Provider when an Early Termination or Access Condition event has occurred.",
     )
-    custody_arrangements: cdm_legaldocumentation_csa_CustodyArrangements_schema.CustodyArrangements | None = Field(
+    custody_arrangements: (
+        cdm_legaldocumentation_csa_CustodyArrangements_schema.CustodyArrangements | None
+    ) = Field(
         None,
         alias="custodyArrangements",
         description="The Custodian and Segregated Account details in respect of each party to the agreement.",
     )
     distribution_and_interest_payment: (
-        cdm_product_collateral_DistributionAndInterestPayment_schema.DistributionAndInterestPayment | None
+        cdm_product_collateral_DistributionAndInterestPayment_schema.DistributionAndInterestPayment
+        | None
     ) = Field(
         None,
         alias="distributionAndInterestPayment",
@@ -161,20 +173,26 @@ class CreditSupportAgreementElections(BaseModel):
         alias="otherEligibleAndPostedSupport",
         description="The Other Eligible Support elections associated with margin agreements.",
     )
-    demands_and_notices: cdm_product_collateral_ContactElection_schema.ContactElection | None = Field(
-        None,
-        alias="demandsAndNotices",
-        description="The optional specification of address where the demands, specifications and notices will be communicated to for each of the parties to the agreement.",
+    demands_and_notices: cdm_product_collateral_ContactElection_schema.ContactElection | None = (
+        Field(
+            None,
+            alias="demandsAndNotices",
+            description="The optional specification of address where the demands, specifications and notices will be communicated to for each of the parties to the agreement.",
+        )
     )
-    addresses_for_transfer: cdm_product_collateral_ContactElection_schema.ContactElection | None = Field(
-        None,
-        alias="addressesForTransfer",
-        description="The optional specification of address for transfer as specified by the respective parties to the agreement.",
+    addresses_for_transfer: cdm_product_collateral_ContactElection_schema.ContactElection | None = (
+        Field(
+            None,
+            alias="addressesForTransfer",
+            description="The optional specification of address for transfer as specified by the respective parties to the agreement.",
+        )
     )
-    other_agreements: cdm_legaldocumentation_csa_OtherAgreements_schema.OtherAgreements | None = Field(
-        None,
-        alias="otherAgreements",
-        description="The bespoke definition of other agreement terms as specified by the parties to the agreement.",
+    other_agreements: cdm_legaldocumentation_csa_OtherAgreements_schema.OtherAgreements | None = (
+        Field(
+            None,
+            alias="otherAgreements",
+            description="The bespoke definition of other agreement terms as specified by the parties to the agreement.",
+        )
     )
     termination_currency_amendment: cdm_legaldocumentation_csa_TerminationCurrencyAmendment_schema.TerminationCurrencyAmendment = Field(
         ...,
@@ -197,7 +215,8 @@ class CreditSupportAgreementElections(BaseModel):
         description="The Process Agent that might be appointed by the parties to the agreement.",
     )
     appropriated_collateral_valuation: (
-        cdm_legaldocumentation_csa_AppropriatedCollateralValuation_schema.AppropriatedCollateralValuation | None
+        cdm_legaldocumentation_csa_AppropriatedCollateralValuation_schema.AppropriatedCollateralValuation
+        | None
     ) = Field(
         None,
         alias="appropriatedCollateralValuation",
@@ -206,7 +225,9 @@ class CreditSupportAgreementElections(BaseModel):
     jurisdiction_related_terms: (
         cdm_legaldocumentation_csa_JurisdictionRelatedTerms_schema.JurisdictionRelatedTerms | None
     ) = Field(
-        None, alias="jurisdictionRelatedTerms", description="The jurisdiction specific terms relevant to the agreement."
+        None,
+        alias="jurisdictionRelatedTerms",
+        description="The jurisdiction specific terms relevant to the agreement.",
     )
     additional_amendments: str | None = Field(
         None,
@@ -214,7 +235,9 @@ class CreditSupportAgreementElections(BaseModel):
         description="Any additional amendments that might be specified by the parties to the agreement.",
     )
     additional_bespoke_terms: str | None = Field(
-        None, alias="additionalBespokeTerms", description="Any additional terms that might be specified applicable."
+        None,
+        alias="additionalBespokeTerms",
+        description="Any additional terms that might be specified applicable.",
     )
     trust_scheme_addendum: bool = Field(
         ...,
@@ -226,7 +249,9 @@ class CreditSupportAgreementElections(BaseModel):
         alias="securityInterestForObligations",
         description="The party to whom obligations under the Master Agreement are owed and secured by the credit support arrangements. Applicable to 1994 NY CSA, 1995 English Law CSD and 2016 New York Law VM CSA.",
     )
-    single_posting_party: cdm_legaldocumentation_csa_SinglePostingParty_schema.SinglePostingParty | None = Field(
+    single_posting_party: (
+        cdm_legaldocumentation_csa_SinglePostingParty_schema.SinglePostingParty | None
+    ) = Field(
         None,
         alias="singlePostingParty",
         description="Where only a single  party is explicitly designated to post collateral, the party which is specified as the sole poster of collateral.",
@@ -236,7 +261,9 @@ class CreditSupportAgreementElections(BaseModel):
         alias="datedAsOfDate",
         description="Defines the dates agreed by the parties as the date of the Credit Support Annex or Credit Support Deed.",
     )
-    cass: str | None = Field(None, description="Details of language relating to Client Asset and Money Rules.")
+    cass: str | None = Field(
+        None, description="Details of language relating to Client Asset and Money Rules."
+    )
     other_csa: str | None = Field(
         None,
         alias="otherCSA",
@@ -247,6 +274,9 @@ class CreditSupportAgreementElections(BaseModel):
         alias="legacyAdditionalRepresentations",
         description="Details of any Additional Representations given by the relevant parties in relation to the collateral arrangement.",
     )
-    value: cdm_legaldocumentation_csa_CollateralValueMethod_schema.CollateralValueMethod | None = Field(
-        None, description="Details how particular types of collateral are valued (other than in respect of a default)."
+    value: cdm_legaldocumentation_csa_CollateralValueMethod_schema.CollateralValueMethod | None = (
+        Field(
+            None,
+            description="Details how particular types of collateral are valued (other than in respect of a default).",
+        )
     )

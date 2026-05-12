@@ -7,10 +7,14 @@ from pydantic import BaseModel, Field
 
 class CreditLimitUtilisationPosition(BaseModel):
     short_position: float | None = Field(
-        None, alias="shortPosition", description="Credit limit utilisation attributable to short positions."
+        None,
+        alias="shortPosition",
+        description="Credit limit utilisation attributable to short positions.",
     )
     long_position: float | None = Field(
-        None, alias="longPosition", description="Credit limit utilisation attributable to long positions."
+        None,
+        alias="longPosition",
+        description="Credit limit utilisation attributable to long positions.",
     )
     global_: float | None = Field(
         None,

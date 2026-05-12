@@ -3,17 +3,22 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_BusinessCenterTime_schema, cdm_base_staticdata_party_CounterpartyRoleEnum_schema
+from . import (
+    cdm_base_datetime_BusinessCenterTime_schema,
+    cdm_base_staticdata_party_CounterpartyRoleEnum_schema,
+)
 
 
 class NotificationTimeElection(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
         ..., description="The elective party."
     )
-    notification_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
-        None,
-        alias="notificationTime",
-        description="The Notification Time as a time that is qualified as a standard business center.",
+    notification_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = (
+        Field(
+            None,
+            alias="notificationTime",
+            description="The Notification Time as a time that is qualified as a standard business center.",
+        )
     )
     custom_notification: str | None = Field(
         None, alias="customNotification", description="The Notification Time as a bespoke election."

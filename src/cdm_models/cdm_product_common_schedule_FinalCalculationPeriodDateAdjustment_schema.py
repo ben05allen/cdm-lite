@@ -17,7 +17,9 @@ class FinalCalculationPeriodDateAdjustment(BaseModel):
         description="Reference to the unadjusted cancellation effective dates.",
     )
     swap_stream_reference: cdm_product_asset_metafields_ReferenceWithMetaInterestRatePayout_schema.ReferenceWithMetaInterestRatePayout = Field(
-        ..., alias="swapStreamReference", description="Reference to the leg, where date adjustments may apply."
+        ...,
+        alias="swapStreamReference",
+        description="Reference to the leg, where date adjustments may apply.",
     )
     business_day_convention: cdm_base_datetime_BusinessDayConventionEnum_schema.BusinessDayConventionEnum = Field(
         ...,

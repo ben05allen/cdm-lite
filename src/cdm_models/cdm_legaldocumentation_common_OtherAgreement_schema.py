@@ -7,15 +7,15 @@ from . import com_rosetta_model_metafields_FieldWithMetaString_schema
 
 
 class OtherAgreement(BaseModel):
-    identifier: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="An identifier that has been created to identify the agreement."
-    )
+    identifier: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(None, description="An identifier that has been created to identify the agreement.")
     other_agreement_type: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
         ...,
         alias="otherAgreementType",
         description="The agreement executed between the parties and intended to govern product-specific derivatives transactions between those parties.",
     )
-    version: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="The version of the agreement."
+    version: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(None, description="The version of the agreement.")
     )
     date: str | None = Field(None, description="The date on which the agreement was signed.")

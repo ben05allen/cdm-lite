@@ -11,7 +11,9 @@ from . import (
 
 
 class FallbackReferencePrice(BaseModel):
-    valuation_postponement: cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None = Field(
+    valuation_postponement: (
+        cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None
+    ) = Field(
         None,
         alias="valuationPostponement",
         description="Specifies how long to wait to get a quote from a settlement rate option upon a price source disruption.",
@@ -32,6 +34,10 @@ class FallbackReferencePrice(BaseModel):
         alias="fallbackSurveyValuationPostponement",
         description="Request rate quotes from the market. This element is set as type Empty in FpML. When present, the FpML synonym is mapped to a value True in the CDM.",
     )
-    calculation_agent_determination: cdm_observable_asset_CalculationAgent_schema.CalculationAgent | None = Field(
-        None, alias="calculationAgentDetermination", description="The calculation agent will decide the rate."
+    calculation_agent_determination: (
+        cdm_observable_asset_CalculationAgent_schema.CalculationAgent | None
+    ) = Field(
+        None,
+        alias="calculationAgentDetermination",
+        description="The calculation agent will decide the rate.",
     )

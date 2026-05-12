@@ -21,12 +21,16 @@ class ValuationSource(BaseModel):
         alias="quotedCurrencyPair",
         description="Defines the two currencies for an FX trade and the quotation relationship between the two currencies.  This attribute was formerly part of 'fxSettlementTerms', which is now being harmonised into a common 'CashSettlementTerms' that includes a 'ValuationDate'.",
     )
-    information_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = Field(
-        None,
-        alias="informationSource",
-        description="The information source where a published or displayed market rate will be obtained, e.g. Telerate Page 3750.",
+    information_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = (
+        Field(
+            None,
+            alias="informationSource",
+            description="The information source where a published or displayed market rate will be obtained, e.g. Telerate Page 3750.",
+        )
     )
-    settlement_rate_option: cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None = Field(
+    settlement_rate_option: (
+        cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None
+    ) = Field(
         None,
         alias="settlementRateOption",
         description="The rate option to use for the fixing. Currently only applicable to foreign exchange fixing in case of cross-currency settlement.",

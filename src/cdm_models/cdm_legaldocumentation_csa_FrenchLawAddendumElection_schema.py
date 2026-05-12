@@ -11,8 +11,12 @@ class FrenchLawAddendumElection(BaseModel):
         ..., description="The elective party."
     )
     is_applicable: bool = Field(
-        ..., alias="isApplicable", description="The qualification of whether the party elects specific language."
+        ...,
+        alias="isApplicable",
+        description="The qualification of whether the party elects specific language.",
     )
     addendum_language: str | None = Field(
-        None, alias="addendumLanguage", description="The party specific language to be included in the agreement."
+        None,
+        alias="addendumLanguage",
+        description="The party specific language to be included in the agreement.",
     )

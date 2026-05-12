@@ -6,7 +6,9 @@ from pydantic import BaseModel, Field
 
 
 class FloatingRateIndexExternalMap(BaseModel):
-    external_id: str = Field(..., alias="externalId", description=" The FRO name that is being mapped to/from.")
+    external_id: str = Field(
+        ..., alias="externalId", description=" The FRO name that is being mapped to/from."
+    )
     external_standard: str | None = Field(
         None, alias="externalStandard", description="The standard/version to which the map applies."
     )

@@ -23,12 +23,18 @@ class New(BaseModel):
     submitg_pty: str = Field(..., alias="submitgPty")
     buyr: cdm_regulation_Buyr_schema.Buyr
     sellr: cdm_regulation_Sellr_schema.Sellr
-    ordr_trnsmssn: cdm_regulation_OrdrTrnsmssn_schema.OrdrTrnsmssn = Field(..., alias="ordrTrnsmssn")
+    ordr_trnsmssn: cdm_regulation_OrdrTrnsmssn_schema.OrdrTrnsmssn = Field(
+        ..., alias="ordrTrnsmssn"
+    )
     tx: Tx
     fin_instrm: cdm_regulation_FinInstrm_schema.FinInstrm = Field(..., alias="finInstrm")
-    invstmt_dcsn_prsn: cdm_regulation_InvstmtDcsnPrsn_schema.InvstmtDcsnPrsn = Field(..., alias="invstmtDcsnPrsn")
+    invstmt_dcsn_prsn: cdm_regulation_InvstmtDcsnPrsn_schema.InvstmtDcsnPrsn = Field(
+        ..., alias="invstmtDcsnPrsn"
+    )
     exctg_prsn: cdm_regulation_ExctgPrsn_schema.ExctgPrsn = Field(..., alias="exctgPrsn")
-    addtl_attrbts: cdm_regulation_AddtlAttrbts_schema.AddtlAttrbts = Field(..., alias="addtlAttrbts")
+    addtl_attrbts: cdm_regulation_AddtlAttrbts_schema.AddtlAttrbts = Field(
+        ..., alias="addtlAttrbts"
+    )
 
 
 class Tx(BaseModel):

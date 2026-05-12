@@ -7,7 +7,8 @@ from pydantic import BaseModel, Field
 
 class FinalReturns(BaseModel):
     applicable: bool | None = Field(
-        None, description="Defines if the clause is applicable to this agreement or any other exceptions."
+        None,
+        description="Defines if the clause is applicable to this agreement or any other exceptions.",
     )
     additional_language: str | None = Field(
         None,

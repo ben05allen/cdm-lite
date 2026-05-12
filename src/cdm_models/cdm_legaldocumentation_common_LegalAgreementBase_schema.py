@@ -24,7 +24,9 @@ class LegalAgreementBase(BaseModel):
         description="The date on which, or as of which, the agreement is effective, if different from the agreement date. It is expected that it will most often correspond to the agreement date, although there could be situations where the parties will explicitly agree on a distinct effective date.",
     )
     identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = Field(
-        None, description="The legal agreement identifier. Several identifiers can be specified.", min_length=0
+        None,
+        description="The legal agreement identifier. Several identifiers can be specified.",
+        min_length=0,
     )
     legal_agreement_identification: cdm_legaldocumentation_common_LegalAgreementIdentification_schema.LegalAgreementIdentification = Field(
         ...,
@@ -32,7 +34,10 @@ class LegalAgreementBase(BaseModel):
         description="The type of legal agreement, identified via a set of composable attributes: agreementName, publisher, governing law and version, e.g. ISDA 2013 Standard Credit Support Annex English Law.",
     )
     contractual_party: (
-        list[cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty] | None
+        list[
+            cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        ]
+        | None
     ) = Field(
         None,
         alias="contractualParty",

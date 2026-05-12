@@ -14,7 +14,8 @@ class CalculationDateLocationElection(BaseModel):
         ..., description="The elective party."
     )
     business_center: (
-        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum | None
+        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum
+        | None
     ) = Field(
         None,
         alias="businessCenter",

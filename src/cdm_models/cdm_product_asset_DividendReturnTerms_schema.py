@@ -17,7 +17,9 @@ from . import (
 
 
 class DividendReturnTerms(BaseModel):
-    dividend_payout_ratio: list[cdm_product_asset_DividendPayoutRatio_schema.DividendPayoutRatio] | None = Field(
+    dividend_payout_ratio: (
+        list[cdm_product_asset_DividendPayoutRatio_schema.DividendPayoutRatio] | None
+    ) = Field(
         None,
         alias="dividendPayoutRatio",
         description="Specifies the dividend payout ratio associated with each underlier. In FpML 5.10 the payout is positioned at the underlier level, although there is an intent to reconsider this approach and position it at the leg level. This is approach adopted by the CDM.",
@@ -28,12 +30,16 @@ class DividendReturnTerms(BaseModel):
         alias="dividendReinvestment",
         description="Boolean element that defines whether the dividend will be reinvested or not.",
     )
-    dividend_entitlement: cdm_product_asset_DividendEntitlementEnum_schema.DividendEntitlementEnum | None = Field(
+    dividend_entitlement: (
+        cdm_product_asset_DividendEntitlementEnum_schema.DividendEntitlementEnum | None
+    ) = Field(
         None,
         alias="dividendEntitlement",
         description="Defines the date on which the receiver of the equity return is entitled to the dividend.",
     )
-    dividend_amount_type: cdm_product_asset_DividendAmountTypeEnum_schema.DividendAmountTypeEnum | None = Field(
+    dividend_amount_type: (
+        cdm_product_asset_DividendAmountTypeEnum_schema.DividendAmountTypeEnum | None
+    ) = Field(
         None,
         alias="dividendAmountType",
         description="Specifies whether the dividend is paid with respect to the Dividend Period.",
@@ -42,18 +48,26 @@ class DividendReturnTerms(BaseModel):
         None,
         description="Performance calculation, in accordance with Part 1 Section 12 of the 2018 ISDA CDM Equity Confirmation for Security Equity Swap, Para 75. 'Equity Performance'. Cumulative performance is used as a notional multiplier factor on both legs of an Equity Swap.",
     )
-    first_or_second_period: cdm_product_asset_DividendPeriodEnum_schema.DividendPeriodEnum | None = Field(
+    first_or_second_period: (
+        cdm_product_asset_DividendPeriodEnum_schema.DividendPeriodEnum | None
+    ) = Field(
         None,
         alias="firstOrSecondPeriod",
         description="2002 ISDA Equity Derivatives Definitions: Dividend Period as either the First Period or the Second Period. | ",
     )
-    extraordinary_dividends_party: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = Field(
+    extraordinary_dividends_party: (
+        cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None
+    ) = Field(
         None,
         alias="extraordinaryDividendsParty",
         description="Specifies the party which determines if dividends are extraordinary in relation to normal levels.",
     )
-    excess_dividend_amount: cdm_product_asset_DividendAmountTypeEnum_schema.DividendAmountTypeEnum | None = Field(
-        None, alias="excessDividendAmount", description="Determination of Gross Cash Dividend per Share."
+    excess_dividend_amount: (
+        cdm_product_asset_DividendAmountTypeEnum_schema.DividendAmountTypeEnum | None
+    ) = Field(
+        None,
+        alias="excessDividendAmount",
+        description="Determination of Gross Cash Dividend per Share.",
     )
     dividend_currency: cdm_product_asset_DividendCurrency_schema.DividendCurrency | None = Field(
         None,
@@ -62,9 +76,17 @@ class DividendReturnTerms(BaseModel):
     )
     non_cash_dividend_treatment: (
         cdm_product_asset_NonCashDividendTreatmentEnum_schema.NonCashDividendTreatmentEnum | None
-    ) = Field(None, alias="nonCashDividendTreatment", description="Specifies the treatment of Non-Cash Dividends.")
-    dividend_composition: cdm_product_asset_DividendCompositionEnum_schema.DividendCompositionEnum | None = Field(
-        None, alias="dividendComposition", description="Specifies how the composition of Dividends is to be determined."
+    ) = Field(
+        None,
+        alias="nonCashDividendTreatment",
+        description="Specifies the treatment of Non-Cash Dividends.",
+    )
+    dividend_composition: (
+        cdm_product_asset_DividendCompositionEnum_schema.DividendCompositionEnum | None
+    ) = Field(
+        None,
+        alias="dividendComposition",
+        description="Specifies how the composition of Dividends is to be determined.",
     )
     special_dividends: bool | None = Field(
         None,

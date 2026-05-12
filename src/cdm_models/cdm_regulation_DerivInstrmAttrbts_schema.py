@@ -9,5 +9,7 @@ from . import cdm_regulation_UndrlygInstrm_schema
 class DerivInstrmAttrbts(BaseModel):
     xpry_dt: str = Field(..., alias="xpryDt")
     pric_mltplr: str = Field(..., alias="pricMltplr")
-    undrlyg_instrm: cdm_regulation_UndrlygInstrm_schema.UndrlygInstrm = Field(..., alias="undrlygInstrm")
+    undrlyg_instrm: cdm_regulation_UndrlygInstrm_schema.UndrlygInstrm = Field(
+        ..., alias="undrlygInstrm"
+    )
     dlvry_tp: str = Field(..., alias="dlvryTp")

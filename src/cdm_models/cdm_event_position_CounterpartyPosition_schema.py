@@ -17,23 +17,28 @@ from . import (
 
 class CounterpartyPosition(BaseModel):
     contract_details: (
-        cdm_event_common_metafields_ReferenceWithMetaContractDetails_schema.ReferenceWithMetaContractDetails | None
+        cdm_event_common_metafields_ReferenceWithMetaContractDetails_schema.ReferenceWithMetaContractDetails
+        | None
     ) = Field(
         None,
         alias="contractDetails",
         description="Represents information specific to trades or positions involving contractual products.",
     )
     execution_details: (
-        cdm_event_common_metafields_ReferenceWithMetaExecutionDetails_schema.ReferenceWithMetaExecutionDetails | None
+        cdm_event_common_metafields_ReferenceWithMetaExecutionDetails_schema.ReferenceWithMetaExecutionDetails
+        | None
     ) = Field(
         None,
         alias="executionDetails",
         description="Defines specific attributes that relate to trade or position executions.",
     )
     collateral: (
-        cdm_product_collateral_metafields_ReferenceWithMetaCollateral_schema.ReferenceWithMetaCollateral | None
+        cdm_product_collateral_metafields_ReferenceWithMetaCollateral_schema.ReferenceWithMetaCollateral
+        | None
     ) = Field(None, description="Represents the collateral obligations of a party.")
-    position_identifier: list[cdm_event_common_PositionIdentifier_schema.PositionIdentifier] | None = Field(
+    position_identifier: (
+        list[cdm_event_common_PositionIdentifier_schema.PositionIdentifier] | None
+    ) = Field(
         None,
         alias="positionIdentifier",
         description="Represents the identifier(s) that uniquely identify a position for an identity issuer. A position can include multiple identifiers, for example an internal position identifer and a UTI (Unique Trade Identifier).",
@@ -43,7 +48,10 @@ class CounterpartyPosition(BaseModel):
         None, alias="openDateTime", description="The date and time when the position was opened."
     )
     trade_reference: (
-        list[cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState] | None
+        list[
+            cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState
+        ]
+        | None
     ) = Field(
         None,
         alias="tradeReference",
@@ -51,7 +59,9 @@ class CounterpartyPosition(BaseModel):
         min_length=0,
     )
     party: list[cdm_base_staticdata_party_Party_schema.Party] | None = Field(
-        None, description="The parties involved in the position, including the Clearing Organization.", min_length=0
+        None,
+        description="The parties involved in the position, including the Clearing Organization.",
+        min_length=0,
     )
     party_role: list[cdm_base_staticdata_party_PartyRole_schema.PartyRole] | None = Field(
         None,
@@ -60,5 +70,7 @@ class CounterpartyPosition(BaseModel):
         min_length=0,
     )
     position_base: cdm_product_template_TradableProduct_schema.TradableProduct = Field(
-        ..., alias="positionBase", description="Encapsulates the core constituents that characterize a position."
+        ...,
+        alias="positionBase",
+        description="Encapsulates the core constituents that characterize a position.",
     )

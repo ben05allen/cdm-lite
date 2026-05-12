@@ -3,12 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_LegacyResolutionAlternativeEnum_schema, cdm_observable_asset_Money_schema
+from . import (
+    cdm_legaldocumentation_csa_LegacyResolutionAlternativeEnum_schema,
+    cdm_observable_asset_Money_schema,
+)
 
 
 class LegacyResolutionAlternative(BaseModel):
     resolution_alternative: (
-        cdm_legaldocumentation_csa_LegacyResolutionAlternativeEnum_schema.LegacyResolutionAlternativeEnum | None
+        cdm_legaldocumentation_csa_LegacyResolutionAlternativeEnum_schema.LegacyResolutionAlternativeEnum
+        | None
     ) = Field(
         None,
         alias="resolutionAlternative",

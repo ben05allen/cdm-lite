@@ -11,14 +11,24 @@ from . import (
 
 
 class DebtEconomics(BaseModel):
-    debt_seniority: cdm_base_staticdata_asset_common_DebtSeniorityEnum_schema.DebtSeniorityEnum | None = Field(
+    debt_seniority: (
+        cdm_base_staticdata_asset_common_DebtSeniorityEnum_schema.DebtSeniorityEnum | None
+    ) = Field(
         None,
         alias="debtSeniority",
         description="Specifies the order of repayment in the event of a sale or bankruptcy of the issuer or a related party (eg guarantor).",
     )
-    debt_interest: cdm_base_staticdata_asset_common_DebtInterestEnum_schema.DebtInterestEnum | None = Field(
-        None, alias="debtInterest", description="Specifies the general rule for periodic interest rate payment."
+    debt_interest: (
+        cdm_base_staticdata_asset_common_DebtInterestEnum_schema.DebtInterestEnum | None
+    ) = Field(
+        None,
+        alias="debtInterest",
+        description="Specifies the general rule for periodic interest rate payment.",
     )
-    debt_principal: cdm_base_staticdata_asset_common_DebtPrincipalEnum_schema.DebtPrincipalEnum | None = Field(
-        None, alias="debtPrincipal", description="Specifies the general rule for repayment of principal."
+    debt_principal: (
+        cdm_base_staticdata_asset_common_DebtPrincipalEnum_schema.DebtPrincipalEnum | None
+    ) = Field(
+        None,
+        alias="debtPrincipal",
+        description="Specifies the general rule for repayment of principal.",
     )

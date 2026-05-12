@@ -25,7 +25,8 @@ class ReferenceObligation(BaseModel):
         description="The entity primarily responsible for repaying debt to a creditor as a result of borrowing or issuing bonds. ISDA 2003 Term: Primary Obligor.",
     )
     primary_obligor_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaLegalEntity_schema.ReferenceWithMetaLegalEntity | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaLegalEntity_schema.ReferenceWithMetaLegalEntity
+        | None
     ) = Field(
         None,
         alias="primaryObligorReference",

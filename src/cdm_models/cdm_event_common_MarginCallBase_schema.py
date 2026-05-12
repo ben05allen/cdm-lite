@@ -36,7 +36,9 @@ class MarginCallBase(BaseModel):
         min_length=0,
     )
     clearing_broker: cdm_base_staticdata_party_Party_schema.Party | None = Field(
-        None, alias="clearingBroker", description="Indicates the name of the Clearing Broker FCM/DCM."
+        None,
+        alias="clearingBroker",
+        description="Indicates the name of the Clearing Broker FCM/DCM.",
     )
     call_identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = Field(
         None,
@@ -64,17 +66,21 @@ class MarginCallBase(BaseModel):
         description="Specifies the collateral legal agreement rounding in base currency.",
     )
     reg_margin_type: cdm_event_common_RegMarginTypeEnum_schema.RegMarginTypeEnum = Field(
-        ..., alias="regMarginType", description="Identifies margin type and if related regulatory mandate"
+        ...,
+        alias="regMarginType",
+        description="Identifies margin type and if related regulatory mandate",
     )
     reg_im_role: cdm_event_common_RegIMRoleEnum_schema.RegIMRoleEnum | None = Field(
         None,
         alias="regIMRole",
         description="Indicates the role of the party in an regulatory initial margin call instruction (i.e Pledgor party or Secured party).",
     )
-    base_currency_exposure: cdm_event_common_MarginCallExposure_schema.MarginCallExposure | None = Field(
-        None,
-        alias="baseCurrencyExposure",
-        description="Represents the current mark to market value or IM calculation value of the trade portfolio as recorded by the principle (in base currency), to be referenced in a margin call.",
+    base_currency_exposure: cdm_event_common_MarginCallExposure_schema.MarginCallExposure | None = (
+        Field(
+            None,
+            alias="baseCurrencyExposure",
+            description="Represents the current mark to market value or IM calculation value of the trade portfolio as recorded by the principle (in base currency), to be referenced in a margin call.",
+        )
     )
     collateral_portfolio: (
         cdm_event_common_metafields_ReferenceWithMetaCollateralPortfolio_schema.ReferenceWithMetaCollateralPortfolio
@@ -84,7 +90,9 @@ class MarginCallBase(BaseModel):
         alias="collateralPortfolio",
         description="Represents attributes to define the details of collateral assets within a collateral portfolio to be used in margin call messaging and contribute to collateral balances e.g securities in a collateral account recorded by the principal as held or posted.",
     )
-    independent_amount_balance: cdm_event_common_CollateralBalance_schema.CollateralBalance | None = Field(
+    independent_amount_balance: (
+        cdm_event_common_CollateralBalance_schema.CollateralBalance | None
+    ) = Field(
         None,
         alias="independentAmountBalance",
         description="Represents additional credit support amount over and above mark to market value.",

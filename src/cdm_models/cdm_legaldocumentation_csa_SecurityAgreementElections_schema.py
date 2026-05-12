@@ -15,17 +15,24 @@ from . import (
 
 class SecurityAgreementElections(BaseModel):
     pledged_account: cdm_base_staticdata_party_Account_schema.Account | None = Field(
-        None, alias="pledgedAccount", description="The pledged account associated with the agreement."
+        None,
+        alias="pledgedAccount",
+        description="The pledged account associated with the agreement.",
     )
-    enforcement_event: cdm_legaldocumentation_csa_EnforcementEvent_schema.EnforcementEvent | None = Field(
+    enforcement_event: (
+        cdm_legaldocumentation_csa_EnforcementEvent_schema.EnforcementEvent | None
+    ) = Field(
         None, alias="enforcementEvent", description="Enforcement Events specific to the agreement."
     )
     delivery_in_lieu_right: bool | None = Field(
         None, alias="deliveryInLieuRight", description="Delivery In Lieu rights."
     )
-    full_discharge: bool | None = Field(None, alias="fullDischarge", description="Full Discharge condition.")
+    full_discharge: bool | None = Field(
+        None, alias="fullDischarge", description="Full Discharge condition."
+    )
     appropriated_collateral_valuation: (
-        cdm_legaldocumentation_csa_AppropriatedCollateralValuation_schema.AppropriatedCollateralValuation | None
+        cdm_legaldocumentation_csa_AppropriatedCollateralValuation_schema.AppropriatedCollateralValuation
+        | None
     ) = Field(
         None,
         alias="appropriatedCollateralValuation",
@@ -38,15 +45,21 @@ class SecurityAgreementElections(BaseModel):
     )
     jurisdiction_related_terms: (
         cdm_legaldocumentation_csa_JurisdictionRelatedTerms_schema.JurisdictionRelatedTerms | None
-    ) = Field(None, alias="jurisdictionRelatedTerms", description="The jurisdiction specific terms.")
+    ) = Field(
+        None, alias="jurisdictionRelatedTerms", description="The jurisdiction specific terms."
+    )
     additional_amendments: str | None = Field(
         None,
         alias="additionalAmendments",
         description="Any additional amendments that might be specified by the parties to the agreement.",
     )
     additional_bespoke_terms: str | None = Field(
-        None, alias="additionalBespokeTerms", description="Any additional terms that might be specified applicable."
+        None,
+        alias="additionalBespokeTerms",
+        description="Any additional terms that might be specified applicable.",
     )
     execution_terms: cdm_legaldocumentation_csa_ExecutionTerms_schema.ExecutionTerms | None = Field(
-        None, alias="executionTerms", description="The location and language of execution to determine duty to be paid."
+        None,
+        alias="executionTerms",
+        description="The location and language of execution to determine duty to be paid.",
     )

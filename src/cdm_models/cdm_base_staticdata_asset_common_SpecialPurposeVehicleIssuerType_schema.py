@@ -7,6 +7,6 @@ from . import cdm_base_staticdata_asset_common_CreditRiskEnum_schema
 
 
 class SpecialPurposeVehicleIssuerType(BaseModel):
-    credit_risk: cdm_base_staticdata_asset_common_CreditRiskEnum_schema.CreditRiskEnum | None = Field(
-        None, alias="creditRisk", description="Indicates tranched or untranched credit risk."
+    credit_risk: cdm_base_staticdata_asset_common_CreditRiskEnum_schema.CreditRiskEnum | None = (
+        Field(None, alias="creditRisk", description="Indicates tranched or untranched credit risk.")
     )

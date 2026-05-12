@@ -7,6 +7,6 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 
 class Infinity(BaseModel):
-    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None, description="Elective Party to which the condition applies."
+    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(None, description="Elective Party to which the condition applies.")
     )

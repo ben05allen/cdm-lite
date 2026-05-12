@@ -7,12 +7,15 @@ from . import cdm_product_template_metafields_ReferenceWithMetaPayout_schema
 
 
 class ResetInstruction(BaseModel):
-    payout: list[cdm_product_template_metafields_ReferenceWithMetaPayout_schema.ReferenceWithMetaPayout] | None = Field(
-        None, min_length=1
-    )
+    payout: (
+        list[cdm_product_template_metafields_ReferenceWithMetaPayout_schema.ReferenceWithMetaPayout]
+        | None
+    ) = Field(None, min_length=1)
     rate_record_date: str | None = Field(
         None,
         alias="rateRecordDate",
         description="Specifies the 'Rate Record Day' for a Fallback rate.  Fallback rate fixing processes typically set the fixing rate in arrears, i.e., the Fallback Rate corresponding to a Rate Record Date is set at the end of the interest accural period.  When this applies, Reset->resetDate occurs at the end of the interest period, and the Reset->rateRecordDate occurs near the start of the interest period.  The Reset->rateRecordDate and Reset->observations->observationIdentifier->observationDate will differ if a Fallback rate is unavailable on the Rate Record Date, and the latest previous available rate is used as the observation.",
     )
-    reset_date: str = Field(..., alias="resetDate", description="Specifies the date on which the reset is occuring.")
+    reset_date: str = Field(
+        ..., alias="resetDate", description="Specifies the date on which the reset is occuring."
+    )

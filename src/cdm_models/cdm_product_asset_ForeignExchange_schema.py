@@ -18,5 +18,7 @@ class ForeignExchange(BaseModel):
         description="This is the second of the two currency flows that define a single leg of a standard foreign exchange transaction.",
     )
     tenor_period: cdm_base_datetime_Period_schema.Period | None = Field(
-        None, alias="tenorPeriod", description="A tenor expressed as a period type and multiplier (e.g. 1D, 1Y, etc.)"
+        None,
+        alias="tenorPeriod",
+        description="A tenor expressed as a period type and multiplier (e.g. 1D, 1Y, etc.)",
     )

@@ -18,8 +18,12 @@ class DividendPeriod(BaseModel):
     end_date: cdm_product_asset_DividendPaymentDate_schema.DividendPaymentDate | None = Field(
         None, alias="endDate", description="Dividend period end date."
     )
-    date_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments = Field(
-        ..., alias="dateAdjustments", description="Date adjustments for all unadjusted dates in this dividend period."
+    date_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments = (
+        Field(
+            ...,
+            alias="dateAdjustments",
+            description="Date adjustments for all unadjusted dates in this dividend period.",
+        )
     )
     basket_constituent: (
         cdm_observable_asset_metafields_ReferenceWithMetaBasketConstituent_schema.ReferenceWithMetaBasketConstituent
@@ -34,6 +38,10 @@ class DividendPeriod(BaseModel):
         alias="dividendPaymentDate",
         description="Specifies when the dividend will be paid to the receiver of the equity return. Has the meaning as defined in the ISDA 2002 Equity Derivatives Definitions. Is not applicable in the case of a dividend reinvestment election.",
     )
-    dividend_valuation_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
-        None, alias="dividendValuationDate", description="Specifies the dividend valuation dates of the swap."
+    dividend_valuation_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
+        None,
+        alias="dividendValuationDate",
+        description="Specifies the dividend valuation dates of the swap.",
     )

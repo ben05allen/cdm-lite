@@ -12,22 +12,28 @@ from . import (
 
 
 class CollateralPortfolio(BaseModel):
-    portfolio_identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = Field(
-        None,
-        alias="portfolioIdentifier",
-        description="Specifies a unique identifier for a set of collateral positions in a portfolio.",
+    portfolio_identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = (
+        Field(
+            None,
+            alias="portfolioIdentifier",
+            description="Specifies a unique identifier for a set of collateral positions in a portfolio.",
+        )
     )
-    collateral_position: list[cdm_event_common_CollateralPosition_schema.CollateralPosition] | None = Field(
+    collateral_position: (
+        list[cdm_event_common_CollateralPosition_schema.CollateralPosition] | None
+    ) = Field(
         None,
         alias="collateralPosition",
         description="Specifies the individual components of the collateral positions in the collateral portfolio.",
         min_length=0,
     )
-    collateral_balance: list[cdm_event_common_CollateralBalance_schema.CollateralBalance] | None = Field(
-        None,
-        alias="collateralBalance",
-        description="Represents the populated or calculated collateral aggregate balance amount for the collateral portfolio.",
-        min_length=0,
+    collateral_balance: list[cdm_event_common_CollateralBalance_schema.CollateralBalance] | None = (
+        Field(
+            None,
+            alias="collateralBalance",
+            description="Represents the populated or calculated collateral aggregate balance amount for the collateral portfolio.",
+            min_length=0,
+        )
     )
     legal_agreement: (
         cdm_legaldocumentation_common_metafields_ReferenceWithMetaLegalAgreement_schema.ReferenceWithMetaLegalAgreement

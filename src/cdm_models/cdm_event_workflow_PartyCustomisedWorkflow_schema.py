@@ -11,11 +11,21 @@ from . import (
 
 class PartyCustomisedWorkflow(BaseModel):
     party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
-    ) = Field(None, alias="partyReference", description="Reference to the party to which the workflow pertains to.")
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
+    ) = Field(
+        None,
+        alias="partyReference",
+        description="Reference to the party to which the workflow pertains to.",
+    )
     party_name: str | None = Field(
         None, alias="partyName", description="The party name to which the workflow pertains to."
     )
-    customised_workflow: list[cdm_event_workflow_CustomisedWorkflow_schema.CustomisedWorkflow] | None = Field(
-        None, alias="customisedWorkflow", description="Non-standardized data in a generic form.", min_length=1
+    customised_workflow: (
+        list[cdm_event_workflow_CustomisedWorkflow_schema.CustomisedWorkflow] | None
+    ) = Field(
+        None,
+        alias="customisedWorkflow",
+        description="Non-standardized data in a generic form.",
+        min_length=1,
     )

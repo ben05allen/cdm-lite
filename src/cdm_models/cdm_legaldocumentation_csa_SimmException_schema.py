@@ -10,13 +10,16 @@ from . import (
 
 
 class SimmException(BaseModel):
-    standardised_exception: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = Field(
-        None,
-        alias="standardisedException",
-        description="The Standard Initial Margin Model exception when specified by the party according to one of the enumerated values.",
+    standardised_exception: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = (
+        Field(
+            None,
+            alias="standardisedException",
+            description="The Standard Initial Margin Model exception when specified by the party according to one of the enumerated values.",
+        )
     )
     simm_exception_applicable: (
-        cdm_legaldocumentation_csa_SimmExceptionApplicableEnum_schema.SimmExceptionApplicableEnum | None
+        cdm_legaldocumentation_csa_SimmExceptionApplicableEnum_schema.SimmExceptionApplicableEnum
+        | None
     ) = Field(
         None,
         alias="simmExceptionApplicable",

@@ -14,7 +14,8 @@ from . import (
 
 class CashSettlementTerms(BaseModel):
     cash_settlement_method: (
-        cdm_product_common_settlement_CashSettlementMethodEnum_schema.CashSettlementMethodEnum | None
+        cdm_product_common_settlement_CashSettlementMethodEnum_schema.CashSettlementMethodEnum
+        | None
     ) = Field(
         None,
         alias="cashSettlementMethod",

@@ -45,7 +45,9 @@ class BrokerConfirmationTypeEnum(StrEnum):
     STANDARD_AUSTRALIA_CORPORATE = "StandardAustraliaCorporate"
     STANDARD_AUSTRALIA_SOVEREIGN = "StandardAustraliaSovereign"
     STANDARD_CDX_TRANCHE = "StandardCDXTranche"
-    STANDARD_EMERGING_EUROPEAN_AND_MIDDLE_EASTERN_SOVEREIGN = "StandardEmergingEuropeanAndMiddleEasternSovereign"
+    STANDARD_EMERGING_EUROPEAN_AND_MIDDLE_EASTERN_SOVEREIGN = (
+        "StandardEmergingEuropeanAndMiddleEasternSovereign"
+    )
     STANDARD_EMERGING_EUROPEAN_CORPORATE = "StandardEmergingEuropeanCorporate"
     STANDARD_EMERGING_EUROPEAN_CORPORATE_LPN = "StandardEmergingEuropeanCorporateLPN"
     STANDARD_EUROPEAN_CORPORATE = "StandardEuropeanCorporate"
@@ -63,7 +65,9 @@ class BrokerConfirmationTypeEnum(StrEnum):
     STANDARD_NORTH_AMERICAN_CORPORATE = "StandardNorthAmericanCorporate"
     STANDARD_SINGAPORE_CORPORATE = "StandardSingaporeCorporate"
     STANDARD_SINGAPORE_SOVEREIGN = "StandardSingaporeSovereign"
-    STANDARD_SUBORDINATED_EUROPEAN_INSURANCE_CORPORATE = "StandardSubordinatedEuropeanInsuranceCorporate"
+    STANDARD_SUBORDINATED_EUROPEAN_INSURANCE_CORPORATE = (
+        "StandardSubordinatedEuropeanInsuranceCorporate"
+    )
     STANDARD_WESTERN_EUROPEAN_SOVEREIGN = "StandardWesternEuropeanSovereign"
     STANDARDI_TRAXX_EUROPE_TRANCHE = "StandardiTraxxEuropeTranche"
     SUBORDINATED_EUROPEAN_INSURANCE_CORPORATE = "SubordinatedEuropeanInsuranceCorporate"

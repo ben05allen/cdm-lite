@@ -23,4 +23,6 @@ class FutureValueAmount(BaseModel):
         alias="calculationPeriodNumberOfDays",
         description="The number of days from the adjusted calculation period start date to the adjusted value date, calculated in accordance with the applicable day count fraction.",
     )
-    value_date: str = Field(..., alias="valueDate", description="Adjusted value date of the future value amount.")
+    value_date: str = Field(
+        ..., alias="valueDate", description="Adjusted value date of the future value amount."
+    )

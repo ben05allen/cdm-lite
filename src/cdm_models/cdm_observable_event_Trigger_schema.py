@@ -16,13 +16,18 @@ class Trigger(BaseModel):
     level: list[cdm_observable_asset_PriceSchedule_schema.PriceSchedule] | None = Field(
         None, description="The trigger level.", max_length=2, min_length=0
     )
-    credit_events: cdm_observable_event_CreditEvents_schema.CreditEvents | None = Field(None, alias="creditEvents")
+    credit_events: cdm_observable_event_CreditEvents_schema.CreditEvents | None = Field(
+        None, alias="creditEvents"
+    )
     credit_events_reference: (
-        cdm_observable_event_metafields_ReferenceWithMetaCreditEvents_schema.ReferenceWithMetaCreditEvents | None
+        cdm_observable_event_metafields_ReferenceWithMetaCreditEvents_schema.ReferenceWithMetaCreditEvents
+        | None
     ) = Field(None, alias="creditEventsReference")
     trigger_type: cdm_observable_event_TriggerTypeEnum_schema.TriggerTypeEnum | None = Field(
         None, alias="triggerType", description="The Triggering condition."
     )
-    trigger_time_type: cdm_observable_event_TriggerTimeTypeEnum_schema.TriggerTimeTypeEnum | None = Field(
+    trigger_time_type: (
+        cdm_observable_event_TriggerTimeTypeEnum_schema.TriggerTimeTypeEnum | None
+    ) = Field(
         None, alias="triggerTimeType", description="The valuation time type of knock condition."
     )

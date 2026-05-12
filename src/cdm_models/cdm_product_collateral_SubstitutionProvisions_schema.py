@@ -8,11 +8,17 @@ from . import cdm_base_datetime_Period_schema
 
 class SubstitutionProvisions(BaseModel):
     number_of_substitutions_allowed: int | None = Field(
-        None, alias="numberOfSubstitutionsAllowed", description="Specifies if 1 or more substitutions are allowed."
+        None,
+        alias="numberOfSubstitutionsAllowed",
+        description="Specifies if 1 or more substitutions are allowed.",
     )
     notice_deadline_period: cdm_base_datetime_Period_schema.Period | None = Field(
-        None, alias="noticeDeadlinePeriod", description="Defines the min period for notify of a substitution."
+        None,
+        alias="noticeDeadlinePeriod",
+        description="Defines the min period for notify of a substitution.",
     )
     notice_deadline_date_time: str | None = Field(
-        None, alias="noticeDeadlineDateTime", description="A specific date and time for the notice deadline"
+        None,
+        alias="noticeDeadlineDateTime",
+        description="A specific date and time for the notice deadline",
     )

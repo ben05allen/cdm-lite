@@ -18,6 +18,8 @@ class ProcessAgentElection(BaseModel):
         alias="isApplicable",
         description="The qualification of whether the Process Agent is applicable (True) or not applicable (False).",
     )
-    process_agent: cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation | None = Field(
+    process_agent: (
+        cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation | None
+    ) = Field(
         None, alias="processAgent", description="The Process Agent specification, when applicable."
     )

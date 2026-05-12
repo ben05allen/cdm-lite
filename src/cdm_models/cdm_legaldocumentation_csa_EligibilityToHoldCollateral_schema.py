@@ -12,7 +12,10 @@ from . import (
 
 class EligibilityToHoldCollateral(BaseModel):
     party_terms: (
-        list[cdm_legaldocumentation_csa_HoldingPostedCollateralEnum_schema.HoldingPostedCollateralEnum] | None
+        list[
+            cdm_legaldocumentation_csa_HoldingPostedCollateralEnum_schema.HoldingPostedCollateralEnum
+        ]
+        | None
     ) = Field(
         None,
         alias="partyTerms",
@@ -24,7 +27,9 @@ class EligibilityToHoldCollateral(BaseModel):
         alias="custodianTerms",
         description="The restrictions that might be required by a party from the other party's custodian agent to hold its posted collateral.",
     )
-    eligible_country: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    eligible_country: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         alias="eligibleCountry",
         description="The restrictions that might be required by a party from the other party in terms of country(ies) where collateral can be held.",

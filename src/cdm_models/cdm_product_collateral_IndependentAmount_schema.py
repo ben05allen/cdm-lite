@@ -12,34 +12,40 @@ from . import (
 
 class IndependentAmount(BaseModel):
     payer_party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="payerPartyReference",
         description="The party responsible for making the payments defined by this structure.",
     )
     payer_account_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount
+        | None
     ) = Field(
         None,
         alias="payerAccountReference",
         description="A reference to the account responsible for making the payments defined by this structure.",
     )
     receiver_party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="receiverPartyReference",
         description="The party that receives the payments corresponding to this structure.",
     )
     receiver_account_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount
+        | None
     ) = Field(
         None,
         alias="receiverAccountReference",
         description="A reference to the account that receives the payments corresponding to this structure.",
     )
-    payment_detail: list[cdm_product_common_settlement_PaymentDetail_schema.PaymentDetail] | None = Field(
+    payment_detail: (
+        list[cdm_product_common_settlement_PaymentDetail_schema.PaymentDetail] | None
+    ) = Field(
         None,
         alias="paymentDetail",
         description="An attribute that specifies a payment as the combination of a payment amount, a payment date and an associated payment calculation rule.",

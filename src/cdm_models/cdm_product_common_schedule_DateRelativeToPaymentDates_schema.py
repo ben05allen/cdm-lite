@@ -8,7 +8,9 @@ from . import cdm_product_common_schedule_metafields_ReferenceWithMetaPaymentDat
 
 class DateRelativeToPaymentDates(BaseModel):
     payment_dates_reference: (
-        list[cdm_product_common_schedule_metafields_ReferenceWithMetaPaymentDates_schema.ReferenceWithMetaPaymentDates]
+        list[
+            cdm_product_common_schedule_metafields_ReferenceWithMetaPaymentDates_schema.ReferenceWithMetaPaymentDates
+        ]
         | None
     ) = Field(
         None,

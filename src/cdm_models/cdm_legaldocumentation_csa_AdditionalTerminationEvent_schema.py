@@ -8,7 +8,9 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 class AdditionalTerminationEvent(BaseModel):
     name: str = Field(..., description="The name of the additional termination event.")
-    applicable_party: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    applicable_party: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         alias="applicableParty",
         description="Whether the additional termination event is applicable for the relevant party.",

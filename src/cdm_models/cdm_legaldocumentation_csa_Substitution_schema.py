@@ -22,8 +22,10 @@ class Substitution(BaseModel):
         alias="specificConsentLanguage",
         description="Specific consent language might be specified by the parties.",
     )
-    legacy_consent: cdm_legaldocumentation_csa_LegacyConsentEnum_schema.LegacyConsentEnum | None = Field(
-        None,
-        alias="legacyConsent",
-        description="The process for substituting/exchanging one form of collateral held by a party for a different form of collateral, used with legacy agreements.",
+    legacy_consent: cdm_legaldocumentation_csa_LegacyConsentEnum_schema.LegacyConsentEnum | None = (
+        Field(
+            None,
+            alias="legacyConsent",
+            description="The process for substituting/exchanging one form of collateral held by a party for a different form of collateral, used with legacy agreements.",
+        )
     )

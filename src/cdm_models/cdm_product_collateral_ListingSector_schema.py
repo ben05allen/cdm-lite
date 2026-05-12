@@ -7,7 +7,9 @@ from . import com_rosetta_model_metafields_FieldWithMetaString_schema
 
 
 class ListingSector(BaseModel):
-    sector: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    sector: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         description="Represents a filter based on an industry sector defined under a system for classifying industry types such as Global Industry Classification Standard (GICS) and North American Industry Classification System (NAICS)",
         min_length=1,

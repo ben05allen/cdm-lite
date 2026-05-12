@@ -10,7 +10,9 @@ from . import (
 
 
 class WorkflowStepApproval(BaseModel):
-    approved: bool = Field(..., description="Flag denoting whether the workflow step is approved or not")
+    approved: bool = Field(
+        ..., description="Flag denoting whether the workflow step is approved or not"
+    )
     party: cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty = Field(
         ..., description="Reference to the Party who is approving/rejecting this workflow step"
     )

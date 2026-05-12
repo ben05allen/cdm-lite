@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_LegacyExposureScopeElection_schema
 
 class ExposureScope(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_LegacyExposureScopeElection_schema.LegacyExposureScopeElection] | None
+        list[
+            cdm_legaldocumentation_csa_LegacyExposureScopeElection_schema.LegacyExposureScopeElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

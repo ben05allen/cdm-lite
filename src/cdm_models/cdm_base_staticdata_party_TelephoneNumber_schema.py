@@ -7,7 +7,11 @@ from . import cdm_base_staticdata_party_TelephoneTypeEnum_schema
 
 
 class TelephoneNumber(BaseModel):
-    telephone_number_type: cdm_base_staticdata_party_TelephoneTypeEnum_schema.TelephoneTypeEnum | None = Field(
-        None, alias="telephoneNumberType", description="The type of telephone number, e.g. work, mobile."
+    telephone_number_type: (
+        cdm_base_staticdata_party_TelephoneTypeEnum_schema.TelephoneTypeEnum | None
+    ) = Field(
+        None,
+        alias="telephoneNumberType",
+        description="The type of telephone number, e.g. work, mobile.",
     )
     number: str = Field(..., description="The actual telephone number.")

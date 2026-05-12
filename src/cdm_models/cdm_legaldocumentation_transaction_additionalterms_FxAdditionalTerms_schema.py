@@ -11,7 +11,8 @@ from . import (
 
 class FxAdditionalTerms(BaseModel):
     disruption_events: (
-        cdm_legaldocumentation_transaction_additionalterms_FxDisruptionEvents_schema.FxDisruptionEvents | None
+        cdm_legaldocumentation_transaction_additionalterms_FxDisruptionEvents_schema.FxDisruptionEvents
+        | None
     ) = Field(None, alias="disruptionEvents")
     determination_terms: (
         cdm_legaldocumentation_transaction_additionalterms_DeterminationRolesAndTerms_schema.DeterminationRolesAndTerms

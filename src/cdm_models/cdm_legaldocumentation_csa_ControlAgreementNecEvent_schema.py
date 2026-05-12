@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_ControlAgreementNecEventElection_schema
 
 class ControlAgreementNecEvent(BaseModel):
     control_agreement_nec_event_election: (
-        list[cdm_legaldocumentation_csa_ControlAgreementNecEventElection_schema.ControlAgreementNecEventElection] | None
+        list[
+            cdm_legaldocumentation_csa_ControlAgreementNecEventElection_schema.ControlAgreementNecEventElection
+        ]
+        | None
     ) = Field(
         None,
         alias="controlAgreementNecEventElection",

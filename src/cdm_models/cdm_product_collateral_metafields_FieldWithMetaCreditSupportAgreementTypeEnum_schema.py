@@ -10,5 +10,8 @@ from . import (
 
 
 class FieldWithMetaCreditSupportAgreementTypeEnum(BaseModel):
-    value: cdm_product_collateral_CreditSupportAgreementTypeEnum_schema.CreditSupportAgreementTypeEnum | None = None
+    value: (
+        cdm_product_collateral_CreditSupportAgreementTypeEnum_schema.CreditSupportAgreementTypeEnum
+        | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

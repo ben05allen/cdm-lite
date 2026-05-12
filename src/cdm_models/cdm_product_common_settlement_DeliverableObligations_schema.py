@@ -19,7 +19,9 @@ class DeliverableObligations(BaseModel):
         alias="accruedInterest",
         description="Indicates whether accrued interest is included (true) or not (false). For cash settlement this specifies whether quotations should be obtained inclusive or not of accrued interest. For physical settlement this specifies whether the buyer should deliver the obligation with an outstanding principal balance that includes or excludes accrued interest. ISDA 2003 Term: Include/Exclude Accrued Interest.",
     )
-    category: cdm_base_staticdata_asset_credit_ObligationCategoryEnum_schema.ObligationCategoryEnum | None = Field(
+    category: (
+        cdm_base_staticdata_asset_credit_ObligationCategoryEnum_schema.ObligationCategoryEnum | None
+    ) = Field(
         None,
         description="Used in both obligations and deliverable obligations to represent a class or type of securities which apply. ISDA 2003 Term: Obligation Category/Deliverable Obligation Category.",
     )
@@ -28,7 +30,9 @@ class DeliverableObligations(BaseModel):
         alias="notSubordinated",
         description="An obligation and deliverable obligation characteristic. An obligation that ranks at least equal with the most senior Reference Obligation in priority of payment or, if no Reference Obligation is specified in the related Confirmation, the obligations of the Reference Entity that are senior. ISDA 2003 Term: Not Subordinated.",
     )
-    specified_currency: cdm_base_staticdata_asset_credit_SpecifiedCurrency_schema.SpecifiedCurrency | None = Field(
+    specified_currency: (
+        cdm_base_staticdata_asset_credit_SpecifiedCurrency_schema.SpecifiedCurrency | None
+    ) = Field(
         None,
         alias="specifiedCurrency",
         description="An obligation and deliverable obligation characteristic. The currency or currencies in which an obligation or deliverable obligation must be payable. ISDA 2003 Term: Specified Currency.",
@@ -38,12 +42,12 @@ class DeliverableObligations(BaseModel):
         alias="notSovereignLender",
         description="An obligation and deliverable obligation characteristic. Any obligation that is not primarily (majority) owed to a Sovereign or Supranational Organisation. ISDA 2003 Term: Not Sovereign Lender.",
     )
-    not_domestic_currency: cdm_base_staticdata_asset_credit_NotDomesticCurrency_schema.NotDomesticCurrency | None = (
-        Field(
-            None,
-            alias="notDomesticCurrency",
-            description="An obligation and deliverable obligation characteristic. Any obligation that is payable in any currency other than the domestic currency. Domestic currency is either the currency so specified or, if no currency is specified, the currency of (a) the reference entity, if the reference entity is a sovereign, or (b) the jurisdiction in which the relevant reference entity is organised, if the reference entity is not a sovereign. ISDA 2003 Term: Not Domestic Currency.",
-        )
+    not_domestic_currency: (
+        cdm_base_staticdata_asset_credit_NotDomesticCurrency_schema.NotDomesticCurrency | None
+    ) = Field(
+        None,
+        alias="notDomesticCurrency",
+        description="An obligation and deliverable obligation characteristic. Any obligation that is payable in any currency other than the domestic currency. Domestic currency is either the currency so specified or, if no currency is specified, the currency of (a) the reference entity, if the reference entity is a sovereign, or (b) the jurisdiction in which the relevant reference entity is organised, if the reference entity is not a sovereign. ISDA 2003 Term: Not Domestic Currency.",
     )
     not_domestic_law: bool | None = Field(
         None,
@@ -65,20 +69,24 @@ class DeliverableObligations(BaseModel):
         description="An obligation and deliverable obligation characteristic. Any obligation other than an obligation that was intended to be offered for sale primarily in the domestic market of the relevant Reference Entity. This specifies that the obligation must be an internationally recognised bond. ISDA 2003 Term: Not Domestic Issuance.",
     )
     assignable_loan: (
-        cdm_product_common_settlement_PCDeliverableObligationCharac_schema.PCDeliverableObligationCharac | None
+        cdm_product_common_settlement_PCDeliverableObligationCharac_schema.PCDeliverableObligationCharac
+        | None
     ) = Field(
         None,
         alias="assignableLoan",
         description="A deliverable obligation characteristic. A loan that is freely assignable to a bank or financial institution without the consent of the Reference Entity or the guarantor, if any, of the loan (or the consent of the applicable borrower if a Reference Entity is guaranteeing the loan) or any agent. ISDA 2003 Term: Assignable Loan.",
     )
     consent_required_loan: (
-        cdm_product_common_settlement_PCDeliverableObligationCharac_schema.PCDeliverableObligationCharac | None
+        cdm_product_common_settlement_PCDeliverableObligationCharac_schema.PCDeliverableObligationCharac
+        | None
     ) = Field(
         None,
         alias="consentRequiredLoan",
         description="A deliverable obligation characteristic. A loan that is capable of being assigned with the consent of the Reference Entity or the guarantor, if any, of the loan or any agent. ISDA 2003 Term: Consent Required Loan.",
     )
-    direct_loan_participation: cdm_product_common_settlement_LoanParticipation_schema.LoanParticipation | None = Field(
+    direct_loan_participation: (
+        cdm_product_common_settlement_LoanParticipation_schema.LoanParticipation | None
+    ) = Field(
         None,
         alias="directLoanParticipation",
         description="A deliverable obligation characteristic. A loan with a participation agreement whereby the buyer is capable of creating, or procuring the creation of, a contractual right in favour of the seller that provides the seller with recourse to the participation seller for a specified share in any payments due under the relevant loan which are received by the participation seller. ISDA 2003 Term: Direct Loan Participation.",
@@ -117,12 +125,12 @@ class DeliverableObligations(BaseModel):
         alias="revenueObligationLiability",
         description="An obligation and deliverable obligation characteristic. Defined in the ISDA published additional provisions for U.S. Municipal as Reference Entity. ISDA 2003 Term: Revenue Obligation Liability.",
     )
-    indirect_loan_participation: cdm_product_common_settlement_LoanParticipation_schema.LoanParticipation | None = (
-        Field(
-            None,
-            alias="indirectLoanParticipation",
-            description="ISDA 1999 Term: Indirect Loan Participation. NOTE: Only applicable as a deliverable obligation under ISDA Credit 1999.",
-        )
+    indirect_loan_participation: (
+        cdm_product_common_settlement_LoanParticipation_schema.LoanParticipation | None
+    ) = Field(
+        None,
+        alias="indirectLoanParticipation",
+        description="ISDA 1999 Term: Indirect Loan Participation. NOTE: Only applicable as a deliverable obligation under ISDA Credit 1999.",
     )
     excluded: str | None = Field(
         None,

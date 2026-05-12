@@ -17,7 +17,9 @@ class CustodianTerms(BaseModel):
         description="The minimal level of assets requirement with respect to the custody agent.",
     )
     minimum_rating: cdm_observable_asset_CreditNotation_schema.CreditNotation | None = Field(
-        None, alias="minimumRating", description="The minimal rating requirement with respect to the custody agent."
+        None,
+        alias="minimumRating",
+        description="The minimal rating requirement with respect to the custody agent.",
     )
     initial_designation: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, alias="initialDesignation", description="Election to specify the initial custodian."

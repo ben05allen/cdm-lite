@@ -8,7 +8,9 @@ from . import cdm_product_template_ExerciseNotice_schema
 
 class ManualExercise(BaseModel):
     exercise_notice: cdm_product_template_ExerciseNotice_schema.ExerciseNotice | None = Field(
-        None, alias="exerciseNotice", description="Definition of the party to whom notice of exercise should be given."
+        None,
+        alias="exerciseNotice",
+        description="Definition of the party to whom notice of exercise should be given.",
     )
     fallback_exercise: bool | None = Field(
         None,

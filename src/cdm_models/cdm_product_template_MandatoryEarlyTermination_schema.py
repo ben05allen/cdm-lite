@@ -28,7 +28,8 @@ class MandatoryEarlyTermination(BaseModel):
         description="If specified, this means that cash settlement is applicable to the transaction and defines the parameters associated with the cash settlement procedure. If not specified, then physical settlement is applicable.",
     )
     mandatory_early_termination_adjusted_dates: (
-        cdm_product_template_MandatoryEarlyTerminationAdjustedDates_schema.MandatoryEarlyTerminationAdjustedDates | None
+        cdm_product_template_MandatoryEarlyTerminationAdjustedDates_schema.MandatoryEarlyTerminationAdjustedDates
+        | None
     ) = Field(
         None,
         alias="mandatoryEarlyTerminationAdjustedDates",

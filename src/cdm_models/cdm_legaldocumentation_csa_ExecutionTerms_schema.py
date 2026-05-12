@@ -3,13 +3,20 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_ExecutionLanguage_schema, cdm_legaldocumentation_csa_ExecutionLocation_schema
+from . import (
+    cdm_legaldocumentation_csa_ExecutionLanguage_schema,
+    cdm_legaldocumentation_csa_ExecutionLocation_schema,
+)
 
 
 class ExecutionTerms(BaseModel):
-    execution_language: cdm_legaldocumentation_csa_ExecutionLanguage_schema.ExecutionLanguage = Field(
-        ..., alias="executionLanguage", description="The bespoke execution language election."
+    execution_language: cdm_legaldocumentation_csa_ExecutionLanguage_schema.ExecutionLanguage = (
+        Field(
+            ..., alias="executionLanguage", description="The bespoke execution language election."
+        )
     )
-    execution_location: cdm_legaldocumentation_csa_ExecutionLocation_schema.ExecutionLocation = Field(
-        ..., alias="executionLocation", description="The bespoke execution location election."
+    execution_location: cdm_legaldocumentation_csa_ExecutionLocation_schema.ExecutionLocation = (
+        Field(
+            ..., alias="executionLocation", description="The bespoke execution location election."
+        )
     )

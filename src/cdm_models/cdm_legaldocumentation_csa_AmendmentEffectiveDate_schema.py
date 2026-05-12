@@ -11,12 +11,13 @@ class AmendmentEffectiveDate(BaseModel):
         None,
         description="The effective date of the Amendment to Termination Currency when specified as an actual date.",
     )
-    specific_date: cdm_legaldocumentation_csa_AmendmentEffectiveDateEnum_schema.AmendmentEffectiveDateEnum | None = (
-        Field(
-            None,
-            alias="specificDate",
-            description="The effective date of the Amendment to Termination Currency when specified as relative to another date (e.g. the annex date).",
-        )
+    specific_date: (
+        cdm_legaldocumentation_csa_AmendmentEffectiveDateEnum_schema.AmendmentEffectiveDateEnum
+        | None
+    ) = Field(
+        None,
+        alias="specificDate",
+        description="The effective date of the Amendment to Termination Currency when specified as relative to another date (e.g. the annex date).",
     )
     custom_provision: str | None = Field(
         None,

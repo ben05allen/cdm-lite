@@ -11,8 +11,11 @@ from . import (
 
 class SpreadSchedule(BaseModel):
     price: (
-        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule | None
-    ) = Field(None, description="The initial rate. An initial rate of 5% would be represented as 0.05.")
+        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule
+        | None
+    ) = Field(
+        None, description="The initial rate. An initial rate of 5% would be represented as 0.05."
+    )
     spread_schedule_type: (
         cdm_product_asset_metafields_FieldWithMetaSpreadScheduleTypeEnum_schema.FieldWithMetaSpreadScheduleTypeEnum
         | None

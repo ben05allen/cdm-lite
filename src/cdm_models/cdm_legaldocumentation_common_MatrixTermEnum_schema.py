@@ -20,7 +20,9 @@ class MatrixTermEnum(StrEnum):
     EUROPEAN_CO_CO_FINANCIAL_CORPORATE = "EuropeanCoCoFinancialCorporate"
     EUROPEAN_CORPORATE = "EuropeanCorporate"
     EUROPEAN_FINANCIAL_CORPORATE = "EuropeanFinancialCorporate"
-    EUROPEAN_SENIOR_NON_PREFERRED_FINANCIAL_CORPORATE = "EuropeanSeniorNonPreferredFinancialCorporate"
+    EUROPEAN_SENIOR_NON_PREFERRED_FINANCIAL_CORPORATE = (
+        "EuropeanSeniorNonPreferredFinancialCorporate"
+    )
     IVS1_OPEN_MARKETS = "IVS1OpenMarkets"
     JAPAN_CORPORATE = "JapanCorporate"
     JAPAN_FINANCIAL_CORPORATE = "JapanFinancialCorporate"
@@ -45,22 +47,30 @@ class MatrixTermEnum(StrEnum):
     STANDARD_AUSTRALIA_CORPORATE = "StandardAustraliaCorporate"
     STANDARD_AUSTRALIA_FINANCIAL_CORPORATE = "StandardAustraliaFinancialCorporate"
     STANDARD_AUSTRALIA_SOVEREIGN = "StandardAustraliaSovereign"
-    STANDARD_EMERGING_EUROPEAN_AND_MIDDLE_EASTERN_SOVEREIGN = "StandardEmergingEuropeanAndMiddleEasternSovereign"
+    STANDARD_EMERGING_EUROPEAN_AND_MIDDLE_EASTERN_SOVEREIGN = (
+        "StandardEmergingEuropeanAndMiddleEasternSovereign"
+    )
     STANDARD_EMERGING_EUROPEAN_CORPORATE = "StandardEmergingEuropeanCorporate"
     STANDARD_EMERGING_EUROPEAN_CORPORATE_LPN = "StandardEmergingEuropeanCorporateLPN"
     STANDARD_EMERGING_EUROPEAN_FINANCIAL_CORPORATE = "StandardEmergingEuropeanFinancialCorporate"
-    STANDARD_EMERGING_EUROPEAN_FINANCIAL_CORPORATE_LPN = "StandardEmergingEuropeanFinancialCorporateLPN"
+    STANDARD_EMERGING_EUROPEAN_FINANCIAL_CORPORATE_LPN = (
+        "StandardEmergingEuropeanFinancialCorporateLPN"
+    )
     STANDARD_EUROPEAN_CO_CO_FINANCIAL_CORPORATE = "StandardEuropeanCoCoFinancialCorporate"
     STANDARD_EUROPEAN_CORPORATE = "StandardEuropeanCorporate"
     STANDARD_EUROPEAN_FINANCIAL_CORPORATE = "StandardEuropeanFinancialCorporate"
-    STANDARD_EUROPEAN_SENIOR_NON_PREFERRED_FINANCIAL_CORPORATE = "StandardEuropeanSeniorNonPreferredFinancialCorporate"
+    STANDARD_EUROPEAN_SENIOR_NON_PREFERRED_FINANCIAL_CORPORATE = (
+        "StandardEuropeanSeniorNonPreferredFinancialCorporate"
+    )
     STANDARD_JAPAN_CORPORATE = "StandardJapanCorporate"
     STANDARD_JAPAN_FINANCIAL_CORPORATE = "StandardJapanFinancialCorporate"
     STANDARD_JAPAN_SOVEREIGN = "StandardJapanSovereign"
     STANDARD_LATIN_AMERICA_CORPORATE_BOND = "StandardLatinAmericaCorporateBond"
     STANDARD_LATIN_AMERICA_CORPORATE_BOND_OR_LOAN = "StandardLatinAmericaCorporateBondOrLoan"
     STANDARD_LATIN_AMERICA_FINANCIAL_CORPORATE_BOND = "StandardLatinAmericaFinancialCorporateBond"
-    STANDARD_LATIN_AMERICA_FINANCIAL_CORPORATE_BOND_OR_LOAN = "StandardLatinAmericaFinancialCorporateBondOrLoan"
+    STANDARD_LATIN_AMERICA_FINANCIAL_CORPORATE_BOND_OR_LOAN = (
+        "StandardLatinAmericaFinancialCorporateBondOrLoan"
+    )
     STANDARD_LATIN_AMERICA_SOVEREIGN = "StandardLatinAmericaSovereign"
     STANDARD_NEW_ZEALAND_CORPORATE = "StandardNewZealandCorporate"
     STANDARD_NEW_ZEALAND_FINANCIAL_CORPORATE = "StandardNewZealandFinancialCorporate"
@@ -70,7 +80,9 @@ class MatrixTermEnum(StrEnum):
     STANDARD_SINGAPORE_CORPORATE = "StandardSingaporeCorporate"
     STANDARD_SINGAPORE_FINANCIAL_CORPORATE = "StandardSingaporeFinancialCorporate"
     STANDARD_SINGAPORE_SOVEREIGN = "StandardSingaporeSovereign"
-    STANDARD_SUBORDINATED_EUROPEAN_INSURANCE_CORPORATE = "StandardSubordinatedEuropeanInsuranceCorporate"
+    STANDARD_SUBORDINATED_EUROPEAN_INSURANCE_CORPORATE = (
+        "StandardSubordinatedEuropeanInsuranceCorporate"
+    )
     STANDARD_SUKUK_FINANCIAL_CORPORATE = "StandardSukukFinancialCorporate"
     STANDARD_US_MUNICIPAL_FULL_FAITH_AND_CREDIT = "StandardUSMunicipalFullFaithAndCredit"
     STANDARD_US_MUNICIPAL_GENERAL_FUND = "StandardUSMunicipalGeneralFund"

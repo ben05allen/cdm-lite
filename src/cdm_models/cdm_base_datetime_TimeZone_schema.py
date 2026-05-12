@@ -8,7 +8,9 @@ from . import com_rosetta_model_metafields_FieldWithMetaString_schema
 
 class TimeZone(BaseModel):
     time: str = Field(..., description="The observation time.")
-    location: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="FpML specifies the timezoneLocationScheme by reference to the Time Zone Database (a.k.a. tz database) maintained by IANA, the Internet Assigned Numbers Authority.",
+    location: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="FpML specifies the timezoneLocationScheme by reference to the Time Zone Database (a.k.a. tz database) maintained by IANA, the Internet Assigned Numbers Authority.",
+        )
     )

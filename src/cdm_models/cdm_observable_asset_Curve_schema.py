@@ -10,8 +10,8 @@ from . import (
 
 
 class Curve(BaseModel):
-    interest_rate_curve: cdm_observable_asset_InterestRateCurve_schema.InterestRateCurve | None = Field(
-        None, alias="interestRateCurve"
+    interest_rate_curve: cdm_observable_asset_InterestRateCurve_schema.InterestRateCurve | None = (
+        Field(None, alias="interestRateCurve")
     )
     commodity_curve: (
         cdm_observable_asset_metafields_FieldWithMetaCommodityReferencePriceEnum_schema.FieldWithMetaCommodityReferencePriceEnum

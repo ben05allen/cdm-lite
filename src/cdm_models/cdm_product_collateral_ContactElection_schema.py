@@ -7,12 +7,13 @@ from . import cdm_base_staticdata_party_PartyContactInformation_schema
 
 
 class ContactElection(BaseModel):
-    party_election: list[cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation] | None = (
-        Field(
-            None,
-            alias="partyElection",
-            description="The parties' contact information election.",
-            max_length=2,
-            min_length=2,
-        )
+    party_election: (
+        list[cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation]
+        | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The parties' contact information election.",
+        max_length=2,
+        min_length=2,
     )

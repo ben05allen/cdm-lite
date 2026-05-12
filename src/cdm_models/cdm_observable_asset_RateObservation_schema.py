@@ -29,7 +29,8 @@ class RateObservation(BaseModel):
         description="The number of days weighting to be associated with the rate observation, i.e. the number of days such rate is in effect. This is applicable in the case of a weighted average method of calculation where more than one reset date is established for a single calculation period.",
     )
     rate_reference: (
-        cdm_observable_asset_metafields_ReferenceWithMetaRateObservation_schema.ReferenceWithMetaRateObservation | None
+        cdm_observable_asset_metafields_ReferenceWithMetaRateObservation_schema.ReferenceWithMetaRateObservation
+        | None
     ) = Field(
         None,
         alias="rateReference",

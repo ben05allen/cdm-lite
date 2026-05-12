@@ -7,7 +7,9 @@ from . import cdm_base_datetime_Offset_schema
 
 
 class GracePeriodExtension(BaseModel):
-    applicable: bool = Field(..., description="Indicates whether the grace period extension provision is applicable.")
+    applicable: bool = Field(
+        ..., description="Indicates whether the grace period extension provision is applicable."
+    )
     grace_period: cdm_base_datetime_Offset_schema.Offset | None = Field(
         None,
         alias="gracePeriod",

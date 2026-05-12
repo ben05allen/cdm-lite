@@ -18,7 +18,9 @@ class StubFloatingRate(BaseModel):
         ..., alias="floatingRateIndex", description="The floating rate index."
     )
     index_tenor: cdm_base_datetime_Period_schema.Period | None = Field(
-        None, alias="indexTenor", description="The ISDA Designated Maturity, i.e. the tenor of the floating rate."
+        None,
+        alias="indexTenor",
+        description="The ISDA Designated Maturity, i.e. the tenor of the floating rate.",
     )
     floating_rate_multiplier_schedule: cdm_base_math_Schedule_schema.Schedule | None = Field(
         None,
@@ -36,15 +38,19 @@ class StubFloatingRate(BaseModel):
         alias="rateTreatment",
         description="The specification of any rate conversion which needs to be applied to the observed rate before being used in any calculations. The two common conversions are for securities quoted on a bank discount basis which will need to be converted to either a Money Market Yield or Bond Equivalent Yield. See the Annex to the 2000 ISDA Definitions, Section 7.3. Certain General Definitions Relating to Floating Rate Options, paragraphs (g) and (h) for definitions of these terms.",
     )
-    cap_rate_schedule: list[cdm_product_template_StrikeSchedule_schema.StrikeSchedule] | None = Field(
-        None,
-        alias="capRateSchedule",
-        description="The cap rate or cap rate schedule, if any, which applies to the floating rate. The cap rate (strike) is only required where the floating rate on a swap stream is capped at a certain level. A cap rate schedule is expressed as explicit cap rates and dates and the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments. The cap rate is assumed to be exclusive of any spread and is a per annum rate, expressed as a decimal. A cap rate of 5% would be represented as 0.05.",
-        min_length=0,
+    cap_rate_schedule: list[cdm_product_template_StrikeSchedule_schema.StrikeSchedule] | None = (
+        Field(
+            None,
+            alias="capRateSchedule",
+            description="The cap rate or cap rate schedule, if any, which applies to the floating rate. The cap rate (strike) is only required where the floating rate on a swap stream is capped at a certain level. A cap rate schedule is expressed as explicit cap rates and dates and the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments. The cap rate is assumed to be exclusive of any spread and is a per annum rate, expressed as a decimal. A cap rate of 5% would be represented as 0.05.",
+            min_length=0,
+        )
     )
-    floor_rate_schedule: list[cdm_product_template_StrikeSchedule_schema.StrikeSchedule] | None = Field(
-        None,
-        alias="floorRateSchedule",
-        description="The floor rate or floor rate schedule, if any, which applies to the floating rate. The floor rate (strike) is only required where the floating rate on a swap stream is floored at a certain strike level. A floor rate schedule is expressed as explicit floor rates and dates and the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments. The floor rate is assumed to be exclusive of any spread and is a per annum rate, expressed as a decimal. A floor rate of 5% would be represented as 0.05.",
-        min_length=0,
+    floor_rate_schedule: list[cdm_product_template_StrikeSchedule_schema.StrikeSchedule] | None = (
+        Field(
+            None,
+            alias="floorRateSchedule",
+            description="The floor rate or floor rate schedule, if any, which applies to the floating rate. The floor rate (strike) is only required where the floating rate on a swap stream is floored at a certain strike level. A floor rate schedule is expressed as explicit floor rates and dates and the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments. The floor rate is assumed to be exclusive of any spread and is a per annum rate, expressed as a decimal. A floor rate of 5% would be represented as 0.05.",
+            min_length=0,
+        )
     )

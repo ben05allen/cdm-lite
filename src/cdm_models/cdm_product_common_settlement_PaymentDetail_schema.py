@@ -11,9 +11,9 @@ from . import (
 
 
 class PaymentDetail(BaseModel):
-    payment_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
-        None, alias="paymentDate"
-    )
+    payment_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(None, alias="paymentDate")
     payment_rule: cdm_product_common_settlement_PaymentRule_schema.PaymentRule = Field(
         ..., alias="paymentRule", description="The calculation rule."
     )

@@ -20,11 +20,13 @@ class CounterpartyPositionState(BaseModel):
     state: cdm_event_common_State_schema.State | None = Field(
         None, description="Represents the State of the Position through its life-cycle."
     )
-    observation_history: list[cdm_event_common_ObservationEvent_schema.ObservationEvent] | None = Field(
-        None,
-        alias="observationHistory",
-        description="Represents the observed events related to a particular product or process, such as credit events or corporate actions.",
-        min_length=0,
+    observation_history: list[cdm_event_common_ObservationEvent_schema.ObservationEvent] | None = (
+        Field(
+            None,
+            alias="observationHistory",
+            description="Represents the observed events related to a particular product or process, such as credit events or corporate actions.",
+            min_length=0,
+        )
     )
     valuation_history: list[cdm_event_common_Valuation_schema.Valuation] | None = Field(
         None, alias="valuationHistory", min_length=0

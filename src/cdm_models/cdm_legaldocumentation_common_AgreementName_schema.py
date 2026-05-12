@@ -25,7 +25,9 @@ class AgreementName(BaseModel):
         cdm_product_collateral_metafields_FieldWithMetaCreditSupportAgreementTypeEnum_schema.FieldWithMetaCreditSupportAgreementTypeEnum
         | None
     ) = Field(
-        None, alias="creditSupportAgreementType", description="Specification of the credit support agreement type."
+        None,
+        alias="creditSupportAgreementType",
+        description="Specification of the credit support agreement type.",
     )
     credit_support_agreement_margin_type: (
         cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None
@@ -46,14 +48,19 @@ class AgreementName(BaseModel):
         min_length=0,
     )
     contractual_terms_supplement: (
-        list[cdm_legaldocumentation_common_ContractualTermsSupplement_schema.ContractualTermsSupplement] | None
+        list[
+            cdm_legaldocumentation_common_ContractualTermsSupplement_schema.ContractualTermsSupplement
+        ]
+        | None
     ) = Field(
         None,
         alias="contractualTermsSupplement",
         description="A contractual supplement (such as those published by ISDA) that will apply to the trade.",
         min_length=0,
     )
-    contractual_matrix: list[cdm_legaldocumentation_common_ContractualMatrix_schema.ContractualMatrix] | None = Field(
+    contractual_matrix: (
+        list[cdm_legaldocumentation_common_ContractualMatrix_schema.ContractualMatrix] | None
+    ) = Field(
         None,
         alias="contractualMatrix",
         description="A reference to a contractual matrix of elected terms/values (such as those published by ISDA) that shall be deemed to apply to the trade. The applicable matrix is identified by reference to a name and optionally a publication date. Depending on the structure of the matrix, an additional term (specified in the matrixTerm element) may be required to further identify a subset of applicable terms/values within the matrix.",
@@ -62,7 +69,9 @@ class AgreementName(BaseModel):
     master_agreement_type: (
         cdm_legaldocumentation_master_metafields_FieldWithMetaMasterAgreementTypeEnum_schema.FieldWithMetaMasterAgreementTypeEnum
         | None
-    ) = Field(None, alias="masterAgreementType", description="Specification of the master agreement type.")
+    ) = Field(
+        None, alias="masterAgreementType", description="Specification of the master agreement type."
+    )
     master_confirmation_type: (
         cdm_legaldocumentation_master_metafields_FieldWithMetaMasterConfirmationTypeEnum_schema.FieldWithMetaMasterConfirmationTypeEnum
         | None
@@ -80,8 +89,11 @@ class AgreementName(BaseModel):
         description="The type of master confirmation annex executed between the parties.",
     )
     other_agreement: str | None = Field(
-        None, alias="otherAgreement", description="Definition of an agreement that is not enumerated in the CDM."
+        None,
+        alias="otherAgreement",
+        description="Definition of an agreement that is not enumerated in the CDM.",
     )
     broker_confirmation_type: (
-        cdm_legaldocumentation_transaction_BrokerConfirmationTypeEnum_schema.BrokerConfirmationTypeEnum | None
+        cdm_legaldocumentation_transaction_BrokerConfirmationTypeEnum_schema.BrokerConfirmationTypeEnum
+        | None
     ) = Field(None, alias="brokerConfirmationType")

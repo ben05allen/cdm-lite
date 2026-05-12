@@ -8,6 +8,8 @@ from enum import StrEnum
 class ValuationTimeDayEnum(StrEnum):
     AS_SELECTED = "As Selected"
     PREVIOUS_LOCAL_BUSINESS_DAY = "Previous Local Business Day"
-    PREVIOUS_LOCAL_BUSINESS_DAY__CITY_OF_VALUATION_AGENT_ = "Previous Local Business Day (City of Valuation Agent)"
+    PREVIOUS_LOCAL_BUSINESS_DAY__CITY_OF_VALUATION_AGENT_ = (
+        "Previous Local Business Day (City of Valuation Agent)"
+    )
     PREVIOUS_LOCAL_BUSINESS_DAY__RELEVANT_MARKET_ = "Previous Local Business Day (Relevant Market)"
     VALUATION_DATE = "Valuation Date"

@@ -24,9 +24,13 @@ class ClearingInstruction(BaseModel):
         ..., description="Second party facing the CCP if it is clearing for its own account."
     )
     clearer_party1: cdm_base_staticdata_party_Party_schema.Party | None = Field(
-        None, alias="clearerParty1", description="Optional party facing the CCP, acting as clearing member for party1."
+        None,
+        alias="clearerParty1",
+        description="Optional party facing the CCP, acting as clearing member for party1.",
     )
     clearer_party2: cdm_base_staticdata_party_Party_schema.Party | None = Field(
-        None, alias="clearerParty2", description="Optional party facing the CCP, acting as clearing member for party2."
+        None,
+        alias="clearerParty2",
+        description="Optional party facing the CCP, acting as clearing member for party2.",
     )
     is_open_offer: bool | None = Field(None, alias="isOpenOffer", description="Open Offer")

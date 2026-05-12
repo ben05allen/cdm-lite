@@ -19,16 +19,22 @@ from . import (
 
 
 class CancelableProvision(BaseModel):
-    buyer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Buyer party that can be resolved as one of the two principal parties to the transaction. The party that buys this instrument, i.e. pays for this instrument and receives the rights defined by it. ISDA 2002 Equity Definitions section 1.18: `Buyer` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (b)(i) relating to a Swaption: 'Buyer' means the party that will, on each Premium Payment Date, pay to Seller the Premium | ISDA 2006 Definitions article 12.1 (b)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such in the related Confirmation, or the Exercising Party if neither party is specified | ISDA 2006 Definitions article 12.1 (b)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Buyer` means the Fixed Rate Payer.",
+    buyer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Buyer party that can be resolved as one of the two principal parties to the transaction. The party that buys this instrument, i.e. pays for this instrument and receives the rights defined by it. ISDA 2002 Equity Definitions section 1.18: `Buyer` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (b)(i) relating to a Swaption: 'Buyer' means the party that will, on each Premium Payment Date, pay to Seller the Premium | ISDA 2006 Definitions article 12.1 (b)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such in the related Confirmation, or the Exercising Party if neither party is specified | ISDA 2006 Definitions article 12.1 (b)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Buyer` means the Fixed Rate Payer.",
+        )
     )
-    seller: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Seller party that can be resolved as one of the two principal parties to the transaction. The party that sells ('writes') this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. ISDA 2002 Equity Definitions section 1.19: `Seller` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (a)(i) relating to a Swaption: 'Seller' means the party the party specified as such or as writer in the related Confirmation | ISDA 2006 Definitions article 12.1 (a)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such or as writer in the related Confirmation or, if neither party is specified as such, the Non-exercising Party | ISDA 2006 Definitions article 12.1 (a)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Seller` means the Floating Rate Payer.",
+    seller: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Seller party that can be resolved as one of the two principal parties to the transaction. The party that sells ('writes') this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. ISDA 2002 Equity Definitions section 1.19: `Seller` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (a)(i) relating to a Swaption: 'Seller' means the party the party specified as such or as writer in the related Confirmation | ISDA 2006 Definitions article 12.1 (a)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such or as writer in the related Confirmation or, if neither party is specified as such, the Non-exercising Party | ISDA 2006 Definitions article 12.1 (a)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Seller` means the Floating Rate Payer.",
+        )
     )
     exercise_notice: cdm_product_template_ExerciseNotice_schema.ExerciseNotice | None = Field(
-        None, alias="exerciseNotice", description="Definition of the party to whom notice of exercise should be given."
+        None,
+        alias="exerciseNotice",
+        description="Definition of the party to whom notice of exercise should be given.",
     )
     follow_up_confirmation: bool = Field(
         ...,
@@ -36,7 +42,8 @@ class CancelableProvision(BaseModel):
         description="A flag to indicate whether follow-up confirmation of exercise (written or electronic) is required following telephonic notice by the buyer to the seller or seller's agent.",
     )
     cancelable_provision_adjusted_dates: (
-        cdm_product_template_CancelableProvisionAdjustedDates_schema.CancelableProvisionAdjustedDates | None
+        cdm_product_template_CancelableProvisionAdjustedDates_schema.CancelableProvisionAdjustedDates
+        | None
     ) = Field(
         None,
         alias="cancelableProvisionAdjustedDates",
@@ -61,17 +68,23 @@ class CancelableProvision(BaseModel):
         alias="callingParty",
         description="The party with right to exercise a cancellation. Allows for buyer, seller or either.",
     )
-    earliest_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    earliest_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="earliestDate",
         description="The first day when cancelation is permitted to take effect. A party may give notice prior to this date and taken together with the effective period would be necessary to cancel on this date.",
     )
-    expiration_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    expiration_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="expirationDate",
         description="The last day within the term of the contract that cancelation is allowed.",
     )
-    effective_date: cdm_base_datetime_AdjustableOrRelativeDates_schema.AdjustableOrRelativeDates | None = Field(
+    effective_date: (
+        cdm_base_datetime_AdjustableOrRelativeDates_schema.AdjustableOrRelativeDates | None
+    ) = Field(
         None,
         alias="effectiveDate",
         description="The effective date if cancelation is invoked otherwise the cancellation period defines the cancellation date.",
@@ -81,13 +94,19 @@ class CancelableProvision(BaseModel):
         alias="effectivePeriod",
         description="Effective period for cancelation when notice is given. This is the period after notice is given that cancellation becomes effecticve.",
     )
-    earliest_cancellation_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
+    earliest_cancellation_time: (
+        cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None
+    ) = Field(
         None,
         alias="earliestCancellationTime",
         description="The earliest time in a business day that notice of cancelation can be given.",
     )
-    latest_cancelation_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
-        None, alias="latestCancelationTime", description="The latest time at which notice of cancelation can be given."
+    latest_cancelation_time: (
+        cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None
+    ) = Field(
+        None,
+        alias="latestCancelationTime",
+        description="The latest time at which notice of cancelation can be given.",
     )
     exercise_terms: cdm_product_template_ExerciseTerms_schema.ExerciseTerms = Field(
         ...,

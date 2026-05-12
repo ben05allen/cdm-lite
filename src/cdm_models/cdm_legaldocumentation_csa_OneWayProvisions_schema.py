@@ -12,7 +12,9 @@ class OneWayProvisions(BaseModel):
         alias="isApplicable",
         description="The determination of whether the One Way Provisions are applicable (true) or not applicable (false).",
     )
-    posting_party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
+    posting_party: (
+        cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None
+    ) = Field(
         None,
         alias="postingParty",
         description="The Posting Party for the purposes of One Way Provisions. It is specified in the case where the One Way Provision is deemed applicable.",

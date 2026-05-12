@@ -3,17 +3,26 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_BusinessDayAdjustments_schema, com_rosetta_model_metafields_FieldWithMetaString_schema
+from . import (
+    cdm_base_datetime_BusinessDayAdjustments_schema,
+    com_rosetta_model_metafields_FieldWithMetaString_schema,
+)
 
 
 class AdjustableOrAdjustedDate(BaseModel):
-    unadjusted_date: str | None = Field(None, alias="unadjustedDate", description="A date subject to adjustment.")
-    date_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None = Field(
+    unadjusted_date: str | None = Field(
+        None, alias="unadjustedDate", description="A date subject to adjustment."
+    )
+    date_adjustments: (
+        cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None
+    ) = Field(
         None,
         alias="dateAdjustments",
         description="The business day convention and financial business centers used for adjusting the date if it would otherwise fall on a day that is not a business date in the specified business centers.",
     )
-    adjusted_date: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    adjusted_date: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="adjustedDate",
         description="The date once the adjustment has been performed. (Note that this date may change if the business center holidays change).",

@@ -11,9 +11,14 @@ from . import (
 
 class PaymentDateSchedule(BaseModel):
     interim_payment_dates: (
-        list[cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates] | None
+        list[
+            cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates
+        ]
+        | None
     ) = Field(None, alias="interimPaymentDates", min_length=0)
-    final_payment_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    final_payment_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="finalPaymentDate",
         description="The last payment when specified as an adjustable or relative date, as in the FpML total return construct.",

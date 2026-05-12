@@ -13,17 +13,23 @@ from . import (
 
 
 class MakeWholeAmount(BaseModel):
-    floating_rate_index: cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None = (
-        Field(None, alias="floatingRateIndex")
-    )
+    floating_rate_index: (
+        cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None
+    ) = Field(None, alias="floatingRateIndex")
     index_tenor: cdm_base_datetime_Period_schema.Period | None = Field(
-        None, alias="indexTenor", description="The ISDA Designated Maturity, i.e. the tenor of the floating rate."
+        None,
+        alias="indexTenor",
+        description="The ISDA Designated Maturity, i.e. the tenor of the floating rate.",
     )
-    spread: float | None = Field(None, description="Spread in basis points over the floating rate index.")
+    spread: float | None = Field(
+        None, description="Spread in basis points over the floating rate index."
+    )
     side: cdm_observable_asset_QuotationSideEnum_schema.QuotationSideEnum | None = Field(
         None, description="The side (bid/mid/ask) of the measure."
     )
-    interpolation_method: cdm_observable_asset_InterpolationMethodEnum_schema.InterpolationMethodEnum | None = Field(
+    interpolation_method: (
+        cdm_observable_asset_InterpolationMethodEnum_schema.InterpolationMethodEnum | None
+    ) = Field(
         None,
         alias="interpolationMethod",
         description="The type of interpolation method that the calculation agent reserves the right to use.",

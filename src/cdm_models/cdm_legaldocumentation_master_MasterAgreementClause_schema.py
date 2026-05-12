@@ -16,7 +16,9 @@ class MasterAgreementClause(BaseModel):
         ..., description="Unique identifier for the clause."
     )
     name: str | None = Field(None, description="Optional textual description of the clause.")
-    counterparty: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    counterparty: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         description="Optional counterparty role. This can be used where a clause needs to be assigned to a specific party on the agreement based upon their role i.e. Party A or Party B.",
         max_length=2,
@@ -29,7 +31,10 @@ class MasterAgreementClause(BaseModel):
         min_length=0,
     )
     variant: (
-        list[cdm_legaldocumentation_master_MasterAgreementClauseVariant_schema.MasterAgreementClauseVariant] | None
+        list[
+            cdm_legaldocumentation_master_MasterAgreementClauseVariant_schema.MasterAgreementClauseVariant
+        ]
+        | None
     ) = Field(
         None,
         description="Allows multiple variants to be defined for a clause. This needs to be an array as some clauses can specify different variants for different parties. At least one variant must be specified for a clause.",

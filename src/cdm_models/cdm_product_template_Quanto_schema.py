@@ -14,10 +14,12 @@ class Quanto(BaseModel):
     fx_rate: list[cdm_observable_asset_FxRate_schema.FxRate] | None = Field(
         None, alias="fxRate", description="Specifies a currency conversion rate.", min_length=0
     )
-    fx_spot_rate_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = Field(
-        None,
-        alias="fxSpotRateSource",
-        description="Specifies the methodology (reference source and, optionally, fixing time) to be used for determining a currency conversion rate.",
+    fx_spot_rate_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = (
+        Field(
+            None,
+            alias="fxSpotRateSource",
+            description="Specifies the methodology (reference source and, optionally, fixing time) to be used for determining a currency conversion rate.",
+        )
     )
     fixing_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
         None,

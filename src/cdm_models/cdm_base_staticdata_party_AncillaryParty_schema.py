@@ -16,14 +16,19 @@ class AncillaryParty(BaseModel):
         description="Specifies the AncillaryRoleEnum that is associated to the party reference. An ancillary party is any involved party that is not one of the two principal parties to the transaction.",
     )
     party_reference: (
-        list[cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty] | None
+        list[
+            cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        ]
+        | None
     ) = Field(
         None,
         alias="partyReference",
         description="Specifies the party, or parties, associated to the ancillary role.",
         min_length=1,
     )
-    on_behalf_of: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
+    on_behalf_of: (
+        cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None
+    ) = Field(
         None,
         alias="onBehalfOf",
         description="Optionally specifies the counterparty that the ancillary party is acting on behalf of.",

@@ -8,7 +8,8 @@ from . import cdm_legaldocumentation_csa_InterestAdjustmentPeriodicityEnum_schem
 
 class InterestAdjustmentPeriodicity(BaseModel):
     standard_election: (
-        cdm_legaldocumentation_csa_InterestAdjustmentPeriodicityEnum_schema.InterestAdjustmentPeriodicityEnum | None
+        cdm_legaldocumentation_csa_InterestAdjustmentPeriodicityEnum_schema.InterestAdjustmentPeriodicityEnum
+        | None
     ) = Field(
         None,
         alias="standardElection",

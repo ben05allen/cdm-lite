@@ -10,5 +10,7 @@ class CSAThresholdVariableSet(BaseModel):
     name: cdm_observable_asset_CreditRatingAgencyEnum_schema.CreditRatingAgencyEnum | None = Field(
         None, description="The relevant rating agency."
     )
-    value: str | None = Field(None, description="Rating applicable to the party from a given rating agency.")
+    value: str | None = Field(
+        None, description="Rating applicable to the party from a given rating agency."
+    )
     amount: int | None = Field(None, description="The amount value applicable to the Threshold.")

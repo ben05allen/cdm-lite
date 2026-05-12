@@ -29,17 +29,23 @@ class InterestRatePayout(BaseModel):
         alias="payerReceiver",
         description="Canonical representation of the payer and receiver parties applicable to each payout leg.",
     )
-    price_quantity: cdm_product_common_settlement_ResolvablePriceQuantity_schema.ResolvablePriceQuantity | None = Field(
+    price_quantity: (
+        cdm_product_common_settlement_ResolvablePriceQuantity_schema.ResolvablePriceQuantity | None
+    ) = Field(
         None,
         alias="priceQuantity",
         description="Each payout leg must implement the quantity concept as a 'resolvable' type, which allows for different payout legs to be linked to each other (e.g. in the case of cross-curreny products).",
     )
-    principal_payment: cdm_product_common_settlement_PrincipalPayments_schema.PrincipalPayments | None = Field(
+    principal_payment: (
+        cdm_product_common_settlement_PrincipalPayments_schema.PrincipalPayments | None
+    ) = Field(
         None,
         alias="principalPayment",
         description="The specification of the principal exchange. Optional as only applicable in the case of cross-currency or zero-coupon swaps with a final payment.",
     )
-    settlement_terms: cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None = Field(
+    settlement_terms: (
+        cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None
+    ) = Field(
         None,
         alias="settlementTerms",
         description="Each payout leg must specifies its settlement terms, including the delivery type (i.e. cash vs physical, and their respective terms), the transfer type (DvP etc.) and settlement date, if any.",
@@ -89,13 +95,19 @@ class InterestRatePayout(BaseModel):
         alias="discountingMethod",
         description="The parameters specifying any discounting conventions that may apply. This element must only be included if discounting applies.",
     )
-    compounding_method: cdm_product_asset_CompoundingMethodEnum_schema.CompoundingMethodEnum | None = Field(
+    compounding_method: (
+        cdm_product_asset_CompoundingMethodEnum_schema.CompoundingMethodEnum | None
+    ) = Field(
         None,
         alias="compoundingMethod",
         description="If one or more calculation period contributes to a single payment amount this element specifies whether compounding is applicable and, if so, what compounding method is to be used. This element must only be included when more than one calculation period contributes to a single payment amount.",
     )
-    cashflow_representation: cdm_product_asset_CashflowRepresentation_schema.CashflowRepresentation | None = Field(
-        None, alias="cashflowRepresentation", description="The cashflow representation of the swap stream."
+    cashflow_representation: (
+        cdm_product_asset_CashflowRepresentation_schema.CashflowRepresentation | None
+    ) = Field(
+        None,
+        alias="cashflowRepresentation",
+        description="The cashflow representation of the swap stream.",
     )
     stub_period: cdm_product_common_schedule_StubPeriod_schema.StubPeriod | None = Field(
         None,
@@ -107,8 +119,12 @@ class InterestRatePayout(BaseModel):
         alias="bondReference",
         description="Reference to a bond underlier to represent an asset swap or Condition Precedent Bond.",
     )
-    fixed_amount: str | None = Field(None, alias="fixedAmount", description="Fixed Amount Calculation")
-    floating_amount: str | None = Field(None, alias="floatingAmount", description="Floating Amount Calculation")
+    fixed_amount: str | None = Field(
+        None, alias="fixedAmount", description="Fixed Amount Calculation"
+    )
+    floating_amount: str | None = Field(
+        None, alias="floatingAmount", description="Floating Amount Calculation"
+    )
     spread_calculation_method: (
         cdm_product_asset_SpreadCalculationMethodEnum_schema.SpreadCalculationMethodEnum | None
     ) = Field(

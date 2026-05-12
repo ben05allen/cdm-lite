@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema, cdm_legaldocumentation_csa_ExcludedProducts_schema
+from . import (
+    cdm_base_staticdata_party_CounterpartyRoleEnum_schema,
+    cdm_legaldocumentation_csa_ExcludedProducts_schema,
+)
 
 
 class LegacyExposureScopeElection(BaseModel):
@@ -15,7 +18,9 @@ class LegacyExposureScopeElection(BaseModel):
         alias="excludedTransactions",
         description="A boolean flag to represent whether any transactions are excluded (ie True) or not (ie False).",
     )
-    excluded_products: list[cdm_legaldocumentation_csa_ExcludedProducts_schema.ExcludedProducts] | None = Field(
+    excluded_products: (
+        list[cdm_legaldocumentation_csa_ExcludedProducts_schema.ExcludedProducts] | None
+    ) = Field(
         None,
         alias="excludedProducts",
         description="Description of the relevant derivative transactions excluded from the calculation of exposure.",

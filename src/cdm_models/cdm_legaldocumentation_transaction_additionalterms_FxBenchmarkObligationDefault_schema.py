@@ -11,14 +11,18 @@ from . import (
 
 
 class FxBenchmarkObligationDefault(BaseModel):
-    benchmark_obligation_default_is_applicable: bool = Field(..., alias="benchmarkObligationDefaultIsApplicable")
+    benchmark_obligation_default_is_applicable: bool = Field(
+        ..., alias="benchmarkObligationDefaultIsApplicable"
+    )
     local_substitute_provision_type: (
         cdm_legaldocumentation_transaction_additionalterms_FxSubstitutionProvisionTypeEnum_schema.FxSubstitutionProvisionTypeEnum
         | None
     ) = Field(None, alias="localSubstituteProvisionType")
     specified_value: (
-        cdm_legaldocumentation_transaction_additionalterms_SpecifiedValueEnum_schema.SpecifiedValueEnum | None
+        cdm_legaldocumentation_transaction_additionalterms_SpecifiedValueEnum_schema.SpecifiedValueEnum
+        | None
     ) = Field(None, alias="specifiedValue")
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")

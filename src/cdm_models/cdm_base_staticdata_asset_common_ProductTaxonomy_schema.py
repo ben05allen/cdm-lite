@@ -11,9 +11,11 @@ from . import (
 
 
 class ProductTaxonomy(BaseModel):
-    source: cdm_base_staticdata_asset_common_TaxonomySourceEnum_schema.TaxonomySourceEnum | None = Field(
-        None,
-        description="The source of the taxonomy that defines the rules for classifying the object. The taxonomy source is taken from a enumerated list of taxonomy names. Optional as the taxonomy source may not be provided.",
+    source: cdm_base_staticdata_asset_common_TaxonomySourceEnum_schema.TaxonomySourceEnum | None = (
+        Field(
+            None,
+            description="The source of the taxonomy that defines the rules for classifying the object. The taxonomy source is taken from a enumerated list of taxonomy names. Optional as the taxonomy source may not be provided.",
+        )
     )
     value: cdm_base_staticdata_asset_common_TaxonomyValue_schema.TaxonomyValue | None = Field(
         None,
@@ -22,9 +24,15 @@ class ProductTaxonomy(BaseModel):
     primary_asset_class: (
         cdm_base_staticdata_asset_common_metafields_FieldWithMetaAssetClassEnum_schema.FieldWithMetaAssetClassEnum
         | None
-    ) = Field(None, alias="primaryAssetClass", description="Classifies the most important risk class of the trade.")
+    ) = Field(
+        None,
+        alias="primaryAssetClass",
+        description="Classifies the most important risk class of the trade.",
+    )
     secondary_asset_class: (
-        list[cdm_base_staticdata_asset_common_metafields_FieldWithMetaAssetClassEnum_schema.FieldWithMetaAssetClassEnum]
+        list[
+            cdm_base_staticdata_asset_common_metafields_FieldWithMetaAssetClassEnum_schema.FieldWithMetaAssetClassEnum
+        ]
         | None
     ) = Field(
         None,

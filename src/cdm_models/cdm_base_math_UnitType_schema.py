@@ -27,6 +27,9 @@ class UnitType(BaseModel):
         alias="financialUnit",
         description="Provides an enumerated value for financial units, generally used in the context of defining quantities for securities.",
     )
-    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="Defines the currency to be used as a unit for a price, quantity, or other purpose."
+    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="Defines the currency to be used as a unit for a price, quantity, or other purpose.",
+        )
     )

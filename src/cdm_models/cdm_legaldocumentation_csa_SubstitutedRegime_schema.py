@@ -10,13 +10,20 @@ from . import (
 
 
 class SubstitutedRegime(BaseModel):
-    regime: cdm_legaldocumentation_csa_RegulatoryRegimeEnum_schema.RegulatoryRegimeEnum | None = Field(
-        None, description="The applicable regulatory regime, as specified through an enumeration."
+    regime: cdm_legaldocumentation_csa_RegulatoryRegimeEnum_schema.RegulatoryRegimeEnum | None = (
+        Field(
+            None,
+            description="The applicable regulatory regime, as specified through an enumeration.",
+        )
     )
     additional_regime: str | None = Field(
-        None, alias="additionalRegime", description="The additional regulatory regime as specified by the parties."
+        None,
+        alias="additionalRegime",
+        description="The additional regulatory regime as specified by the parties.",
     )
-    regime_terms: list[cdm_legaldocumentation_csa_SubstitutedRegimeTerms_schema.SubstitutedRegimeTerms] | None = Field(
+    regime_terms: (
+        list[cdm_legaldocumentation_csa_SubstitutedRegimeTerms_schema.SubstitutedRegimeTerms] | None
+    ) = Field(
         None,
         alias="regimeTerms",
         description="Specifies the applicability of the Substituted Regime as denoted in the Substituted Regime Table as part of certain legal agreements, such as the ISDA 2016 and 2018 CSA for Initial Margin.",

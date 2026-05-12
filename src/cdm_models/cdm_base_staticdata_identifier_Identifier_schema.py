@@ -12,21 +12,24 @@ from . import (
 
 class Identifier(BaseModel):
     issuer_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="issuerReference",
         description="The identifier issuer, when specified by reference to a party specified as part of the transaction.",
     )
-    issuer: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="The identifier issuer, when specified explicitly alongside the identifier value (instead of being specified by reference to a party).",
-    )
-    assigned_identifier: list[cdm_base_staticdata_identifier_AssignedIdentifier_schema.AssignedIdentifier] | None = (
+    issuer: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
         Field(
             None,
-            alias="assignedIdentifier",
-            description="The identifier value. This level of indirection between the issuer and the identifier and its version provides the ability to associate multiple identifiers to one issuer, consistently with the FpML PartyTradeIdentifier.",
-            min_length=1,
+            description="The identifier issuer, when specified explicitly alongside the identifier value (instead of being specified by reference to a party).",
         )
+    )
+    assigned_identifier: (
+        list[cdm_base_staticdata_identifier_AssignedIdentifier_schema.AssignedIdentifier] | None
+    ) = Field(
+        None,
+        alias="assignedIdentifier",
+        description="The identifier value. This level of indirection between the issuer and the identifier and its version provides the ability to associate multiple identifiers to one issuer, consistently with the FpML PartyTradeIdentifier.",
+        min_length=1,
     )

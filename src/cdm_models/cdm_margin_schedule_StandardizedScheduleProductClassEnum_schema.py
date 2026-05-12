@@ -20,7 +20,9 @@ class StandardizedScheduleProductClassEnum(StrEnum):
     FIXED_FLOAT_SWAP = "FixedFloatSwap"
     FORWARD = "Forward"
     FORWARD_RATE_AGREEMENT = "ForwardRateAgreement"
-    IR_EXOTIC_SWAP_WITH_AN_EXOTIC_COUPON_AGAINST_A_FLOATING_LEG = "IRExoticSwapWithAnExoticCouponAgainstAFloatingLeg"
+    IR_EXOTIC_SWAP_WITH_AN_EXOTIC_COUPON_AGAINST_A_FLOATING_LEG = (
+        "IRExoticSwapWithAnExoticCouponAgainstAFloatingLeg"
+    )
     INDEX_CDS = "IndexCDS"
     INDEX_TRANCHE = "IndexTranche"
     NON_DELIVERABLE_CROSS_CURRENCY_SWAP = "NonDeliverableCrossCurrencySwap"
@@ -29,7 +31,9 @@ class StandardizedScheduleProductClassEnum(StrEnum):
     OPTION = "Option"
     SINGLE_NAME_CREDIT_DEFAULT_SWAP = "SingleNameCreditDefaultSwap"
     SWAP = "Swap"
-    SWAP_WITH_CALLABLE_BERMUDAN_RIGHT_TO_ENTER_EXIT_SWAPS = "SwapWithCallableBermudanRightToEnterExitSwaps"
+    SWAP_WITH_CALLABLE_BERMUDAN_RIGHT_TO_ENTER_EXIT_SWAPS = (
+        "SwapWithCallableBermudanRightToEnterExitSwaps"
+    )
     SWAPS_AND_PORTFOLIO_SWAPS = "SwapsAndPortfolioSwaps"
     SWAPTION = "Swaption"
     SWAPTION_STRADDLE = "SwaptionStraddle"

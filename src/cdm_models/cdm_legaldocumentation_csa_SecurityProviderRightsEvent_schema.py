@@ -8,7 +8,9 @@ from . import cdm_legaldocumentation_csa_SecurityProviderRightsEventElection_sch
 
 class SecurityProviderRightsEvent(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_SecurityProviderRightsEventElection_schema.SecurityProviderRightsEventElection]
+        list[
+            cdm_legaldocumentation_csa_SecurityProviderRightsEventElection_schema.SecurityProviderRightsEventElection
+        ]
         | None
     ) = Field(None, alias="partyElection", max_length=2, min_length=0)
     include_cooling_off_language: bool = Field(

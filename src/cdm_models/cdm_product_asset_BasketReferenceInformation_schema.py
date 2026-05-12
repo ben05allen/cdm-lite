@@ -11,21 +11,25 @@ from . import (
 
 
 class BasketReferenceInformation(BaseModel):
-    basket_name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    basket_name: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="basketName",
         description="The name of the basket expressed as a free format string. FpML does not define usage rules for this element.",
     )
-    basket_id: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
-        None, alias="basketId", description="A CDS basket identifier.", min_length=0
-    )
+    basket_id: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(None, alias="basketId", description="A CDS basket identifier.", min_length=0)
     reference_pool: cdm_product_asset_ReferencePool_schema.ReferencePool = Field(
         ...,
         alias="referencePool",
         description="This element contains all the reference pool items to define the reference entity and reference obligation(s) in the basket.",
     )
     nth_to_default: int | None = Field(
-        None, alias="nthToDefault", description="N th reference obligation to default triggers payout."
+        None,
+        alias="nthToDefault",
+        description="N th reference obligation to default triggers payout.",
     )
     mth_to_default: int | None = Field(
         None,

@@ -11,14 +11,16 @@ from . import (
 
 class TerminationCurrency(BaseModel):
     stated_termination_currency: (
-        cdm_legaldocumentation_master_isda_TerminationCurrencySelection_schema.TerminationCurrencySelection | None
+        cdm_legaldocumentation_master_isda_TerminationCurrencySelection_schema.TerminationCurrencySelection
+        | None
     ) = Field(
         None,
         alias="statedTerminationCurrency",
         description="Allows for specific Termination Currency(ies) and a fallback Termination Currency to be selected.",
     )
     party_option_termination_currency: (
-        cdm_legaldocumentation_master_isda_PartyOptionTerminationCurrency_schema.PartyOptionTerminationCurrency | None
+        cdm_legaldocumentation_master_isda_PartyOptionTerminationCurrency_schema.PartyOptionTerminationCurrency
+        | None
     ) = Field(
         None,
         alias="partyOptionTerminationCurrency",

@@ -7,6 +7,12 @@ from . import cdm_legaldocumentation_csa_CustodianRiskElection_schema
 
 
 class CustodianRisk(BaseModel):
-    party_election: list[cdm_legaldocumentation_csa_CustodianRiskElection_schema.CustodianRiskElection] | None = Field(
-        None, alias="partyElection", description="The party specific elections.", max_length=2, min_length=1
+    party_election: (
+        list[cdm_legaldocumentation_csa_CustodianRiskElection_schema.CustodianRiskElection] | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The party specific elections.",
+        max_length=2,
+        min_length=1,
     )

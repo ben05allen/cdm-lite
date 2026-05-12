@@ -14,30 +14,39 @@ from . import (
 
 
 class ExtraordinaryEvents(BaseModel):
-    additional_bespoke_terms: list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None = Field(
+    additional_bespoke_terms: (
+        list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None
+    ) = Field(
         None,
         alias="additionalBespokeTerms",
         description="Where parties may optionnaly describe any extra bespoke agreements, in regards of the standardized Extraordinary Events.",
         min_length=0,
     )
     merger_events: (
-        cdm_legaldocumentation_transaction_additionalterms_EquityCorporateEvents_schema.EquityCorporateEvents | None
+        cdm_legaldocumentation_transaction_additionalterms_EquityCorporateEvents_schema.EquityCorporateEvents
+        | None
     ) = Field(None, alias="mergerEvents")
     tender_offer_events: (
-        cdm_legaldocumentation_transaction_additionalterms_EquityCorporateEvents_schema.EquityCorporateEvents | None
+        cdm_legaldocumentation_transaction_additionalterms_EquityCorporateEvents_schema.EquityCorporateEvents
+        | None
     ) = Field(None, alias="tenderOfferEvents")
-    composition_of_combined_consideration: bool | None = Field(None, alias="compositionOfCombinedConsideration")
+    composition_of_combined_consideration: bool | None = Field(
+        None, alias="compositionOfCombinedConsideration"
+    )
     index_adjustment_events: (
-        cdm_legaldocumentation_transaction_additionalterms_IndexAdjustmentEvents_schema.IndexAdjustmentEvents | None
+        cdm_legaldocumentation_transaction_additionalterms_IndexAdjustmentEvents_schema.IndexAdjustmentEvents
+        | None
     ) = Field(None, alias="indexAdjustmentEvents")
     additional_disruption_events: (
-        cdm_legaldocumentation_transaction_AdditionalDisruptionEvents_schema.AdditionalDisruptionEvents | None
+        cdm_legaldocumentation_transaction_AdditionalDisruptionEvents_schema.AdditionalDisruptionEvents
+        | None
     ) = Field(None, alias="additionalDisruptionEvents")
     failure_to_deliver: bool | None = Field(
         None, alias="failureToDeliver", description="If true, failure to deliver is applicable."
     )
     representations: (
-        cdm_legaldocumentation_transaction_additionalterms_Representations_schema.Representations | None
+        cdm_legaldocumentation_transaction_additionalterms_Representations_schema.Representations
+        | None
     ) = None
     nationalization_or_insolvency: (
         cdm_legaldocumentation_master_NationalizationOrInsolvencyOrDelistingEventEnum_schema.NationalizationOrInsolvencyOrDelistingEventEnum

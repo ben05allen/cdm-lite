@@ -8,10 +8,14 @@ from . import cdm_observable_asset_calculatedrate_CalculatedRateObservations_sch
 
 class CalculatedRateDetails(BaseModel):
     observations: (
-        cdm_observable_asset_calculatedrate_CalculatedRateObservations_schema.CalculatedRateObservations | None
+        cdm_observable_asset_calculatedrate_CalculatedRateObservations_schema.CalculatedRateObservations
+        | None
     ) = Field(None, description="The observation dates and weights for each observation date.")
     weighted_rates: list[float] | None = Field(
-        None, alias="weightedRates", description="The weighted value of each observation.", min_length=0
+        None,
+        alias="weightedRates",
+        description="The weighted value of each observation.",
+        min_length=0,
     )
     growth_factor: list[float] | None = Field(
         None,
@@ -35,4 +39,6 @@ class CalculatedRateDetails(BaseModel):
         alias="aggregateWeight",
         description="The total weight of all the terms that went into the calculated rate.",
     )
-    calculated_rate: float | None = Field(None, alias="calculatedRate", description="The resulting calculated weight.")
+    calculated_rate: float | None = Field(
+        None, alias="calculatedRate", description="The resulting calculated weight."
+    )

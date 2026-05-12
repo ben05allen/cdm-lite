@@ -13,14 +13,19 @@ from . import (
 
 
 class ReferencePoolItem(BaseModel):
-    constituent_weight: cdm_product_template_ConstituentWeight_schema.ConstituentWeight | None = Field(
-        None,
-        alias="constituentWeight",
-        description="Describes the weight of each of the constituents within the basket. If not provided, it is assumed to be equal weighted.",
+    constituent_weight: cdm_product_template_ConstituentWeight_schema.ConstituentWeight | None = (
+        Field(
+            None,
+            alias="constituentWeight",
+            description="Describes the weight of each of the constituents within the basket. If not provided, it is assumed to be equal weighted.",
+        )
     )
-    reference_pair: cdm_product_asset_ReferencePair_schema.ReferencePair = Field(..., alias="referencePair")
+    reference_pair: cdm_product_asset_ReferencePair_schema.ReferencePair = Field(
+        ..., alias="referencePair"
+    )
     protection_terms_reference: (
-        cdm_product_asset_metafields_ReferenceWithMetaProtectionTerms_schema.ReferenceWithMetaProtectionTerms | None
+        cdm_product_asset_metafields_ReferenceWithMetaProtectionTerms_schema.ReferenceWithMetaProtectionTerms
+        | None
     ) = Field(
         None,
         alias="protectionTermsReference",

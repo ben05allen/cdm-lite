@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_Money_schema, cdm_product_common_schedule_CalculationPeriodBase_schema
+from . import (
+    cdm_observable_asset_Money_schema,
+    cdm_product_common_schedule_CalculationPeriodBase_schema,
+)
 
 
 class FixedAmountCalculationDetails(BaseModel):
@@ -17,7 +20,9 @@ class FixedAmountCalculationDetails(BaseModel):
         alias="calculationPeriodNotionalAmount",
         description="The notional in effect during the calculation period.",
     )
-    fixed_rate: float = Field(..., alias="fixedRate", description="The value of the fixed rate that was used.")
+    fixed_rate: float = Field(
+        ..., alias="fixedRate", description="The value of the fixed rate that was used."
+    )
     year_fraction: float = Field(
         ...,
         alias="yearFraction",

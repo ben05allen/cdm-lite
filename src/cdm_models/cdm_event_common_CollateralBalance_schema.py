@@ -12,15 +12,19 @@ from . import (
 
 
 class CollateralBalance(BaseModel):
-    collateral_balance_status: cdm_event_common_CollateralStatusEnum_schema.CollateralStatusEnum | None = Field(
+    collateral_balance_status: (
+        cdm_event_common_CollateralStatusEnum_schema.CollateralStatusEnum | None
+    ) = Field(
         None,
         alias="collateralBalanceStatus",
         description="Defines the collateral balance breakdown of settlement status.",
     )
-    haircut_indicator: cdm_event_common_HaircutIndicatorEnum_schema.HaircutIndicatorEnum | None = Field(
-        None,
-        alias="haircutIndicator",
-        description="Indicates if the collateral balance amount is based on pre or post haircut, if a haircut is associated with the collateral asset",
+    haircut_indicator: cdm_event_common_HaircutIndicatorEnum_schema.HaircutIndicatorEnum | None = (
+        Field(
+            None,
+            alias="haircutIndicator",
+            description="Indicates if the collateral balance amount is based on pre or post haircut, if a haircut is associated with the collateral asset",
+        )
     )
     amount_base_currency: cdm_observable_asset_Money_schema.Money = Field(
         ...,

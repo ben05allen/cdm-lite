@@ -11,11 +11,15 @@ from . import (
 
 
 class Lineage(BaseModel):
-    trade_reference: list[cdm_event_common_metafields_ReferenceWithMetaTrade_schema.ReferenceWithMetaTrade] | None = (
-        Field(None, alias="tradeReference", min_length=0)
-    )
+    trade_reference: (
+        list[cdm_event_common_metafields_ReferenceWithMetaTrade_schema.ReferenceWithMetaTrade]
+        | None
+    ) = Field(None, alias="tradeReference", min_length=0)
     event_reference: (
-        list[cdm_event_workflow_metafields_ReferenceWithMetaWorkflowStep_schema.ReferenceWithMetaWorkflowStep] | None
+        list[
+            cdm_event_workflow_metafields_ReferenceWithMetaWorkflowStep_schema.ReferenceWithMetaWorkflowStep
+        ]
+        | None
     ) = Field(
         None,
         alias="eventReference",
@@ -23,7 +27,9 @@ class Lineage(BaseModel):
         min_length=0,
     )
     portfolio_state_reference: (
-        list[cdm_event_position_metafields_ReferenceWithMetaPortfolioState_schema.ReferenceWithMetaPortfolioState]
+        list[
+            cdm_event_position_metafields_ReferenceWithMetaPortfolioState_schema.ReferenceWithMetaPortfolioState
+        ]
         | None
     ) = Field(
         None,

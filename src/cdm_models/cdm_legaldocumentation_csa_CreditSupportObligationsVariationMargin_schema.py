@@ -17,7 +17,9 @@ class CreditSupportObligationsVariationMargin(BaseModel):
         alias="ineligibleCreditSupport",
         description="The parties to which the provisions of the Credit Support Annex for Variation Margin will apply to.",
     )
-    major_currency: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    major_currency: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         alias="majorCurrency",
         description="The additional currencies that are specified as Major Currency for the purpose of applying the FX Haircut Percentage.",

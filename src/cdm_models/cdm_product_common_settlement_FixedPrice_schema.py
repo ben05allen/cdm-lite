@@ -8,7 +8,9 @@ from . import cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_sch
 
 class FixedPrice(BaseModel):
     price: (
-        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule | None
+        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule
+        | None
     ) = Field(
-        None, description="Fixed price step schedule, including an initial price specified as an absolute number."
+        None,
+        description="Fixed price step schedule, including an initial price specified as an absolute number.",
     )

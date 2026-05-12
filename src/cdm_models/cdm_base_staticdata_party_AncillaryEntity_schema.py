@@ -3,13 +3,20 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_AncillaryRoleEnum_schema, cdm_base_staticdata_party_LegalEntity_schema
+from . import (
+    cdm_base_staticdata_party_AncillaryRoleEnum_schema,
+    cdm_base_staticdata_party_LegalEntity_schema,
+)
 
 
 class AncillaryEntity(BaseModel):
-    ancillary_party: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = Field(
-        None,
-        alias="ancillaryParty",
-        description="Identifies a party via its ancillary role on a transaction (e.g. CCP or DCO through which the trade should be cleared.)",
+    ancillary_party: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = (
+        Field(
+            None,
+            alias="ancillaryParty",
+            description="Identifies a party via its ancillary role on a transaction (e.g. CCP or DCO through which the trade should be cleared.)",
+        )
     )
-    legal_entity: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(None, alias="legalEntity")
+    legal_entity: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
+        None, alias="legalEntity"
+    )

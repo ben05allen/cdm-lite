@@ -3,12 +3,20 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_identifier_Identifier_schema, cdm_observable_asset_PriceQuantity_schema
+from . import (
+    cdm_base_staticdata_identifier_Identifier_schema,
+    cdm_observable_asset_PriceQuantity_schema,
+)
 
 
 class TradeLot(BaseModel):
-    lot_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = Field(
-        None, alias="lotIdentifier", description="Specifies one or more identifiers for the lot, if any.", min_length=0
+    lot_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = (
+        Field(
+            None,
+            alias="lotIdentifier",
+            description="Specifies one or more identifiers for the lot, if any.",
+            min_length=0,
+        )
     )
     price_quantity: list[cdm_observable_asset_PriceQuantity_schema.PriceQuantity] | None = Field(
         None,

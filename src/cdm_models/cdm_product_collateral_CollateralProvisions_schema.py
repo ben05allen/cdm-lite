@@ -12,17 +12,22 @@ from . import (
 
 class CollateralProvisions(BaseModel):
     collateral_type: cdm_product_collateral_CollateralTypeEnum_schema.CollateralTypeEnum = Field(
-        ..., alias="collateralType", description="Enumerates the collateral types which are accepted by the Seller."
+        ...,
+        alias="collateralType",
+        description="Enumerates the collateral types which are accepted by the Seller.",
     )
     eligible_collateral: (
-        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria] | None
+        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria]
+        | None
     ) = Field(
         None,
         alias="eligibleCollateral",
         description="The eligible collateral as specified in relation to the transaction.",
         min_length=0,
     )
-    substitution_provisions: cdm_product_collateral_SubstitutionProvisions_schema.SubstitutionProvisions | None = Field(
+    substitution_provisions: (
+        cdm_product_collateral_SubstitutionProvisions_schema.SubstitutionProvisions | None
+    ) = Field(
         None,
         alias="substitutionProvisions",
         description="The provisions for collateral substitutions such as how many and when they are allowed.",

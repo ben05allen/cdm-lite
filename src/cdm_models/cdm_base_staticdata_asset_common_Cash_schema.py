@@ -11,7 +11,9 @@ from . import (
 
 
 class Cash(BaseModel):
-    identifier: list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None = Field(
+    identifier: (
+        list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None
+    ) = Field(
         None,
         description="Asset Identifiers are used to uniquely identify an Asset, using a specified Asset Identifier Type.",
         min_length=1,
@@ -22,11 +24,16 @@ class Cash(BaseModel):
         min_length=0,
     )
     is_exchange_listed: bool | None = Field(
-        None, alias="isExchangeListed", description="Defines whether the Asset is listed on a public exchange."
+        None,
+        alias="isExchangeListed",
+        description="Defines whether the Asset is listed on a public exchange.",
     )
     exchange: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="If the Asset is listed, defines the public exchange of the listing."
     )
     related_exchange: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
-        None, alias="relatedExchange", description="Provides the related Exchanges, if applicable.", min_length=0
+        None,
+        alias="relatedExchange",
+        description="Provides the related Exchanges, if applicable.",
+        min_length=0,
     )

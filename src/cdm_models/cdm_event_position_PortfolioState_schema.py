@@ -8,7 +8,9 @@ from . import cdm_event_common_Lineage_schema, cdm_event_position_Position_schem
 
 class PortfolioState(BaseModel):
     positions: list[cdm_event_position_Position_schema.Position] | None = Field(
-        None, description="The list of positions, each containing a Quantity and a Product.", min_length=0
+        None,
+        description="The list of positions, each containing a Quantity and a Product.",
+        min_length=0,
     )
     lineage: cdm_event_common_Lineage_schema.Lineage = Field(
         ...,

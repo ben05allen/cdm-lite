@@ -8,5 +8,8 @@ from . import cdm_product_template_SchedulePeriod_schema
 
 class CalculationSchedule(BaseModel):
     schedule_period: list[cdm_product_template_SchedulePeriod_schema.SchedulePeriod] | None = Field(
-        None, alias="schedulePeriod", description="Defines a period of a calculation schedule structure.", min_length=1
+        None,
+        alias="schedulePeriod",
+        description="Defines a period of a calculation schedule structure.",
+        min_length=1,
     )

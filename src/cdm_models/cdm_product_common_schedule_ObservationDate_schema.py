@@ -6,13 +6,17 @@ from pydantic import BaseModel, Field
 
 
 class ObservationDate(BaseModel):
-    unadjusted_date: str | None = Field(None, alias="unadjustedDate", description="A date subject to adjustment.")
+    unadjusted_date: str | None = Field(
+        None, alias="unadjustedDate", description="A date subject to adjustment."
+    )
     adjusted_date: str | None = Field(
         None,
         alias="adjustedDate",
         description="The date once the adjustment has been performed. (Note that this date may change if the business center holidays change).",
     )
-    weight: float | None = Field(None, description="Specifies the degree of importance of the observation.")
+    weight: float | None = Field(
+        None, description="Specifies the degree of importance of the observation."
+    )
     observation_reference: str | None = Field(
         None,
         alias="observationReference",

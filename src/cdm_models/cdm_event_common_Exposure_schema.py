@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_event_position_metafields_ReferenceWithMetaPortfolioState_schema, cdm_observable_asset_Money_schema
+from . import (
+    cdm_event_position_metafields_ReferenceWithMetaPortfolioState_schema,
+    cdm_observable_asset_Money_schema,
+)
 
 
 class Exposure(BaseModel):
@@ -13,7 +16,9 @@ class Exposure(BaseModel):
         description="Represents a Portfolio that describes all the positions held at a given time, in various states which can be either traded, settled, etc., with lineage information to the previous state.",
     )
     aggregate_value: cdm_observable_asset_Money_schema.Money = Field(
-        ..., alias="aggregateValue", description="Represents the aggregate value of the portfolio in base currency."
+        ...,
+        alias="aggregateValue",
+        description="Represents the aggregate value of the portfolio in base currency.",
     )
     calculation_date_time: str | None = Field(
         None,

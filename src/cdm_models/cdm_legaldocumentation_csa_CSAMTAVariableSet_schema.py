@@ -11,7 +11,11 @@ class CSAMTAVariableSet(BaseModel):
         None, description="The name of the Rating Agency."
     )
     value: str | None = Field(None, description="The value assigned to the rating.")
-    amount: int | None = Field(None, description="The Minimum Transfer Amount (MTA) applicable to the Rating.")
+    amount: int | None = Field(
+        None, description="The Minimum Transfer Amount (MTA) applicable to the Rating."
+    )
     amount_is_infinity: bool | None = Field(
-        None, alias="amountIsInfinity", description="A flag that defines the Minimum Transfer Amount (MTA) as Infinity."
+        None,
+        alias="amountIsInfinity",
+        description="A flag that defines the Minimum Transfer Amount (MTA) as Infinity.",
     )

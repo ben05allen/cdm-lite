@@ -50,22 +50,28 @@ class CollateralTransferAgreementElections(BaseModel):
         alias="identifiedCrossCurrencySwap",
         description="The qualification of whether cross-currency swaps need to be identified in the Confirmation so that the obligations to exchange principal be disregarded for the purpose of determining the Delivery Amount or Return Amount.",
     )
-    sensitivity_methodologies: cdm_legaldocumentation_csa_SensitivityMethodologies_schema.SensitivityMethodologies = (
-        Field(
-            ...,
-            alias="sensitivityMethodologies",
-            description="The specification of methodologies to compute sensitivities specific to the agreement.",
-        )
+    sensitivity_methodologies: cdm_legaldocumentation_csa_SensitivityMethodologies_schema.SensitivityMethodologies = Field(
+        ...,
+        alias="sensitivityMethodologies",
+        description="The specification of methodologies to compute sensitivities specific to the agreement.",
     )
-    fx_haircut_currency: cdm_legaldocumentation_csa_FxHaircutCurrency_schema.FxHaircutCurrency | None = Field(
+    fx_haircut_currency: (
+        cdm_legaldocumentation_csa_FxHaircutCurrency_schema.FxHaircutCurrency | None
+    ) = Field(
         None,
         alias="fxHaircutCurrency",
         description="The reference currency for the purpose of specifying the FX Haircut relating to a posting obligation, as being either the Termination Currency or an FX Designated Currency.",
     )
-    posting_obligations: cdm_legaldocumentation_csa_PostingObligations_schema.PostingObligations = Field(
-        ..., alias="postingObligations", description="The security providers posting obligations."
+    posting_obligations: cdm_legaldocumentation_csa_PostingObligations_schema.PostingObligations = (
+        Field(
+            ...,
+            alias="postingObligations",
+            description="The security providers posting obligations.",
+        )
     )
-    substituted_regime: list[cdm_legaldocumentation_csa_SubstitutedRegime_schema.SubstitutedRegime] | None = Field(
+    substituted_regime: (
+        list[cdm_legaldocumentation_csa_SubstitutedRegime_schema.SubstitutedRegime] | None
+    ) = Field(
         None,
         alias="substitutedRegime",
         description="The specification of Additional regimes for purposes of determining whether a Regulatory Event has occurred.",
@@ -76,12 +82,10 @@ class CollateralTransferAgreementElections(BaseModel):
         alias="baseAndEligibleCurrency",
         description="The base and eligible currency(ies) for the document as specified by the parties to the agreement.",
     )
-    credit_support_obligations: cdm_legaldocumentation_csa_CreditSupportObligations_schema.CreditSupportObligations = (
-        Field(
-            ...,
-            alias="creditSupportObligations",
-            description="The Credit Support Obligations applicable to the agreement.",
-        )
+    credit_support_obligations: cdm_legaldocumentation_csa_CreditSupportObligations_schema.CreditSupportObligations = Field(
+        ...,
+        alias="creditSupportObligations",
+        description="The Credit Support Obligations applicable to the agreement.",
     )
     calculation_and_timing: cdm_legaldocumentation_csa_CalculationAndTiming_schema.CalculationAndTiming = Field(
         ...,
@@ -94,7 +98,8 @@ class CollateralTransferAgreementElections(BaseModel):
         description="The set of elections that may overwrite the default Condition Precedent provision, and the set of provisions that are deemed Access Condition.",
     )
     substitution: cdm_legaldocumentation_csa_Substitution_schema.Substitution | None = Field(
-        None, description="The conditions under which the Security Provider can substitute posted collateral."
+        None,
+        description="The conditions under which the Security Provider can substitute posted collateral.",
     )
     dispute_resolution: cdm_legaldocumentation_csa_DisputeResolution_schema.DisputeResolution = Field(
         ...,
@@ -116,15 +121,19 @@ class CollateralTransferAgreementElections(BaseModel):
         alias="additionalRepresentations",
         description="The specification Additional Representations that may be applicable to the agreement.",
     )
-    demands_and_notices: cdm_product_collateral_ContactElection_schema.ContactElection | None = Field(
-        None,
-        alias="demandsAndNotices",
-        description="The optional specification of address where the demands, specifications and notices will be communicated to for each of the parties to the agreement.",
+    demands_and_notices: cdm_product_collateral_ContactElection_schema.ContactElection | None = (
+        Field(
+            None,
+            alias="demandsAndNotices",
+            description="The optional specification of address where the demands, specifications and notices will be communicated to for each of the parties to the agreement.",
+        )
     )
-    addresses_for_transfer: cdm_product_collateral_ContactElection_schema.ContactElection | None = Field(
-        None,
-        alias="addressesForTransfer",
-        description="The optional specification of address for transfer as specified by the respective parties to the agreement.",
+    addresses_for_transfer: cdm_product_collateral_ContactElection_schema.ContactElection | None = (
+        Field(
+            None,
+            alias="addressesForTransfer",
+            description="The optional specification of address for transfer as specified by the respective parties to the agreement.",
+        )
     )
     other_csa: str | None = Field(
         None,
@@ -137,7 +146,8 @@ class CollateralTransferAgreementElections(BaseModel):
         description="The bespoke provision that might be specified by the parties to the agreement applicable to Termination Currency.  Unless specified the definition of Termination Currency has the meaning specified in the Schedule to the ISDA Master Agreement.",
     )
     minimum_transfer_amount_amendment: (
-        cdm_legaldocumentation_csa_MinimumTransferAmountAmendment_schema.MinimumTransferAmountAmendment | None
+        cdm_legaldocumentation_csa_MinimumTransferAmountAmendment_schema.MinimumTransferAmountAmendment
+        | None
     ) = Field(
         None,
         alias="minimumTransferAmountAmendment",
@@ -156,7 +166,9 @@ class CollateralTransferAgreementElections(BaseModel):
     jurisdiction_related_terms: (
         cdm_legaldocumentation_csa_JurisdictionRelatedTerms_schema.JurisdictionRelatedTerms | None
     ) = Field(
-        None, alias="jurisdictionRelatedTerms", description="The jurisdiction specific terms relevant to the agreement."
+        None,
+        alias="jurisdictionRelatedTerms",
+        description="The jurisdiction specific terms relevant to the agreement.",
     )
     additional_amendments: str | None = Field(
         None,
@@ -164,10 +176,13 @@ class CollateralTransferAgreementElections(BaseModel):
         description="Any additional amendments that might be specified by the parties to the agreement.",
     )
     additional_bespoke_terms: str | None = Field(
-        None, alias="additionalBespokeTerms", description="Any additional terms that might be specified applicable."
+        None,
+        alias="additionalBespokeTerms",
+        description="Any additional terms that might be specified applicable.",
     )
     pledgee_representative_rider: (
-        cdm_legaldocumentation_csa_PledgeeRepresentativeRider_schema.PledgeeRepresentativeRider | None
+        cdm_legaldocumentation_csa_PledgeeRepresentativeRider_schema.PledgeeRepresentativeRider
+        | None
     ) = Field(
         None,
         alias="pledgeeRepresentativeRider",

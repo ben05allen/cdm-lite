@@ -7,11 +7,11 @@ from . import cdm_product_template_EarlyTerminationEvent_schema
 
 
 class OptionalEarlyTerminationAdjustedDates(BaseModel):
-    early_termination_event: list[cdm_product_template_EarlyTerminationEvent_schema.EarlyTerminationEvent] | None = (
-        Field(
-            None,
-            alias="earlyTerminationEvent",
-            description="The adjusted dates associated with an individual early termination date.",
-            min_length=1,
-        )
+    early_termination_event: (
+        list[cdm_product_template_EarlyTerminationEvent_schema.EarlyTerminationEvent] | None
+    ) = Field(
+        None,
+        alias="earlyTerminationEvent",
+        description="The adjusted dates associated with an individual early termination date.",
+        min_length=1,
     )

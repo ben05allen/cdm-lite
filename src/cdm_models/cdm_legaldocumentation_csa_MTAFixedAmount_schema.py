@@ -13,7 +13,9 @@ class MTAFixedAmount(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
         ..., description="The party to which the Minimum Transfer Amount (MTA) applies."
     )
-    amount: int = Field(..., description="The amount value applicable to the Minimum Transfer Amount (MTA).")
-    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = Field(
-        ..., description="The minimum transfer amount currency code."
+    amount: int = Field(
+        ..., description="The amount value applicable to the Minimum Transfer Amount (MTA)."
+    )
+    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = (
+        Field(..., description="The minimum transfer amount currency code.")
     )

@@ -7,10 +7,12 @@ from . import cdm_legaldocumentation_csa_ExceptionEnum_schema
 
 
 class RetrospectiveEffect(BaseModel):
-    standardised_exception: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = Field(
-        None,
-        alias="standardisedException",
-        description="The Standard Initial Margin Model exception when specified by the party according to one of the enumerated values.",
+    standardised_exception: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = (
+        Field(
+            None,
+            alias="standardisedException",
+            description="The Standard Initial Margin Model exception when specified by the party according to one of the enumerated values.",
+        )
     )
     as_specified: str | None = Field(
         None,

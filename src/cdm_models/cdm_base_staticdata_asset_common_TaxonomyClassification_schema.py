@@ -11,7 +11,10 @@ class TaxonomyClassification(BaseModel):
         alias="className",
         description="The name defined by the classification system for a specific attribute in the taxonomy",
     )
-    value: str = Field(..., description="The value set by the taxonomy that is specific to the className attribute.")
+    value: str = Field(
+        ...,
+        description="The value set by the taxonomy that is specific to the className attribute.",
+    )
     description: str | None = Field(None, description="A description of the class.")
     ordinal: int | None = Field(
         None,

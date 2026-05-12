@@ -10,14 +10,21 @@ from . import (
 
 
 class ObservationShiftCalculation(BaseModel):
-    offset_days: int | None = Field(None, alias="offsetDays", description="The number of days of observation shift.")
+    offset_days: int | None = Field(
+        None, alias="offsetDays", description="The number of days of observation shift."
+    )
     calculation_base: (
-        cdm_observable_asset_calculatedrate_ObservationPeriodDatesEnum_schema.ObservationPeriodDatesEnum | None
+        cdm_observable_asset_calculatedrate_ObservationPeriodDatesEnum_schema.ObservationPeriodDatesEnum
+        | None
     ) = Field(
         None,
         alias="calculationBase",
         description="Whether the rate is calculated in advance, in arrears, or relative to a reset date.",
     )
-    additional_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = Field(
-        None, alias="additionalBusinessDays", description="Any additional business days that be applicable."
+    additional_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = (
+        Field(
+            None,
+            alias="additionalBusinessDays",
+            description="Any additional business days that be applicable.",
+        )
     )

@@ -7,9 +7,14 @@ from . import cdm_observable_asset_fro_FloatingRateIndexMap_schema
 
 
 class FloatingRateIndexMappings(BaseModel):
-    maps_to: cdm_observable_asset_fro_FloatingRateIndexMap_schema.FloatingRateIndexMap | None = Field(
-        None, alias="mapsTo", description="The successor FRO that this index maps to."
+    maps_to: cdm_observable_asset_fro_FloatingRateIndexMap_schema.FloatingRateIndexMap | None = (
+        Field(None, alias="mapsTo", description="The successor FRO that this index maps to.")
     )
-    maps_from: list[cdm_observable_asset_fro_FloatingRateIndexMap_schema.FloatingRateIndexMap] | None = Field(
-        None, alias="mapsFrom", description="The predecessor FRO(s) that this index maps to.", min_length=0
+    maps_from: (
+        list[cdm_observable_asset_fro_FloatingRateIndexMap_schema.FloatingRateIndexMap] | None
+    ) = Field(
+        None,
+        alias="mapsFrom",
+        description="The predecessor FRO(s) that this index maps to.",
+        min_length=0,
     )

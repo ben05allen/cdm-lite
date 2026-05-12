@@ -28,9 +28,12 @@ class WorkflowStep(BaseModel):
         description="Life cycle event for the step. The businessEvent is optional when a proposedEvent or rejection are present.",
     )
     counterparty_position_business_event: (
-        cdm_event_common_CounterpartyPositionBusinessEvent_schema.CounterpartyPositionBusinessEvent | None
+        cdm_event_common_CounterpartyPositionBusinessEvent_schema.CounterpartyPositionBusinessEvent
+        | None
     ) = Field(
-        None, alias="counterpartyPositionBusinessEvent", description="Documents the life cycle event for a position."
+        None,
+        alias="counterpartyPositionBusinessEvent",
+        description="Documents the life cycle event for a position.",
     )
     proposed_event: cdm_event_workflow_EventInstruction_schema.EventInstruction | None = Field(
         None,
@@ -38,13 +41,16 @@ class WorkflowStep(BaseModel):
         description="The proposed event for a workflow step. The proposedEvent is optional when the businessEvent or rejection are present",
     )
     rejected: bool | None = Field(None, description="Flags this step as rejected.")
-    approval: list[cdm_event_workflow_WorkflowStepApproval_schema.WorkflowStepApproval] | None = Field(
-        None,
-        description="Optional party approvals for the current workflow step. A workflow step can have any number of parties associated to it, thus this object is represented as a list. All parties that are expected to provide approval should have an item in this list that references them.",
-        min_length=0,
+    approval: list[cdm_event_workflow_WorkflowStepApproval_schema.WorkflowStepApproval] | None = (
+        Field(
+            None,
+            description="Optional party approvals for the current workflow step. A workflow step can have any number of parties associated to it, thus this object is represented as a list. All parties that are expected to provide approval should have an item in this list that references them.",
+            min_length=0,
+        )
     )
     previous_workflow_step: (
-        cdm_event_workflow_metafields_ReferenceWithMetaWorkflowStep_schema.ReferenceWithMetaWorkflowStep | None
+        cdm_event_workflow_metafields_ReferenceWithMetaWorkflowStep_schema.ReferenceWithMetaWorkflowStep
+        | None
     ) = Field(
         None,
         alias="previousWorkflowStep",
@@ -55,19 +61,25 @@ class WorkflowStep(BaseModel):
         alias="nextEvent",
         description="The intended next event can be specified, even if the instructions are not known yet.",
     )
-    message_information: cdm_event_workflow_MessageInformation_schema.MessageInformation | None = Field(
-        None, alias="messageInformation", description="Contains all information pertaining the FpML messaging header "
+    message_information: cdm_event_workflow_MessageInformation_schema.MessageInformation | None = (
+        Field(
+            None,
+            alias="messageInformation",
+            description="Contains all information pertaining the FpML messaging header ",
+        )
     )
     timestamp: list[cdm_event_workflow_EventTimestamp_schema.EventTimestamp] | None = Field(
         None,
         description="The set of timestamp(s) associated with the event as a collection of [dateTime, qualifier].",
         min_length=1,
     )
-    event_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = Field(
-        None,
-        alias="eventIdentifier",
-        description="The identifier(s) that uniquely identify a lifecycle event. The unbounded cardinality is meant to provide the ability to associate identifiers that are issued by distinct parties. As an example, each of the parties to the event may choose to associate their own identifiers to the event.",
-        min_length=1,
+    event_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = (
+        Field(
+            None,
+            alias="eventIdentifier",
+            description="The identifier(s) that uniquely identify a lifecycle event. The unbounded cardinality is meant to provide the ability to associate identifiers that are issued by distinct parties. As an example, each of the parties to the event may choose to associate their own identifiers to the event.",
+            min_length=1,
+        )
     )
     action: cdm_event_common_ActionEnum_schema.ActionEnum | None = Field(
         None, description="Specifies whether the event is a new, a correction or a cancellation."
@@ -78,15 +90,17 @@ class WorkflowStep(BaseModel):
         min_length=0,
     )
     account: list[cdm_base_staticdata_party_Account_schema.Account] | None = Field(
-        None, description="Optional account information that could be associated to the event.", min_length=0
+        None,
+        description="Optional account information that could be associated to the event.",
+        min_length=0,
     )
     lineage: cdm_event_common_Lineage_schema.Lineage | None = Field(
         None,
         description="The lineage attribute provides a linkage among lifecycle events through the globalKey hash value. One example is when a given lifecycle event is being corrected or cancelled. In such case, each subsequent event will have lineage into the prior version of that event. The second broad use case is when an event has a dependency upon either another event (e.g. the regular payment associated with a fix/float swap will have a lineage into the reset event, which will in turn have a lineage into the observation event for the floating rate and the contract) or a contract (e.g. the exercise of an option has a lineage into that option).",
     )
-    credit_limit_information: cdm_event_workflow_CreditLimitInformation_schema.CreditLimitInformation | None = Field(
-        None, alias="creditLimitInformation"
-    )
+    credit_limit_information: (
+        cdm_event_workflow_CreditLimitInformation_schema.CreditLimitInformation | None
+    ) = Field(None, alias="creditLimitInformation")
     workflow_state: cdm_event_workflow_WorkflowState_schema.WorkflowState | None = Field(
         None,
         alias="workflowState",

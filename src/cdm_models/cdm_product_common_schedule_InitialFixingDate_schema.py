@@ -7,7 +7,7 @@ from . import cdm_base_datetime_RelativeDateOffset_schema
 
 
 class InitialFixingDate(BaseModel):
-    relative_date_offset: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
-        None, alias="relativeDateOffset"
+    relative_date_offset: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = (
+        Field(None, alias="relativeDateOffset")
     )
     initial_fixing_date: str | None = Field(None, alias="initialFixingDate")

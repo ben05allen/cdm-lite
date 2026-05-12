@@ -6,7 +6,9 @@ from pydantic import BaseModel, Field
 
 
 class Clause(BaseModel):
-    identifier: str | None = Field(None, description="The  name or identifier associated to this clause.")
+    identifier: str | None = Field(
+        None, description="The  name or identifier associated to this clause."
+    )
     terms: str | None = Field(None, description="Content of this bespoke clause.")
     subcomponents: list[Clause] | None = Field(
         None, description="Additional hierarchical components of the clause if relevant."

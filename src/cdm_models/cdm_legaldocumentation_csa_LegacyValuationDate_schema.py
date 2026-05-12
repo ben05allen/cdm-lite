@@ -11,19 +11,25 @@ from . import (
 
 
 class LegacyValuationDate(BaseModel):
-    date: cdm_legaldocumentation_csa_ValuationDateDateEnum_schema.ValuationDateDateEnum | None = Field(
-        None,
-        description="Defines whether a date is defined by a certain day of the week or a particular date in the month. If not specified here, then additional language must be used.",
+    date: cdm_legaldocumentation_csa_ValuationDateDateEnum_schema.ValuationDateDateEnum | None = (
+        Field(
+            None,
+            description="Defines whether a date is defined by a certain day of the week or a particular date in the month. If not specified here, then additional language must be used.",
+        )
     )
     day: cdm_legaldocumentation_csa_ValuationDateDayEnum_schema.ValuationDateDayEnum | None = Field(
-        None, description="Specific day(s) or day of the week, if any, specified for Valuation Time."
+        None,
+        description="Specific day(s) or day of the week, if any, specified for Valuation Time.",
     )
     calendar_day: float | None = Field(
         None,
         alias="calendarDay",
         description="Defines the day of the calendar if this is specified for in the ValuationDateDateEnum.",
     )
-    frequency: cdm_legaldocumentation_csa_ValuationDateFrequencyEnum_schema.ValuationDateFrequencyEnum | None = Field(
+    frequency: (
+        cdm_legaldocumentation_csa_ValuationDateFrequencyEnum_schema.ValuationDateFrequencyEnum
+        | None
+    ) = Field(
         None, description="Defines the regularity of the date specified for the Valuation Date."
     )
     additional_language: str | None = Field(

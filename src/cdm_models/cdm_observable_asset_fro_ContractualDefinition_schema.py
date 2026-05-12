@@ -15,7 +15,8 @@ class ContractualDefinition(BaseModel):
         description="Corresponds to the unique identifier of the Contractual Definition in which the code is published",
     )
     contractual_definition_identifier: (
-        cdm_observable_asset_fro_ContractualDefinitionIdentifier_schema.ContractualDefinitionIdentifier | None
+        cdm_observable_asset_fro_ContractualDefinitionIdentifier_schema.ContractualDefinitionIdentifier
+        | None
     ) = Field(
         None,
         alias="contractualDefinitionIdentifier",

@@ -7,6 +7,12 @@ from . import cdm_legaldocumentation_csa_ElectiveAmountElection_schema
 
 
 class Threshold(BaseModel):
-    party_election: list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None = (
-        Field(None, alias="partyElection", description="The parties' Threshold election.", max_length=2, min_length=2)
+    party_election: (
+        list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The parties' Threshold election.",
+        max_length=2,
+        min_length=2,
     )

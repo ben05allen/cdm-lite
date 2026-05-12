@@ -16,7 +16,9 @@ class ReferenceInformation(BaseModel):
         alias="referenceEntity",
         description="The corporate or sovereign entity which is subject to the swap transaction and any successor that assumes all or substantially all of its contractual and other obligations. Reference Entities cannot be senior or subordinated. It is the obligations of the Reference Entities that can be senior or subordinated. ISDA 2014 Credit definitions article II section 2.1: `Reference Entity` means the entity specified as such in the related Confirmation.",
     )
-    reference_obligation: list[cdm_product_asset_ReferenceObligation_schema.ReferenceObligation] | None = Field(
+    reference_obligation: (
+        list[cdm_product_asset_ReferenceObligation_schema.ReferenceObligation] | None
+    ) = Field(
         None,
         alias="referenceObligation",
         description="The Reference Obligation is a financial instrument that is either issued or guaranteed by the reference entity. It serves to clarify the precise reference entity protection is being offered upon, and its legal position with regard to other related firms (parents/subsidiaries). Furthermore the Reference Obligation is ALWAYS deliverable and establishes the Pari Passu ranking (as the deliverable bonds must rank equal to the reference obligation). ISDA 2003 Term: Reference Obligation.",

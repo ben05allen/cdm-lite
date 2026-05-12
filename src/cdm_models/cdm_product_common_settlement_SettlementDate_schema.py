@@ -12,7 +12,8 @@ from . import (
 
 class SettlementDate(BaseModel):
     adjustable_or_relative_date: (
-        cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate | None
+        cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate
+        | None
     ) = Field(
         None,
         alias="adjustableOrRelativeDate",
@@ -28,10 +29,12 @@ class SettlementDate(BaseModel):
         alias="adjustableDates",
         description="A series of dates that shall be subject to adjustment if they would otherwise fall on a day that is not a business day in the specified business centers, together with the convention for adjusting the date. This attributes was formerly part of 'CashSettlementPaymentDate' as included into 'OptionCashSettlement' (which is now merged into a unique 'CashSettlementTerms' data type.",
     )
-    business_date_range: cdm_base_datetime_BusinessDateRange_schema.BusinessDateRange | None = Field(
-        None,
-        alias="businessDateRange",
-        description="A range of contiguous business days. This attribute is meant to be merged with the 'settlementDate' at some future point once we refactor 'Date' to use a single complex type across the model. This attributes was formerly part of 'CashSettlementPaymentDate', as included into 'OptionCashSettlement' (which is now merged into a unique 'CashSettlementTerms' data type.",
+    business_date_range: cdm_base_datetime_BusinessDateRange_schema.BusinessDateRange | None = (
+        Field(
+            None,
+            alias="businessDateRange",
+            description="A range of contiguous business days. This attribute is meant to be merged with the 'settlementDate' at some future point once we refactor 'Date' to use a single complex type across the model. This attributes was formerly part of 'CashSettlementPaymentDate', as included into 'OptionCashSettlement' (which is now merged into a unique 'CashSettlementTerms' data type.",
+        )
     )
     cash_settlement_business_days: int | None = Field(
         None,

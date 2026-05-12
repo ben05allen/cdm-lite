@@ -3,17 +3,24 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_BusinessDayAdjustments_schema, cdm_product_common_schedule_ObservationDate_schema
+from . import (
+    cdm_base_datetime_BusinessDayAdjustments_schema,
+    cdm_product_common_schedule_ObservationDate_schema,
+)
 
 
 class ObservationSchedule(BaseModel):
-    observation_date: list[cdm_product_common_schedule_ObservationDate_schema.ObservationDate] | None = Field(
+    observation_date: (
+        list[cdm_product_common_schedule_ObservationDate_schema.ObservationDate] | None
+    ) = Field(
         None,
         alias="observationDate",
         description="Specifies an adjusted or unadjusted date for a market observation.",
         min_length=0,
     )
-    date_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None = Field(
+    date_adjustments: (
+        cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None
+    ) = Field(
         None,
         alias="dateAdjustments",
         description="The business day convention and financial business centers used for adjusting the date if it would otherwise fall on a day that is not a business date in the specified business centers.",

@@ -15,7 +15,8 @@ from . import (
 
 class TradeState(BaseModel):
     trade: cdm_event_common_Trade_schema.Trade = Field(
-        ..., description="Represents the Trade that has been effected by a business or life-cycle event."
+        ...,
+        description="Represents the Trade that has been effected by a business or life-cycle event.",
     )
     state: cdm_event_common_State_schema.State | None = Field(
         None, description="Represents the State of the Trade through its life-cycle."
@@ -32,11 +33,13 @@ class TradeState(BaseModel):
         description="Represents the updated Trade attributes which can change as the result of a transfer event.",
         min_length=0,
     )
-    observation_history: list[cdm_event_common_ObservationEvent_schema.ObservationEvent] | None = Field(
-        None,
-        alias="observationHistory",
-        description="Represents the observed events related to a particular product or process, such as credit events or corporate actions.",
-        min_length=0,
+    observation_history: list[cdm_event_common_ObservationEvent_schema.ObservationEvent] | None = (
+        Field(
+            None,
+            alias="observationHistory",
+            description="Represents the observed events related to a particular product or process, such as credit events or corporate actions.",
+            min_length=0,
+        )
     )
     valuation_history: list[cdm_event_common_Valuation_schema.Valuation] | None = Field(
         None, alias="valuationHistory", min_length=0

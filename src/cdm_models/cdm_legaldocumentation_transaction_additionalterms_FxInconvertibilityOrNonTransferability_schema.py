@@ -13,7 +13,8 @@ from . import (
 
 class FxInconvertibilityOrNonTransferability(BaseModel):
     general_inconvertibility: (
-        cdm_legaldocumentation_transaction_additionalterms_GeneralInconvertibility_schema.GeneralInconvertibility | None
+        cdm_legaldocumentation_transaction_additionalterms_GeneralInconvertibility_schema.GeneralInconvertibility
+        | None
     ) = Field(None, alias="generalInconvertibility")
     general_non_transferability: (
         cdm_legaldocumentation_transaction_additionalterms_GeneralNonTransferability_schema.GeneralNonTransferability

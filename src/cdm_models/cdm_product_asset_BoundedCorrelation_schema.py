@@ -7,8 +7,12 @@ from pydantic import BaseModel, Field
 
 class BoundedCorrelation(BaseModel):
     minimum_boundary_percent: float | None = Field(
-        None, alias="minimumBoundaryPercent", description="Minimum Boundary as a percentage of the Strike Price."
+        None,
+        alias="minimumBoundaryPercent",
+        description="Minimum Boundary as a percentage of the Strike Price.",
     )
     maximum_boundary_percent: float | None = Field(
-        None, alias="maximumBoundaryPercent", description="Maximum Boundary as a percentage of the Strike Price."
+        None,
+        alias="maximumBoundaryPercent",
+        description="Maximum Boundary as a percentage of the Strike Price.",
     )

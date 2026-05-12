@@ -15,13 +15,22 @@ class TerminationCurrencyAmendment(BaseModel):
         alias="isApplicable",
         description="The qualification of whether the Amendment to Termination Currency is deemed applicable by the parties (True) or not (False).",
     )
-    effective_date: cdm_legaldocumentation_csa_AmendmentEffectiveDate_schema.AmendmentEffectiveDate | None = Field(
+    effective_date: (
+        cdm_legaldocumentation_csa_AmendmentEffectiveDate_schema.AmendmentEffectiveDate | None
+    ) = Field(
         None,
         alias="effectiveDate",
         description="The effective date of the Amendment to Termination Currency. This date can be specified as either an actual date, a specific date (e.g. the annex date) or as a custom provision.",
     )
     party_election: (
-        list[cdm_legaldocumentation_csa_TerminationCurrencyElection_schema.TerminationCurrencyElection] | None
+        list[
+            cdm_legaldocumentation_csa_TerminationCurrencyElection_schema.TerminationCurrencyElection
+        ]
+        | None
     ) = Field(
-        None, alias="partyElection", description="The parties' Amendment Currency election.", max_length=3, min_length=0
+        None,
+        alias="partyElection",
+        description="The parties' Amendment Currency election.",
+        max_length=3,
+        min_length=0,
     )

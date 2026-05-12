@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel
-from . import cdm_product_asset_IndexAnnexSourceEnum_schema, com_rosetta_model_metafields_MetaFields_schema
+from . import (
+    cdm_product_asset_IndexAnnexSourceEnum_schema,
+    com_rosetta_model_metafields_MetaFields_schema,
+)
 
 
 class FieldWithMetaIndexAnnexSourceEnum(BaseModel):

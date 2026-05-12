@@ -7,7 +7,10 @@ from . import cdm_legaldocumentation_master_MasterAgreementClause_schema
 
 
 class MasterAgreementSchedule(BaseModel):
-    clause: list[cdm_legaldocumentation_master_MasterAgreementClause_schema.MasterAgreementClause] | None = Field(
+    clause: (
+        list[cdm_legaldocumentation_master_MasterAgreementClause_schema.MasterAgreementClause]
+        | None
+    ) = Field(
         None,
         description="Clauses that have had elections made against them in this Master Agreement. There must be at least one clause defined in the agreement.",
         min_length=1,

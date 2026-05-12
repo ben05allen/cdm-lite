@@ -13,12 +13,15 @@ from . import (
 
 class CalculationFrequency(BaseModel):
     period: cdm_base_datetime_Period_schema.Period = Field(
-        ..., description="Specifies the time period at which calculation is performed, e.g. 1 month."
+        ...,
+        description="Specifies the time period at which calculation is performed, e.g. 1 month.",
     )
     month_of_year: float | None = Field(
         None, alias="monthOfYear", description="Specifies the month of the year if used."
     )
-    day_of_month: float | None = Field(None, alias="dayOfMonth", description="Specifies the day of the month if used.")
+    day_of_month: float | None = Field(
+        None, alias="dayOfMonth", description="Specifies the day of the month if used."
+    )
     day_of_week: cdm_base_datetime_DayOfWeekEnum_schema.DayOfWeekEnum | None = Field(
         None, alias="dayOfWeek", description="Specifies the day of the week if used."
     )
@@ -26,14 +29,18 @@ class CalculationFrequency(BaseModel):
         None, alias="weekOfMonth", description="Specifies the week of the month if used."
     )
     offset_days: float = Field(
-        ..., alias="offsetDays", description="Specifies how many days from the trigger event should the payment occur."
+        ...,
+        alias="offsetDays",
+        description="Specifies how many days from the trigger event should the payment occur.",
     )
     date_location: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime = Field(
         ..., alias="dateLocation", description="Specifies where is the time measured."
     )
-    business_center: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = Field(
-        None,
-        alias="businessCenter",
-        description="Specifies the business center for adjustment of calculation period.",
-        min_length=0,
+    business_center: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = (
+        Field(
+            None,
+            alias="businessCenter",
+            description="Specifies the business center for adjustment of calculation period.",
+            min_length=0,
+        )
     )

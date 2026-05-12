@@ -13,14 +13,17 @@ class FloatingRateIndexFixingTime(BaseModel):
         description="A time specified in hh:mm:ss format where the second component must be '00', e.g. 11am would be represented as 11:00:00.",
     )
     business_center: (
-        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum | None
+        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum
+        | None
     ) = Field(
         None,
         alias="businessCenter",
         description="A code identifying a business day calendar location. A business day calendar location is drawn from the list identified by the business day calendar location enumeration.",
     )
     designated_maturity: str | None = Field(
-        None, alias="designatedMaturity", description="Allows a designed maturity to be specified for the fixing time."
+        None,
+        alias="designatedMaturity",
+        description="Allows a designed maturity to be specified for the fixing time.",
     )
     fixing_time_definition: str | None = Field(
         None,

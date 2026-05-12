@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_SecuredPartyRightsEventElection_schema
 
 class SecuredPartyRightsEvent(BaseModel):
     secured_party_rights_event_election: (
-        list[cdm_legaldocumentation_csa_SecuredPartyRightsEventElection_schema.SecuredPartyRightsEventElection] | None
+        list[
+            cdm_legaldocumentation_csa_SecuredPartyRightsEventElection_schema.SecuredPartyRightsEventElection
+        ]
+        | None
     ) = Field(None, alias="securedPartyRightsEventElection", max_length=2, min_length=0)
     early_termination_date_optional_language: bool = Field(
         ...,

@@ -15,6 +15,6 @@ class ScheduledTransfer(BaseModel):
         alias="transferType",
         description="Specifies a transfer created from a scheduled or contingent event on a contract, e.g. Exercise, Performance, Credit Event",
     )
-    corporate_action_transfer_type: cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None = (
-        Field(None, alias="corporateActionTransferType")
-    )
+    corporate_action_transfer_type: (
+        cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None
+    ) = Field(None, alias="corporateActionTransferType")

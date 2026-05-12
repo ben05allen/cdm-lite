@@ -13,13 +13,16 @@ from . import (
 
 class PartyContactInformation(BaseModel):
     party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="partyReference",
         description="The reference to the party to which the contact information refers to.",
     )
-    contact_information: cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None = Field(
+    contact_information: (
+        cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None
+    ) = Field(
         None,
         alias="contactInformation",
         description="The postal/street address, telephone number, email address and/or web page. If the contact information is specific to the associated business unit(s), it should be associated with those.",
@@ -36,5 +39,7 @@ class PartyContactInformation(BaseModel):
         min_length=0,
     )
     additional_information: str | None = Field(
-        None, alias="additionalInformation", description="Specification of special instructions of the relevant party."
+        None,
+        alias="additionalInformation",
+        description="Specification of special instructions of the relevant party.",
     )

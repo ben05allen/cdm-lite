@@ -10,8 +10,8 @@ from . import (
 
 
 class StandardizedSchedule(BaseModel):
-    asset_class: cdm_margin_schedule_StandardizedScheduleAssetClassEnum_schema.StandardizedScheduleAssetClassEnum = (
-        Field(..., alias="assetClass")
+    asset_class: cdm_margin_schedule_StandardizedScheduleAssetClassEnum_schema.StandardizedScheduleAssetClassEnum = Field(
+        ..., alias="assetClass"
     )
     product_class: cdm_margin_schedule_StandardizedScheduleProductClassEnum_schema.StandardizedScheduleProductClassEnum = Field(
         ..., alias="productClass"

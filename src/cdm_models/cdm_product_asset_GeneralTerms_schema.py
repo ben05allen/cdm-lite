@@ -12,7 +12,9 @@ from . import (
 
 
 class GeneralTerms(BaseModel):
-    reference_information: cdm_product_asset_ReferenceInformation_schema.ReferenceInformation | None = Field(
+    reference_information: (
+        cdm_product_asset_ReferenceInformation_schema.ReferenceInformation | None
+    ) = Field(
         None,
         alias="referenceInformation",
         description="This attribute contains all the terms relevant to defining the reference entity and reference obligation(s).",
@@ -29,14 +31,17 @@ class GeneralTerms(BaseModel):
         alias="basketReferenceInformation",
         description="This attribute contains all the terms relevant to defining the Credit Default Swap Basket.",
     )
-    additional_term: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    additional_term: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         alias="additionalTerm",
         description="This attribute is used for representing information contained in the Additional Terms field of the 2003 Master Credit Derivatives confirm.",
         min_length=0,
     )
     substitution: bool | None = Field(
-        None, description="Value of this attribute set to 'true' indicates that substitution is applicable."
+        None,
+        description="Value of this attribute set to 'true' indicates that substitution is applicable.",
     )
     modified_equity_delivery: bool | None = Field(
         None,

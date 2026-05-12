@@ -8,7 +8,8 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 class SubstitutedRegimeTerms(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
-        ..., description="The party for which the regime terms are being specified when acting as collateral taker."
+        ...,
+        description="The party for which the regime terms are being specified when acting as collateral taker.",
     )
     is_applicable: bool = Field(
         ...,

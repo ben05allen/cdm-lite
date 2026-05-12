@@ -7,9 +7,13 @@ from . import cdm_event_workflow_CreditLimitUtilisationPosition_schema
 
 
 class CreditLimitUtilisation(BaseModel):
-    executed: cdm_event_workflow_CreditLimitUtilisationPosition_schema.CreditLimitUtilisationPosition | None = Field(
-        None, description="Credit limit utilisation attributable to executed trades."
-    )
-    pending: cdm_event_workflow_CreditLimitUtilisationPosition_schema.CreditLimitUtilisationPosition | None = Field(
+    executed: (
+        cdm_event_workflow_CreditLimitUtilisationPosition_schema.CreditLimitUtilisationPosition
+        | None
+    ) = Field(None, description="Credit limit utilisation attributable to executed trades.")
+    pending: (
+        cdm_event_workflow_CreditLimitUtilisationPosition_schema.CreditLimitUtilisationPosition
+        | None
+    ) = Field(
         None, description="Credit limit utilisation attributable to pending unexecuted orders."
     )

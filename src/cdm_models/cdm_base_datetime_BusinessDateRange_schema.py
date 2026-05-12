@@ -3,12 +3,19 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_BusinessCenters_schema, cdm_base_datetime_BusinessDayConventionEnum_schema
+from . import (
+    cdm_base_datetime_BusinessCenters_schema,
+    cdm_base_datetime_BusinessDayConventionEnum_schema,
+)
 
 
 class BusinessDateRange(BaseModel):
-    start_date: str | None = Field(None, alias="startDate", description="The first date of a date range.")
-    end_date: str | None = Field(None, alias="endDate", description="The last date of a date range.")
+    start_date: str | None = Field(
+        None, alias="startDate", description="The first date of a date range."
+    )
+    end_date: str | None = Field(
+        None, alias="endDate", description="The last date of a date range."
+    )
     business_day_convention: cdm_base_datetime_BusinessDayConventionEnum_schema.BusinessDayConventionEnum = Field(
         ...,
         alias="businessDayConvention",

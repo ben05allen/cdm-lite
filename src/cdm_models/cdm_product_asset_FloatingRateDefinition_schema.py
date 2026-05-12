@@ -12,11 +12,13 @@ class FloatingRateDefinition(BaseModel):
         alias="calculatedRate",
         description="The final calculated rate for a calculation period after any required averaging of rates A calculated rate of 5% would be represented as 0.05.",
     )
-    rate_observation: list[cdm_observable_asset_RateObservation_schema.RateObservation] | None = Field(
-        None,
-        alias="rateObservation",
-        description="The details of a particular rate observation, including the fixing date and observed rate. A list of rate observation elements may be ordered in the document by ascending adjusted fixing date. An FpML document containing an unordered list of rate observations is still regarded as a conformant document.",
-        min_length=0,
+    rate_observation: list[cdm_observable_asset_RateObservation_schema.RateObservation] | None = (
+        Field(
+            None,
+            alias="rateObservation",
+            description="The details of a particular rate observation, including the fixing date and observed rate. A list of rate observation elements may be ordered in the document by ascending adjusted fixing date. An FpML document containing an unordered list of rate observations is still regarded as a conformant document.",
+            min_length=0,
+        )
     )
     floating_rate_multiplier: float | None = Field(
         None,

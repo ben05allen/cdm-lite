@@ -10,5 +10,7 @@ from . import (
 
 
 class FieldWithMetaInflationRateIndexEnum(BaseModel):
-    value: cdm_base_staticdata_asset_rates_InflationRateIndexEnum_schema.InflationRateIndexEnum | None = None
+    value: (
+        cdm_base_staticdata_asset_rates_InflationRateIndexEnum_schema.InflationRateIndexEnum | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

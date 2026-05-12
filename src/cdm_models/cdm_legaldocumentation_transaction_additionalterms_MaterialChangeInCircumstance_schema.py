@@ -10,10 +10,13 @@ from . import (
 
 
 class MaterialChangeInCircumstance(BaseModel):
-    material_change_in_circumstance_is_applicable: bool = Field(..., alias="materialChangeInCircumstanceIsApplicable")
-    escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
-    ) = Field(None, alias="escrowArrangement")
-    maximum_days_of_disruption: cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None = Field(
-        None, alias="maximumDaysOfDisruption"
+    material_change_in_circumstance_is_applicable: bool = Field(
+        ..., alias="materialChangeInCircumstanceIsApplicable"
     )
+    escrow_arrangement: (
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
+    ) = Field(None, alias="escrowArrangement")
+    maximum_days_of_disruption: (
+        cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None
+    ) = Field(None, alias="maximumDaysOfDisruption")

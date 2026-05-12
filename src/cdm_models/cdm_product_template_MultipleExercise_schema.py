@@ -7,12 +7,12 @@ from . import cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema
 
 
 class MultipleExercise(BaseModel):
-    notiona_reference: cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney | None = (
-        Field(
-            None,
-            alias="notionaReference",
-            description="A pointer style reference to the associated notional schedule defined elsewhere in the document. This element has been made optional as part of its integration in the OptionBaseExtended, because not required for the options on securities.",
-        )
+    notiona_reference: (
+        cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney | None
+    ) = Field(
+        None,
+        alias="notionaReference",
+        description="A pointer style reference to the associated notional schedule defined elsewhere in the document. This element has been made optional as part of its integration in the OptionBaseExtended, because not required for the options on securities.",
     )
     integral_multiple_amount: float | None = Field(
         None,

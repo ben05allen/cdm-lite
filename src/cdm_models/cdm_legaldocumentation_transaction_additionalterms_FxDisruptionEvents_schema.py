@@ -29,22 +29,24 @@ class FxDisruptionEvents(BaseModel):
         cdm_legaldocumentation_transaction_additionalterms_FxForceMajeureOrActOfSStateEnum_schema.FxForceMajeureOrActOfSStateEnum
         | None
     ) = Field(None, alias="forceMajeureOrActOfSState")
-    event_currency: cdm_legaldocumentation_transaction_additionalterms_EventCurrency_schema.EventCurrency | None = (
-        Field(
-            None,
-            alias="eventCurrency",
-            description="Additional Provisions for a Confirmation of an FX or Currency Option Transaction.",
-        )
+    event_currency: (
+        cdm_legaldocumentation_transaction_additionalterms_EventCurrency_schema.EventCurrency | None
+    ) = Field(
+        None,
+        alias="eventCurrency",
+        description="Additional Provisions for a Confirmation of an FX or Currency Option Transaction.",
     )
     price_source_disruption: (
-        cdm_legaldocumentation_transaction_additionalterms_FxPriceSourceDisruption_schema.FxPriceSourceDisruption | None
+        cdm_legaldocumentation_transaction_additionalterms_FxPriceSourceDisruption_schema.FxPriceSourceDisruption
+        | None
     ) = Field(None, alias="priceSourceDisruption")
     benchmark_obligation_default: (
         cdm_legaldocumentation_transaction_additionalterms_FxBenchmarkObligationDefault_schema.FxBenchmarkObligationDefault
         | None
     ) = Field(None, alias="benchmarkObligationDefault")
     dual_exchange_rate: (
-        cdm_legaldocumentation_transaction_additionalterms_FxDualExchangeRate_schema.FxDualExchangeRate | None
+        cdm_legaldocumentation_transaction_additionalterms_FxDualExchangeRate_schema.FxDualExchangeRate
+        | None
     ) = Field(None, alias="dualExchangeRate")
     inconvertibility_or_non_transferability: (
         cdm_legaldocumentation_transaction_additionalterms_FxInconvertibilityOrNonTransferability_schema.FxInconvertibilityOrNonTransferability
@@ -54,18 +56,24 @@ class FxDisruptionEvents(BaseModel):
         cdm_legaldocumentation_transaction_additionalterms_GovernmentalAuthorityDefault_schema.GovernmentalAuthorityDefault
         | None
     ) = Field(None, alias="governmentalAuthorityDefault")
-    illiquidity: cdm_legaldocumentation_transaction_additionalterms_Illiquidity_schema.Illiquidity | None = None
+    illiquidity: (
+        cdm_legaldocumentation_transaction_additionalterms_Illiquidity_schema.Illiquidity | None
+    ) = None
     material_change_in_circumstance: (
         cdm_legaldocumentation_transaction_additionalterms_MaterialChangeInCircumstance_schema.MaterialChangeInCircumstance
         | None
     ) = Field(None, alias="materialChangeInCircumstance")
     nationalization: (
-        cdm_legaldocumentation_transaction_additionalterms_Nationalization_schema.Nationalization | None
+        cdm_legaldocumentation_transaction_additionalterms_Nationalization_schema.Nationalization
+        | None
     ) = None
     price_materiality: (
-        cdm_legaldocumentation_transaction_additionalterms_PriceMateriality_schema.PriceMateriality | None
+        cdm_legaldocumentation_transaction_additionalterms_PriceMateriality_schema.PriceMateriality
+        | None
     ) = Field(None, alias="priceMateriality")
-    fallback_language_bespoke_terms: cdm_legaldocumentation_transaction_Clause_schema.Clause | None = Field(
+    fallback_language_bespoke_terms: (
+        cdm_legaldocumentation_transaction_Clause_schema.Clause | None
+    ) = Field(
         None,
         alias="fallbackLanguageBespokeTerms",
         description="Where parties may optionaly describe any extra bespoke agreements about fallback procedure attached to a particular determination role.",

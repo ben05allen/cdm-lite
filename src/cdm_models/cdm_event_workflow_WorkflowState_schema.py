@@ -12,7 +12,9 @@ from . import (
 
 class WorkflowState(BaseModel):
     workflow_status: cdm_event_workflow_WorkflowStatusEnum_schema.WorkflowStatusEnum = Field(
-        ..., alias="workflowStatus", description="The workflow status indicator, e.g. Accepted, Rejected, ..."
+        ...,
+        alias="workflowStatus",
+        description="The workflow status indicator, e.g. Accepted, Rejected, ...",
     )
     comment: str | None = Field(
         None,
@@ -26,7 +28,9 @@ class WorkflowState(BaseModel):
         description="Workflow data that is specific to certain market participants and is expressed as part of the CDM in a very generic manner, which can be party-specific. The initial use cases have been derived from the CME clearing and the DTCC TIW submissions.",
         min_length=0,
     )
-    warehouse_identity: cdm_event_workflow_WarehouseIdentityEnum_schema.WarehouseIdentityEnum | None = Field(
+    warehouse_identity: (
+        cdm_event_workflow_WarehouseIdentityEnum_schema.WarehouseIdentityEnum | None
+    ) = Field(
         None,
         alias="warehouseIdentity",
         description="The identity of the warehouse, if any, that is executing that workflow step.",

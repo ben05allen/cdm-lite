@@ -8,8 +8,12 @@ from . import cdm_base_math_NumberBound_schema
 
 class NumberRange(BaseModel):
     lower_bound: cdm_base_math_NumberBound_schema.NumberBound | None = Field(
-        None, alias="lowerBound", description="The lower bound of a number range, e.g. greater than or equal to 5."
+        None,
+        alias="lowerBound",
+        description="The lower bound of a number range, e.g. greater than or equal to 5.",
     )
     upper_bound: cdm_base_math_NumberBound_schema.NumberBound | None = Field(
-        None, alias="upperBound", description="The upper bound of a number range, e.g. less than 10."
+        None,
+        alias="upperBound",
+        description="The upper bound of a number range, e.g. less than 10.",
     )

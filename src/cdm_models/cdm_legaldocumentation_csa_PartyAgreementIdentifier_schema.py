@@ -14,7 +14,10 @@ class PartyAgreementIdentifier(BaseModel):
         ..., alias="partyReference", description="Party that issued the document identifier."
     )
     document_identifier: (
-        list[cdm_base_staticdata_identifier_metafields_FieldWithMetaIdentifier_schema.FieldWithMetaIdentifier] | None
+        list[
+            cdm_base_staticdata_identifier_metafields_FieldWithMetaIdentifier_schema.FieldWithMetaIdentifier
+        ]
+        | None
     ) = Field(
         None,
         alias="documentIdentifier",

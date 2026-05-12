@@ -11,16 +11,19 @@ from . import (
 
 
 class FloatingRateIndexMap(BaseModel):
-    index: list[cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum] | None = Field(
-        None, description=" The FRO name that is being mapped to/from.", min_length=0
-    )
+    index: (
+        list[cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum]
+        | None
+    ) = Field(None, description=" The FRO name that is being mapped to/from.", min_length=0)
     contractual_definition_identifier: (
-        cdm_observable_asset_fro_ContractualDefinitionIdentifier_schema.ContractualDefinitionIdentifier | None
+        cdm_observable_asset_fro_ContractualDefinitionIdentifier_schema.ContractualDefinitionIdentifier
+        | None
     ) = Field(
         None,
         alias="contractualDefinitionIdentifier",
         description="Contractual Definition to which the map applies. Includes Document Type and Document Version",
     )
     identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = Field(
-        None, description="Corresponds to the unique identifier of the Contractual Definition to which the map applies"
+        None,
+        description="Corresponds to the unique identifier of the Contractual Definition to which the map applies",
     )

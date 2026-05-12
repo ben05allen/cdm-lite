@@ -7,7 +7,9 @@ from . import cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema
 
 
 class PercentageRule(BaseModel):
-    payment_percent: float = Field(..., alias="paymentPercent", description="A percentage of the notional amount.")
-    notional_amount_reference: cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney = (
-        Field(..., alias="notionalAmountReference", description="A reference to the notional amount.")
+    payment_percent: float = Field(
+        ..., alias="paymentPercent", description="A percentage of the notional amount."
+    )
+    notional_amount_reference: cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney = Field(
+        ..., alias="notionalAmountReference", description="A reference to the notional amount."
     )

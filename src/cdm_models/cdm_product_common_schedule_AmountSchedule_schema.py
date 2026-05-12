@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_math_DatedValue_schema, com_rosetta_model_metafields_FieldWithMetaString_schema
+from . import (
+    cdm_base_math_DatedValue_schema,
+    com_rosetta_model_metafields_FieldWithMetaString_schema,
+)
 
 
 class AmountSchedule(BaseModel):
@@ -17,7 +20,9 @@ class AmountSchedule(BaseModel):
         description="The schedule of step date and value pairs. On each step date the associated step value becomes effective. A list of steps may be ordered in the document by ascending step date. An FpML document containing an unordered list of steps is still regarded as a conformant document.",
         min_length=0,
     )
-    currency: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    currency: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         description="The currency in which the amount schedule is denominated. The currency is specified outside of the actual schedule in order to be applied uniformly to it. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
         min_length=1,

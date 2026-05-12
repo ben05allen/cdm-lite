@@ -11,13 +11,13 @@ from . import (
 
 
 class SpecifiedEntity(BaseModel):
-    party: cdm_base_staticdata_party_Party_schema.Party = Field(..., description="The elective party.")
-    specified_entity_terms: cdm_legaldocumentation_common_SpecifiedEntityTermsEnum_schema.SpecifiedEntityTermsEnum = (
-        Field(
-            ...,
-            alias="specifiedEntityTerms",
-            description="The specified entity terms for the Event of Default or Termination Event specified.",
-        )
+    party: cdm_base_staticdata_party_Party_schema.Party = Field(
+        ..., description="The elective party."
+    )
+    specified_entity_terms: cdm_legaldocumentation_common_SpecifiedEntityTermsEnum_schema.SpecifiedEntityTermsEnum = Field(
+        ...,
+        alias="specifiedEntityTerms",
+        description="The specified entity terms for the Event of Default or Termination Event specified.",
     )
     specified_entity: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
         None,

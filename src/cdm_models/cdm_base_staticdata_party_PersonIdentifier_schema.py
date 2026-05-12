@@ -14,9 +14,11 @@ class PersonIdentifier(BaseModel):
         ...,
         description="Provides an identifier associated with a person. The identifier is unique within the public source specified in the source attribute.",
     )
-    identifier_type: cdm_base_staticdata_party_PersonIdentifierTypeEnum_schema.PersonIdentifierTypeEnum | None = Field(
-        None, alias="identifierType", description="Defines the source of the identifier."
-    )
-    country: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="The ISO 3166 standard code for the country issuing the identifier."
+    identifier_type: (
+        cdm_base_staticdata_party_PersonIdentifierTypeEnum_schema.PersonIdentifierTypeEnum | None
+    ) = Field(None, alias="identifierType", description="Defines the source of the identifier.")
+    country: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None, description="The ISO 3166 standard code for the country issuing the identifier."
+        )
     )

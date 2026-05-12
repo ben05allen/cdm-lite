@@ -21,8 +21,8 @@ class Party(BaseModel):
         description="The identifier associated with a party, e.g. the 20 digits LEI code.",
         min_length=1,
     )
-    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="The party name."
+    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(None, description="The party name.")
     )
     business_unit: list[cdm_base_staticdata_party_BusinessUnit_schema.BusinessUnit] | None = Field(
         None,
@@ -35,14 +35,16 @@ class Party(BaseModel):
         description="The person(s) who might be associated with the party as part of the execution, contract or legal document.",
         min_length=0,
     )
-    person_role: list[cdm_base_staticdata_party_NaturalPersonRole_schema.NaturalPersonRole] | None = Field(
-        None, alias="personRole", description="The role of the person(s) ", min_length=0
-    )
+    person_role: (
+        list[cdm_base_staticdata_party_NaturalPersonRole_schema.NaturalPersonRole] | None
+    ) = Field(None, alias="personRole", description="The role of the person(s) ", min_length=0)
     account: cdm_base_staticdata_party_Account_schema.Account | None = Field(
         None,
         description="The account that might be associated with the party. At most one account can be specified, as it is expected that this information is used in the context of a contract or legal document where only one account per party can be associated with such object.",
     )
-    contact_information: cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None = Field(
+    contact_information: (
+        cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None
+    ) = Field(
         None,
         alias="contactInformation",
         description="The postal/street address, telephone number, email address and/or web page. If the contact information is specific to the associated business unit(s) or person (s), it should be associated with those.",

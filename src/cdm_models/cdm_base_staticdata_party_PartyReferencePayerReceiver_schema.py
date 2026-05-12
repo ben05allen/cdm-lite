@@ -10,15 +10,14 @@ from . import (
 
 
 class PartyReferencePayerReceiver(BaseModel):
-    payer_party_reference: cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty = (
-        Field(
-            ...,
-            alias="payerPartyReference",
-            description="The party responsible for making the payments defined by this structure.",
-        )
+    payer_party_reference: cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty = Field(
+        ...,
+        alias="payerPartyReference",
+        description="The party responsible for making the payments defined by this structure.",
     )
     payer_account_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount
+        | None
     ) = Field(
         None,
         alias="payerAccountReference",
@@ -30,7 +29,8 @@ class PartyReferencePayerReceiver(BaseModel):
         description="The party that receives the payments corresponding to this structure.",
     )
     receiver_account_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount
+        | None
     ) = Field(
         None,
         alias="receiverAccountReference",

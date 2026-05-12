@@ -12,19 +12,22 @@ from . import (
 
 class ContractBase(BaseModel):
     contract_details: (
-        cdm_event_common_metafields_ReferenceWithMetaContractDetails_schema.ReferenceWithMetaContractDetails | None
+        cdm_event_common_metafields_ReferenceWithMetaContractDetails_schema.ReferenceWithMetaContractDetails
+        | None
     ) = Field(
         None,
         alias="contractDetails",
         description="Represents information specific to trades or positions involving contractual products.",
     )
     execution_details: (
-        cdm_event_common_metafields_ReferenceWithMetaExecutionDetails_schema.ReferenceWithMetaExecutionDetails | None
+        cdm_event_common_metafields_ReferenceWithMetaExecutionDetails_schema.ReferenceWithMetaExecutionDetails
+        | None
     ) = Field(
         None,
         alias="executionDetails",
         description="Defines specific attributes that relate to trade or position executions.",
     )
     collateral: (
-        cdm_product_collateral_metafields_ReferenceWithMetaCollateral_schema.ReferenceWithMetaCollateral | None
+        cdm_product_collateral_metafields_ReferenceWithMetaCollateral_schema.ReferenceWithMetaCollateral
+        | None
     ) = Field(None, description="Represents the collateral obligations of a party.")

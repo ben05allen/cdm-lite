@@ -15,7 +15,9 @@ from . import (
 
 
 class Security(BaseModel):
-    identifier: list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None = Field(
+    identifier: (
+        list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None
+    ) = Field(
         None,
         description="Asset Identifiers are used to uniquely identify an Asset, using a specified Asset Identifier Type.",
         min_length=1,
@@ -26,23 +28,34 @@ class Security(BaseModel):
         min_length=0,
     )
     is_exchange_listed: bool | None = Field(
-        None, alias="isExchangeListed", description="Defines whether the Asset is listed on a public exchange."
+        None,
+        alias="isExchangeListed",
+        description="Defines whether the Asset is listed on a public exchange.",
     )
     exchange: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="If the Asset is listed, defines the public exchange of the listing."
     )
     related_exchange: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
-        None, alias="relatedExchange", description="Provides the related Exchanges, if applicable.", min_length=0
+        None,
+        alias="relatedExchange",
+        description="Provides the related Exchanges, if applicable.",
+        min_length=0,
     )
-    instrument_type: cdm_base_staticdata_asset_common_InstrumentTypeEnum_schema.InstrumentTypeEnum | None = Field(
-        None, alias="instrumentType", description="Identifies the type of an instrument using an enumerated list."
+    instrument_type: (
+        cdm_base_staticdata_asset_common_InstrumentTypeEnum_schema.InstrumentTypeEnum | None
+    ) = Field(
+        None,
+        alias="instrumentType",
+        description="Identifies the type of an instrument using an enumerated list.",
     )
     debt_type: cdm_base_staticdata_asset_common_DebtType_schema.DebtType | None = Field(
-        None, alias="debtType", description="Identifies the type of debt and selected debt economics."
+        None,
+        alias="debtType",
+        description="Identifies the type of debt and selected debt economics.",
     )
-    equity_type: cdm_base_staticdata_asset_common_EquityTypeEnum_schema.EquityTypeEnum | None = Field(
-        None, alias="equityType", description="Identifies the type of equity."
+    equity_type: cdm_base_staticdata_asset_common_EquityTypeEnum_schema.EquityTypeEnum | None = (
+        Field(None, alias="equityType", description="Identifies the type of equity.")
     )
-    fund_type: cdm_base_staticdata_asset_common_FundProductTypeEnum_schema.FundProductTypeEnum | None = Field(
-        None, alias="fundType", description="Identifies the type of fund."
-    )
+    fund_type: (
+        cdm_base_staticdata_asset_common_FundProductTypeEnum_schema.FundProductTypeEnum | None
+    ) = Field(None, alias="fundType", description="Identifies the type of fund.")

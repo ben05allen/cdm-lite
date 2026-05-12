@@ -28,12 +28,16 @@ class PaymentDates(BaseModel):
         alias="lastRegularPaymentDate",
         description="The last regular payment date when specified as a date, as in the FpML interest rate construct. FpML specifies that this date may be subject to adjustment in accordance with any business day convention specified in the paymentDatesAdjustments attribute.",
     )
-    payment_date_schedule: cdm_product_common_schedule_PaymentDateSchedule_schema.PaymentDateSchedule | None = Field(
+    payment_date_schedule: (
+        cdm_product_common_schedule_PaymentDateSchedule_schema.PaymentDateSchedule | None
+    ) = Field(
         None,
         alias="paymentDateSchedule",
         description="The payment dates when specified as relative to a set of dates specified somewhere else in the instance document/transaction, e.g. the valuation dates as typically the case for equity swaps, or when specified as a calculation period schedule.",
     )
-    pay_relative_to: cdm_product_common_schedule_PayRelativeToEnum_schema.PayRelativeToEnum | None = Field(
+    pay_relative_to: (
+        cdm_product_common_schedule_PayRelativeToEnum_schema.PayRelativeToEnum | None
+    ) = Field(
         None,
         alias="payRelativeTo",
         description="Specifies whether the payments occur relative to each adjusted calculation period start date or end date, each reset date, valuation date or the last pricing date. Calculation period start date means relative to the start of the first calculation period contributing to a given payment. Similarly, calculation period end date means the end of the last calculation period contributing to a given payment. The valuation date is applicable for Brazilian-CDI and equity swaps.",
@@ -43,7 +47,9 @@ class PaymentDates(BaseModel):
         alias="paymentDaysOffset",
         description="If early payment or delayed payment is required, specifies the number of days offset that the payment occurs relative to what would otherwise be the unadjusted payment date. The offset can be specified in terms of either calendar or business days. Even in the case of a calendar days offset, the resulting payment date, adjusted for the specified calendar days offset, will still be adjusted in accordance with the specified payment dates adjustments. This element should only be included if early or delayed payment is applicable, i.e. if the periodMultiplier element value is not equal to zero. An early payment would be indicated by a negative periodMultiplier element value and a delayed payment (or payment lag) would be indicated by a positive periodMultiplier element value.",
     )
-    payment_dates_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None = Field(
+    payment_dates_adjustments: (
+        cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None
+    ) = Field(
         None,
         alias="paymentDatesAdjustments",
         description="The definition of the business day convention and financial business centers used for adjusting the payment date if it would otherwise fall on a day that is not a business day in the specified business center.",

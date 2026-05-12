@@ -7,9 +7,11 @@ from . import cdm_event_position_InventoryRecord_schema
 
 
 class Inventory(BaseModel):
-    inventory_record: list[cdm_event_position_InventoryRecord_schema.InventoryRecord] | None = Field(
-        None,
-        alias="inventoryRecord",
-        description="An array holding the list of inventory being described. Each element in the inventoryRecord array represents an individual piece of inventory i.e. a security.",
-        min_length=0,
+    inventory_record: list[cdm_event_position_InventoryRecord_schema.InventoryRecord] | None = (
+        Field(
+            None,
+            alias="inventoryRecord",
+            description="An array holding the list of inventory being described. Each element in the inventoryRecord array represents an individual piece of inventory i.e. a security.",
+            min_length=0,
+        )
     )

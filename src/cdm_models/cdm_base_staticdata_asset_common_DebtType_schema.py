@@ -13,7 +13,9 @@ class DebtType(BaseModel):
     debt_class: cdm_base_staticdata_asset_common_DebtClassEnum_schema.DebtClassEnum | None = Field(
         None, alias="debtClass", description="Specifies the characteristics of a debt instrument."
     )
-    debt_economics: list[cdm_base_staticdata_asset_common_DebtEconomics_schema.DebtEconomics] | None = Field(
+    debt_economics: (
+        list[cdm_base_staticdata_asset_common_DebtEconomics_schema.DebtEconomics] | None
+    ) = Field(
         None,
         alias="debtEconomics",
         description="Specifies selected financial terms of a debt instrument.",

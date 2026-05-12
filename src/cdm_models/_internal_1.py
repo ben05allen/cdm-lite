@@ -47,7 +47,8 @@ class AgreementTerms(BaseModel):
 
 class Agreement(BaseModel):
     credit_support_agreement_elections: (
-        cdm_legaldocumentation_csa_CreditSupportAgreementElections_schema.CreditSupportAgreementElections | None
+        cdm_legaldocumentation_csa_CreditSupportAgreementElections_schema.CreditSupportAgreementElections
+        | None
     ) = Field(
         None,
         alias="creditSupportAgreementElections",
@@ -62,13 +63,23 @@ class Agreement(BaseModel):
         description="Elections to specify a Collateral Transfer Agreement.",
     )
     security_agreement_elections: (
-        cdm_legaldocumentation_csa_SecurityAgreementElections_schema.SecurityAgreementElections | None
-    ) = Field(None, alias="securityAgreementElections", description="Elections to specify a Security agreement.")
+        cdm_legaldocumentation_csa_SecurityAgreementElections_schema.SecurityAgreementElections
+        | None
+    ) = Field(
+        None,
+        alias="securityAgreementElections",
+        description="Elections to specify a Security agreement.",
+    )
     master_agreement_schedule: (
         cdm_legaldocumentation_master_MasterAgreementSchedule_schema.MasterAgreementSchedule | None
-    ) = Field(None, alias="masterAgreementSchedule", description="Elections to specify a Master Agreement Schedule.")
+    ) = Field(
+        None,
+        alias="masterAgreementSchedule",
+        description="Elections to specify a Master Agreement Schedule.",
+    )
     transaction_additional_terms: (
-        cdm_legaldocumentation_transaction_TransactionAdditionalTerms_schema.TransactionAdditionalTerms | None
+        cdm_legaldocumentation_transaction_TransactionAdditionalTerms_schema.TransactionAdditionalTerms
+        | None
     ) = Field(
         None,
         alias="transactionAdditionalTerms",
@@ -93,17 +104,23 @@ class LegalAgreement(BaseModel):
         description="The date on which, or as of which, the agreement is effective, if different from the agreement date. It is expected that it will most often correspond to the agreement date, although there could be situations where the parties will explicitly agree on a distinct effective date.",
     )
     identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = Field(
-        None, description="The legal agreement identifier. Several identifiers can be specified.", min_length=0
+        None,
+        description="The legal agreement identifier. Several identifiers can be specified.",
+        min_length=0,
     )
     legal_agreement_identification: (
-        cdm_legaldocumentation_common_LegalAgreementIdentification_schema.LegalAgreementIdentification | None
+        cdm_legaldocumentation_common_LegalAgreementIdentification_schema.LegalAgreementIdentification
+        | None
     ) = Field(
         None,
         alias="legalAgreementIdentification",
         description="The type of legal agreement, identified via a set of composable attributes: agreementName, publisher, governing law and version, e.g. ISDA 2013 Standard Credit Support Annex English Law.",
     )
     contractual_party: (
-        list[cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty] | None
+        list[
+            cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        ]
+        | None
     ) = Field(
         None,
         alias="contractualParty",
@@ -121,14 +138,18 @@ class LegalAgreement(BaseModel):
         None, description="A human readable document, for example a confirmation.", min_length=0
     )
     agreement_terms: AgreementTerms | None = Field(
-        None, alias="agreementTerms", description="Specification of the content of the legal agreement."
+        None,
+        alias="agreementTerms",
+        description="Specification of the content of the legal agreement.",
     )
     related_agreements: list[LegalAgreement] | None = Field(
         None,
         alias="relatedAgreements",
         description="Specifies the agreement(s) that govern the agreement, either as a reference to such agreements when specified as part of the CDM, or through identification of some of the key terms of those agreements, such as the type of agreement, the publisher, the vintage, the agreement identifier and the agreement date.",
     )
-    umbrella_agreement: cdm_legaldocumentation_common_UmbrellaAgreement_schema.UmbrellaAgreement | None = Field(
+    umbrella_agreement: (
+        cdm_legaldocumentation_common_UmbrellaAgreement_schema.UmbrellaAgreement | None
+    ) = Field(
         None,
         alias="umbrellaAgreement",
         description="The determination of whether Umbrella Agreement terms are applicable (True) or Not Applicable (False).",
@@ -136,12 +157,19 @@ class LegalAgreement(BaseModel):
 
 
 class CreditSupportDocumentElection(BaseModel):
-    party: cdm_base_staticdata_party_Party_schema.Party = Field(..., description="The elective party.")
+    party: cdm_base_staticdata_party_Party_schema.Party = Field(
+        ..., description="The elective party."
+    )
     credit_support_document_terms: cdm_legaldocumentation_common_CreditSupportDocumentTermsEnum_schema.CreditSupportDocumentTermsEnum = Field(
-        ..., alias="creditSupportDocumentTerms", description="Specification of the Credit Support Document terms."
+        ...,
+        alias="creditSupportDocumentTerms",
+        description="Specification of the Credit Support Document terms.",
     )
     credit_support_document_types: (
-        list[cdm_legaldocumentation_common_LegalAgreementIdentification_schema.LegalAgreementIdentification] | None
+        list[
+            cdm_legaldocumentation_common_LegalAgreementIdentification_schema.LegalAgreementIdentification
+        ]
+        | None
     ) = Field(
         None,
         alias="creditSupportDocumentTypes",
@@ -176,11 +204,14 @@ class MasterAgreementElections(BaseModel):
         cdm_legaldocumentation_master_isla_GlobalMasterSecuritiesLendingAgreement_schema.GlobalMasterSecuritiesLendingAgreement
         | None
     ) = Field(None, alias="islaGmsla", description="The set of elections that define a GMSLA.")
-    icma_gmra: cdm_legaldocumentation_master_icma_GlobalMasterRepoAgreement_schema.GlobalMasterRepoAgreement | None = (
-        Field(None, alias="icmaGmra", description="The set of elections that define a GMRA.")
-    )
+    icma_gmra: (
+        cdm_legaldocumentation_master_icma_GlobalMasterRepoAgreement_schema.GlobalMasterRepoAgreement
+        | None
+    ) = Field(None, alias="icmaGmra", description="The set of elections that define a GMRA.")
     isda_master: MasterAgreement | None = Field(
-        None, alias="isdaMaster", description="The set of elections that define an ISDA Master Agreement."
+        None,
+        alias="isdaMaster",
+        description="The set of elections that define an ISDA Master Agreement.",
     )
 
 
@@ -196,7 +227,9 @@ class MasterAgreement(BaseModel):
         description="Specification of the currency in which the termination payment is made (including the process by which such currency is determined).",
     )
     address_for_notices: cdm_legaldocumentation_common_AddressForNotices_schema.AddressForNotices = Field(
-        ..., alias="addressForNotices", description="Specification of the address and other details for notices."
+        ...,
+        alias="addressForNotices",
+        description="Specification of the address and other details for notices.",
     )
     non_contractual_obligations: bool = Field(
         ...,
@@ -213,14 +246,14 @@ class MasterAgreement(BaseModel):
         alias="creditSupportProvider",
         description="Identification of party specific Credit Support Providers applicable to the document.",
     )
-    specified_entities: list[cdm_legaldocumentation_master_isda_SpecifiedEntities_schema.SpecifiedEntities] | None = (
-        Field(
-            None,
-            alias="specifiedEntities",
-            description="A provision that allows each party to specify its Specified Entities for certain Events of Default and Termination Events.",
-            max_length=4,
-            min_length=4,
-        )
+    specified_entities: (
+        list[cdm_legaldocumentation_master_isda_SpecifiedEntities_schema.SpecifiedEntities] | None
+    ) = Field(
+        None,
+        alias="specifiedEntities",
+        description="A provision that allows each party to specify its Specified Entities for certain Events of Default and Termination Events.",
+        max_length=4,
+        min_length=4,
     )
 
 

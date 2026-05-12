@@ -11,18 +11,24 @@ from . import (
 
 
 class RateSpecification(BaseModel):
-    fixed_rate_specification: cdm_product_asset_FixedRateSpecification_schema.FixedRateSpecification | None = Field(
+    fixed_rate_specification: (
+        cdm_product_asset_FixedRateSpecification_schema.FixedRateSpecification | None
+    ) = Field(
         None,
         alias="FixedRateSpecification",
         description="The fixed rate or fixed rate specification expressed as explicit fixed rates and dates.",
     )
-    floating_rate_specification: cdm_product_asset_FloatingRateSpecification_schema.FloatingRateSpecification | None = (
-        Field(
-            None,
-            alias="FloatingRateSpecification",
-            description="The floating interest rate specification, which includes the definition of the floating rate index. the tenor, the initial value, and, when applicable, the spread, the rounding convention, the averaging method and the negative interest rate treatment.",
-        )
+    floating_rate_specification: (
+        cdm_product_asset_FloatingRateSpecification_schema.FloatingRateSpecification | None
+    ) = Field(
+        None,
+        alias="FloatingRateSpecification",
+        description="The floating interest rate specification, which includes the definition of the floating rate index. the tenor, the initial value, and, when applicable, the spread, the rounding convention, the averaging method and the negative interest rate treatment.",
     )
     inflation_rate_specification: (
         cdm_product_asset_InflationRateSpecification_schema.InflationRateSpecification | None
-    ) = Field(None, alias="InflationRateSpecification", description="An inflation rate calculation definition.")
+    ) = Field(
+        None,
+        alias="InflationRateSpecification",
+        description="An inflation rate calculation definition.",
+    )

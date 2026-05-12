@@ -19,7 +19,9 @@ class ConcentrationLimit(BaseModel):
         description="Specifies a set of criteria to describe the assets that the concentration limits apply to.",
     )
     value_limit: cdm_base_math_MoneyRange_schema.MoneyRange | None = Field(
-        None, alias="valueLimit", description="Specifies the value of collateral limit represented as a range."
+        None,
+        alias="valueLimit",
+        description="Specifies the value of collateral limit represented as a range.",
     )
     percentage_limit: cdm_base_math_NumberRange_schema.NumberRange | None = Field(
         None,

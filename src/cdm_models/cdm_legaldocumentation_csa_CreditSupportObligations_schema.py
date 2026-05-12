@@ -31,7 +31,9 @@ class CreditSupportObligations(BaseModel):
         description="Return Amount (VM) has the meaning specified in Paragraph 3(a), unless otherwise specified here.",
     )
     margin_approach: cdm_legaldocumentation_csa_MarginApproach_schema.MarginApproach | None = Field(
-        None, alias="marginApproach", description="The selection of Margin Approach applicable to the agreement."
+        None,
+        alias="marginApproach",
+        description="The selection of Margin Approach applicable to the agreement.",
     )
     other_eligible_support: str | None = Field(
         None,
@@ -47,16 +49,18 @@ class CreditSupportObligations(BaseModel):
         alias="minimumTransferAmount",
         description="The net amount of exposure reached before collateral has to be posted or returned.",
     )
-    rounding: cdm_legaldocumentation_csa_CollateralRounding_schema.CollateralRounding | None = Field(
-        None,
-        description="The rounding methodology applicable to the Delivery Amount and the Return Amount in terms of nearest integral multiple of Base Currency units.",
-    )
-    bespoke_transfer_timing: cdm_legaldocumentation_csa_BespokeTransferTiming_schema.BespokeTransferTiming | None = (
+    rounding: cdm_legaldocumentation_csa_CollateralRounding_schema.CollateralRounding | None = (
         Field(
             None,
-            alias="bespokeTransferTiming",
-            description="The time by which the transfer of collateral must take place when different from the Regular Settlement Day as a result of parties' election.",
+            description="The rounding methodology applicable to the Delivery Amount and the Return Amount in terms of nearest integral multiple of Base Currency units.",
         )
+    )
+    bespoke_transfer_timing: (
+        cdm_legaldocumentation_csa_BespokeTransferTiming_schema.BespokeTransferTiming | None
+    ) = Field(
+        None,
+        alias="bespokeTransferTiming",
+        description="The time by which the transfer of collateral must take place when different from the Regular Settlement Day as a result of parties' election.",
     )
     credit_support_obligations_variation_margin: (
         cdm_legaldocumentation_csa_CreditSupportObligationsVariationMargin_schema.CreditSupportObligationsVariationMargin
@@ -66,11 +70,12 @@ class CreditSupportObligations(BaseModel):
         alias="creditSupportObligationsVariationMargin",
         description="The specification of Credit Support Obligations applicable to Variation Margin agreements.",
     )
-    legacy_threshold: list[cdm_legaldocumentation_csa_CSAThreshold_schema.CSAThreshold] | None = Field(
-        None, alias="legacyThreshold", max_length=2, min_length=0
+    legacy_threshold: list[cdm_legaldocumentation_csa_CSAThreshold_schema.CSAThreshold] | None = (
+        Field(None, alias="legacyThreshold", max_length=2, min_length=0)
     )
     legacy_minimum_transfer_amount: (
-        list[cdm_legaldocumentation_csa_CSAMinimumTransferAmount_schema.CSAMinimumTransferAmount] | None
+        list[cdm_legaldocumentation_csa_CSAMinimumTransferAmount_schema.CSAMinimumTransferAmount]
+        | None
     ) = Field(None, alias="legacyMinimumTransferAmount", max_length=2, min_length=0)
     legacy_delivery_amount: cdm_legaldocumentation_csa_LegacyDeliveryAmount_schema.LegacyDeliveryAmount = Field(
         ...,

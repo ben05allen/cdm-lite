@@ -14,8 +14,12 @@ class RecalculationOfValueElection(BaseModel):
         ..., description="The elective party."
     )
     recalculation_of_value_election: cdm_legaldocumentation_csa_RecalculationOfValueElectionEnum_schema.RecalculationOfValueElectionEnum = Field(
-        ..., alias="recalculationOfValueElection", description="The procedure for Recalculation of Value."
+        ...,
+        alias="recalculationOfValueElection",
+        description="The procedure for Recalculation of Value.",
     )
     recalculation_of_value_terms: str | None = Field(
-        None, alias="recalculationOfValueTerms", description="Additional Recalculation of Value terms when specified."
+        None,
+        alias="recalculationOfValueTerms",
+        description="Additional Recalculation of Value terms when specified.",
     )

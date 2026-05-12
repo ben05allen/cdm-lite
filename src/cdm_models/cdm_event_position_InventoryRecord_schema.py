@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_asset_common_Security_schema, cdm_base_staticdata_identifier_AssignedIdentifier_schema
+from . import (
+    cdm_base_staticdata_asset_common_Security_schema,
+    cdm_base_staticdata_identifier_AssignedIdentifier_schema,
+)
 
 
 class InventoryRecord(BaseModel):

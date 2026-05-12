@@ -16,23 +16,29 @@ class PledgeeRepresentativeRider(BaseModel):
         alias="isApplicable",
         description="Identification of whether the representative CTA provisions are applicable (True) or not applicable (False).",
     )
-    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None, description="Identification of the represented party."
+    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(None, description="Identification of the represented party.")
     )
     representative_terms: str | None = Field(
-        None, alias="representativeTerms", description="The specific representative terms applicable when specified."
-    )
-    representative_event: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = Field(
         None,
-        alias="representativeEvent",
-        description="The specification of whether the representative event terms are applicable.",
+        alias="representativeTerms",
+        description="The specific representative terms applicable when specified.",
+    )
+    representative_event: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = (
+        Field(
+            None,
+            alias="representativeEvent",
+            description="The specification of whether the representative event terms are applicable.",
+        )
     )
     representative_event_terms: str | None = Field(
         None,
         alias="representativeEventTerms",
         description="The specific representative event terms applicable when specified.",
     )
-    representative_end_date: cdm_base_datetime_CustomisableOffset_schema.CustomisableOffset | None = Field(
+    representative_end_date: (
+        cdm_base_datetime_CustomisableOffset_schema.CustomisableOffset | None
+    ) = Field(
         None,
         alias="representativeEndDate",
         description="The definition of representative end date in relation to a representative event.",

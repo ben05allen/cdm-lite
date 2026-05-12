@@ -18,7 +18,10 @@ class IneligibleCreditSupport(BaseModel):
         description="Transfer Ineligibility Date has the meaning specified in Paragraph 11(g), unless otherwise specified here.",
     )
     specified_party: (
-        list[cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty] | None
+        list[
+            cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        ]
+        | None
     ) = Field(
         None,
         alias="specifiedParty",

@@ -15,7 +15,9 @@ class SettlementRateOption(BaseModel):
         alias="settlementRateOption",
         description="The rate source for the conversion to the settlement currency. This source is specified through a scheme that reflects the terms of the Annex A to the 1998 FX and Currency Option Definitions.",
     )
-    price_source_disruption: cdm_observable_asset_PriceSourceDisruption_schema.PriceSourceDisruption | None = Field(
+    price_source_disruption: (
+        cdm_observable_asset_PriceSourceDisruption_schema.PriceSourceDisruption | None
+    ) = Field(
         None,
         alias="priceSourceDisruption",
         description="An attribute defining the parameters to get a new quote when a settlement rate option is disrupted.",

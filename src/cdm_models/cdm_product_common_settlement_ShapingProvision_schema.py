@@ -8,5 +8,8 @@ from . import cdm_observable_asset_Money_schema
 
 class ShapingProvision(BaseModel):
     shape_schedule: list[cdm_observable_asset_Money_schema.Money] | None = Field(
-        None, alias="shapeSchedule", description="Defines applicable settlement limits in each currency.", min_length=1
+        None,
+        alias="shapeSchedule",
+        description="Defines applicable settlement limits in each currency.",
+        min_length=1,
     )

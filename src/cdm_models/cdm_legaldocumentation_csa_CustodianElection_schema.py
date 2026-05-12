@@ -29,7 +29,9 @@ class CustodianElection(BaseModel):
         alias="segregatedSecurityAccount",
         description="The identification of the segregated security account for the purpose of holding security collateral.",
     )
-    legacy_vm_custodian: cdm_legaldocumentation_csa_LegacyVMCustodianEnum_schema.LegacyVMCustodianEnum | None = Field(
+    legacy_vm_custodian: (
+        cdm_legaldocumentation_csa_LegacyVMCustodianEnum_schema.LegacyVMCustodianEnum | None
+    ) = Field(
         None, alias="legacyVMCustodian", description="Details how the Custodian is determined."
     )
     legacy_named_entity: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(

@@ -3,18 +3,25 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_ValueCashEnum_schema, cdm_legaldocumentation_csa_ValueSecuritiesEnum_schema
+from . import (
+    cdm_legaldocumentation_csa_ValueCashEnum_schema,
+    cdm_legaldocumentation_csa_ValueSecuritiesEnum_schema,
+)
 
 
 class LegacyResolutionValue(BaseModel):
     cash: cdm_legaldocumentation_csa_ValueCashEnum_schema.ValueCashEnum | None = Field(
         None, description="Details of how cash collateral is valued when resolving disputes."
     )
-    securities: cdm_legaldocumentation_csa_ValueSecuritiesEnum_schema.ValueSecuritiesEnum | None = Field(
-        None, description="Details of how securities collateral is valued when resolving disputes."
+    securities: cdm_legaldocumentation_csa_ValueSecuritiesEnum_schema.ValueSecuritiesEnum | None = (
+        Field(
+            None,
+            description="Details of how securities collateral is valued when resolving disputes.",
+        )
     )
     fallback: bool | None = Field(
-        None, description="A boolean flag to represent whether a fallback calculation method is applicable."
+        None,
+        description="A boolean flag to represent whether a fallback calculation method is applicable.",
     )
     additional_language: str | None = Field(
         None,

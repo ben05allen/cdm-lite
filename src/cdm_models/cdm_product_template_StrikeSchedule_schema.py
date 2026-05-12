@@ -11,8 +11,11 @@ from . import (
 
 class StrikeSchedule(BaseModel):
     price: (
-        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule | None
-    ) = Field(None, description="The initial rate. An initial rate of 5% would be represented as 0.05.")
+        cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule
+        | None
+    ) = Field(
+        None, description="The initial rate. An initial rate of 5% would be represented as 0.05."
+    )
     buyer: cdm_base_staticdata_party_PayerReceiverEnum_schema.PayerReceiverEnum | None = Field(
         None, description="The buyer of the option."
     )

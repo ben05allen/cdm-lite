@@ -11,7 +11,8 @@ from . import (
 
 class AccessConditions(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_AccessConditionsElections_schema.AccessConditionsElections] | None
+        list[cdm_legaldocumentation_csa_AccessConditionsElections_schema.AccessConditionsElections]
+        | None
     ) = Field(
         None,
         alias="partyElection",
@@ -20,7 +21,10 @@ class AccessConditions(BaseModel):
         min_length=2,
     )
     additional_termination_event: (
-        list[cdm_legaldocumentation_csa_AdditionalTerminationEvent_schema.AdditionalTerminationEvent] | None
+        list[
+            cdm_legaldocumentation_csa_AdditionalTerminationEvent_schema.AdditionalTerminationEvent
+        ]
+        | None
     ) = Field(
         None,
         alias="additionalTerminationEvent",

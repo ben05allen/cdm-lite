@@ -16,8 +16,12 @@ class CounterpartyPositionBusinessEvent(BaseModel):
         ...,
         description="The intent attribute is meant to be specified when the event qualification cannot be programmatically inferred from the event features. As a result it is only associated with those primitives that can give way to such ambiguity, the quantityChange being one of those.",
     )
-    corporate_action_intent: cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None = Field(
-        None, alias="corporateActionIntent", description="The intent of a corporate action on the position."
+    corporate_action_intent: (
+        cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None
+    ) = Field(
+        None,
+        alias="corporateActionIntent",
+        description="The intent of a corporate action on the position.",
     )
     event_date: str | None = Field(
         None,
@@ -29,11 +33,13 @@ class CounterpartyPositionBusinessEvent(BaseModel):
         alias="effectiveDate",
         description="The date on which the event contractually takes effect, when different from the event date.",
     )
-    package_information: cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None = Field(
+    package_information: (
+        cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None
+    ) = Field(
         None,
         alias="packageInformation",
         description="Specifies the package information in case the business event represents several trades executed as a package (hence this attribute is optional). The package information is only instantiated once at the business event level to preserve referential integrity, whereas individual trades make reference to it to identify that they are part of a package.",
     )
-    after: list[cdm_event_common_CounterpartyPositionState_schema.CounterpartyPositionState] | None = Field(
-        None, description="Specifies the after position state(s) created.", min_length=0
-    )
+    after: (
+        list[cdm_event_common_CounterpartyPositionState_schema.CounterpartyPositionState] | None
+    ) = Field(None, description="Specifies the after position state(s) created.", min_length=0)

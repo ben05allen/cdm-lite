@@ -7,12 +7,12 @@ from . import cdm_legaldocumentation_csa_ElectiveAmountElection_schema
 
 
 class MinimumTransferAmount(BaseModel):
-    party_election: list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None = (
-        Field(
-            None,
-            alias="partyElection",
-            description="The parties' minimum transfer amount elections.",
-            max_length=2,
-            min_length=2,
-        )
+    party_election: (
+        list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The parties' minimum transfer amount elections.",
+        max_length=2,
+        min_length=2,
     )

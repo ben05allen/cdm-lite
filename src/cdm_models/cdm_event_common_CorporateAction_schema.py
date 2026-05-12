@@ -12,9 +12,13 @@ class CorporateAction(BaseModel):
         ..., alias="corporateActionType", description="The type of corporate action taking place."
     )
     ex_date: str = Field(
-        ..., alias="exDate", description="The date on which the corporate action is known to have taken place."
+        ...,
+        alias="exDate",
+        description="The date on which the corporate action is known to have taken place.",
     )
     pay_date: str = Field(
-        ..., alias="payDate", description="The date on which resulting from the corporate action are delivered."
+        ...,
+        alias="payDate",
+        description="The date on which resulting from the corporate action are delivered.",
     )
     underlier: Underlier = Field(..., description="The underlier impacted by the corporate action.")

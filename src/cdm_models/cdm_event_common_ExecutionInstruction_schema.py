@@ -35,14 +35,18 @@ class ExecutionInstruction(BaseModel):
         max_length=2,
         min_length=2,
     )
-    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = Field(
-        None,
-        alias="ancillaryParty",
-        description="Maps any ancillary parties, e.g. parties involved in the transaction that are not one of the two principal parties.",
-        min_length=0,
+    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = (
+        Field(
+            None,
+            alias="ancillaryParty",
+            description="Maps any ancillary parties, e.g. parties involved in the transaction that are not one of the two principal parties.",
+            min_length=0,
+        )
     )
     parties: list[cdm_base_staticdata_party_Party_schema.Party] | None = Field(
-        None, description="Defines all parties to that execution, including agents and brokers.", min_length=2
+        None,
+        description="Defines all parties to that execution, including agents and brokers.",
+        min_length=2,
     )
     party_roles: list[cdm_base_staticdata_party_PartyRole_schema.PartyRole] | None = Field(
         None,
@@ -58,7 +62,9 @@ class ExecutionInstruction(BaseModel):
     trade_date: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
         ..., alias="tradeDate", description="Denotes the trade/execution date."
     )
-    trade_time: cdm_base_datetime_metafields_FieldWithMetaTimeZone_schema.FieldWithMetaTimeZone | None = Field(
+    trade_time: (
+        cdm_base_datetime_metafields_FieldWithMetaTimeZone_schema.FieldWithMetaTimeZone | None
+    ) = Field(
         None,
         alias="tradeTime",
         description="Denotes the trade time and timezone as agreed by the parties to the trade.",

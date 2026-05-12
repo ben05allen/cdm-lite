@@ -10,10 +10,12 @@ from . import (
 
 
 class LegacyValuationAgent(BaseModel):
-    party: cdm_legaldocumentation_csa_ValuationAgentPartyEnum_schema.ValuationAgentPartyEnum | None = Field(
-        None, description="The elective party."
-    )
-    valuation_agent: cdm_legaldocumentation_csa_LegacyValuationAgentEnum_schema.LegacyValuationAgentEnum | None = Field(
+    party: (
+        cdm_legaldocumentation_csa_ValuationAgentPartyEnum_schema.ValuationAgentPartyEnum | None
+    ) = Field(None, description="The elective party.")
+    valuation_agent: (
+        cdm_legaldocumentation_csa_LegacyValuationAgentEnum_schema.LegacyValuationAgentEnum | None
+    ) = Field(
         None, alias="valuationAgent", description="Specifies how the Valuation Agent is determined."
     )
     additional_language: str | None = Field(

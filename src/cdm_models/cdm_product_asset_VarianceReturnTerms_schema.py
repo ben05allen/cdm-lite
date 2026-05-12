@@ -25,28 +25,36 @@ class VarianceReturnTerms(BaseModel):
         alias="annualizationFactor",
         description="This specifies the numerator of an annualization factor. Frequently this number is equal to the number of observations of prices in a year e.g. 252.",
     )
-    dividend_applicability: cdm_observable_asset_DividendApplicability_schema.DividendApplicability | None = Field(
-        None, alias="dividendApplicability", description="The parameters which define whether dividends are applicable"
+    dividend_applicability: (
+        cdm_observable_asset_DividendApplicability_schema.DividendApplicability | None
+    ) = Field(
+        None,
+        alias="dividendApplicability",
+        description="The parameters which define whether dividends are applicable",
     )
-    equity_underlier_provisions: cdm_product_asset_EquityUnderlierProvisions_schema.EquityUnderlierProvisions | None = (
-        Field(
-            None,
-            alias="equityUnderlierProvisions",
-            description="Contains Equity Underlyer provisions regarding jurisdiction and fallbacks.",
-        )
+    equity_underlier_provisions: (
+        cdm_product_asset_EquityUnderlierProvisions_schema.EquityUnderlierProvisions | None
+    ) = Field(
+        None,
+        alias="equityUnderlierProvisions",
+        description="Contains Equity Underlyer provisions regarding jurisdiction and fallbacks.",
     )
     share_price_dividend_adjustment: bool | None = Field(
         None,
         alias="sharePriceDividendAdjustment",
         description="Indicates whether the price of shares is adjusted for dividends or not.",
     )
-    expected_n: int | None = Field(None, alias="expectedN", description="Expected number of trading days.")
+    expected_n: int | None = Field(
+        None, alias="expectedN", description="Expected number of trading days."
+    )
     initial_level: float | None = Field(
         None,
         alias="initialLevel",
         description="Contract will strike off this initial level. Providing just the initialLevel without initialLevelSource, infers that this is AgreedInitialPrice - a specified Initial Index Level.",
     )
-    initial_level_source: cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None = Field(
+    initial_level_source: (
+        cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None
+    ) = Field(
         None,
         alias="initialLevelSource",
         description="In this context, this is AgreedInitialPrice - a specified Initial Index Level.",
@@ -75,16 +83,23 @@ class VarianceReturnTerms(BaseModel):
         alias="varianceCapFloor",
         description="Contains possible barriers for variance products, both variance-based and underlier price based",
     )
-    volatility_cap_floor: cdm_product_asset_VolatilityCapFloor_schema.VolatilityCapFloor | None = Field(
-        None, alias="volatilityCapFloor", description="Contains containing volatility-based barriers"
+    volatility_cap_floor: cdm_product_asset_VolatilityCapFloor_schema.VolatilityCapFloor | None = (
+        Field(
+            None,
+            alias="volatilityCapFloor",
+            description="Contains containing volatility-based barriers",
+        )
     )
-    vega_notional_amount: cdm_base_math_NonNegativeQuantitySchedule_schema.NonNegativeQuantitySchedule | None = Field(
+    vega_notional_amount: (
+        cdm_base_math_NonNegativeQuantitySchedule_schema.NonNegativeQuantitySchedule | None
+    ) = Field(
         None,
         alias="vegaNotionalAmount",
         description="Vega Notional represents the approximate gain/loss at maturity for a 1% difference between RVol (realised vol) and KVol (strike vol). It does not necessarily represent the Vega Risk of the trade.",
     )
     exchange_traded_contract_nearest: (
-        cdm_observable_asset_metafields_ReferenceWithMetaObservable_schema.ReferenceWithMetaObservable | None
+        cdm_observable_asset_metafields_ReferenceWithMetaObservable_schema.ReferenceWithMetaObservable
+        | None
     ) = Field(
         None,
         alias="exchangeTradedContractNearest",

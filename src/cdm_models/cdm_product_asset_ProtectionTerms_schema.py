@@ -20,7 +20,9 @@ class ProtectionTerms(BaseModel):
         None,
         description="The underlying obligations of the reference entity on which you are buying or selling protection. The credit events Failure to Pay, Obligation Acceleration, Obligation Default, Restructuring, Repudiation/Moratorium are defined with respect to these obligations.",
     )
-    floating_amount_events: cdm_product_asset_FloatingAmountEvents_schema.FloatingAmountEvents | None = Field(
+    floating_amount_events: (
+        cdm_product_asset_FloatingAmountEvents_schema.FloatingAmountEvents | None
+    ) = Field(
         None,
         alias="floatingAmountEvents",
         description="This element contains the ISDA terms relating to the floating rate payment events and the implied additional fixed payments, applicable to the credit derivatives transactions on mortgage-backed securities with pay-as-you-go or physical settlement.",

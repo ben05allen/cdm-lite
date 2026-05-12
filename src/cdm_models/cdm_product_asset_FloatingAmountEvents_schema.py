@@ -30,14 +30,16 @@ class FloatingAmountEvents(BaseModel):
         alias="impliedWritedown",
         description="A floating rate payment event. Results from the fact that losses occur to the underlying instruments that do not result in reductions of the outstanding principal of the reference obligation.",
     )
-    floating_amount_provisions: cdm_product_asset_FloatingAmountProvisions_schema.FloatingAmountProvisions | None = (
-        Field(
-            None,
-            alias="floatingAmountProvisions",
-            description="Specifies the floating amount provisions associated with the floatingAmountEvents.",
-        )
+    floating_amount_provisions: (
+        cdm_product_asset_FloatingAmountProvisions_schema.FloatingAmountProvisions | None
+    ) = Field(
+        None,
+        alias="floatingAmountProvisions",
+        description="Specifies the floating amount provisions associated with the floatingAmountEvents.",
     )
-    additional_fixed_payments: cdm_product_asset_AdditionalFixedPayments_schema.AdditionalFixedPayments | None = Field(
+    additional_fixed_payments: (
+        cdm_product_asset_AdditionalFixedPayments_schema.AdditionalFixedPayments | None
+    ) = Field(
         None,
         alias="additionalFixedPayments",
         description="Specifies the events that will give rise to the payment additional fixed payments.",

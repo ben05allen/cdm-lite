@@ -40,13 +40,16 @@ class OptionalEarlyTermination(BaseModel):
         alias="calculationAgent",
         description="The ISDA Calculation Agent responsible for performing duties associated with an optional early termination.",
     )
-    cash_settlement: cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None = Field(
-        None,
-        alias="cashSettlement",
-        description="If specified, this means that cash settlement is applicable to the transaction and defines the parameters associated with the cash settlement procedure. If not specified, then physical settlement is applicable.",
+    cash_settlement: cdm_product_common_settlement_SettlementTerms_schema.SettlementTerms | None = (
+        Field(
+            None,
+            alias="cashSettlement",
+            description="If specified, this means that cash settlement is applicable to the transaction and defines the parameters associated with the cash settlement procedure. If not specified, then physical settlement is applicable.",
+        )
     )
     optional_early_termination_adjusted_dates: (
-        cdm_product_template_OptionalEarlyTerminationAdjustedDates_schema.OptionalEarlyTerminationAdjustedDates | None
+        cdm_product_template_OptionalEarlyTerminationAdjustedDates_schema.OptionalEarlyTerminationAdjustedDates
+        | None
     ) = Field(
         None,
         alias="optionalEarlyTerminationAdjustedDates",

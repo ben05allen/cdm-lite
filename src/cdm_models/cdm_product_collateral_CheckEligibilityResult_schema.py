@@ -17,7 +17,8 @@ class CheckEligibilityResult(BaseModel):
         description="a simple boolean which is set to true if the asset described in the EligibilityQuery input is eligible",
     )
     matching_eligible_criteria: (
-        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria] | None
+        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria]
+        | None
     ) = Field(
         None,
         alias="matchingEligibleCriteria",
@@ -29,8 +30,7 @@ class CheckEligibilityResult(BaseModel):
         alias="eligibilityQuery",
         description="a copy of the input query that was checked against the eligible collateral specification",
     )
-    specification: cdm_product_collateral_EligibleCollateralSpecification_schema.EligibleCollateralSpecification = (
-        Field(
-            ..., description="a copy of the input EligbilityCollateralSpecification that was checked against the query"
-        )
+    specification: cdm_product_collateral_EligibleCollateralSpecification_schema.EligibleCollateralSpecification = Field(
+        ...,
+        description="a copy of the input EligbilityCollateralSpecification that was checked against the query",
     )

@@ -13,7 +13,8 @@ class CashflowRepresentation(BaseModel):
         description="A true/false flag to indicate whether the cashflows match the parametric definition of the stream, i.e. whether the cashflows could be regenerated from the parameters without loss of information.",
     )
     payment_calculation_period: (
-        list[cdm_product_common_schedule_PaymentCalculationPeriod_schema.PaymentCalculationPeriod] | None
+        list[cdm_product_common_schedule_PaymentCalculationPeriod_schema.PaymentCalculationPeriod]
+        | None
     ) = Field(
         None,
         alias="paymentCalculationPeriod",

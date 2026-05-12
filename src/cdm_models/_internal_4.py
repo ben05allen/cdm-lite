@@ -34,76 +34,119 @@ class AnyCriteria(BaseModel):
 
 class CollateralCriteria(BaseModel):
     all_criteria: AllCriteria | None = Field(
-        None, alias="AllCriteria", description="Enables two or more Collateral Criteria to be combined using AND logic."
+        None,
+        alias="AllCriteria",
+        description="Enables two or more Collateral Criteria to be combined using AND logic.",
     )
     any_criteria: AnyCriteria | None = Field(
-        None, alias="AnyCriteria", description="Enables two or more Collateral Criteria to be combined using OR logic."
+        None,
+        alias="AnyCriteria",
+        description="Enables two or more Collateral Criteria to be combined using OR logic.",
     )
     negative_criteria: NegativeCriteria | None = Field(
         None,
         alias="NegativeCriteria",
         description="Enables a single Collateral Criteria to be excluded using NOT logic.",
     )
-    collateral_issuer_type: cdm_base_staticdata_asset_common_CollateralIssuerType_schema.CollateralIssuerType | None = (
-        Field(None, alias="CollateralIssuerType", description="Criteria is the type of entity issuing the asset.")
+    collateral_issuer_type: (
+        cdm_base_staticdata_asset_common_CollateralIssuerType_schema.CollateralIssuerType | None
+    ) = Field(
+        None,
+        alias="CollateralIssuerType",
+        description="Criteria is the type of entity issuing the asset.",
     )
     asset_type: cdm_base_staticdata_asset_common_AssetType_schema.AssetType | None = Field(
         None, alias="AssetType", description="Criteria is the asset type of the collateral."
     )
-    issuer_country_of_origin: cdm_product_collateral_IssuerCountryOfOrigin_schema.IssuerCountryOfOrigin | None = Field(
-        None, alias="IssuerCountryOfOrigin", description="Criteria is the issuing entity country of origin."
+    issuer_country_of_origin: (
+        cdm_product_collateral_IssuerCountryOfOrigin_schema.IssuerCountryOfOrigin | None
+    ) = Field(
+        None,
+        alias="IssuerCountryOfOrigin",
+        description="Criteria is the issuing entity country of origin.",
     )
-    asset_country_of_origin: cdm_product_collateral_AssetCountryOfOrigin_schema.AssetCountryOfOrigin | None = Field(
-        None, alias="AssetCountryOfOrigin", description="Criteria is the collateral asset country of origin."
+    asset_country_of_origin: (
+        cdm_product_collateral_AssetCountryOfOrigin_schema.AssetCountryOfOrigin | None
+    ) = Field(
+        None,
+        alias="AssetCountryOfOrigin",
+        description="Criteria is the collateral asset country of origin.",
     )
-    currency_code_enum: cdm_base_staticdata_asset_common_CurrencyCodeEnum_schema.CurrencyCodeEnum | None = Field(
-        None, alias="CurrencyCodeEnum", description="Criteria is the denominated currency of the collateral."
+    currency_code_enum: (
+        cdm_base_staticdata_asset_common_CurrencyCodeEnum_schema.CurrencyCodeEnum | None
+    ) = Field(
+        None,
+        alias="CurrencyCodeEnum",
+        description="Criteria is the denominated currency of the collateral.",
     )
     issuer_name: cdm_product_collateral_IssuerName_schema.IssuerName | None = Field(
         None, alias="IssuerName", description="Criteria is a specific named issuer entity."
     )
-    issuer_agency_rating: cdm_product_collateral_IssuerAgencyRating_schema.IssuerAgencyRating | None = Field(
-        None, alias="IssuerAgencyRating", description="Criteria is the agency rating(s) of the issuer."
+    issuer_agency_rating: (
+        cdm_product_collateral_IssuerAgencyRating_schema.IssuerAgencyRating | None
+    ) = Field(
+        None,
+        alias="IssuerAgencyRating",
+        description="Criteria is the agency rating(s) of the issuer.",
     )
-    sovereign_agency_rating: cdm_product_collateral_SovereignAgencyRating_schema.SovereignAgencyRating | None = Field(
+    sovereign_agency_rating: (
+        cdm_product_collateral_SovereignAgencyRating_schema.SovereignAgencyRating | None
+    ) = Field(
         None,
         alias="SovereignAgencyRating",
         description="Criteria is the agency rating(s) of the country of the issuer.",
     )
-    asset_agency_rating: cdm_product_collateral_AssetAgencyRating_schema.AssetAgencyRating | None = Field(
-        None, alias="AssetAgencyRating", description="Criteria is the agency rating(s) of the collateral asset."
+    asset_agency_rating: (
+        cdm_product_collateral_AssetAgencyRating_schema.AssetAgencyRating | None
+    ) = Field(
+        None,
+        alias="AssetAgencyRating",
+        description="Criteria is the agency rating(s) of the collateral asset.",
     )
     asset_maturity: cdm_product_collateral_AssetMaturity_schema.AssetMaturity | None = Field(
-        None, alias="AssetMaturity", description="Criteria is the maturity characteristics of the collateral asset."
+        None,
+        alias="AssetMaturity",
+        description="Criteria is the maturity characteristics of the collateral asset.",
     )
     specific_asset: cdm_product_collateral_SpecificAsset_schema.SpecificAsset | None = Field(
         None, alias="SpecificAsset", description="Criteria is a specifically identified asset"
     )
-    collateral_taxonomy: cdm_base_staticdata_asset_common_CollateralTaxonomy_schema.CollateralTaxonomy | None = Field(
-        None, alias="CollateralTaxonomy", description="Criteria is the taxonomy characteristics of an collateral."
+    collateral_taxonomy: (
+        cdm_base_staticdata_asset_common_CollateralTaxonomy_schema.CollateralTaxonomy | None
+    ) = Field(
+        None,
+        alias="CollateralTaxonomy",
+        description="Criteria is the taxonomy characteristics of an collateral.",
     )
     listing_exchange: cdm_product_collateral_ListingExchange_schema.ListingExchange | None = Field(
-        None, alias="ListingExchange", description="Criteria is that the collateral is listed on a specific exchange."
+        None,
+        alias="ListingExchange",
+        description="Criteria is that the collateral is listed on a specific exchange.",
     )
     listing_sector: cdm_product_collateral_ListingSector_schema.ListingSector | None = Field(
-        None, alias="ListingSector", description="Criteria is the industry sector of the collateral asset."
+        None,
+        alias="ListingSector",
+        description="Criteria is the industry sector of the collateral asset.",
     )
     index: cdm_observable_asset_Index_schema.Index | None = Field(
-        None, alias="Index", description="Criteria is that the collateral is a constituent of a specific index."
+        None,
+        alias="Index",
+        description="Criteria is that the collateral is a constituent of a specific index.",
     )
     counterparty_own_issue_permitted: (
-        cdm_product_collateral_CounterpartyOwnIssuePermitted_schema.CounterpartyOwnIssuePermitted | None
+        cdm_product_collateral_CounterpartyOwnIssuePermitted_schema.CounterpartyOwnIssuePermitted
+        | None
     ) = Field(
         None,
         alias="CounterpartyOwnIssuePermitted",
         description="Criteria includes collateral issued by the counterparty.",
     )
-    domestic_currency_issued: cdm_product_collateral_DomesticCurrencyIssued_schema.DomesticCurrencyIssued | None = (
-        Field(
-            None,
-            alias="DomesticCurrencyIssued",
-            description="Criteria is that collateral must be denominated in the domestic currency of the issuer.",
-        )
+    domestic_currency_issued: (
+        cdm_product_collateral_DomesticCurrencyIssued_schema.DomesticCurrencyIssued | None
+    ) = Field(
+        None,
+        alias="DomesticCurrencyIssued",
+        description="Criteria is that collateral must be denominated in the domestic currency of the issuer.",
     )
 
 

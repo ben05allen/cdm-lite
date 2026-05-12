@@ -14,10 +14,15 @@ from . import (
 class Illiquidity(BaseModel):
     illiquidity_is_applicable: bool = Field(..., alias="illiquidityIsApplicable")
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")
-    minimum_amount: cdm_base_math_Quantity_schema.Quantity | None = Field(None, alias="minimumAmount")
-    fallback_reference_price: cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None = Field(
+    minimum_amount: cdm_base_math_Quantity_schema.Quantity | None = Field(
+        None, alias="minimumAmount"
+    )
+    fallback_reference_price: (
+        cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None
+    ) = Field(
         None,
         alias="fallbackReferencePrice",
         description="The method, prioritised by the order it is listed in this element, to get a replacement rate for the disrupted settlement rate option.",

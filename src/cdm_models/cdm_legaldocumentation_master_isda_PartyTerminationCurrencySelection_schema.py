@@ -7,5 +7,9 @@ from . import cdm_base_staticdata_party_Party_schema
 
 
 class PartyTerminationCurrencySelection(BaseModel):
-    party: cdm_base_staticdata_party_Party_schema.Party = Field(..., description="The elective party.")
-    stated_party_currency: str = Field(..., alias="statedPartyCurrency", description="Specifies termination Currency.")
+    party: cdm_base_staticdata_party_Party_schema.Party = Field(
+        ..., description="The elective party."
+    )
+    stated_party_currency: str = Field(
+        ..., alias="statedPartyCurrency", description="Specifies termination Currency."
+    )

@@ -11,9 +11,9 @@ from . import (
 
 
 class EquityAdditionalTerms(BaseModel):
-    extraordinary_events: cdm_legaldocumentation_transaction_ExtraordinaryEvents_schema.ExtraordinaryEvents | None = (
-        Field(None, alias="extraordinaryEvents")
-    )
+    extraordinary_events: (
+        cdm_legaldocumentation_transaction_ExtraordinaryEvents_schema.ExtraordinaryEvents | None
+    ) = Field(None, alias="extraordinaryEvents")
     determination_terms: (
         list[
             cdm_legaldocumentation_transaction_additionalterms_DeterminationRolesAndTerms_schema.DeterminationRolesAndTerms
@@ -21,5 +21,6 @@ class EquityAdditionalTerms(BaseModel):
         | None
     ) = Field(None, alias="determinationTerms", min_length=1)
     substitution_provision: (
-        cdm_legaldocumentation_transaction_UnderlierSubstitutionProvision_schema.UnderlierSubstitutionProvision | None
+        cdm_legaldocumentation_transaction_UnderlierSubstitutionProvision_schema.UnderlierSubstitutionProvision
+        | None
     ) = Field(None, alias="substitutionProvision")

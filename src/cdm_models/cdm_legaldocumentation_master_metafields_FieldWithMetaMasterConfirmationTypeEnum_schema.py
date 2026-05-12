@@ -10,5 +10,8 @@ from . import (
 
 
 class FieldWithMetaMasterConfirmationTypeEnum(BaseModel):
-    value: cdm_legaldocumentation_master_MasterConfirmationTypeEnum_schema.MasterConfirmationTypeEnum | None = None
+    value: (
+        cdm_legaldocumentation_master_MasterConfirmationTypeEnum_schema.MasterConfirmationTypeEnum
+        | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

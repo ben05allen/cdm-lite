@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_CalculationDateLocationElection_schema
 
 class CalculationDateLocation(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_CalculationDateLocationElection_schema.CalculationDateLocationElection] | None
+        list[
+            cdm_legaldocumentation_csa_CalculationDateLocationElection_schema.CalculationDateLocationElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

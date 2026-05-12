@@ -11,17 +11,23 @@ from . import (
 
 
 class DividendCurrency(BaseModel):
-    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="The currency in which the dividend is denominated. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
+    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="The currency in which the dividend is denominated. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
+        )
     )
-    determination_method: cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None = Field(
+    determination_method: (
+        cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None
+    ) = Field(
         None,
         alias="determinationMethod",
         description="Specifies the method according to which the dividend is determined, e.g. the dividend currency.",
     )
-    currency_reference: com_rosetta_model_metafields_ReferenceWithMetaString_schema.ReferenceWithMetaString | None = (
-        Field(
-            None, alias="currencyReference", description="Reference to a currency specified elsewhere in the document"
-        )
+    currency_reference: (
+        com_rosetta_model_metafields_ReferenceWithMetaString_schema.ReferenceWithMetaString | None
+    ) = Field(
+        None,
+        alias="currencyReference",
+        description="Reference to a currency specified elsewhere in the document",
     )

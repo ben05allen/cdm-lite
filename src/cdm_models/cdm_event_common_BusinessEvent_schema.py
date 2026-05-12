@@ -17,9 +17,9 @@ class BusinessEvent(BaseModel):
         None,
         description="The intent attribute is meant to be specified when the event qualification cannot be programmatically inferred from the event features. As a result it is only associated with those primitives that can give way to such ambiguity, the quantityChange being one of those. An example of such is a reduction in the trade notional, which could be interpreted as either a trade correction (unless a maximum period of time post-event is specified as part of the qualification), a partial termination or a portfolio rebalancing in the case of an equity swap. On the other hand, an event such as the exercise is not expected to have an associated intent as there should not be ambiguity.",
     )
-    corporate_action_intent: cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None = Field(
-        None, alias="corporateActionIntent"
-    )
+    corporate_action_intent: (
+        cdm_event_common_CorporateActionTypeEnum_schema.CorporateActionTypeEnum | None
+    ) = Field(None, alias="corporateActionIntent")
     event_date: str | None = Field(
         None,
         alias="eventDate",
@@ -30,7 +30,9 @@ class BusinessEvent(BaseModel):
         alias="effectiveDate",
         description="The date on which the event contractually takes effect, when different from the event date.",
     )
-    package_information: cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None = Field(
+    package_information: (
+        cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None
+    ) = Field(
         None,
         alias="packageInformation",
         description="Specifies the package information in case the business event represents several trades executed as a package (hence this attribute is optional). The package information is only instantiated once at the business event level to preserve referential integrity, whereas individual trades make reference to it to identify that they are part of a package.",

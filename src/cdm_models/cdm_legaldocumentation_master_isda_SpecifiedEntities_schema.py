@@ -15,7 +15,9 @@ class SpecifiedEntities(BaseModel):
         alias="specifiedEntityClause",
         description="The Event of Default or Termination event for which Specified Entities terms are being defined.",
     )
-    specified_entity: list[cdm_legaldocumentation_master_isda_SpecifiedEntity_schema.SpecifiedEntity] | None = Field(
+    specified_entity: (
+        list[cdm_legaldocumentation_master_isda_SpecifiedEntity_schema.SpecifiedEntity] | None
+    ) = Field(
         None,
         alias="specifiedEntity",
         description="The party specific election of Specified Entities for the Event of Default or Termination Event specified.",

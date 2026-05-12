@@ -10,5 +10,8 @@ from . import (
 
 
 class FieldWithMetaContractualDefinitionsEnum(BaseModel):
-    value: cdm_legaldocumentation_common_ContractualDefinitionsEnum_schema.ContractualDefinitionsEnum | None = None
+    value: (
+        cdm_legaldocumentation_common_ContractualDefinitionsEnum_schema.ContractualDefinitionsEnum
+        | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

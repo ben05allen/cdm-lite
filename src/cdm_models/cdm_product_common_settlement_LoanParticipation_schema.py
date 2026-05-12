@@ -6,7 +6,9 @@ from pydantic import BaseModel, Field
 
 
 class LoanParticipation(BaseModel):
-    applicable: bool | None = Field(None, description="Indicates whether the provision is applicable.")
+    applicable: bool | None = Field(
+        None, description="Indicates whether the provision is applicable."
+    )
     partial_cash_settlement: bool | None = Field(
         None,
         alias="partialCashSettlement",

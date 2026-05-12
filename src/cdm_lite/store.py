@@ -1,0 +1,201 @@
+import json
+from dataclasses import asdict, dataclass, field
+from datetime import datetime, timezone
+from pathlib import Path
+
+from platformdirs import user_cache_dir
+
+from cdm_lite.registry import CdmVersion
+
+# ── Cache root ────────────────────────────────────────────────────────────────
+
+CACHE_DIR = Path(user_cache_dir("cdm-lite"))
+CONFIG_PATH = CACHE_DIR / "config.json"
+
+
+# ── Data classes ──────────────────────────────────────────────────────────────
+
+
+@dataclass
+class VersionStatus:
+    version: str
+    downloaded: bool = False
+    cleaned: bool = False
+    generated: bool = False
+    downloaded_at: str | None = None
+    cleaned_at: str | None = None
+    generated_at: str | None = None
+    cdm_lite_version: str | None = None
+
+    def to_json(self) -> str:
+        return json.dumps(asdict(self), indent=2)
+
+    @classmethod
+    def from_json(cls, text: str) -> "VersionStatus":
+        return cls(**json.loads(text))
+
+
+@dataclass
+class Config:
+    current_version: str | None = None
+    versions: list[str] = field(default_factory=list)
+
+    def to_json(self) -> str:
+        return json.dumps(asdict(self), indent=2)
+
+    @classmethod
+    def from_json(cls, text: str) -> "Config":
+        return cls(**json.loads(text))
+
+
+# ── Store ─────────────────────────────────────────────────────────────────────
+
+
+class CdmStore:
+    """
+    Manages the local CDM cache.
+
+    Directory layout:
+        <cache>/
+        ├── config.json
+        └── versions/
+            └── 6.19.0/
+                ├── status.json
+                ├── schema-raw/
+                ├── schema-clean/
+                └── models/
+    """
+
+    def __init__(self, cache_dir: Path = CACHE_DIR):
+        self.cache_dir = cache_dir
+        self.config_path = cache_dir / "config.json"
+
+    # ── Internal helpers ──────────────────────────────────────────────────────
+
+    def _version_dir(self, version: CdmVersion) -> Path:
+        return self.cache_dir / "versions" / version.version
+
+    def _status_path(self, version: CdmVersion) -> Path:
+        return self._version_dir(version) / "status.json"
+
+    @staticmethod
+    def _now() -> str:
+        return datetime.now(timezone.utc).isoformat()
+
+    # ── Initialisation ────────────────────────────────────────────────────────
+
+    def init(self) -> None:
+        """Create the cache root directory if it doesn't exist."""
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+    def init_version(self, version: CdmVersion) -> None:
+        """Create the directory structure for a specific version."""
+        base = self._version_dir(version)
+        for subdir in ("schema-raw", "schema-clean", "models"):
+            (base / subdir).mkdir(parents=True, exist_ok=True)
+
+        # Write a fresh status.json if one doesn't exist yet
+        status_path = self._status_path(version)
+        if not status_path.exists():
+            status = VersionStatus(version=version.version)
+            status_path.write_text(status.to_json())
+
+    # ── Path resolution ───────────────────────────────────────────────────────
+
+    def schema_raw_dir(self, version: CdmVersion) -> Path:
+        return self._version_dir(version) / "schema-raw"
+
+    def schema_clean_dir(self, version: CdmVersion) -> Path:
+        return self._version_dir(version) / "schema-clean"
+
+    def models_dir(self, version: CdmVersion) -> Path:
+        return self._version_dir(version) / "models"
+
+    # ── Status reads ──────────────────────────────────────────────────────────
+
+    def status(self, version: CdmVersion) -> VersionStatus:
+        """Read the status for a version, raising if not initialised."""
+        path = self._status_path(version)
+        if not path.exists():
+            raise FileNotFoundError(
+                f"Version {version} not found in cache. Run `cdm-lite init --version {version}` first."
+            )
+        return VersionStatus.from_json(path.read_text())
+
+    def is_downloaded(self, version: CdmVersion) -> bool:
+        try:
+            return self.status(version).downloaded
+        except FileNotFoundError:
+            return False
+
+    def is_cleaned(self, version: CdmVersion) -> bool:
+        try:
+            return self.status(version).cleaned
+        except FileNotFoundError:
+            return False
+
+    def is_generated(self, version: CdmVersion) -> bool:
+        try:
+            return self.status(version).generated
+        except FileNotFoundError:
+            return False
+
+    # ── Status writes ─────────────────────────────────────────────────────────
+
+    def _update_status(self, version: CdmVersion, **kwargs) -> None:
+        """Read-modify-write the status file."""
+        path = self._status_path(version)
+        status = VersionStatus.from_json(path.read_text())
+        for key, value in kwargs.items():
+            setattr(status, key, value)
+        path.write_text(status.to_json())
+
+    def mark_downloaded(self, version: CdmVersion) -> None:
+        self._update_status(
+            version,
+            downloaded=True,
+            downloaded_at=self._now(),
+        )
+
+    def mark_cleaned(self, version: CdmVersion) -> None:
+        self._update_status(
+            version,
+            cleaned=True,
+            cleaned_at=self._now(),
+        )
+
+    def mark_generated(self, version: CdmVersion, cdm_lite_version: str) -> None:
+        self._update_status(
+            version,
+            generated=True,
+            generated_at=self._now(),
+            cdm_lite_version=cdm_lite_version,
+        )
+
+    # ── Config ────────────────────────────────────────────────────────────────
+
+    def load_config(self) -> Config:
+        if not self.config_path.exists():
+            return Config()
+        return Config.from_json(self.config_path.read_text())
+
+    def save_config(self, config: Config) -> None:
+        self.config_path.write_text(config.to_json())
+
+    def set_current_version(self, version: CdmVersion) -> None:
+        config = self.load_config()
+        config.current_version = version.version
+        if version.version not in config.versions:
+            config.versions.append(version.version)
+        self.save_config(config)
+
+    def current_version(self) -> CdmVersion | None:
+        config = self.load_config()
+        if config.current_version is None:
+            return None
+        return CdmVersion(config.current_version)
+
+    def cached_versions(self) -> list[CdmVersion]:
+        """Return all versions that have been initialised in the cache."""
+        config = self.load_config()
+        return [CdmVersion(v) for v in config.versions]

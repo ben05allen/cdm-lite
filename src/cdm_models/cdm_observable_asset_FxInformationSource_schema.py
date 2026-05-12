@@ -19,13 +19,17 @@ class FxInformationSource(BaseModel):
         alias="sourceProvider",
         description="An information source for obtaining a market data point. For example Bloomberg, Reuters, Telerate, etc.",
     )
-    source_page: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    source_page: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="sourcePage",
         description="A specific page for the source for obtaining a market data point. In FpML, this is specified as a scheme, rateSourcePageScheme, for which no coding Scheme or URI is specified.",
     )
     source_page_heading: str | None = Field(
-        None, alias="sourcePageHeading", description="The heading for the source on a given source page."
+        None,
+        alias="sourcePageHeading",
+        description="The heading for the source on a given source page.",
     )
     fixing_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
         None,

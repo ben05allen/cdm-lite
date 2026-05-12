@@ -14,24 +14,34 @@ from . import (
 
 class ReturnTerms(BaseModel):
     price_return_terms: cdm_product_asset_PriceReturnTerms_schema.PriceReturnTerms | None = Field(
-        None, alias="priceReturnTerms", description="Return terms based upon the underlier's observed price."
+        None,
+        alias="priceReturnTerms",
+        description="Return terms based upon the underlier's observed price.",
     )
-    dividend_return_terms: cdm_product_asset_DividendReturnTerms_schema.DividendReturnTerms | None = Field(
+    dividend_return_terms: (
+        cdm_product_asset_DividendReturnTerms_schema.DividendReturnTerms | None
+    ) = Field(
         None,
         alias="dividendReturnTerms",
         description="Return terms based upon dividend payments associated to the underlier.",
     )
-    variance_return_terms: cdm_product_asset_VarianceReturnTerms_schema.VarianceReturnTerms | None = Field(
+    variance_return_terms: (
+        cdm_product_asset_VarianceReturnTerms_schema.VarianceReturnTerms | None
+    ) = Field(
         None,
         alias="varianceReturnTerms",
         description="Return terms based upon the observed variance of the underlier's price.",
     )
-    volatility_return_terms: cdm_product_asset_VolatilityReturnTerms_schema.VolatilityReturnTerms | None = Field(
+    volatility_return_terms: (
+        cdm_product_asset_VolatilityReturnTerms_schema.VolatilityReturnTerms | None
+    ) = Field(
         None,
         alias="volatilityReturnTerms",
         description="Return terms based upon the observed volatility of the underlier's price.",
     )
-    correlation_return_terms: cdm_product_asset_CorrelationReturnTerms_schema.CorrelationReturnTerms | None = Field(
+    correlation_return_terms: (
+        cdm_product_asset_CorrelationReturnTerms_schema.CorrelationReturnTerms | None
+    ) = Field(
         None,
         alias="correlationReturnTerms",
         description="Return terms based upon the observed correlation between the components of the underlying basket.",

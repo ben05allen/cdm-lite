@@ -10,5 +10,7 @@ from . import (
 
 
 class FieldWithMetaFloatingRateIndexEnum(BaseModel):
-    value: cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None = None
+    value: (
+        cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

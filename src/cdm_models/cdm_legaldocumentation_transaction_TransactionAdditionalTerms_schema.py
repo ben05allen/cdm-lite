@@ -14,7 +14,8 @@ class TransactionAdditionalTerms(BaseModel):
         cdm_legaldocumentation_transaction_EquityAdditionalTerms_schema.EquityAdditionalTerms | None
     ) = Field(None, alias="equityAdditionalTerms")
     foreign_exchange_additional_terms: (
-        cdm_legaldocumentation_transaction_additionalterms_FxAdditionalTerms_schema.FxAdditionalTerms | None
+        cdm_legaldocumentation_transaction_additionalterms_FxAdditionalTerms_schema.FxAdditionalTerms
+        | None
     ) = Field(None, alias="foreignExchangeAdditionalTerms")
     commodities_additional_terms: str | None = Field(None, alias="commoditiesAdditionalTerms")
     credit_additional_terms: str | None = Field(None, alias="creditAdditionalTerms")

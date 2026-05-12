@@ -24,14 +24,16 @@ class EarlyTerminationProvision(BaseModel):
         alias="mandatoryEarlyTerminationDateTenor",
         description="Period after trade date of the mandatory early termination date.",
     )
-    optional_early_termination: cdm_product_template_OptionalEarlyTermination_schema.OptionalEarlyTermination | None = (
-        Field(
-            None,
-            alias="optionalEarlyTermination",
-            description="An option for either or both parties to terminate the swap at fair value.",
-        )
+    optional_early_termination: (
+        cdm_product_template_OptionalEarlyTermination_schema.OptionalEarlyTermination | None
+    ) = Field(
+        None,
+        alias="optionalEarlyTermination",
+        description="An option for either or both parties to terminate the swap at fair value.",
     )
-    optional_early_termination_parameters: cdm_product_template_ExercisePeriod_schema.ExercisePeriod | None = Field(
+    optional_early_termination_parameters: (
+        cdm_product_template_ExercisePeriod_schema.ExercisePeriod | None
+    ) = Field(
         None,
         alias="optionalEarlyTerminationParameters",
         description="Definition of the first early termination date and the frequency of the termination dates subsequent to that. American exercise is defined by having a frequency of one day.",

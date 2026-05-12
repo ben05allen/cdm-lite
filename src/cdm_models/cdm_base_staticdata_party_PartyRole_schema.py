@@ -11,11 +11,16 @@ from . import (
 
 class PartyRole(BaseModel):
     party_reference: cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty = Field(
-        ..., alias="partyReference", description="A reference to the party to which the role refers to."
+        ...,
+        alias="partyReference",
+        description="A reference to the party to which the role refers to.",
     )
-    role: cdm_base_staticdata_party_PartyRoleEnum_schema.PartyRoleEnum = Field(..., description="The party role.")
+    role: cdm_base_staticdata_party_PartyRoleEnum_schema.PartyRoleEnum = Field(
+        ..., description="The party role."
+    )
     ownership_party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="ownershipPartyReference",

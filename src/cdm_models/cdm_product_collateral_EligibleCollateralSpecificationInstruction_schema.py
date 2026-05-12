@@ -8,6 +8,7 @@ from . import cdm_product_collateral_EligibleCollateralCriteria_schema
 
 class EligibleCollateralSpecificationInstruction(BaseModel):
     common: cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria
-    variable: list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria] | None = Field(
-        None, min_length=1
-    )
+    variable: (
+        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria]
+        | None
+    ) = Field(None, min_length=1)

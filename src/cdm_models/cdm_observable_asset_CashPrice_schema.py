@@ -14,10 +14,12 @@ class CashPrice(BaseModel):
     cash_price_type: cdm_observable_asset_CashPriceTypeEnum_schema.CashPriceTypeEnum = Field(
         ..., alias="cashPriceType", description="Specifies the type of Cash Price."
     )
-    premium_expression: cdm_observable_asset_PremiumExpression_schema.PremiumExpression | None = Field(
-        None,
-        alias="premiumExpression",
-        description="Specifies a premium when expressed in a way other than an amount, and any required forward starting price definition.",
+    premium_expression: cdm_observable_asset_PremiumExpression_schema.PremiumExpression | None = (
+        Field(
+            None,
+            alias="premiumExpression",
+            description="Specifies a premium when expressed in a way other than an amount, and any required forward starting price definition.",
+        )
     )
     fee_type: cdm_observable_asset_FeeTypeEnum_schema.FeeTypeEnum | None = Field(
         None, alias="feeType", description="Specifies the event type associated with a fee."

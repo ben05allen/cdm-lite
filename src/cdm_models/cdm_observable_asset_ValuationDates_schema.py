@@ -7,12 +7,22 @@ from . import cdm_observable_asset_PerformanceValuationDates_schema
 
 
 class ValuationDates(BaseModel):
-    initial_valuation_date: cdm_observable_asset_PerformanceValuationDates_schema.PerformanceValuationDates | None = (
-        Field(None, alias="initialValuationDate", description="Specifies the initial valuation dates of the underlyer.")
+    initial_valuation_date: (
+        cdm_observable_asset_PerformanceValuationDates_schema.PerformanceValuationDates | None
+    ) = Field(
+        None,
+        alias="initialValuationDate",
+        description="Specifies the initial valuation dates of the underlyer.",
     )
-    interim_valuation_date: cdm_observable_asset_PerformanceValuationDates_schema.PerformanceValuationDates | None = (
-        Field(None, alias="interimValuationDate", description="Specifies the interim valuation dates of the underlyer.")
+    interim_valuation_date: (
+        cdm_observable_asset_PerformanceValuationDates_schema.PerformanceValuationDates | None
+    ) = Field(
+        None,
+        alias="interimValuationDate",
+        description="Specifies the interim valuation dates of the underlyer.",
     )
     final_valuation_date: cdm_observable_asset_PerformanceValuationDates_schema.PerformanceValuationDates = Field(
-        ..., alias="finalValuationDate", description="Specifies the final valuation dates of the underlyer."
+        ...,
+        alias="finalValuationDate",
+        description="Specifies the final valuation dates of the underlyer.",
     )

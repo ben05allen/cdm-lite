@@ -16,10 +16,12 @@ class AvailableInventory(BaseModel):
     available_inventory_type: cdm_event_position_AvailableInventoryTypeEnum_schema.AvailableInventoryTypeEnum = Field(
         ..., alias="availableInventoryType", description="Defines the purpose of this inventory."
     )
-    message_information: cdm_event_workflow_MessageInformation_schema.MessageInformation | None = Field(
-        None,
-        alias="messageInformation",
-        description="Allows details related to the availability messaging use case to be defined",
+    message_information: cdm_event_workflow_MessageInformation_schema.MessageInformation | None = (
+        Field(
+            None,
+            alias="messageInformation",
+            description="Allows details related to the availability messaging use case to be defined",
+        )
     )
     party: list[cdm_base_staticdata_party_Party_schema.Party] | None = Field(
         None,

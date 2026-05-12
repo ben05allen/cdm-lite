@@ -24,7 +24,9 @@ class FloatingRateIndexFixingOffset(BaseModel):
         alias="fixingOffsetDefinition",
         description="Legal text that underlies the Fixing Offset. ISDA Fixing Offset Definition. (e.g. One day that is either a Sydney Business Day or a Melbourne Business Day following the Reset Date)",
     )
-    fixing_offset_reason: str | None = Field(None, alias="fixingOffsetReason", description="Fixing Offset Reason")
+    fixing_offset_reason: str | None = Field(
+        None, alias="fixingOffsetReason", description="Fixing Offset Reason"
+    )
     designated_maturity: str | None = Field(
         None,
         alias="designatedMaturity",

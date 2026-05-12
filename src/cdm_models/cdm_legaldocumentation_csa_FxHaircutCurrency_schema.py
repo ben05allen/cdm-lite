@@ -12,7 +12,9 @@ class FxHaircutCurrency(BaseModel):
         alias="isTerminationCurrency",
         description="The reference currency for the purpose of specifying the FX Haircut relating to a posting obligation is the Termination Currency when the Boolean value is set to True.",
     )
-    fx_designated_currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    fx_designated_currency: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="fxDesignatedCurrency",
         description="When specified, the reference currency for the purpose of specifying the FX Haircut relating to a posting obligation. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",

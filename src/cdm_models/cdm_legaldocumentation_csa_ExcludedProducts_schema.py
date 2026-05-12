@@ -3,17 +3,25 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_BusinessCenterEnum_schema, cdm_legaldocumentation_csa_ExposureScopeProductEnum_schema
+from . import (
+    cdm_base_datetime_BusinessCenterEnum_schema,
+    cdm_legaldocumentation_csa_ExposureScopeProductEnum_schema,
+)
 
 
 class ExcludedProducts(BaseModel):
-    product: list[cdm_legaldocumentation_csa_ExposureScopeProductEnum_schema.ExposureScopeProductEnum] | None = Field(
+    product: (
+        list[cdm_legaldocumentation_csa_ExposureScopeProductEnum_schema.ExposureScopeProductEnum]
+        | None
+    ) = Field(
         None,
         description="Description of the relevant derivative transactions excluded from the calculation of exposure.",
         min_length=0,
     )
     branch: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = Field(
-        None, description="Description of the specific branch entered into by the relevant party.", min_length=0
+        None,
+        description="Description of the specific branch entered into by the relevant party.",
+        min_length=0,
     )
     excluded: bool = Field(
         ...,

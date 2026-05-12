@@ -16,19 +16,25 @@ class DeterminationRolesAndTerms(BaseModel):
         alias="determinationRole",
         description="Defines the enumerated values to specify the determination roles to the transaction. Such roles mostly address any determination that would be required when some Extraordinary Events would happen, for instance qualifying the effectiveness of such event, or when a calculation is required, etc. else any other kind of determination as need be. Yet for clarity, other kinds of determination may be covered by such roles, which are not necessarily restricted to the scope of Extarordinary Events, depending on particular product specifications e.g. for instance when Calculation Agent is mentioned as the Price Determination Method enumarated value, etc.",
     )
-    who_to_determine: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    who_to_determine: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         alias="whoToDetermine",
         description="Designates which Counterparty to the transaction is granted with the particular role ; cardinality of this object is 2, in case parties are both having the same role e.g. jointly CalculationAgent, jointly Determining Party, etc. ",
         max_length=2,
         min_length=1,
     )
-    disputing_party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
+    disputing_party: (
+        cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None
+    ) = Field(
         None,
         alias="disputingParty",
         description="Where the party who is not granted with the determination role at least has a right to dispute the determination given by the counterparty with such role. As an example, a given PartyA is the unique Counterparty with the Role of CalculationAgent, yet Party B could be Disputing Party in regard of such Role.",
     )
-    fallback_language_bespoke_terms: cdm_legaldocumentation_transaction_Clause_schema.Clause | None = Field(
+    fallback_language_bespoke_terms: (
+        cdm_legaldocumentation_transaction_Clause_schema.Clause | None
+    ) = Field(
         None,
         alias="fallbackLanguageBespokeTerms",
         description="Where parties may optionnaly describe any extra bespoke agreements about fallback procedure attached to a particular determination role. This fallback bespoke paragraph would typically address topics such as : delay for the Disputing Party to notify a disagreement when receiving a determination from the Calculation Agent ; Independent Third Party Dealers election terms e.g. number of Dealers to be jointly elected by the counterparties ; delay for joint election of Dealers by the counterparties ; further fallback election procedure in case of disagreement between parties to jointly elect all the Dealers e.g. typically each party designates 1 Dealer, each a Party Representant, which thus result in 2 Dealers in charge of joint election of 3 other Dealers who will be the final ones to provide the response, each a Final Dealer ; delay for joint election of the Final Dealers by the Party Representants ; fees repartition e.g. typically cost and fees incurred by the election of Dealers are equally shared by the parties ; etc.",

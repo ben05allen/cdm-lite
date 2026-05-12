@@ -39,16 +39,20 @@ class PriceSchedule(BaseModel):
         alias="priceType",
         description="Specifies the price type as an enumeration: interest rate, exchange rate, asset price etc. This attribute is mandatory so that prices can always be clasiffied according to their type. The price type implies some constraints on the price's units.",
     )
-    price_expression: cdm_observable_asset_PriceExpressionEnum_schema.PriceExpressionEnum | None = Field(
-        None,
-        alias="priceExpression",
-        description="(Optionally) Specifies whether the price is expressed in absolute or percentage terms.",
+    price_expression: cdm_observable_asset_PriceExpressionEnum_schema.PriceExpressionEnum | None = (
+        Field(
+            None,
+            alias="priceExpression",
+            description="(Optionally) Specifies whether the price is expressed in absolute or percentage terms.",
+        )
     )
     composite: cdm_observable_asset_PriceComposite_schema.PriceComposite | None = Field(
         None,
         description="(Optionally) Specifies the underlying price components if the price can be expressed as a composite: e.g. dirty price = clean price + accrued.",
     )
-    arithmetic_operator: cdm_base_math_ArithmeticOperationEnum_schema.ArithmeticOperationEnum | None = Field(
+    arithmetic_operator: (
+        cdm_base_math_ArithmeticOperationEnum_schema.ArithmeticOperationEnum | None
+    ) = Field(
         None,
         alias="arithmeticOperator",
         description="(Optionally) When the price is to be understood as an operator to apply to an observable, i.e. a spread, multiplier or min/max.",

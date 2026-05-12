@@ -13,23 +13,29 @@ from . import (
 
 
 class ExerciseFeeSchedule(BaseModel):
-    payer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Specifies the counterparty responsible for making the payments defined by this structure.  The party is one of the two principal parties to the transaction.",
+    payer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Specifies the counterparty responsible for making the payments defined by this structure.  The party is one of the two principal parties to the transaction.",
+        )
     )
-    receiver: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Specifies the party that receives the payments corresponding to this structure.  The party is one of the two counterparties to the transaction.",
+    receiver: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Specifies the party that receives the payments corresponding to this structure.  The party is one of the two counterparties to the transaction.",
+        )
     )
     notional_reference: cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney = Field(
         ...,
         alias="notionalReference",
         description="A pointer style reference to the associated notional schedule defined elsewhere in the document.",
     )
-    fee_amount_schedule: cdm_product_common_schedule_AmountSchedule_schema.AmountSchedule | None = Field(
-        None,
-        alias="feeAmountSchedule",
-        description="The exercise fee amount schedule. The fees are expressed as currency amounts. The currency of the fee is assumed to be that of the notional schedule referenced.",
+    fee_amount_schedule: cdm_product_common_schedule_AmountSchedule_schema.AmountSchedule | None = (
+        Field(
+            None,
+            alias="feeAmountSchedule",
+            description="The exercise fee amount schedule. The fees are expressed as currency amounts. The currency of the fee is assumed to be that of the notional schedule referenced.",
+        )
     )
     fee_rate_schedule: cdm_base_math_Schedule_schema.Schedule | None = Field(
         None,

@@ -7,8 +7,8 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 
 class SinglePostingParty(BaseModel):
-    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None, description="The party acting as the Single Posting Party."
+    party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(None, description="The party acting as the Single Posting Party.")
     )
     other: str | None = Field(
         None,

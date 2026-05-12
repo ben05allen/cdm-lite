@@ -19,7 +19,10 @@ class EligibleCollateralSpecification(BaseModel):
         min_length=0,
     )
     party: list[cdm_base_staticdata_party_Party_schema.Party] | None = Field(
-        None, description="The parties associated with the specification.", max_length=2, min_length=0
+        None,
+        description="The parties associated with the specification.",
+        max_length=2,
+        min_length=0,
     )
     counterparty: list[cdm_base_staticdata_party_Counterparty_schema.Counterparty] | None = Field(
         None,
@@ -27,8 +30,13 @@ class EligibleCollateralSpecification(BaseModel):
         max_length=2,
         min_length=0,
     )
-    criteria: list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria] | None = Field(
-        None, description="Represents a set of criteria used to specify eligible collateral.", min_length=1
+    criteria: (
+        list[cdm_product_collateral_EligibleCollateralCriteria_schema.EligibleCollateralCriteria]
+        | None
+    ) = Field(
+        None,
+        description="Represents a set of criteria used to specify eligible collateral.",
+        min_length=1,
     )
     party_role: list[cdm_base_staticdata_party_PartyRole_schema.PartyRole] | None = Field(
         None,

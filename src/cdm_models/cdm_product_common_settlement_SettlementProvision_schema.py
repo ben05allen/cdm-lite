@@ -7,7 +7,9 @@ from . import cdm_product_common_settlement_ShapingProvision_schema
 
 
 class SettlementProvision(BaseModel):
-    shaping_provisions: cdm_product_common_settlement_ShapingProvision_schema.ShapingProvision | None = Field(
+    shaping_provisions: (
+        cdm_product_common_settlement_ShapingProvision_schema.ShapingProvision | None
+    ) = Field(
         None,
         alias="shapingProvisions",
         description="Defines the parameters that are necessary to 'shape' a settlement, i.e. break it down into smaller amounts.",

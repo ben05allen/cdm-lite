@@ -12,4 +12,6 @@ class ResourceLength(BaseModel):
         alias="lengthUnit",
         description="The length unit of the resource. For example, pages (pdf, text documents) or time (audio, video files).",
     )
-    length_value: float = Field(..., alias="lengthValue", description="The length value of the resource.")
+    length_value: float = Field(
+        ..., alias="lengthValue", description="The length value of the resource."
+    )

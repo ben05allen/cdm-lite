@@ -16,16 +16,22 @@ from . import (
 
 
 class ExtendibleProvision(BaseModel):
-    buyer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Buyer party that can be resolved as one of the two principal parties to the transaction. The party that buys this instrument, i.e. pays for this instrument and receives the rights defined by it. ISDA 2002 Equity Definitions section 1.18: `Buyer` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (b)(i) relating to a Swaption: 'Buyer' means the party that will, on each Premium Payment Date, pay to Seller the Premium | ISDA 2006 Definitions article 12.1 (b)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such in the related Confirmation, or the Exercising Party if neither party is specified | ISDA 2006 Definitions article 12.1 (b)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Buyer` means the Fixed Rate Payer.",
+    buyer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Buyer party that can be resolved as one of the two principal parties to the transaction. The party that buys this instrument, i.e. pays for this instrument and receives the rights defined by it. ISDA 2002 Equity Definitions section 1.18: `Buyer` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (b)(i) relating to a Swaption: 'Buyer' means the party that will, on each Premium Payment Date, pay to Seller the Premium | ISDA 2006 Definitions article 12.1 (b)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such in the related Confirmation, or the Exercising Party if neither party is specified | ISDA 2006 Definitions article 12.1 (b)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Buyer` means the Fixed Rate Payer.",
+        )
     )
-    seller: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Seller party that can be resolved as one of the two principal parties to the transaction. The party that sells ('writes') this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. ISDA 2002 Equity Definitions section 1.19: `Seller` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (a)(i) relating to a Swaption: 'Seller' means the party the party specified as such or as writer in the related Confirmation | ISDA 2006 Definitions article 12.1 (a)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such or as writer in the related Confirmation or, if neither party is specified as such, the Non-exercising Party | ISDA 2006 Definitions article 12.1 (a)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Seller` means the Floating Rate Payer.",
+    seller: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Seller party that can be resolved as one of the two principal parties to the transaction. The party that sells ('writes') this instrument, i.e. that grants the rights defined by this instrument and in return receives a payment for it. ISDA 2002 Equity Definitions section 1.19: `Seller` means the party specified as such in the related Confirmation. | ISDA 2006 Definitions article 12.1 (a)(i) relating to a Swaption: 'Seller' means the party the party specified as such or as writer in the related Confirmation | ISDA 2006 Definitions article 12.1 (a)(ii) relating to Swap Transactions with applicable Early Termination: the party specified as such or as writer in the related Confirmation or, if neither party is specified as such, the Non-exercising Party | ISDA 2006 Definitions article 12.1 (a)(iii) relating to any other Option Transaction: the party specified as such in the related Confirmation. | ISDA 2014 Credit Definition article 1.4: `Seller` means the Floating Rate Payer.",
+        )
     )
     exercise_notice: cdm_product_template_ExerciseNotice_schema.ExerciseNotice | None = Field(
-        None, alias="exerciseNotice", description="Definition of the party to whom notice of exercise should be given."
+        None,
+        alias="exerciseNotice",
+        description="Definition of the party to whom notice of exercise should be given.",
     )
     follow_up_confirmation: bool | None = Field(
         None,
@@ -33,7 +39,8 @@ class ExtendibleProvision(BaseModel):
         description="A flag to indicate whether follow-up confirmation of exercise (written or electronic) is required following telephonic notice by the buyer to the seller or seller's agent.",
     )
     extendible_provision_adjusted_dates: (
-        cdm_product_template_ExtendibleProvisionAdjustedDates_schema.ExtendibleProvisionAdjustedDates | None
+        cdm_product_template_ExtendibleProvisionAdjustedDates_schema.ExtendibleProvisionAdjustedDates
+        | None
     ) = Field(
         None,
         alias="extendibleProvisionAdjustedDates",
@@ -47,13 +54,17 @@ class ExtendibleProvision(BaseModel):
         alias="singlePartyOption",
         description="If the ability to extend the contract is not available to both parties then this component specifies the buyer and seller of the option.",
     )
-    notice_deadline_period: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
+    notice_deadline_period: (
+        cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None
+    ) = Field(
         None,
         alias="noticeDeadlinePeriod",
         description="Defines the minimum period before a contract is scheduled to terminate that notice can be given that it will terminate beyond the scheduled termination date.",
     )
     notice_deadline_date_time: str | None = Field(
-        None, alias="noticeDeadlineDateTime", description="A specific date and time for the notice deadline"
+        None,
+        alias="noticeDeadlineDateTime",
+        description="A specific date and time for the notice deadline",
     )
     extension_term: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
         None,
@@ -61,7 +72,8 @@ class ExtendibleProvision(BaseModel):
         description="The length of each extension period relative to the effective date of the preceding contract.",
     )
     extension_period: (
-        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates | None
+        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates
+        | None
     ) = Field(
         None,
         alias="extensionPeriod",

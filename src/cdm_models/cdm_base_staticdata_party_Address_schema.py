@@ -17,8 +17,11 @@ class Address(BaseModel):
         None,
         description="A country subdivision used in postal addresses in some countries. For example, US states, Canadian provinces, Swiss cantons, ...",
     )
-    country: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="The ISO 3166 standard code for the country within which the postal address is located."
+    country: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="The ISO 3166 standard code for the country within which the postal address is located.",
+        )
     )
     postal_code: str | None = Field(
         None,

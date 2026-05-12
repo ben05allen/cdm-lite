@@ -7,20 +7,24 @@ from . import cdm_legaldocumentation_transaction_Clause_schema
 
 
 class Representations(BaseModel):
-    non_reliance: bool = Field(..., alias="nonReliance", description="If true, then non reliance is applicable.")
+    non_reliance: bool = Field(
+        ..., alias="nonReliance", description="If true, then non reliance is applicable."
+    )
     agreements_regarding_hedging: bool = Field(
         ...,
         alias="agreementsRegardingHedging",
         description="If true, then agreements regarding hedging are applicable.",
     )
     index_disclaimer: bool | None = Field(
-        None, alias="indexDisclaimer", description="If present and true, then index disclaimer is applicable."
+        None,
+        alias="indexDisclaimer",
+        description="If present and true, then index disclaimer is applicable.",
     )
     additional_acknowledgements: bool | None = Field(
         None,
         alias="additionalAcknowledgements",
         description="If true, then additional acknowledgements are applicable.",
     )
-    additional_bespoke_terms: list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None = Field(
-        None, alias="additionalBespokeTerms", min_length=0
-    )
+    additional_bespoke_terms: (
+        list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None
+    ) = Field(None, alias="additionalBespokeTerms", min_length=0)

@@ -9,4 +9,6 @@ class EnforcementEvent(BaseModel):
     early_termination_date: bool = Field(
         ..., alias="earlyTerminationDate", description="The early termination election."
     )
-    failure_to_pay: bool | None = Field(None, alias="failureToPay", description="The failure to pay election.")
+    failure_to_pay: bool | None = Field(
+        None, alias="failureToPay", description="The failure to pay election."
+    )

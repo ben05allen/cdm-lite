@@ -7,7 +7,9 @@ from . import cdm_product_template_CancellationEvent_schema
 
 
 class CancelableProvisionAdjustedDates(BaseModel):
-    cancellation_event: list[cdm_product_template_CancellationEvent_schema.CancellationEvent] | None = Field(
+    cancellation_event: (
+        list[cdm_product_template_CancellationEvent_schema.CancellationEvent] | None
+    ) = Field(
         None,
         alias="cancellationEvent",
         description="The adjusted dates for an individual cancellation date.",

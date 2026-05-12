@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_math_ArithmeticOperationEnum_schema, cdm_observable_asset_PriceOperandEnum_schema
+from . import (
+    cdm_base_math_ArithmeticOperationEnum_schema,
+    cdm_observable_asset_PriceOperandEnum_schema,
+)
 
 
 class PriceComposite(BaseModel):
@@ -16,8 +19,12 @@ class PriceComposite(BaseModel):
         ...,
         description="The 2nd value in the arithmetic operation, which may be non-commutative in some cases: Subtract, Divide). The 2nd operand is called 'operand' to distinguish it from the 1st one which is the price anchor.",
     )
-    arithmetic_operator: cdm_base_math_ArithmeticOperationEnum_schema.ArithmeticOperationEnum = Field(
-        ..., alias="arithmeticOperator", description="Specifies the arithmetic operator via an enumeration."
+    arithmetic_operator: cdm_base_math_ArithmeticOperationEnum_schema.ArithmeticOperationEnum = (
+        Field(
+            ...,
+            alias="arithmeticOperator",
+            description="Specifies the arithmetic operator via an enumeration.",
+        )
     )
     operand_type: cdm_observable_asset_PriceOperandEnum_schema.PriceOperandEnum | None = Field(
         None,

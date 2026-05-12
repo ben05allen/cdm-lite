@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_DateRange_schema, cdm_product_asset_CalculationScheduleDeliveryPeriods_schema
+from . import (
+    cdm_base_datetime_DateRange_schema,
+    cdm_product_asset_CalculationScheduleDeliveryPeriods_schema,
+)
 
 
 class SchedulePeriod(BaseModel):
@@ -15,5 +18,10 @@ class SchedulePeriod(BaseModel):
         ..., alias="fixingPeriod", description="Period over which the underlying price is observed."
     )
     delivery_period: (
-        cdm_product_asset_CalculationScheduleDeliveryPeriods_schema.CalculationScheduleDeliveryPeriods | None
-    ) = Field(None, alias="deliveryPeriod", description="Period and time profile over which the delivery takes place.")
+        cdm_product_asset_CalculationScheduleDeliveryPeriods_schema.CalculationScheduleDeliveryPeriods
+        | None
+    ) = Field(
+        None,
+        alias="deliveryPeriod",
+        description="Period and time profile over which the delivery takes place.",
+    )

@@ -17,19 +17,33 @@ class FloatingRateCalculationParameters(BaseModel):
         ..., alias="calculationMethod", description="calculation type (averaging or compounding)."
     )
     observation_shift_calculation: (
-        cdm_observable_asset_calculatedrate_ObservationShiftCalculation_schema.ObservationShiftCalculation | None
-    ) = Field(None, alias="observationShiftCalculation", description="any obervation shift parameters if applicable.")
-    lookback_calculation: cdm_observable_asset_calculatedrate_OffsetCalculation_schema.OffsetCalculation | None = Field(
+        cdm_observable_asset_calculatedrate_ObservationShiftCalculation_schema.ObservationShiftCalculation
+        | None
+    ) = Field(
+        None,
+        alias="observationShiftCalculation",
+        description="any obervation shift parameters if applicable.",
+    )
+    lookback_calculation: (
+        cdm_observable_asset_calculatedrate_OffsetCalculation_schema.OffsetCalculation | None
+    ) = Field(
         None, alias="lookbackCalculation", description="any lookback  parameters if applicable."
     )
-    lockout_calculation: cdm_observable_asset_calculatedrate_OffsetCalculation_schema.OffsetCalculation | None = Field(
+    lockout_calculation: (
+        cdm_observable_asset_calculatedrate_OffsetCalculation_schema.OffsetCalculation | None
+    ) = Field(
         None, alias="lockoutCalculation", description="any lockout  parameters if applicable."
     )
-    applicable_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = Field(
-        None, alias="applicableBusinessDays", description="the business days that are applicable for the calculation."
+    applicable_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = (
+        Field(
+            None,
+            alias="applicableBusinessDays",
+            description="the business days that are applicable for the calculation.",
+        )
     )
     observation_parameters: (
-        cdm_observable_asset_calculatedrate_ObservationParameters_schema.ObservationParameters | None
+        cdm_observable_asset_calculatedrate_ObservationParameters_schema.ObservationParameters
+        | None
     ) = Field(
         None,
         alias="observationParameters",

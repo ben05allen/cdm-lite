@@ -20,30 +20,42 @@ class CustodyArrangements(BaseModel):
         description="Unless specified as True, the Control Agreement is not a Credit Support Document under the agreement with respect to a party.",
     )
     has_control_agreement_language: bool | None = Field(
-        None, alias="hasControlAgreementLanguage", description="Control Agreement language is specified when True."
+        None,
+        alias="hasControlAgreementLanguage",
+        description="Control Agreement language is specified when True.",
     )
     other_provisions: str | None = Field(
-        None, alias="otherProvisions", description="Other Custom Provisions of Custody Arrangements."
+        None,
+        alias="otherProvisions",
+        description="Other Custom Provisions of Custody Arrangements.",
     )
-    collateral_access_breach: cdm_legaldocumentation_csa_CollateralAccessBreach_schema.CollateralAccessBreach | None = (
-        Field(
-            None,
-            alias="collateralAccessBreach",
-            description="The elections specific to Collateral Access Breach language.",
-        )
+    collateral_access_breach: (
+        cdm_legaldocumentation_csa_CollateralAccessBreach_schema.CollateralAccessBreach | None
+    ) = Field(
+        None,
+        alias="collateralAccessBreach",
+        description="The elections specific to Collateral Access Breach language.",
     )
     custodian_risk: cdm_legaldocumentation_csa_CustodianRisk_schema.CustodianRisk | None = Field(
         None, alias="custodianRisk", description="The qualification of the Custodian Risk."
     )
-    control_agreement: cdm_legaldocumentation_csa_ControlAgreement_schema.ControlAgreement | None = Field(
-        None, alias="controlAgreement", description="The party-specific election with respect to the control agreement."
+    control_agreement: (
+        cdm_legaldocumentation_csa_ControlAgreement_schema.ControlAgreement | None
+    ) = Field(
+        None,
+        alias="controlAgreement",
+        description="The party-specific election with respect to the control agreement.",
     )
     custodian_event: cdm_legaldocumentation_csa_CustodianEvent_schema.CustodianEvent = Field(
-        ..., alias="custodianEvent", description="Specifies if and until when a Custodian Event clause applies."
+        ...,
+        alias="custodianEvent",
+        description="Specifies if and until when a Custodian Event clause applies.",
     )
     custodian: cdm_legaldocumentation_csa_Custodian_schema.Custodian | None = Field(
-        None, description="The custodian and segregated account details for each party to the agreement."
+        None,
+        description="The custodian and segregated account details for each party to the agreement.",
     )
     collateral_management_agreement: (
-        cdm_legaldocumentation_csa_CollateralManagementAgreement_schema.CollateralManagementAgreement | None
+        cdm_legaldocumentation_csa_CollateralManagementAgreement_schema.CollateralManagementAgreement
+        | None
     ) = Field(None, alias="collateralManagementAgreement")

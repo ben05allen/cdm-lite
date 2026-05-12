@@ -24,14 +24,16 @@ class ResetDates(BaseModel):
         alias="calculationPeriodDatesReference",
         description="A pointer style reference to the associated calculation period dates component defined elsewhere in the document.",
     )
-    reset_relative_to: cdm_product_common_schedule_ResetRelativeToEnum_schema.ResetRelativeToEnum | None = Field(
+    reset_relative_to: (
+        cdm_product_common_schedule_ResetRelativeToEnum_schema.ResetRelativeToEnum | None
+    ) = Field(
         None,
         alias="resetRelativeTo",
         description="Specifies whether the reset dates are determined with respect to each adjusted calculation period start date or adjusted calculation period end date. If the reset frequency is specified as daily this element must not be included.",
     )
-    initial_fixing_date: cdm_product_common_schedule_InitialFixingDate_schema.InitialFixingDate | None = Field(
-        None, alias="initialFixingDate", description="The initial fixing date."
-    )
+    initial_fixing_date: (
+        cdm_product_common_schedule_InitialFixingDate_schema.InitialFixingDate | None
+    ) = Field(None, alias="initialFixingDate", description="The initial fixing date.")
     fixing_dates: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
         None,
         alias="fixingDates",
@@ -47,12 +49,16 @@ class ResetDates(BaseModel):
         alias="rateCutOffDaysOffset",
         description="Specifies the number of business days before the period end date when the rate cut-off date is assumed to apply. The financial business centers associated with determining the rate cut-off date are those specified in the reset dates adjustments. The rate cut-off number of days must be a negative integer (a value of zero would imply no rate cut off applies in which case the rateCutOffDaysOffset element should not be included). The relevant rate for each reset date in the period from, and including, a rate cut-off date to, but excluding, the next applicable period end date (or, in the case of the last calculation period, the termination date) will (solely for purposes of calculating the floating amount payable on the next applicable payment date) be deemed to be the relevant rate in effect on that rate cut-off date. For example, if rate cut-off days for a daily averaging deal is -2 business days, then the refix rate applied on (period end date - 2 days) will also be applied as the reset on (period end date - 1 day), i.e. the actual number of reset dates remains the same but from the rate cut-off date until the period end date, the same refix rate is applied. Note that in the case of several calculation periods contributing to a single payment, the rate cut-off is assumed only to apply to the final calculation period contributing to that payment. The day type associated with the offset must imply a business days offset.",
     )
-    reset_frequency: cdm_product_common_schedule_ResetFrequency_schema.ResetFrequency | None = Field(
-        None,
-        alias="resetFrequency",
-        description="The frequency at which the reset dates occur. In the case of a weekly reset frequency, also specifies the day of the week that the reset occurs. If the reset frequency is greater than the calculation period frequency then this implies that more than one reset is established for each calculation period and some form of rate averaging is applicable.",
+    reset_frequency: cdm_product_common_schedule_ResetFrequency_schema.ResetFrequency | None = (
+        Field(
+            None,
+            alias="resetFrequency",
+            description="The frequency at which the reset dates occur. In the case of a weekly reset frequency, also specifies the day of the week that the reset occurs. If the reset frequency is greater than the calculation period frequency then this implies that more than one reset is established for each calculation period and some form of rate averaging is applicable.",
+        )
     )
-    reset_dates_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None = Field(
+    reset_dates_adjustments: (
+        cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None
+    ) = Field(
         None,
         alias="resetDatesAdjustments",
         description="The definition of the business day convention and financial business centers used for adjusting the reset date if it would otherwise fall on a day that is not a business day in the specified business center.",

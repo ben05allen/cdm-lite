@@ -7,4 +7,6 @@ from . import cdm_event_workflow_WorkflowStep_schema
 
 
 class Workflow(BaseModel):
-    steps: list[cdm_event_workflow_WorkflowStep_schema.WorkflowStep] | None = Field(None, min_length=1)
+    steps: list[cdm_event_workflow_WorkflowStep_schema.WorkflowStep] | None = Field(
+        None, min_length=1
+    )

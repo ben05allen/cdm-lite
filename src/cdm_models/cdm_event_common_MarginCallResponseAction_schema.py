@@ -3,11 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_event_common_CollateralPosition_schema, cdm_event_common_MarginCallActionEnum_schema
+from . import (
+    cdm_event_common_CollateralPosition_schema,
+    cdm_event_common_MarginCallActionEnum_schema,
+)
 
 
 class MarginCallResponseAction(BaseModel):
-    collateral_position_component: list[cdm_event_common_CollateralPosition_schema.CollateralPosition] | None = Field(
+    collateral_position_component: (
+        list[cdm_event_common_CollateralPosition_schema.CollateralPosition] | None
+    ) = Field(
         None,
         alias="collateralPositionComponent",
         description="Specifies the collateral to be moved and its direction.",

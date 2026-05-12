@@ -53,7 +53,9 @@ def process_directory(input_dir: str, output_dir: str):
                 shutil.copy2(str(in_path), str(output_path))
                 copied += 1
 
-    print(f"Processed {copied} files, cleaned oneOf from {cleaned} enum schemas, fixed {fixed} deserialization errors.")
+    print(
+        f"Processed {copied} files, cleaned oneOf from {cleaned} enum schemas, fixed {fixed} deserialization errors."
+    )
 
 
 if __name__ == "__main__":

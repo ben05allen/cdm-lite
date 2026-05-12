@@ -3,10 +3,14 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_transaction_metafields_FieldWithMetaBrokerConfirmationTypeEnum_schema
+from . import (
+    cdm_legaldocumentation_transaction_metafields_FieldWithMetaBrokerConfirmationTypeEnum_schema,
+)
 
 
 class BrokerConfirmation(BaseModel):
     broker_confirmation_type: cdm_legaldocumentation_transaction_metafields_FieldWithMetaBrokerConfirmationTypeEnum_schema.FieldWithMetaBrokerConfirmationTypeEnum = Field(
-        ..., alias="brokerConfirmationType", description="The type of broker confirmation executed between the parties."
+        ...,
+        alias="brokerConfirmationType",
+        description="The type of broker confirmation executed between the parties.",
     )

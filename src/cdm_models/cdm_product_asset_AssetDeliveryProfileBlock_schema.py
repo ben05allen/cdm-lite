@@ -3,18 +3,30 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_DayOfWeekEnum_schema, cdm_base_math_Quantity_schema, cdm_observable_asset_Price_schema
+from . import (
+    cdm_base_datetime_DayOfWeekEnum_schema,
+    cdm_base_math_Quantity_schema,
+    cdm_observable_asset_Price_schema,
+)
 
 
 class AssetDeliveryProfileBlock(BaseModel):
     start_time: str | None = Field(
-        None, alias="startTime", description="The start time of the delivery interval for each block or shape."
+        None,
+        alias="startTime",
+        description="The start time of the delivery interval for each block or shape.",
     )
     end_time: str | None = Field(
-        None, alias="endTime", description="The end time of the delivery interval for each block or shape."
+        None,
+        alias="endTime",
+        description="The end time of the delivery interval for each block or shape.",
     )
     day_of_week: list[cdm_base_datetime_DayOfWeekEnum_schema.DayOfWeekEnum] | None = Field(
-        None, alias="dayOfWeek", description="The days of the week of the delivery.", max_length=7, min_length=0
+        None,
+        alias="dayOfWeek",
+        description="The days of the week of the delivery.",
+        max_length=7,
+        min_length=0,
     )
     delivery_capacity: cdm_base_math_Quantity_schema.Quantity | None = Field(
         None,
@@ -22,5 +34,7 @@ class AssetDeliveryProfileBlock(BaseModel):
         description="The number of units included in the transaction for each delivery interval",
     )
     price_time_interval_quantity: cdm_observable_asset_Price_schema.Price | None = Field(
-        None, alias="priceTimeIntervalQuantity", description="Price per quantity per delivery time interval."
+        None,
+        alias="priceTimeIntervalQuantity",
+        description="Price per quantity per delivery time interval.",
     )

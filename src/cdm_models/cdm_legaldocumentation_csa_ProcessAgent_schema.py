@@ -7,6 +7,12 @@ from . import cdm_legaldocumentation_csa_ProcessAgentElection_schema
 
 
 class ProcessAgent(BaseModel):
-    party_election: list[cdm_legaldocumentation_csa_ProcessAgentElection_schema.ProcessAgentElection] | None = Field(
-        None, alias="partyElection", description="The parties' Process Agent election.", max_length=2, min_length=2
+    party_election: (
+        list[cdm_legaldocumentation_csa_ProcessAgentElection_schema.ProcessAgentElection] | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The parties' Process Agent election.",
+        max_length=2,
+        min_length=2,
     )

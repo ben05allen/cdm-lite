@@ -18,10 +18,14 @@ class BillingInstruction(BaseModel):
         ..., alias="receivingParty", description="The party receiving the invoice"
     )
     billing_start_date: str = Field(
-        ..., alias="billingStartDate", description="The starting date of the period described by this invoice"
+        ...,
+        alias="billingStartDate",
+        description="The starting date of the period described by this invoice",
     )
     billing_end_date: str = Field(
-        ..., alias="billingEndDate", description="The ending date of the period described by this invoice"
+        ...,
+        alias="billingEndDate",
+        description="The ending date of the period described by this invoice",
     )
     billing_record_instruction: (
         list[cdm_event_common_BillingRecordInstruction_schema.BillingRecordInstruction] | None
@@ -31,6 +35,11 @@ class BillingInstruction(BaseModel):
         description="Instructions for creating the billing records contained within the invoice",
         min_length=1,
     )
-    billing_summary: list[cdm_event_common_BillingSummaryInstruction_schema.BillingSummaryInstruction] | None = Field(
-        None, alias="billingSummary", description="The billing summaries contained within the invoice", min_length=0
+    billing_summary: (
+        list[cdm_event_common_BillingSummaryInstruction_schema.BillingSummaryInstruction] | None
+    ) = Field(
+        None,
+        alias="billingSummary",
+        description="The billing summaries contained within the invoice",
+        min_length=0,
     )

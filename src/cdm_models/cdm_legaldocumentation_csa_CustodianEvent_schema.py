@@ -12,7 +12,9 @@ class CustodianEvent(BaseModel):
         alias="isApplicable",
         description="The qualification as to whether the Custodian Event (English Law & New York Law ISDA CSA) or the Collateral Manager Event (Japanese Law ISDA CSA) is applicable.",
     )
-    end_date: cdm_legaldocumentation_csa_CustodianEventEndDate_schema.CustodianEventEndDate | None = Field(
+    end_date: (
+        cdm_legaldocumentation_csa_CustodianEventEndDate_schema.CustodianEventEndDate | None
+    ) = Field(
         None,
         alias="endDate",
         description="The qualification of the Custodian Event (English Law & New York Law ISDA CSA) or Collateral Manager Event (Japanese Law ISDA CSA) End Date.",

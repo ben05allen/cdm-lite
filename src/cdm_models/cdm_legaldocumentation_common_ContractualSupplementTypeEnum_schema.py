@@ -37,15 +37,21 @@ class ContractualSupplementTypeEnum(StrEnum):
     ISDA2003_CREDIT_RUSSIAN_FEDERATION = "ISDA2003CreditRussianFederation"
     ISDA2003_CREDIT_US_MUNICIPALS = "ISDA2003CreditUSMunicipals"
     ISDA2003_ST_MICROELECTRONICS_NV = "ISDA2003STMicroelectronicsNV"
-    ISDA2007_FULL_LOOKTHROUGH_DEPOSITORY_RECEIPT_SUPPLEMENT = "ISDA2007FullLookthroughDepositoryReceiptSupplement"
-    ISDA2007_PARTIAL_LOOKTHROUGH_DEPOSITORY_RECEIPT_SUPPLEMENT = "ISDA2007PartialLookthroughDepositoryReceiptSupplement"
+    ISDA2007_FULL_LOOKTHROUGH_DEPOSITORY_RECEIPT_SUPPLEMENT = (
+        "ISDA2007FullLookthroughDepositoryReceiptSupplement"
+    )
+    ISDA2007_PARTIAL_LOOKTHROUGH_DEPOSITORY_RECEIPT_SUPPLEMENT = (
+        "ISDA2007PartialLookthroughDepositoryReceiptSupplement"
+    )
     ISDA_CREDIT_MONOLINE_INSURERS = "ISDACreditMonolineInsurers"
     ISDA_DELIVERY_RESTRICTIONS = "ISDADeliveryRestrictions"
     ISDA_FIXED_RECOVERY = "ISDAFixedRecovery"
     ISDALPN_REFERENCE_ENTITIES = "ISDALPNReferenceEntities"
     ISDA_MARCH2004_EQUITY_CANADIAN_SUPPLEMENT = "ISDAMarch2004EquityCanadianSupplement"
     ISDA_RECOVERY_LOCK = "ISDARecoveryLock"
-    ISDA_SECURED_DELIVERABLE_OBLIGATION_CHARACTERISTIC = "ISDASecuredDeliverableObligationCharacteristic"
+    ISDA_SECURED_DELIVERABLE_OBLIGATION_CHARACTERISTIC = (
+        "ISDASecuredDeliverableObligationCharacteristic"
+    )
     LCDX = "LCDX"
     LCDX_TRANCHE = "LCDXTranche"
     MBX = "MBX"

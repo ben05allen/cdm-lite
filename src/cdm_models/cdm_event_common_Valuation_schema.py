@@ -31,7 +31,9 @@ class Valuation(BaseModel):
         description="The ratio of the change in the price of a derivative transaction to the change in the price of the underlying. This field is applicable only to options and swaptions.",
     )
     valuation_timing: cdm_event_common_PriceTimingEnum_schema.PriceTimingEnum | None = Field(
-        None, alias="valuationTiming", description="Denotes when the valuation was sourced during a business day."
+        None,
+        alias="valuationTiming",
+        description="Denotes when the valuation was sourced during a business day.",
     )
     price_component: cdm_observable_asset_Price_schema.Price | None = Field(
         None, alias="priceComponent", description="Denotes the price used to compute the valuation."

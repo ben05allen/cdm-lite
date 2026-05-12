@@ -8,7 +8,9 @@ from . import cdm_legaldocumentation_master_isda_PartyTerminationCurrencySelecti
 
 class TerminationCurrencySelection(BaseModel):
     stated_currency: str | None = Field(
-        None, alias="statedCurrency", description="Specifies a single Termination Currency for the agreement."
+        None,
+        alias="statedCurrency",
+        description="Specifies a single Termination Currency for the agreement.",
     )
     fallback_currency: str | None = Field(
         None,

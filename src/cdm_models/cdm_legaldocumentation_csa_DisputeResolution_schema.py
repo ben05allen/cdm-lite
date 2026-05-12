@@ -28,26 +28,35 @@ class DisputeResolution(BaseModel):
         description="The method of calculation for determining value for the purposes of a Variation Margin agreement.",
     )
     alternative_terms: str | None = Field(
-        None, alias="alternativeTerms", description="The alternative dispute resolution procedure if specified."
+        None,
+        alias="alternativeTerms",
+        description="The alternative dispute resolution procedure if specified.",
     )
-    recalculation_of_value: cdm_legaldocumentation_csa_RecalculationOfValue_schema.RecalculationOfValue | None = Field(
+    recalculation_of_value: (
+        cdm_legaldocumentation_csa_RecalculationOfValue_schema.RecalculationOfValue | None
+    ) = Field(
         None,
         alias="recalculationOfValue",
         description="The elections to specify terms for recalculation of the market value of posted collateral.",
     )
-    legacy_resolution_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
+    legacy_resolution_time: (
+        cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None
+    ) = Field(
         None,
         alias="legacyResolutionTime",
         description="Definition of a point of time un the following LBD to the date of notice in the resolution process at which the recalculation of the disputed amount(s) begins if the consultation process has not resolved the dispute.",
     )
     legacy_alternative: (
-        cdm_legaldocumentation_csa_LegacyResolutionAlternative_schema.LegacyResolutionAlternative | None
+        cdm_legaldocumentation_csa_LegacyResolutionAlternative_schema.LegacyResolutionAlternative
+        | None
     ) = Field(
         None,
         alias="legacyAlternative",
         description="Alternative procedures to those in the pre-print for resolving collateral related disputes.",
     )
-    legacy_value: cdm_legaldocumentation_csa_LegacyResolutionValue_schema.LegacyResolutionValue | None = Field(
+    legacy_value: (
+        cdm_legaldocumentation_csa_LegacyResolutionValue_schema.LegacyResolutionValue | None
+    ) = Field(
         None,
         alias="legacyValue",
         description="Methodology for resolving disputes in respect of the determination of the value of collateral.",

@@ -15,9 +15,19 @@ class MinimumTransferAmountAmendment(BaseModel):
         alias="isApplicable",
         description="The definition of Minimum Transfer Amount in any Other Regulatory CSA will be amended when applicable.",
     )
-    effective_date: cdm_legaldocumentation_csa_AmendmentEffectiveDate_schema.AmendmentEffectiveDate | None = Field(
-        None, alias="effectiveDate", description="The effective date of the Amendment to Termination Currency."
+    effective_date: (
+        cdm_legaldocumentation_csa_AmendmentEffectiveDate_schema.AmendmentEffectiveDate | None
+    ) = Field(
+        None,
+        alias="effectiveDate",
+        description="The effective date of the Amendment to Termination Currency.",
     )
-    party_elections: list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None = (
-        Field(None, alias="partyElections", description="The party elective amounts.", max_length=2, min_length=0)
+    party_elections: (
+        list[cdm_legaldocumentation_csa_ElectiveAmountElection_schema.ElectiveAmountElection] | None
+    ) = Field(
+        None,
+        alias="partyElections",
+        description="The party elective amounts.",
+        max_length=2,
+        min_length=0,
     )

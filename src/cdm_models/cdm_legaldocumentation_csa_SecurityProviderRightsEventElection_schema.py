@@ -11,5 +11,7 @@ class SecurityProviderRightsEventElection(BaseModel):
         ..., description="The elective party."
     )
     rights_event: bool = Field(
-        ..., alias="rightsEvent", description="If True, the Rights Event language applies for the specified Party."
+        ...,
+        alias="rightsEvent",
+        description="If True, the Rights Event language applies for the specified Party.",
     )

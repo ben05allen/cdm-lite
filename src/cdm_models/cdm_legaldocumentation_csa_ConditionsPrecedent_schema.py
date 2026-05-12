@@ -3,11 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_AccessConditions_schema, cdm_legaldocumentation_csa_ExceptionEnum_schema
+from . import (
+    cdm_legaldocumentation_csa_AccessConditions_schema,
+    cdm_legaldocumentation_csa_ExceptionEnum_schema,
+)
 
 
 class ConditionsPrecedent(BaseModel):
-    conditions_precedent_election: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = Field(
+    conditions_precedent_election: (
+        cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None
+    ) = Field(
         None,
         alias="conditionsPrecedentElection",
         description="The election to specify whether the standard Conditions Precedent apply.",

@@ -16,20 +16,24 @@ class ObservationIdentifier(BaseModel):
         ..., description="Represents the asset or rate to which the observation relates."
     )
     observation_date: str = Field(
-        ..., alias="observationDate", description="Specifies the date value to use when resolving the market data."
+        ...,
+        alias="observationDate",
+        description="Specifies the date value to use when resolving the market data.",
     )
     observation_time: cdm_base_datetime_TimeZone_schema.TimeZone | None = Field(
         None, alias="observationTime", description="Represents the time and time-zone."
     )
-    information_source: cdm_observable_asset_InformationSource_schema.InformationSource | None = Field(
-        None,
-        alias="informationSource",
-        description="Represents where the market data published and should be observed.",
-    )
-    determination_methodology: cdm_observable_event_DeterminationMethodology_schema.DeterminationMethodology | None = (
+    information_source: cdm_observable_asset_InformationSource_schema.InformationSource | None = (
         Field(
             None,
-            alias="determinationMethodology",
-            description="Specifies the method according to which an amount or a date is determined.",
+            alias="informationSource",
+            description="Represents where the market data published and should be observed.",
         )
+    )
+    determination_methodology: (
+        cdm_observable_event_DeterminationMethodology_schema.DeterminationMethodology | None
+    ) = Field(
+        None,
+        alias="determinationMethodology",
+        description="Specifies the method according to which an amount or a date is determined.",
     )

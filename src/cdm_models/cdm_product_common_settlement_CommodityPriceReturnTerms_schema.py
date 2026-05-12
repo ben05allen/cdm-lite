@@ -12,7 +12,8 @@ from . import (
 
 class CommodityPriceReturnTerms(BaseModel):
     rounding: cdm_base_math_Rounding_schema.Rounding | None = Field(
-        None, description="Defines rounding rules and precision to be used in the rounding of a number."
+        None,
+        description="Defines rounding rules and precision to be used in the rounding of a number.",
     )
     spread: cdm_product_asset_SpreadSchedule_schema.SpreadSchedule | None = Field(
         None, description="Defines a spread value for one or more defined dates."

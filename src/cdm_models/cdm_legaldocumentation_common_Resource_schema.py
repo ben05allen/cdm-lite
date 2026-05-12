@@ -19,9 +19,16 @@ class Resource(BaseModel):
     resource_type: (
         cdm_legaldocumentation_common_metafields_FieldWithMetaResourceTypeEnum_schema.FieldWithMetaResourceTypeEnum
         | None
-    ) = Field(None, alias="resourceType", description="A description of the type of the resource, e.g. a confirmation.")
-    language: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="Indicates the language of the resource, described using the ISO 639-2/T Code."
+    ) = Field(
+        None,
+        alias="resourceType",
+        description="A description of the type of the resource, e.g. a confirmation.",
+    )
+    language: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="Indicates the language of the resource, described using the ISO 639-2/T Code.",
+        )
     )
     size_in_bytes: float | None = Field(
         None,
@@ -32,13 +39,16 @@ class Resource(BaseModel):
         None,
         description="Indicates the length of the resource. For example, if the resource were a PDF file, the length would be in pages.",
     )
-    mime_type: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    mime_type: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="mimeType",
         description="Indicates the type of media used to store the content. mimeType is used to determine the software product(s) that can read the content. MIME Types are described in RFC 2046.",
     )
     name: str | None = Field(
-        None, description="The name of the resource.  It is specified as a NormalizedString in FpML."
+        None,
+        description="The name of the resource.  It is specified as a NormalizedString in FpML.",
     )
     comments: str | None = Field(
         None,

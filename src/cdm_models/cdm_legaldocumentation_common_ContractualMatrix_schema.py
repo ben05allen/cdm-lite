@@ -14,7 +14,8 @@ class ContractualMatrix(BaseModel):
         ..., alias="matrixType", description="Identifies the form of applicable matrix."
     )
     matrix_term: (
-        cdm_legaldocumentation_common_metafields_FieldWithMetaMatrixTermEnum_schema.FieldWithMetaMatrixTermEnum | None
+        cdm_legaldocumentation_common_metafields_FieldWithMetaMatrixTermEnum_schema.FieldWithMetaMatrixTermEnum
+        | None
     ) = Field(
         None,
         alias="matrixTerm",

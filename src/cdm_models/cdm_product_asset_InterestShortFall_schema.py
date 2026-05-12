@@ -19,4 +19,6 @@ class InterestShortFall(BaseModel):
     rate_source: (
         cdm_base_staticdata_asset_rates_metafields_FieldWithMetaFloatingRateIndexEnum_schema.FieldWithMetaFloatingRateIndexEnum
         | None
-    ) = Field(None, alias="rateSource", description="The rate source in the case of a variable cap.")
+    ) = Field(
+        None, alias="rateSource", description="The rate source in the case of a variable cap."
+    )

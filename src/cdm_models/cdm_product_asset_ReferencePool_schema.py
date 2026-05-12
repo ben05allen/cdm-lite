@@ -7,7 +7,9 @@ from . import cdm_product_asset_ReferencePoolItem_schema
 
 
 class ReferencePool(BaseModel):
-    reference_pool_item: list[cdm_product_asset_ReferencePoolItem_schema.ReferencePoolItem] | None = Field(
+    reference_pool_item: (
+        list[cdm_product_asset_ReferencePoolItem_schema.ReferencePoolItem] | None
+    ) = Field(
         None,
         alias="referencePoolItem",
         description="This type contains all the constituent weight and reference information.",

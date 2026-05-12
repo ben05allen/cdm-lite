@@ -8,7 +8,9 @@ from . import cdm_observable_asset_Money_schema
 
 class PostedCreditSupportItem(BaseModel):
     cash_or_security_value: cdm_observable_asset_Money_schema.Money = Field(
-        ..., alias="cashOrSecurityValue", description="The Base Currency Equivalent of Cash or Security."
+        ...,
+        alias="cashOrSecurityValue",
+        description="The Base Currency Equivalent of Cash or Security.",
     )
     haircut_percentage: float = Field(
         ...,

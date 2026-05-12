@@ -13,7 +13,10 @@ class PostingObligations(BaseModel):
         description="The security provider party(ies) to which the posting obligations apply to, which can be either one of the parties to the legal agreement, or both of those.",
     )
     party_election: (
-        list[cdm_legaldocumentation_csa_PostingObligationsElection_schema.PostingObligationsElection] | None
+        list[
+            cdm_legaldocumentation_csa_PostingObligationsElection_schema.PostingObligationsElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

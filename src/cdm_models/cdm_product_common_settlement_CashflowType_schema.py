@@ -11,14 +11,18 @@ from . import (
 
 
 class CashflowType(BaseModel):
-    cashflow_type: cdm_product_common_settlement_ScheduledTransferEnum_schema.ScheduledTransferEnum | None = Field(
-        None, alias="cashflowType", description="Type of cashflow corresponding to a scheduled event."
+    cashflow_type: (
+        cdm_product_common_settlement_ScheduledTransferEnum_schema.ScheduledTransferEnum | None
+    ) = Field(
+        None,
+        alias="cashflowType",
+        description="Type of cashflow corresponding to a scheduled event.",
     )
     cash_price: cdm_observable_asset_CashPrice_schema.CashPrice | None = Field(
         None,
         alias="cashPrice",
         description="Type of cashflow corresponding to a non-scheduled event, where a price must be agreed between the parties.",
     )
-    price_expression: cdm_observable_asset_PriceExpressionEnum_schema.PriceExpressionEnum | None = Field(
-        None, alias="priceExpression"
+    price_expression: cdm_observable_asset_PriceExpressionEnum_schema.PriceExpressionEnum | None = (
+        Field(None, alias="priceExpression")
     )

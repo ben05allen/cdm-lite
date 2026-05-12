@@ -13,16 +13,24 @@ from . import (
 
 class MultipleCreditNotations(BaseModel):
     condition: cdm_base_math_QuantifierEnum_schema.QuantifierEnum = Field(
-        ..., description="An enumerated element, to qualify whether All or Any credit notation applies."
+        ...,
+        description="An enumerated element, to qualify whether All or Any credit notation applies.",
     )
     credit_notation: (
-        list[cdm_observable_asset_metafields_FieldWithMetaCreditNotation_schema.FieldWithMetaCreditNotation] | None
+        list[
+            cdm_observable_asset_metafields_FieldWithMetaCreditNotation_schema.FieldWithMetaCreditNotation
+        ]
+        | None
     ) = Field(
-        None, alias="creditNotation", description="At least two credit notations much be specified.", min_length=2
+        None,
+        alias="creditNotation",
+        description="At least two credit notations much be specified.",
+        min_length=2,
     )
     mismatch_resolution: (
-        cdm_observable_asset_CreditNotationMismatchResolutionEnum_schema.CreditNotationMismatchResolutionEnum | None
+        cdm_observable_asset_CreditNotationMismatchResolutionEnum_schema.CreditNotationMismatchResolutionEnum
+        | None
     ) = Field(None, alias="mismatchResolution")
-    reference_agency: cdm_observable_asset_CreditRatingAgencyEnum_schema.CreditRatingAgencyEnum | None = Field(
-        None, alias="referenceAgency"
-    )
+    reference_agency: (
+        cdm_observable_asset_CreditRatingAgencyEnum_schema.CreditRatingAgencyEnum | None
+    ) = Field(None, alias="referenceAgency")

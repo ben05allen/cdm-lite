@@ -28,13 +28,17 @@ class TradableProduct(BaseModel):
         max_length=2,
         min_length=2,
     )
-    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = Field(
-        None,
-        alias="ancillaryParty",
-        description="Specifies the parties with ancillary roles in the transaction. The product is agnostic to the actual parties involved in the transaction, with the party references abstracted away from the product definition and replaced by the AncillaryRoleEnum. The AncillaryRoleEnum can then be positioned in the product and this AncillaryParty type, which is positioned outside of the product definition, allows the AncillaryRoleEnum to be associated with an actual party reference.",
-        min_length=0,
+    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = (
+        Field(
+            None,
+            alias="ancillaryParty",
+            description="Specifies the parties with ancillary roles in the transaction. The product is agnostic to the actual parties involved in the transaction, with the party references abstracted away from the product definition and replaced by the AncillaryRoleEnum. The AncillaryRoleEnum can then be positioned in the product and this AncillaryParty type, which is positioned outside of the product definition, allows the AncillaryRoleEnum to be associated with an actual party reference.",
+            min_length=0,
+        )
     )
-    adjustment: cdm_product_common_NotionalAdjustmentEnum_schema.NotionalAdjustmentEnum | None = Field(
-        None,
-        description="Specifies the conditions that govern the adjustment to the quantity of a product being traded: e.g. execution, portfolio rebalancing etc. It is typically used in the context of Equity Swaps.",
+    adjustment: cdm_product_common_NotionalAdjustmentEnum_schema.NotionalAdjustmentEnum | None = (
+        Field(
+            None,
+            description="Specifies the conditions that govern the adjustment to the quantity of a product being traded: e.g. execution, portfolio rebalancing etc. It is typically used in the context of Equity Swaps.",
+        )
     )

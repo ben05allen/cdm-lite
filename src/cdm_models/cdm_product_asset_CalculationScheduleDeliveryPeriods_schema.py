@@ -11,10 +11,12 @@ from . import (
 
 
 class CalculationScheduleDeliveryPeriods(BaseModel):
-    profile: list[cdm_product_asset_AssetDeliveryProfile_schema.AssetDeliveryProfile] | None = Field(
-        None,
-        description="Defines the delivery profile of the asset, including the load type and the delivery intervals.",
-        min_length=0,
+    profile: list[cdm_product_asset_AssetDeliveryProfile_schema.AssetDeliveryProfile] | None = (
+        Field(
+            None,
+            description="Defines the delivery profile of the asset, including the load type and the delivery intervals.",
+            min_length=0,
+        )
     )
     start_date: str | None = Field(None, alias="startDate", description="Delivery start date")
     end_date: str | None = Field(None, alias="endDate", description="Delivery end date")
@@ -24,5 +26,7 @@ class CalculationScheduleDeliveryPeriods(BaseModel):
         description="The number of units included in the transaction for each delivery interval",
     )
     price_time_interval_quantity: cdm_observable_asset_Price_schema.Price | None = Field(
-        None, alias="priceTimeIntervalQuantity", description="Price per quantity per delivery time interval."
+        None,
+        alias="priceTimeIntervalQuantity",
+        description="Price per quantity per delivery time interval.",
     )

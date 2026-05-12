@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_AdjustableOrRelativeDate_schema, cdm_product_common_settlement_DeliveryMethodEnum_schema
+from . import (
+    cdm_base_datetime_AdjustableOrRelativeDate_schema,
+    cdm_product_common_settlement_DeliveryMethodEnum_schema,
+)
 
 
 class AssetLeg(BaseModel):
@@ -12,6 +15,10 @@ class AssetLeg(BaseModel):
         alias="settlementDate",
         description="Specifies the settlement date of securities.  In a repo transaction the purchase date would always be the effective date as specified under Economic Terms, the repurchase date would always be the termination date as specified under Economic Terms.",
     )
-    delivery_method: cdm_product_common_settlement_DeliveryMethodEnum_schema.DeliveryMethodEnum = Field(
-        ..., alias="deliveryMethod", description="Specifies a delivery method for the security transaction."
+    delivery_method: cdm_product_common_settlement_DeliveryMethodEnum_schema.DeliveryMethodEnum = (
+        Field(
+            ...,
+            alias="deliveryMethod",
+            description="Specifies a delivery method for the security transaction.",
+        )
     )

@@ -15,5 +15,7 @@ class ExecutionLanguage(BaseModel):
         None, alias="numberOfOriginals", description="The number of original documents."
     )
     other_language: str | None = Field(
-        None, alias="otherLanguage", description="Bespoke execution language to be included when specified."
+        None,
+        alias="otherLanguage",
+        description="Bespoke execution language to be included when specified.",
     )

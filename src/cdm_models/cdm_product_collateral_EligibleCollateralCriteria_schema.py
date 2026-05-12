@@ -18,20 +18,25 @@ class EligibleCollateralCriteria(BaseModel):
         alias="collateralCriteria",
         description="The specific criteria in an Eligible Collateral Schedule. This is a mandatory attribute of an ECS so an override is required to enforce the cardinality.",
     )
-    applies_to: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    applies_to: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         alias="appliesTo",
         description="Specifies which of the two counterparties the criteria applies to (either one or both counterparties). This attribute is optional, in case the applicable party is already specified elsewhere within a party election.",
         max_length=2,
         min_length=0,
     )
-    restrict_to: cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None = Field(
+    restrict_to: (
+        cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None
+    ) = Field(
         None,
         alias="restrictTo",
         description="Restrict the criteria to only apply to a specific type of margin, ie IM or VM.",
     )
     rating_priority_resolution: (
-        cdm_product_collateral_RatingPriorityResolutionEnum_schema.RatingPriorityResolutionEnum | None
+        cdm_product_collateral_RatingPriorityResolutionEnum_schema.RatingPriorityResolutionEnum
+        | None
     ) = Field(
         None,
         alias="ratingPriorityResolution",

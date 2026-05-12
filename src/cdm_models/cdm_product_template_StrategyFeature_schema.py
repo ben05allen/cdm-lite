@@ -11,5 +11,7 @@ class StrategyFeature(BaseModel):
         None, alias="strikeSpread", description="Definition of the upper strike in a strike spread."
     )
     calendar_spread: cdm_product_template_CalendarSpread_schema.CalendarSpread | None = Field(
-        None, alias="calendarSpread", description="Definition of the later expiration date in a calendar spread."
+        None,
+        alias="calendarSpread",
+        description="Definition of the later expiration date in a calendar spread.",
     )

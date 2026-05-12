@@ -23,5 +23,7 @@ class PriceSource(BaseModel):
         description="Specifies the heading or field name for the price  on a given page or screen, where applicable.",
     )
     price_source_time: str | None = Field(
-        None, alias="priceSourceTime", description="Specifies the time at which the price should be observed."
+        None,
+        alias="priceSourceTime",
+        description="Specifies the time at which the price should be observed.",
     )

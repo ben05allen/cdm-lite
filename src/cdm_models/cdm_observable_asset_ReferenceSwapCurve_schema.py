@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_MakeWholeAmount_schema, cdm_observable_asset_SwapCurveValuation_schema
+from . import (
+    cdm_observable_asset_MakeWholeAmount_schema,
+    cdm_observable_asset_SwapCurveValuation_schema,
+)
 
 
 class ReferenceSwapCurve(BaseModel):

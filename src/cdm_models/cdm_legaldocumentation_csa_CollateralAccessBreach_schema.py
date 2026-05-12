@@ -22,5 +22,7 @@ class CollateralAccessBreach(BaseModel):
         description="The business days following the related Collateral Access Breach when the additional terms end.",
     )
     cab_end_date_terms: str | None = Field(
-        None, alias="cabEndDateTerms", description="Specific terms for when Collateral Access Breach terms end."
+        None,
+        alias="cabEndDateTerms",
+        description="Specific terms for when Collateral Access Breach terms end.",
     )

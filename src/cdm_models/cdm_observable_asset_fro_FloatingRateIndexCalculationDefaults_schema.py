@@ -15,10 +15,13 @@ from . import (
 
 
 class FloatingRateIndexCalculationDefaults(BaseModel):
-    category: cdm_observable_asset_fro_FloatingRateIndexCategoryEnum_schema.FloatingRateIndexCategoryEnum | None = (
-        Field(None, description="The ISDA FRO category (e.g. screen rate or calculated rate).")
-    )
-    index_style: cdm_observable_asset_fro_FloatingRateIndexStyleEnum_schema.FloatingRateIndexStyleEnum | None = Field(
+    category: (
+        cdm_observable_asset_fro_FloatingRateIndexCategoryEnum_schema.FloatingRateIndexCategoryEnum
+        | None
+    ) = Field(None, description="The ISDA FRO category (e.g. screen rate or calculated rate).")
+    index_style: (
+        cdm_observable_asset_fro_FloatingRateIndexStyleEnum_schema.FloatingRateIndexStyleEnum | None
+    ) = Field(
         None, alias="indexStyle", description="The ISDA FRO style (e.g. term rate, swap rate, etc)."
     )
     method: (
@@ -26,14 +29,23 @@ class FloatingRateIndexCalculationDefaults(BaseModel):
         | None
     ) = Field(None, description="The ISDA FRO calculation method (e.g. OIS Compounding).")
     fixing: (
-        list[cdm_observable_asset_fro_FloatingRateIndexFixingDetails_schema.FloatingRateIndexFixingDetails] | None
+        list[
+            cdm_observable_asset_fro_FloatingRateIndexFixingDetails_schema.FloatingRateIndexFixingDetails
+        ]
+        | None
     ) = Field(None, description="The default fixing details.", min_length=0)
-    day_count_fraction: cdm_base_datetime_daycount_DayCountFractionEnum_schema.DayCountFractionEnum | None = Field(
-        None, alias="dayCountFraction", description="The default day count fraction."
+    day_count_fraction: (
+        cdm_base_datetime_daycount_DayCountFractionEnum_schema.DayCountFractionEnum | None
+    ) = Field(None, alias="dayCountFraction", description="The default day count fraction.")
+    applicable_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = (
+        Field(
+            None,
+            alias="applicableBusinessDays",
+            description="The default applicable business days.",
+        )
     )
-    applicable_business_days: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = Field(
-        None, alias="applicableBusinessDays", description="The default applicable business days."
-    )
-    publication_calendar: cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum | None = Field(
-        None, alias="publicationCalendar", description="Publication Calendar (e.g. EUR-ICESWAP)"
+    publication_calendar: cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum | None = (
+        Field(
+            None, alias="publicationCalendar", description="Publication Calendar (e.g. EUR-ICESWAP)"
+        )
     )

@@ -11,13 +11,17 @@ from . import (
 
 
 class ExerciseFee(BaseModel):
-    payer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Specifies the counterparty responsible for making the payments defined by this structure.  The party is one of the two principal parties to the transaction.",
+    payer: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Specifies the counterparty responsible for making the payments defined by this structure.  The party is one of the two principal parties to the transaction.",
+        )
     )
-    receiver: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None,
-        description="Specifies the party that receives the payments corresponding to this structure.  The party is one of the two counterparties to the transaction.",
+    receiver: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = (
+        Field(
+            None,
+            description="Specifies the party that receives the payments corresponding to this structure.  The party is one of the two counterparties to the transaction.",
+        )
     )
     notional_reference: cdm_observable_asset_metafields_ReferenceWithMetaMoney_schema.ReferenceWithMetaMoney = Field(
         ...,

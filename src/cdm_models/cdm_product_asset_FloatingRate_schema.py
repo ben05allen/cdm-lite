@@ -34,7 +34,9 @@ class FloatingRate(BaseModel):
         alias="floorRateSchedule",
         description="The floor rate or floor rate schedule, if any, which applies to the floating rate. The floor rate (strike) is only required where the floating rate on a swap stream is floored at a certain strike level. A floor rate schedule is expressed as explicit floor rates and dates and the step dates may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments. The floor rate is assumed to be exclusive of any spread and is a per annum rate, expressed as a decimal. A floor rate of 5% would be represented as 0.05.",
     )
-    floating_rate_multiplier_schedule: cdm_product_common_schedule_RateSchedule_schema.RateSchedule | None = Field(
+    floating_rate_multiplier_schedule: (
+        cdm_product_common_schedule_RateSchedule_schema.RateSchedule | None
+    ) = Field(
         None,
         alias="floatingRateMultiplierSchedule",
         description="A rate multiplier or multiplier schedule to apply to the floating rate. A multiplier schedule is expressed as explicit multipliers and dates. In the case of a schedule, the step dates may be subject to adjustment in accordance with any adjustments specified in the calculationPeriodDatesAdjustments. The multiplier can be a positive or negative decimal. This element should only be included if the multiplier is not equal to 1 (one) for the term of the stream.",
@@ -52,6 +54,11 @@ class FloatingRate(BaseModel):
         alias="calculationParameters",
         description="Support for modular calculated rates, such such as lockout compound calculations.",
     )
-    fallback_rate: cdm_observable_asset_calculatedrate_FallbackRateParameters_schema.FallbackRateParameters | None = (
-        Field(None, alias="fallbackRate", description="Definition of any fallback rate that may be applicable.")
+    fallback_rate: (
+        cdm_observable_asset_calculatedrate_FallbackRateParameters_schema.FallbackRateParameters
+        | None
+    ) = Field(
+        None,
+        alias="fallbackRate",
+        description="Definition of any fallback rate that may be applicable.",
     )

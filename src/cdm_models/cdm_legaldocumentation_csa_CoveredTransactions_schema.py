@@ -16,7 +16,9 @@ class CoveredTransactions(BaseModel):
         alias="inclusionDate",
         description="Includes any Transaction specified below that is entered into on or after the specified date.",
     )
-    covered_transactions: list[cdm_base_staticdata_asset_common_ProductTaxonomy_schema.ProductTaxonomy] | None = Field(
+    covered_transactions: (
+        list[cdm_base_staticdata_asset_common_ProductTaxonomy_schema.ProductTaxonomy] | None
+    ) = Field(
         None,
         alias="coveredTransactions",
         description="Covered Transactions when expressed using the ISDA taxonomy.",
@@ -38,12 +40,15 @@ class CoveredTransactions(BaseModel):
         min_length=0,
     )
     exposure: str | None = Field(
-        None, description="The bespoke definition of exposure for Covered Transactions as part of the agreement."
-    )
-    legacy_exposure: list[cdm_legaldocumentation_csa_ExposureScope_schema.ExposureScope] | None = Field(
         None,
-        alias="legacyExposure",
-        description="Specification of amendments to the calculation of Exposure in terms of the Transactions covered.",
-        max_length=2,
-        min_length=0,
+        description="The bespoke definition of exposure for Covered Transactions as part of the agreement.",
+    )
+    legacy_exposure: list[cdm_legaldocumentation_csa_ExposureScope_schema.ExposureScope] | None = (
+        Field(
+            None,
+            alias="legacyExposure",
+            description="Specification of amendments to the calculation of Exposure in terms of the Transactions covered.",
+            max_length=2,
+            min_length=0,
+        )
     )

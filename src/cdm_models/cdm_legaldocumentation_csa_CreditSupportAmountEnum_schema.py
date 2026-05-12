@@ -7,7 +7,9 @@ from enum import StrEnum
 
 class CreditSupportAmountEnum(StrEnum):
     NON_STANDARD___IA_FLOOR__LESS_GIVER_IA_ = "Non-Standard - IA Floor (Less GiverIA)"
-    NON_STANDARD___IA_FLOOR__LESS_GIVER_IA_AND_TAKER_IA_ = "Non-Standard - IA Floor (Less GiverIA and TakerIA)"
+    NON_STANDARD___IA_FLOOR__LESS_GIVER_IA_AND_TAKER_IA_ = (
+        "Non-Standard - IA Floor (Less GiverIA and TakerIA)"
+    )
     NON_STANDARD___OTHER = "Non-Standard - Other"
     NON_STANDARD___RATINGS = "Non-Standard - Ratings"
     STANDARD = "Standard"

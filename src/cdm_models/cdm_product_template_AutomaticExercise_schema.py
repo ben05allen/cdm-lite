@@ -12,5 +12,7 @@ class AutomaticExercise(BaseModel):
         description="A threshold rate. The threshold of 0.10% would be represented as 0.001",
     )
     is_applicable: bool | None = Field(
-        None, alias="isApplicable", description="Boolean that indicates if it has an automaticExercise"
+        None,
+        alias="isApplicable",
+        description="Boolean that indicates if it has an automaticExercise",
     )

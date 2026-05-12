@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_PartyContactInformation_schema, cdm_product_collateral_ContactElection_schema
+from . import (
+    cdm_base_staticdata_party_PartyContactInformation_schema,
+    cdm_product_collateral_ContactElection_schema,
+)
 
 
 class AddressForNotices(BaseModel):
@@ -11,7 +14,8 @@ class AddressForNotices(BaseModel):
         ..., alias="primaryNotices", description="Specification of primary notice details"
     )
     additional_notices: (
-        list[cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation] | None
+        list[cdm_base_staticdata_party_PartyContactInformation_schema.PartyContactInformation]
+        | None
     ) = Field(
         None,
         alias="additionalNotices",

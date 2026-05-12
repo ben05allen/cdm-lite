@@ -19,10 +19,10 @@ class TradePricingReport(BaseModel):
         alias="pricingTime",
         description="The regional exchange close time for the underlying contract,including time zone, at which the trades should be priced. This provides an indication for which regional snapshot should be used for pricing primarily for Global markets where there are multiple regional close times.",
     )
-    discounting_index: cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None = (
-        Field(
-            None,
-            alias="discountingIndex",
-            description="It specifies the interest payable on collateral delivered under a CSA covering the trade.",
-        )
+    discounting_index: (
+        cdm_base_staticdata_asset_rates_FloatingRateIndexEnum_schema.FloatingRateIndexEnum | None
+    ) = Field(
+        None,
+        alias="discountingIndex",
+        description="It specifies the interest payable on collateral delivered under a CSA covering the trade.",
     )

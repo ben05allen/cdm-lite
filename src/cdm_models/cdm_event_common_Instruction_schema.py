@@ -13,6 +13,10 @@ class Instruction(BaseModel):
         alias="primitiveInstruction",
         description="Specifies the primitive instructions that will be used to call primitive event functions.",
     )
-    before: cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState | None = Field(
-        None, description="Specifies the trade state that will be acted on by the primitive event functions."
+    before: (
+        cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState
+        | None
+    ) = Field(
+        None,
+        description="Specifies the trade state that will be acted on by the primitive event functions.",
     )

@@ -14,11 +14,17 @@ class AssetDeliveryProfile(BaseModel):
     load_type: cdm_product_asset_LoadTypeEnum_schema.LoadTypeEnum | None = Field(
         None, alias="loadType", description="Identification of the delivery profile."
     )
-    block: list[cdm_product_asset_AssetDeliveryProfileBlock_schema.AssetDeliveryProfileBlock] | None = Field(
+    block: (
+        list[cdm_product_asset_AssetDeliveryProfileBlock_schema.AssetDeliveryProfileBlock] | None
+    ) = Field(
         None,
         description="Defines a delivery profile block, including start and end time, days of the week, duration, delivery capacity and price time interval quantity.",
         min_length=0,
     )
-    bank_holidays_treatment: cdm_product_asset_BankHolidayTreatmentEnum_schema.BankHolidayTreatmentEnum | None = Field(
-        None, alias="bankHolidaysTreatment", description="Specifies whether the dates defined include holidays or not."
+    bank_holidays_treatment: (
+        cdm_product_asset_BankHolidayTreatmentEnum_schema.BankHolidayTreatmentEnum | None
+    ) = Field(
+        None,
+        alias="bankHolidaysTreatment",
+        description="Specifies whether the dates defined include holidays or not.",
     )

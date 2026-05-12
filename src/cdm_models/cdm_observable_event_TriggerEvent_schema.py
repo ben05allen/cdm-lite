@@ -18,7 +18,9 @@ class TriggerEvent(BaseModel):
     trigger_dates: cdm_base_datetime_DateList_schema.DateList | None = Field(
         None, alias="triggerDates", description="The trigger Dates."
     )
-    trigger: cdm_observable_event_Trigger_schema.Trigger = Field(..., description="The trigger level")
+    trigger: cdm_observable_event_Trigger_schema.Trigger = Field(
+        ..., description="The trigger level"
+    )
     feature_payment: cdm_observable_event_FeaturePayment_schema.FeaturePayment | None = Field(
         None,
         alias="featurePayment",

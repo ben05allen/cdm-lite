@@ -79,8 +79,10 @@ class CreditEvents(BaseModel):
         alias="defaultRequirement",
         description="In relation to certain credit events, serves as a threshold for Obligation Acceleration, Obligation Default, Repudiation/Moratorium and Restructuring. Market standard is USD 10,000,000 (JPY 1,000,000,000 for all Japanese Yen trades). This is applied on an aggregate or total basis across all Obligations of the Reference Entity. Used to prevent technical/operational errors from triggering credit events. ISDA 2003 Term: Default Requirement.",
     )
-    credit_event_notice: cdm_observable_event_CreditEventNotice_schema.CreditEventNotice | None = Field(
-        None,
-        alias="creditEventNotice",
-        description="A specified condition to settlement. An irrevocable written or verbal notice that describes a credit event that has occurred. The notice is sent from the notifying party (either the buyer or the seller) to the counterparty. It provides information relevant to determining that a credit event has occurred. This is typically accompanied by Publicly Available Information. ISDA 2003 Term: Credit Event Notice.",
+    credit_event_notice: cdm_observable_event_CreditEventNotice_schema.CreditEventNotice | None = (
+        Field(
+            None,
+            alias="creditEventNotice",
+            description="A specified condition to settlement. An irrevocable written or verbal notice that describes a credit event that has occurred. The notice is sent from the notifying party (either the buyer or the seller) to the counterparty. It provides information relevant to determining that a credit event has occurred. This is typically accompanied by Publicly Available Information. ISDA 2003 Term: Credit Event Notice.",
+        )
     )

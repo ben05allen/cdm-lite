@@ -8,7 +8,9 @@ from . import cdm_product_asset_BoundedVariance_schema
 
 class VarianceCapFloor(BaseModel):
     variance_cap: bool = Field(
-        ..., alias="varianceCap", description="If present and true, then variance cap is applicable."
+        ...,
+        alias="varianceCap",
+        description="If present and true, then variance cap is applicable.",
     )
     unadjusted_variance_cap: float | None = Field(
         None,

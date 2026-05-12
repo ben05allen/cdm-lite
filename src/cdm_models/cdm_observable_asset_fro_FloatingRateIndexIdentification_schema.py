@@ -18,7 +18,7 @@ class FloatingRateIndexIdentification(BaseModel):
         alias="floatingRateIndex",
         description="The reference index that is used to specify the floating interest rate. The FpML standard maintains the list of such indices, which are positioned as enumeration values as part of the CDM.",
     )
-    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum | None = Field(
-        None, description="FRO currency - 3 character ISO currrency code"
-    )
+    currency: (
+        cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum | None
+    ) = Field(None, description="FRO currency - 3 character ISO currrency code")
     fro_type: str | None = Field(None, alias="froType", description="FRO type (e.g. OIS)")

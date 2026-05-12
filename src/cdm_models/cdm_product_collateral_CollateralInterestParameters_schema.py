@@ -13,28 +13,41 @@ from . import (
 
 
 class CollateralInterestParameters(BaseModel):
-    posting_party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
+    posting_party: (
+        cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None
+    ) = Field(
         None,
         alias="postingParty",
         description="Represents the party to which these parameters apply (the applicable party).  In other words, if the parameters are different depending on which party is posting/holding the collateral, for which party to the Collateral Agreement (Party 1 or Party 2) that is posting the collateral do these parameters apply?",
     )
-    margin_type: cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None = Field(
+    margin_type: (
+        cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None
+    ) = Field(
         None,
         alias="marginType",
         description="Specifies the type of margin for which interest is being calculated, if the parameters are different depending on type of margin (initial or variation).",
     )
-    currency: str | None = Field(None, description="Specifies the currency for which the parameters are captured.")
+    currency: str | None = Field(
+        None, description="Specifies the currency for which the parameters are captured."
+    )
     interest_calculation_parameters: (
         cdm_product_collateral_CollateralInterestCalculationParameters_schema.CollateralInterestCalculationParameters
         | None
     ) = Field(
-        None, alias="interestCalculationParameters", description="Represents the basic interest calculation parameters."
+        None,
+        alias="interestCalculationParameters",
+        description="Represents the basic interest calculation parameters.",
     )
-    interest_calculation_frequency: cdm_base_datetime_CalculationFrequency_schema.CalculationFrequency | None = Field(
-        None, alias="interestCalculationFrequency", description="Represents how often and when interest is calculated."
+    interest_calculation_frequency: (
+        cdm_base_datetime_CalculationFrequency_schema.CalculationFrequency | None
+    ) = Field(
+        None,
+        alias="interestCalculationFrequency",
+        description="Represents how often and when interest is calculated.",
     )
     interest_handling_parameters: (
-        cdm_product_collateral_CollateralInterestHandlingParameters_schema.CollateralInterestHandlingParameters | None
+        cdm_product_collateral_CollateralInterestHandlingParameters_schema.CollateralInterestHandlingParameters
+        | None
     ) = Field(
         None,
         alias="interestHandlingParameters",

@@ -12,11 +12,16 @@ class CollateralInterestNotification(BaseModel):
         description="Specifies what triggers notification (should be enum) Interest Statement Frequency, Period End Date.",
     )
     offset: float = Field(
-        ..., description="Specifies the number of days before (negative) or after (positive) the trigger event."
+        ...,
+        description="Specifies the number of days before (negative) or after (positive) the trigger event.",
     )
     notification_time: str = Field(
-        ..., alias="notificationTime", description="Specifies the time of day that the notification should occur."
+        ...,
+        alias="notificationTime",
+        description="Specifies the time of day that the notification should occur.",
     )
     notification_day_type: cdm_base_datetime_DayTypeEnum_schema.DayTypeEnum = Field(
-        ..., alias="notificationDayType", description="The type of days on which notification should occur."
+        ...,
+        alias="notificationDayType",
+        description="The type of days on which notification should occur.",
     )

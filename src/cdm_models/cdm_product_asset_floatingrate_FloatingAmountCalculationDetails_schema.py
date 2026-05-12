@@ -23,14 +23,16 @@ class FloatingAmountCalculationDetails(BaseModel):
         description="The notional in effect during the calculation period.",
     )
     floating_rate: (
-        cdm_product_asset_floatingrate_FloatingRateSettingDetails_schema.FloatingRateSettingDetails | None
+        cdm_product_asset_floatingrate_FloatingRateSettingDetails_schema.FloatingRateSettingDetails
+        | None
     ) = Field(
         None,
         alias="floatingRate",
         description="The details of the floating rate setting.  (If it is a calculated rate, details of that calculation will be inside that.",
     )
     processing_details: (
-        cdm_product_asset_floatingrate_FloatingRateProcessingDetails_schema.FloatingRateProcessingDetails | None
+        cdm_product_asset_floatingrate_FloatingRateProcessingDetails_schema.FloatingRateProcessingDetails
+        | None
     ) = Field(
         None,
         alias="processingDetails",

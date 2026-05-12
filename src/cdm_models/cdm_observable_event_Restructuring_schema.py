@@ -7,10 +7,17 @@ from . import cdm_observable_event_metafields_FieldWithMetaRestructuringEnum_sch
 
 
 class Restructuring(BaseModel):
-    applicable: bool = Field(..., description="Indicates whether the restructuring provision is applicable.")
+    applicable: bool = Field(
+        ..., description="Indicates whether the restructuring provision is applicable."
+    )
     restructuring_type: (
-        cdm_observable_event_metafields_FieldWithMetaRestructuringEnum_schema.FieldWithMetaRestructuringEnum | None
-    ) = Field(None, alias="restructuringType", description="Specifies the type of restructuring that is applicable.")
+        cdm_observable_event_metafields_FieldWithMetaRestructuringEnum_schema.FieldWithMetaRestructuringEnum
+        | None
+    ) = Field(
+        None,
+        alias="restructuringType",
+        description="Specifies the type of restructuring that is applicable.",
+    )
     multiple_holder_obligation: bool | None = Field(
         None,
         alias="multipleHolderObligation",

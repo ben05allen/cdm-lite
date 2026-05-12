@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_math_RoundingModeEnum_schema, cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema
+from . import (
+    cdm_base_math_RoundingModeEnum_schema,
+    cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema,
+)
 
 
 class CollateralRounding(BaseModel):
@@ -28,7 +31,8 @@ class CollateralRounding(BaseModel):
         description="The rounding rule applicable to the Return Amount (which can be (i) up to nearest; (ii) down to nearest).",
     )
     currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = Field(
-        ..., description="The currency in which the Delivery Amount and Return Amount rounding amounts are specified."
+        ...,
+        description="The currency in which the Delivery Amount and Return Amount rounding amounts are specified.",
     )
     other: str | None = Field(
         None,

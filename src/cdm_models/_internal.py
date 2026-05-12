@@ -29,9 +29,16 @@ class ExerciseInstruction(BaseModel):
         description="Contains instructions for exercising the option including a quantity change, and optionally a transfer.",
     )
     exercise_option: (
-        cdm_product_template_metafields_ReferenceWithMetaOptionPayout_schema.ReferenceWithMetaOptionPayout | None
-    ) = Field(None, alias="exerciseOption", description="Specifies the Option Payout being exercised on the trade.")
-    exercise_date: cdm_base_datetime_AdjustableOrAdjustedDate_schema.AdjustableOrAdjustedDate | None = Field(
+        cdm_product_template_metafields_ReferenceWithMetaOptionPayout_schema.ReferenceWithMetaOptionPayout
+        | None
+    ) = Field(
+        None,
+        alias="exerciseOption",
+        description="Specifies the Option Payout being exercised on the trade.",
+    )
+    exercise_date: (
+        cdm_base_datetime_AdjustableOrAdjustedDate_schema.AdjustableOrAdjustedDate | None
+    ) = Field(
         None,
         alias="exerciseDate",
         description="Specifies the date on which an option contained within the financial product would be exercised. The date may be omitted if the contractual product allows for only a single date of exercise (European exercise).",
@@ -41,7 +48,9 @@ class ExerciseInstruction(BaseModel):
         alias="exerciseTime",
         description="Specifies the time at which an option contained within the financial product woulld be exercised. The time may be omitted if the contractual product allows for only a single time of exercise (European exercise). ",
     )
-    replacement_trade_identifier: list[cdm_event_common_TradeIdentifier_schema.TradeIdentifier] | None = Field(
+    replacement_trade_identifier: (
+        list[cdm_event_common_TradeIdentifier_schema.TradeIdentifier] | None
+    ) = Field(
         None,
         alias="replacementTradeIdentifier",
         description="Specifies the trade identifier to apply to the replacement trade for physical exercise.",
@@ -50,12 +59,12 @@ class ExerciseInstruction(BaseModel):
 
 
 class PrimitiveInstruction(BaseModel):
-    contract_formation: cdm_event_common_ContractFormationInstruction_schema.ContractFormationInstruction | None = (
-        Field(
-            None,
-            alias="contractFormation",
-            description="Specifies instructions describing an contract formation primitive event.",
-        )
+    contract_formation: (
+        cdm_event_common_ContractFormationInstruction_schema.ContractFormationInstruction | None
+    ) = Field(
+        None,
+        alias="contractFormation",
+        description="Specifies instructions describing an contract formation primitive event.",
     )
     execution: cdm_event_common_ExecutionInstruction_schema.ExecutionInstruction | None = Field(
         None, description="Specifies instructions describing an execution primitive event."
@@ -63,10 +72,16 @@ class PrimitiveInstruction(BaseModel):
     exercise: ExerciseInstruction | None = Field(
         None, description="Specifies instructions describing an exercise primitive event."
     )
-    party_change: cdm_event_common_PartyChangeInstruction_schema.PartyChangeInstruction | None = Field(
-        None, alias="partyChange", description="Specifies instructions describing a party change primitive event."
+    party_change: cdm_event_common_PartyChangeInstruction_schema.PartyChangeInstruction | None = (
+        Field(
+            None,
+            alias="partyChange",
+            description="Specifies instructions describing a party change primitive event.",
+        )
     )
-    quantity_change: cdm_event_common_QuantityChangeInstruction_schema.QuantityChangeInstruction | None = Field(
+    quantity_change: (
+        cdm_event_common_QuantityChangeInstruction_schema.QuantityChangeInstruction | None
+    ) = Field(
         None,
         alias="quantityChange",
         description="Specifies instructions describing an quantity change primitive event.",
@@ -77,22 +92,30 @@ class PrimitiveInstruction(BaseModel):
     split: SplitInstruction | None = Field(
         None, description="Specifies instructions to split a trade into multiple branches."
     )
-    terms_change: cdm_event_common_TermsChangeInstruction_schema.TermsChangeInstruction | None = Field(
-        None, alias="termsChange", description="Specifies instructions describing a terms change primitive event."
+    terms_change: cdm_event_common_TermsChangeInstruction_schema.TermsChangeInstruction | None = (
+        Field(
+            None,
+            alias="termsChange",
+            description="Specifies instructions describing a terms change primitive event.",
+        )
     )
     transfer: cdm_event_common_TransferInstruction_schema.TransferInstruction | None = Field(
         None, description="Specifies instructions describing a transfer primitive event."
     )
-    index_transition: cdm_event_common_IndexTransitionInstruction_schema.IndexTransitionInstruction | None = Field(
+    index_transition: (
+        cdm_event_common_IndexTransitionInstruction_schema.IndexTransitionInstruction | None
+    ) = Field(
         None,
         alias="indexTransition",
         description="Specifies inputs needed to process a Index Transition business event.",
     )
     stock_split: cdm_event_common_StockSplitInstruction_schema.StockSplitInstruction | None = Field(
-        None, alias="stockSplit", description="Specifies inputs needed to process a Stock Split business event."
+        None,
+        alias="stockSplit",
+        description="Specifies inputs needed to process a Stock Split business event.",
     )
-    observation: cdm_event_common_ObservationInstruction_schema.ObservationInstruction | None = Field(
-        None, description="Specifies inputs needed to process an observation."
+    observation: cdm_event_common_ObservationInstruction_schema.ObservationInstruction | None = (
+        Field(None, description="Specifies inputs needed to process an observation.")
     )
     valuation: cdm_event_common_ValuationInstruction_schema.ValuationInstruction | None = Field(
         None, description="Specifies inputs needed to process an update of a valuation."

@@ -13,7 +13,10 @@ from . import (
 
 class CollateralTaxonomyValue(BaseModel):
     eu_emir_eligible_collateral: (
-        list[cdm_base_staticdata_asset_common_EU_EMIR_EligibleCollateralEnum_schema.EUEMIREligibleCollateralEnum] | None
+        list[
+            cdm_base_staticdata_asset_common_EU_EMIR_EligibleCollateralEnum_schema.EUEMIREligibleCollateralEnum
+        ]
+        | None
     ) = Field(
         None,
         alias="eu_EMIR_EligibleCollateral",
@@ -21,7 +24,10 @@ class CollateralTaxonomyValue(BaseModel):
         min_length=0,
     )
     uk_emir_eligible_collateral: (
-        list[cdm_base_staticdata_asset_common_UK_EMIR_EligibleCollateralEnum_schema.UKEMIREligibleCollateralEnum] | None
+        list[
+            cdm_base_staticdata_asset_common_UK_EMIR_EligibleCollateralEnum_schema.UKEMIREligibleCollateralEnum
+        ]
+        | None
     ) = Field(
         None,
         alias="uk_EMIR_EligibleCollateral",
@@ -29,7 +35,9 @@ class CollateralTaxonomyValue(BaseModel):
         min_length=0,
     )
     us_cftc_pr_eligible_collateral: (
-        list[cdm_base_staticdata_asset_common_US_CFTC_PR_EligibleCollateralEnum_schema.USCFTCPREligibleCollateralEnum]
+        list[
+            cdm_base_staticdata_asset_common_US_CFTC_PR_EligibleCollateralEnum_schema.USCFTCPREligibleCollateralEnum
+        ]
         | None
     ) = Field(
         None,

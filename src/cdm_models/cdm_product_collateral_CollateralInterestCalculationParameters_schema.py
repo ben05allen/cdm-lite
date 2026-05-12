@@ -18,31 +18,42 @@ class CollateralInterestCalculationParameters(BaseModel):
         None, alias="fixedRate", description="Specifies the applicable fixed rate  if used."
     )
     floating_rate: (
-        cdm_product_collateral_CollateralAgreementFloatingRate_schema.CollateralAgreementFloatingRate | None
-    ) = Field(None, alias="floatingRate", description="Specifies the floating interest rate to be used.")
+        cdm_product_collateral_CollateralAgreementFloatingRate_schema.CollateralAgreementFloatingRate
+        | None
+    ) = Field(
+        None, alias="floatingRate", description="Specifies the floating interest rate to be used."
+    )
     in_base_currency: bool = Field(
         ...,
         alias="inBaseCurrency",
         description="If True, specifies that the interest transfers should be converted to base currency equivalent, or if False specifies that the transfer should be in the currency of the collateral.",
     )
-    compounding_type: cdm_base_datetime_CompoundingTypeEnum_schema.CompoundingTypeEnum | None = Field(
-        None,
-        alias="compoundingType",
-        description="Specifies the type of compounding to be applied (None, Business, Calendar).",
+    compounding_type: cdm_base_datetime_CompoundingTypeEnum_schema.CompoundingTypeEnum | None = (
+        Field(
+            None,
+            alias="compoundingType",
+            description="Specifies the type of compounding to be applied (None, Business, Calendar).",
+        )
     )
-    compounding_business_center: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = Field(
+    compounding_business_center: (
+        list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None
+    ) = Field(
         None,
         alias="compoundingBusinessCenter",
         description="Specifies the applicable business centers for compounding.",
         min_length=0,
     )
     day_count_fraction: cdm_base_datetime_daycount_DayCountFractionEnum_schema.DayCountFractionEnum = Field(
-        ..., alias="dayCountFraction", description="Specifies the day count fraction to use for that currency."
+        ...,
+        alias="dayCountFraction",
+        description="Specifies the day count fraction to use for that currency.",
     )
     rounding: cdm_base_math_Rounding_schema.Rounding | None = Field(
         None, description="Specifies the rounding rules for settling in that currency."
     )
-    rounding_frequency: cdm_base_datetime_RoundingFrequencyEnum_schema.RoundingFrequencyEnum | None = Field(
+    rounding_frequency: (
+        cdm_base_datetime_RoundingFrequencyEnum_schema.RoundingFrequencyEnum | None
+    ) = Field(
         None, alias="roundingFrequency", description="Specifies when/how often is rounding applied?"
     )
     withholding_tax_rate: float | None = Field(

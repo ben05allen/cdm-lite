@@ -12,7 +12,9 @@ class FroHistory(BaseModel):
         alias="startDate",
         description="The date the Floating Rate Option was added to the 2006 Definitions or 2021 Floating Rate Matrix. (e.g. 2017/04/06)",
     )
-    first_defined_in: cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition | None = Field(
+    first_defined_in: (
+        cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition | None
+    ) = Field(
         None,
         alias="firstDefinedIn",
         description="The supplement or version the FRO was first added to the 2006 Definitions or 2021 Floating Rate Matrix. (e.g. S52)",
@@ -22,7 +24,9 @@ class FroHistory(BaseModel):
         alias="updateDate",
         description="The date the Floating Rate Option was last updated in the 2006 Definitions or 2021 Floating Rate Matrix. (e.g. 2021/06/11)",
     )
-    last_updated_in: cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition | None = Field(
+    last_updated_in: (
+        cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition | None
+    ) = Field(
         None,
         alias="lastUpdatedIn",
         description="The supplement or version the FRO was last updated in the 2006 Definitions or 2021 Floating Rate Matrix. (e.g. FRO-M-V1)",

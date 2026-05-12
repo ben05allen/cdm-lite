@@ -8,5 +8,8 @@ from . import cdm_event_common_TransferState_schema
 
 class TransferInstruction(BaseModel):
     transfer_state: list[cdm_event_common_TransferState_schema.TransferState] | None = Field(
-        None, alias="transferState", description="Specifies the terms and state of a transfers.", min_length=0
+        None,
+        alias="transferState",
+        description="Specifies the terms and state of a transfers.",
+        min_length=0,
     )

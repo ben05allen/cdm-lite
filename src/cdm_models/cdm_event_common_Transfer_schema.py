@@ -21,23 +21,35 @@ class Transfer(BaseModel):
         description="Represents the amount of the asset to be transferred. The cashflow amount is always a positive number, as the cashflow direction is implied by the payer/receiver attribute.",
     )
     asset: cdm_base_staticdata_asset_common_Asset_schema.Asset | None = Field(
-        None, description="Represents the object that is subject to the transfer, it could be an asset or a reference."
+        None,
+        description="Represents the object that is subject to the transfer, it could be an asset or a reference.",
     )
     settlement_date: (
-        cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate | None
-    ) = Field(None, alias="settlementDate", description="Represents the date on which the transfer to due.")
+        cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate
+        | None
+    ) = Field(
+        None,
+        alias="settlementDate",
+        description="Represents the date on which the transfer to due.",
+    )
     identifier: (
-        list[cdm_base_staticdata_identifier_metafields_FieldWithMetaIdentifier_schema.FieldWithMetaIdentifier] | None
+        list[
+            cdm_base_staticdata_identifier_metafields_FieldWithMetaIdentifier_schema.FieldWithMetaIdentifier
+        ]
+        | None
     ) = Field(None, description="Represents a unique reference to the transfer.", min_length=0)
     payer_receiver: cdm_base_staticdata_party_PartyReferencePayerReceiver_schema.PartyReferencePayerReceiver = Field(
-        ..., alias="payerReceiver", description="Represents the parties to the transfer and their role."
+        ...,
+        alias="payerReceiver",
+        description="Represents the parties to the transfer and their role.",
     )
-    settlement_origin: cdm_product_template_metafields_ReferenceWithMetaPayout_schema.ReferenceWithMetaPayout | None = (
-        Field(
-            None,
-            alias="settlementOrigin",
-            description="Represents the origin to the transfer as a reference for lineage purposes, whether it originated from trade level settlement terms or from payment terms on an economic payout.",
-        )
+    settlement_origin: (
+        cdm_product_template_metafields_ReferenceWithMetaPayout_schema.ReferenceWithMetaPayout
+        | None
+    ) = Field(
+        None,
+        alias="settlementOrigin",
+        description="Represents the origin to the transfer as a reference for lineage purposes, whether it originated from trade level settlement terms or from payment terms on an economic payout.",
     )
     reset_origin: cdm_event_common_Reset_schema.Reset | None = Field(
         None,

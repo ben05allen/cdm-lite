@@ -7,8 +7,12 @@ from . import cdm_base_math_AveragingCalculationMethod_schema, cdm_base_math_Rou
 
 
 class AveragingCalculation(BaseModel):
-    averaging_method: cdm_base_math_AveragingCalculationMethod_schema.AveragingCalculationMethod = Field(
-        ..., alias="averagingMethod", description="Specifies enumerations for the type of averaging calculation."
+    averaging_method: cdm_base_math_AveragingCalculationMethod_schema.AveragingCalculationMethod = (
+        Field(
+            ...,
+            alias="averagingMethod",
+            description="Specifies enumerations for the type of averaging calculation.",
+        )
     )
     precision: cdm_base_math_Rounding_schema.Rounding = Field(
         ..., description="Rounding applied to the average calculation. "

@@ -18,7 +18,9 @@ from . import (
 
 
 class CreditIndex(BaseModel):
-    identifier: list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None = Field(
+    identifier: (
+        list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None
+    ) = Field(
         None,
         description="Asset Identifiers are used to uniquely identify an Asset, using a specified Asset Identifier Type.",
         min_length=1,
@@ -29,40 +31,57 @@ class CreditIndex(BaseModel):
         min_length=0,
     )
     is_exchange_listed: bool | None = Field(
-        None, alias="isExchangeListed", description="Defines whether the Asset is listed on a public exchange."
+        None,
+        alias="isExchangeListed",
+        description="Defines whether the Asset is listed on a public exchange.",
     )
     exchange: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="If the Asset is listed, defines the public exchange of the listing."
     )
     related_exchange: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
-        None, alias="relatedExchange", description="Provides the related Exchanges, if applicable.", min_length=0
+        None,
+        alias="relatedExchange",
+        description="Provides the related Exchanges, if applicable.",
+        min_length=0,
     )
-    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="A description of the Index."
+    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(None, description="A description of the Index.")
     )
     provider: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="The organisation that creates or maintains the Index."
     )
-    asset_class: cdm_base_staticdata_asset_common_AssetClassEnum_schema.AssetClassEnum | None = Field(
-        None, alias="assetClass", description="The Asset Class of the Index."
+    asset_class: cdm_base_staticdata_asset_common_AssetClassEnum_schema.AssetClassEnum | None = (
+        Field(None, alias="assetClass", description="The Asset Class of the Index.")
     )
     index_series: int | None = Field(
         None, alias="indexSeries", description="A CDS index series identifier, e.g. 1, 2, 3 etc."
     )
     index_annex_version: int | None = Field(
-        None, alias="indexAnnexVersion", description="A CDS index series version identifier, e.g. 1, 2, 3 etc."
+        None,
+        alias="indexAnnexVersion",
+        description="A CDS index series version identifier, e.g. 1, 2, 3 etc.",
     )
-    index_annex_date: str | None = Field(None, alias="indexAnnexDate", description="A CDS index series annex date.")
+    index_annex_date: str | None = Field(
+        None, alias="indexAnnexDate", description="A CDS index series annex date."
+    )
     index_annex_source: (
-        cdm_product_asset_metafields_FieldWithMetaIndexAnnexSourceEnum_schema.FieldWithMetaIndexAnnexSourceEnum | None
+        cdm_product_asset_metafields_FieldWithMetaIndexAnnexSourceEnum_schema.FieldWithMetaIndexAnnexSourceEnum
+        | None
     ) = Field(None, alias="indexAnnexSource", description="A CDS index series annex source.")
-    excluded_reference_entity: list[cdm_product_asset_ReferenceInformation_schema.ReferenceInformation] | None = Field(
-        None, alias="excludedReferenceEntity", description="Excluded reference entity.", min_length=0
+    excluded_reference_entity: (
+        list[cdm_product_asset_ReferenceInformation_schema.ReferenceInformation] | None
+    ) = Field(
+        None,
+        alias="excludedReferenceEntity",
+        description="Excluded reference entity.",
+        min_length=0,
     )
     tranche: cdm_product_asset_Tranche_schema.Tranche | None = Field(
         None, description="This element contains CDS tranche terms."
     )
-    settled_entity_matrix: cdm_product_asset_SettledEntityMatrix_schema.SettledEntityMatrix | None = Field(
+    settled_entity_matrix: (
+        cdm_product_asset_SettledEntityMatrix_schema.SettledEntityMatrix | None
+    ) = Field(
         None,
         alias="settledEntityMatrix",
         description="Used to specify the Relevant Settled Entity Matrix when there are settled entities at the time of the trade.",

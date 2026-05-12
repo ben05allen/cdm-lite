@@ -11,16 +11,17 @@ from . import (
 
 
 class SecurityInterestForObligations(BaseModel):
-    party: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    party: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         description="The elective party to which the Security Interest for Obligations is applicable.",
         max_length=2,
         min_length=2,
     )
-    obligations: cdm_legaldocumentation_csa_SecurityInterestObligationsEnum_schema.SecurityInterestObligationsEnum = (
-        Field(
-            ..., description="A description of any additional obligations secured by the credit support arrangements."
-        )
+    obligations: cdm_legaldocumentation_csa_SecurityInterestObligationsEnum_schema.SecurityInterestObligationsEnum = Field(
+        ...,
+        description="A description of any additional obligations secured by the credit support arrangements.",
     )
     obligee: cdm_legaldocumentation_csa_SecurityInterestObligeeEnum_schema.SecurityInterestObligeeEnum = Field(
         ...,

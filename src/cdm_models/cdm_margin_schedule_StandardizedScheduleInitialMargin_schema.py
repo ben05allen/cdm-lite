@@ -3,11 +3,17 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_margin_schedule_StandardizedScheduleTradeInfo_schema, cdm_observable_asset_Money_schema
+from . import (
+    cdm_margin_schedule_StandardizedScheduleTradeInfo_schema,
+    cdm_observable_asset_Money_schema,
+)
 
 
 class StandardizedScheduleInitialMargin(BaseModel):
-    trade_info: list[cdm_margin_schedule_StandardizedScheduleTradeInfo_schema.StandardizedScheduleTradeInfo] | None = (
-        Field(None, alias="tradeInfo", min_length=0)
+    trade_info: (
+        list[cdm_margin_schedule_StandardizedScheduleTradeInfo_schema.StandardizedScheduleTradeInfo]
+        | None
+    ) = Field(None, alias="tradeInfo", min_length=0)
+    net_initial_margin: cdm_observable_asset_Money_schema.Money = Field(
+        ..., alias="netInitialMargin"
     )
-    net_initial_margin: cdm_observable_asset_Money_schema.Money = Field(..., alias="netInitialMargin")

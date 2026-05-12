@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_AncillaryRoleEnum_schema, cdm_legaldocumentation_transaction_Clause_schema
+from . import (
+    cdm_base_staticdata_party_AncillaryRoleEnum_schema,
+    cdm_legaldocumentation_transaction_Clause_schema,
+)
 
 
 class AdditionalDisruptionEvents(BaseModel):
@@ -25,10 +28,16 @@ class AdditionalDisruptionEvents(BaseModel):
         alias="initialStockLoanRate",
         description="Specifies the initial stock loan per ISDA Def. A percentage of 5% is represented as 0.05.",
     )
-    determining_party: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = Field(
-        None, alias="determiningParty", description="Specifies the party which determines additional disruption events."
+    determining_party: (
+        cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None
+    ) = Field(
+        None,
+        alias="determiningParty",
+        description="Specifies the party which determines additional disruption events.",
     )
-    additional_bespoke_terms: list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None = Field(
+    additional_bespoke_terms: (
+        list[cdm_legaldocumentation_transaction_Clause_schema.Clause] | None
+    ) = Field(
         None,
         alias="additionalBespokeTerms",
         description="Where parties may optionnaly describe any extra bespoke agreements, in regards of the standardized Extraordinary Events.",

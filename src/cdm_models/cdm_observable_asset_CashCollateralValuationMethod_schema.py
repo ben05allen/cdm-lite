@@ -28,12 +28,16 @@ class CashCollateralValuationMethod(BaseModel):
         alias="cashCollateralInterestRate",
         description="This may be used to indicate the interest rate to be used for cash collateral for cash settlement purposes.",
     )
-    agreed_discount_rate: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    agreed_discount_rate: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="agreedDiscountRate",
         description="This may be used to indicate the discount rate to be used for cash collateral for cash settlement purposes.",
     )
-    protected_party: list[cdm_observable_asset_PartyDeterminationEnum_schema.PartyDeterminationEnum] | None = Field(
+    protected_party: (
+        list[cdm_observable_asset_PartyDeterminationEnum_schema.PartyDeterminationEnum] | None
+    ) = Field(
         None,
         alias="protectedParty",
         description="This may be used to specify which party is protected (e.g. under Replacement Value cash settlement methods).",

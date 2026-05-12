@@ -3,9 +3,14 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel
-from . import cdm_product_asset_SettledEntityMatrixSourceEnum_schema, com_rosetta_model_metafields_MetaFields_schema
+from . import (
+    cdm_product_asset_SettledEntityMatrixSourceEnum_schema,
+    com_rosetta_model_metafields_MetaFields_schema,
+)
 
 
 class FieldWithMetaSettledEntityMatrixSourceEnum(BaseModel):
-    value: cdm_product_asset_SettledEntityMatrixSourceEnum_schema.SettledEntityMatrixSourceEnum | None = None
+    value: (
+        cdm_product_asset_SettledEntityMatrixSourceEnum_schema.SettledEntityMatrixSourceEnum | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

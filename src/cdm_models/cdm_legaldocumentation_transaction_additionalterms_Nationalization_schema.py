@@ -12,13 +12,14 @@ from . import (
 
 class Nationalization(BaseModel):
     nationalization_is_applicable: bool = Field(..., alias="nationalizationIsApplicable")
-    relevant_affiliate: list[cdm_base_staticdata_party_AncillaryEntity_schema.AncillaryEntity] | None = Field(
-        None, alias="relevantAffiliate", min_length=0
-    )
+    relevant_affiliate: (
+        list[cdm_base_staticdata_party_AncillaryEntity_schema.AncillaryEntity] | None
+    ) = Field(None, alias="relevantAffiliate", min_length=0)
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")
     assignment_of_claim: bool | None = Field(None, alias="assignmentOfClaim")
-    maximum_days_of_disruption: cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None = Field(
-        None, alias="maximumDaysOfDisruption"
-    )
+    maximum_days_of_disruption: (
+        cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None
+    ) = Field(None, alias="maximumDaysOfDisruption")

@@ -13,7 +13,8 @@ from . import (
 
 class RegimeTerms(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
-        ..., description="The party for which the regime terms are being specified when acting as collateral taker."
+        ...,
+        description="The party for which the regime terms are being specified when acting as collateral taker.",
     )
     is_applicable: cdm_legaldocumentation_csa_ExceptionEnum_schema.ExceptionEnum | None = Field(
         None,
@@ -26,9 +27,13 @@ class RegimeTerms(BaseModel):
         description="The bespoke party specific Regime term elections applicable when specified.",
     )
     simm_exception: cdm_legaldocumentation_csa_SimmException_schema.SimmException | None = Field(
-        None, alias="simmException", description="The election for SIMM exception to the regulatory regime clause."
+        None,
+        alias="simmException",
+        description="The election for SIMM exception to the regulatory regime clause.",
     )
-    retrospective_effect: cdm_legaldocumentation_csa_RetrospectiveEffect_schema.RetrospectiveEffect | None = Field(
+    retrospective_effect: (
+        cdm_legaldocumentation_csa_RetrospectiveEffect_schema.RetrospectiveEffect | None
+    ) = Field(
         None,
         alias="retrospectiveEffect",
         description="Specifies the retrospective effect exception to the regulatory regime clause of Initial Margin documents as either a normalized value specified as part of an enumeration or a customized value specified of type string.",

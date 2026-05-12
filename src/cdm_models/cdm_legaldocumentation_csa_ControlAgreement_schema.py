@@ -8,5 +8,12 @@ from . import cdm_legaldocumentation_csa_ControlAgreementElections_schema
 
 class ControlAgreement(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_ControlAgreementElections_schema.ControlAgreementElections] | None
-    ) = Field(None, alias="partyElection", description="The party specific elections.", max_length=2, min_length=2)
+        list[cdm_legaldocumentation_csa_ControlAgreementElections_schema.ControlAgreementElections]
+        | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The party specific elections.",
+        max_length=2,
+        min_length=2,
+    )

@@ -3,12 +3,15 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_Address_schema, cdm_base_staticdata_party_TelephoneNumber_schema
+from . import (
+    cdm_base_staticdata_party_Address_schema,
+    cdm_base_staticdata_party_TelephoneNumber_schema,
+)
 
 
 class ContactInformation(BaseModel):
-    telephone: list[cdm_base_staticdata_party_TelephoneNumber_schema.TelephoneNumber] | None = Field(
-        None, description="The telephone number.", min_length=0
+    telephone: list[cdm_base_staticdata_party_TelephoneNumber_schema.TelephoneNumber] | None = (
+        Field(None, description="The telephone number.", min_length=0)
     )
     address: list[cdm_base_staticdata_party_Address_schema.Address] | None = Field(
         None, description="The street/postal address.", min_length=0

@@ -3,11 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_party_EntityIdentifier_schema, com_rosetta_model_metafields_FieldWithMetaString_schema
+from . import (
+    cdm_base_staticdata_party_EntityIdentifier_schema,
+    com_rosetta_model_metafields_FieldWithMetaString_schema,
+)
 
 
 class LegalEntity(BaseModel):
-    entity_id: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    entity_id: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         alias="entityId",
         description="A legal entity identifier (e.g. RED entity code). This type is deprecated. It is recommended to use entityIdentifier.",
@@ -16,7 +21,9 @@ class LegalEntity(BaseModel):
     name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
         ..., description="The legal entity name."
     )
-    entity_identifier: list[cdm_base_staticdata_party_EntityIdentifier_schema.EntityIdentifier] | None = Field(
+    entity_identifier: (
+        list[cdm_base_staticdata_party_EntityIdentifier_schema.EntityIdentifier] | None
+    ) = Field(
         None,
         alias="entityIdentifier",
         description="A legal entity identifier with a source (e.g. RED entity code).",

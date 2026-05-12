@@ -24,13 +24,16 @@ class ObservationTerms(BaseModel):
         alias="observationTimeType",
         description="The enumerated values to specify points in the day when option exercise and valuation can occur.",
     )
-    information_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = Field(
-        None,
-        alias="informationSource",
-        description="The information source where a published or displayed market rate will be obtained, e.g. Telerate Page 3750.",
+    information_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = (
+        Field(
+            None,
+            alias="informationSource",
+            description="The information source where a published or displayed market rate will be obtained, e.g. Telerate Page 3750.",
+        )
     )
     precision: cdm_base_math_Rounding_schema.Rounding | None = Field(
-        None, description="Defines rounding rules and precision to be used in the rounding of observations."
+        None,
+        description="Defines rounding rules and precision to be used in the rounding of observations.",
     )
     calculation_period_dates: (
         cdm_product_common_schedule_CalculationPeriodDates_schema.CalculationPeriodDates | None

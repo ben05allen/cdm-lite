@@ -12,9 +12,12 @@ from . import (
 class PriceMateriality(BaseModel):
     price_materiality_is_applicable: bool = Field(..., alias="priceMaterialityIsApplicable")
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")
-    fallback_reference_price: cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None = Field(
+    fallback_reference_price: (
+        cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None
+    ) = Field(
         None,
         alias="fallbackReferencePrice",
         description="The method, prioritised by the order it is listed in this element, to get a replacement rate for the disrupted settlement rate option.",

@@ -18,4 +18,6 @@ class IdentifiedList(BaseModel):
         description="Identifiers for each component of the list. Since the data type is used to link multiple identified objects together, at least 2 components are required in the list. Creating an identified list with only 1 identified component has been deemed unnecessary, because it would just create a redundant identifier.",
         min_length=2,
     )
-    price: cdm_observable_asset_Price_schema.Price | None = Field(None, description="The price of the package.")
+    price: cdm_observable_asset_Price_schema.Price | None = Field(
+        None, description="The price of the package."
+    )

@@ -8,5 +8,7 @@ from . import cdm_event_common_ObservationEvent_schema
 
 class ObservationInstruction(BaseModel):
     observation_event: cdm_event_common_ObservationEvent_schema.ObservationEvent = Field(
-        ..., alias="observationEvent", description="Contains all information related to an observation."
+        ...,
+        alias="observationEvent",
+        description="Contains all information related to an observation.",
     )

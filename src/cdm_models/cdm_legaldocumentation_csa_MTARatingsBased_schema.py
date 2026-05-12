@@ -20,23 +20,27 @@ class MTARatingsBased(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
         ..., description="The party to which the Minimum Transfer Amount (MTA) applies."
     )
-    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = Field(
-        ..., description="The minimum transfer amount currency code."
+    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = (
+        Field(..., description="The minimum transfer amount currency code.")
     )
     rating_type: cdm_legaldocumentation_csa_RatingTypeEnum_schema.RatingTypeEnum = Field(
         ..., alias="ratingType", description="The relevant rating type."
     )
-    variable_set: list[cdm_legaldocumentation_csa_CSAMTAVariableSet_schema.CSAMTAVariableSet] | None = Field(
+    variable_set: (
+        list[cdm_legaldocumentation_csa_CSAMTAVariableSet_schema.CSAMTAVariableSet] | None
+    ) = Field(
         None,
         alias="variableSet",
         description="Defines a combination of Rating Agency, Rating Value, amount and Currency code.",
         min_length=0,
     )
-    rated_party: cdm_legaldocumentation_csa_MTARatedPartyEnum_schema.MTARatedPartyEnum | None = Field(
-        None, alias="ratedParty", description="The party to which a rating applies."
+    rated_party: cdm_legaldocumentation_csa_MTARatedPartyEnum_schema.MTARatedPartyEnum | None = (
+        Field(None, alias="ratedParty", description="The party to which a rating applies.")
     )
     named_entity: str | None = Field(
-        None, alias="namedEntity", description="Details the Named Entity where the Rated Party is Named Entity."
+        None,
+        alias="namedEntity",
+        description="Details the Named Entity where the Rated Party is Named Entity.",
     )
     named_affiliate: str | None = Field(
         None,
@@ -44,21 +48,32 @@ class MTARatingsBased(BaseModel):
         description="Details the Named Affiliate where the Rated Party is Named Affiliate.",
     )
     compare: (
-        cdm_observable_asset_CreditNotationMismatchResolutionEnum_schema.CreditNotationMismatchResolutionEnum | None
-    ) = Field(None, description="Where two ratings are specified whether the higher or lower rating prevails.")
-    no_rating: bool = Field(..., alias="noRating", description="What conditions apply where a party has no rating.")
+        cdm_observable_asset_CreditNotationMismatchResolutionEnum_schema.CreditNotationMismatchResolutionEnum
+        | None
+    ) = Field(
+        None,
+        description="Where two ratings are specified whether the higher or lower rating prevails.",
+    )
+    no_rating: bool = Field(
+        ..., alias="noRating", description="What conditions apply where a party has no rating."
+    )
     not_rated_by: cdm_legaldocumentation_csa_NotRatedByEnum_schema.NotRatedByEnum | None = Field(
-        None, alias="notRatedBy", description="Defines where conditions apply if no Rating where ratings may not exist."
+        None,
+        alias="notRatedBy",
+        description="Defines where conditions apply if no Rating where ratings may not exist.",
     )
     number_of_rating_agencies: (
-        cdm_legaldocumentation_csa_NumberOfRatingAgenciesEnum_schema.NumberOfRatingAgenciesEnum | None
+        cdm_legaldocumentation_csa_NumberOfRatingAgenciesEnum_schema.NumberOfRatingAgenciesEnum
+        | None
     ) = Field(
         None,
         alias="numberOfRatingAgencies",
         description="Defines the number of Rating Agencies that the Party must be rated by.",
     )
     zero_event: bool = Field(
-        ..., alias="zeroEvent", description="Whether a trigger applies for the threshold to fall to zero."
+        ...,
+        alias="zeroEvent",
+        description="Whether a trigger applies for the threshold to fall to zero.",
     )
     event: list[cdm_legaldocumentation_csa_MTAZeroEventEnum_schema.MTAZeroEventEnum] | None = Field(
         None, description="The relevant trigger for the to fall to zero.", min_length=0

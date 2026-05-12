@@ -18,13 +18,19 @@ class FloatingRateProcessingParameters(BaseModel):
     multiplier: float | None = Field(None, description="floating rate multiplier.")
     spread: float | None = Field(None, description="spread to be added to the floating rate.")
     treatment: cdm_product_asset_RateTreatmentEnum_schema.RateTreatmentEnum | None = Field(
-        None, description="US rate treatment (Bond Equivalent Yield or Money Market Yield, if applicable."
+        None,
+        description="US rate treatment (Bond Equivalent Yield or Money Market Yield, if applicable.",
     )
-    cap_rate: float | None = Field(None, alias="capRate", description="capt to be applied to the floating rate.")
-    floor_rate: float | None = Field(None, alias="floorRate", description="floor to be applied to the floating rate.")
+    cap_rate: float | None = Field(
+        None, alias="capRate", description="capt to be applied to the floating rate."
+    )
+    floor_rate: float | None = Field(
+        None, alias="floorRate", description="floor to be applied to the floating rate."
+    )
     rounding: cdm_base_math_Rounding_schema.Rounding | None = Field(
         None, description="THe final rate rounding to be applied."
     )
     negative_treatment: (
-        cdm_product_asset_NegativeInterestRateTreatmentEnum_schema.NegativeInterestRateTreatmentEnum | None
+        cdm_product_asset_NegativeInterestRateTreatmentEnum_schema.NegativeInterestRateTreatmentEnum
+        | None
     ) = Field(None, alias="negativeTreatment", description="How to handle negative interest rates.")

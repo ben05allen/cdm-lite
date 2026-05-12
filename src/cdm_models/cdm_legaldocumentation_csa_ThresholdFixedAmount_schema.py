@@ -14,8 +14,8 @@ class ThresholdFixedAmount(BaseModel):
         ..., description="The party to which the threshold applies."
     )
     amount: int = Field(..., description="The amount value applicable to the Threshold.")
-    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = Field(
-        ..., description="The Threshold currency code."
+    currency: cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum = (
+        Field(..., description="The Threshold currency code.")
     )
     amount_is_infinity: bool | None = Field(
         None,

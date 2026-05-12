@@ -16,8 +16,9 @@ class AssetFlowBase(BaseModel):
         description="Represents the amount of the asset to be transferred. The cashflow amount is always a positive number, as the cashflow direction is implied by the payer/receiver attribute.",
     )
     asset: cdm_base_staticdata_asset_common_Asset_schema.Asset = Field(
-        ..., description="Represents the object that is subject to the transfer, it could be an asset or a reference."
+        ...,
+        description="Represents the object that is subject to the transfer, it could be an asset or a reference.",
     )
-    settlement_date: cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate = (
-        Field(..., alias="settlementDate", description="Represents the date on which the transfer to due.")
+    settlement_date: cdm_base_datetime_AdjustableOrAdjustedOrRelativeDate_schema.AdjustableOrAdjustedOrRelativeDate = Field(
+        ..., alias="settlementDate", description="Represents the date on which the transfer to due."
     )

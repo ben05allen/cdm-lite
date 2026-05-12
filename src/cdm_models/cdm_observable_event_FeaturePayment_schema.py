@@ -17,14 +17,16 @@ class FeaturePayment(BaseModel):
         alias="payerReceiver",
         description="This attribute doesn't exist as part of the FpML construct, which makes use of the PayerReceiver.model group.",
     )
-    level_percentage: float | None = Field(None, alias="levelPercentage", description="The trigger level percentage.")
+    level_percentage: float | None = Field(
+        None, alias="levelPercentage", description="The trigger level percentage."
+    )
     amount: float | None = Field(None, description="The monetary quantity in currency units.")
     time: cdm_observable_common_TimeTypeEnum_schema.TimeTypeEnum | None = Field(
         None, description="The feature payment time."
     )
-    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="The currency in which an amount is denominated."
+    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(None, description="The currency in which an amount is denominated.")
     )
-    payment_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
-        None, alias="paymentDate", description="The feature payment date."
-    )
+    payment_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(None, alias="paymentDate", description="The feature payment date.")

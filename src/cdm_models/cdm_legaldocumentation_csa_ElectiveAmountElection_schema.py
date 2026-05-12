@@ -14,8 +14,12 @@ class ElectiveAmountElection(BaseModel):
     party: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum = Field(
         ..., description="The elective party."
     )
-    elective_amount: cdm_legaldocumentation_csa_ElectiveAmountEnum_schema.ElectiveAmountEnum | None = Field(
-        None, alias="electiveAmount", description="Specifies an enumerated election to express the elective amount."
+    elective_amount: (
+        cdm_legaldocumentation_csa_ElectiveAmountEnum_schema.ElectiveAmountEnum | None
+    ) = Field(
+        None,
+        alias="electiveAmount",
+        description="Specifies an enumerated election to express the elective amount.",
     )
     amount: cdm_observable_asset_Money_schema.Money | None = Field(
         None,

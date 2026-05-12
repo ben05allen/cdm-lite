@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_event_position_AggregationParameters_schema, cdm_event_position_PortfolioState_schema
+from . import (
+    cdm_event_position_AggregationParameters_schema,
+    cdm_event_position_PortfolioState_schema,
+)
 
 
 class Portfolio(BaseModel):

@@ -13,5 +13,7 @@ class PeriodRange(BaseModel):
         description="Specifies the lower bound of a period range, e.g. greater than or equal to 5Y.",
     )
     upper_bound: cdm_base_datetime_PeriodBound_schema.PeriodBound | None = Field(
-        None, alias="upperBound", description="Specifies the upper bound of a period range, e.g. less than to 10Y."
+        None,
+        alias="upperBound",
+        description="Specifies the upper bound of a period range, e.g. less than to 10Y.",
     )

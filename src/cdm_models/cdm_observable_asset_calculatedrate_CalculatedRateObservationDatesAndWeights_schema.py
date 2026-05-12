@@ -12,4 +12,6 @@ class CalculatedRateObservationDatesAndWeights(BaseModel):
         description="The observation date upon which the rate is observed.",
         min_length=0,
     )
-    weights: list[float] | None = Field(None, description="The corresponding weight for each date.", min_length=0)
+    weights: list[float] | None = Field(
+        None, description="The corresponding weight for each date.", min_length=0
+    )

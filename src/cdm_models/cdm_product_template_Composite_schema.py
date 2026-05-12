@@ -12,18 +12,24 @@ from . import (
 
 
 class Composite(BaseModel):
-    determination_method: cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None = Field(
+    determination_method: (
+        cdm_observable_common_DeterminationMethodEnum_schema.DeterminationMethodEnum | None
+    ) = Field(
         None,
         alias="determinationMethod",
         description="Specifies the method according to which an amount or a date is determined.",
     )
     relative_date: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
-        None, alias="relativeDate", description="A date specified as some offset to another date (the anchor date)."
-    )
-    fx_spot_rate_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = Field(
         None,
-        alias="fxSpotRateSource",
-        description="Specifies the methodology (reference source and, optionally, fixing time) to be used for determining a currency conversion rate.",
+        alias="relativeDate",
+        description="A date specified as some offset to another date (the anchor date).",
+    )
+    fx_spot_rate_source: cdm_observable_asset_FxSpotRateSource_schema.FxSpotRateSource | None = (
+        Field(
+            None,
+            alias="fxSpotRateSource",
+            description="Specifies the methodology (reference source and, optionally, fixing time) to be used for determining a currency conversion rate.",
+        )
     )
     fixing_time: cdm_base_datetime_BusinessCenterTime_schema.BusinessCenterTime | None = Field(
         None,

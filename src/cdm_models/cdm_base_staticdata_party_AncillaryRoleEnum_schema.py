@@ -11,9 +11,15 @@ class AncillaryRoleEnum(StrEnum):
     CALCULATION_AGENT_MANDATORY_EARLY_TERMINATION = "CalculationAgentMandatoryEarlyTermination"
     CALCULATION_AGENT_OPTIONAL_EARLY_TERMINATION = "CalculationAgentOptionalEarlyTermination"
     DISRUPTION_EVENTS_DETERMINING_PARTY = "DisruptionEventsDeterminingParty"
-    EXERCISE_NOTICE_RECEIVER_PARTY_CANCELABLE_PROVISION = "ExerciseNoticeReceiverPartyCancelableProvision"
-    EXERCISE_NOTICE_RECEIVER_PARTY_EXTENDIBLE_PROVISION = "ExerciseNoticeReceiverPartyExtendibleProvision"
+    EXERCISE_NOTICE_RECEIVER_PARTY_CANCELABLE_PROVISION = (
+        "ExerciseNoticeReceiverPartyCancelableProvision"
+    )
+    EXERCISE_NOTICE_RECEIVER_PARTY_EXTENDIBLE_PROVISION = (
+        "ExerciseNoticeReceiverPartyExtendibleProvision"
+    )
     EXERCISE_NOTICE_RECEIVER_PARTY_MANUAL = "ExerciseNoticeReceiverPartyManual"
-    EXERCISE_NOTICE_RECEIVER_PARTY_OPTIONAL_EARLY_TERMINATION = "ExerciseNoticeReceiverPartyOptionalEarlyTermination"
+    EXERCISE_NOTICE_RECEIVER_PARTY_OPTIONAL_EARLY_TERMINATION = (
+        "ExerciseNoticeReceiverPartyOptionalEarlyTermination"
+    )
     EXTRAORDINARY_DIVIDENDS_PARTY = "ExtraordinaryDividendsParty"
     PREDETERMINED_CLEARING_ORGANIZATION_PARTY = "PredeterminedClearingOrganizationParty"

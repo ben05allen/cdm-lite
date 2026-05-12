@@ -14,29 +14,37 @@ from . import (
 
 class CollateralIssuerType(BaseModel):
     issuer_type: cdm_base_staticdata_asset_common_IssuerTypeEnum_schema.IssuerTypeEnum = Field(
-        ..., alias="issuerType", description="Specifies the origin of entity issuing the collateral."
+        ...,
+        alias="issuerType",
+        description="Specifies the origin of entity issuing the collateral.",
     )
     supra_national_type: (
-        cdm_base_staticdata_asset_common_SupraNationalIssuerTypeEnum_schema.SupraNationalIssuerTypeEnum | None
+        cdm_base_staticdata_asset_common_SupraNationalIssuerTypeEnum_schema.SupraNationalIssuerTypeEnum
+        | None
     ) = Field(
         None,
         alias="supraNationalType",
         description="Specifies debt issued by international organisations and multilateral banks.",
     )
     quasi_government_type: (
-        cdm_base_staticdata_asset_common_QuasiGovernmentIssuerType_schema.QuasiGovernmentIssuerType | None
+        cdm_base_staticdata_asset_common_QuasiGovernmentIssuerType_schema.QuasiGovernmentIssuerType
+        | None
     ) = Field(
         None,
         alias="quasiGovernmentType",
         description="Specifies debt issues by institutions or bodies, typically constituted by statute, with a function mandated by the government and subject to government supervision inclusive of profit- and non-profit making bodies. Includes the US Agencies and GSEs and the EU concept of public sector entities. Excluding any entities which are also Regional Government.",
     )
     regional_government_type: (
-        cdm_base_staticdata_asset_common_RegionalGovernmentIssuerType_schema.RegionalGovernmentIssuerType | None
+        cdm_base_staticdata_asset_common_RegionalGovernmentIssuerType_schema.RegionalGovernmentIssuerType
+        | None
     ) = Field(
-        None, alias="regionalGovernmentType", description="Specifies Regional government, local authority or municipal."
+        None,
+        alias="regionalGovernmentType",
+        description="Specifies Regional government, local authority or municipal.",
     )
     special_purpose_vehicle_type: (
-        cdm_base_staticdata_asset_common_SpecialPurposeVehicleIssuerType_schema.SpecialPurposeVehicleIssuerType | None
+        cdm_base_staticdata_asset_common_SpecialPurposeVehicleIssuerType_schema.SpecialPurposeVehicleIssuerType
+        | None
     ) = Field(
         None,
         alias="specialPurposeVehicleType",

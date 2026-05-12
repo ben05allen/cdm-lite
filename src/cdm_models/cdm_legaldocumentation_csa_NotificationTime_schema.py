@@ -8,9 +8,14 @@ from . import cdm_legaldocumentation_csa_NotificationTimeElection_schema
 
 class NotificationTime(BaseModel):
     party_elections: (
-        list[cdm_legaldocumentation_csa_NotificationTimeElection_schema.NotificationTimeElection] | None
+        list[cdm_legaldocumentation_csa_NotificationTimeElection_schema.NotificationTimeElection]
+        | None
     ) = Field(
-        None, alias="partyElections", description="The parties' Notification Time election.", max_length=2, min_length=2
+        None,
+        alias="partyElections",
+        description="The parties' Notification Time election.",
+        max_length=2,
+        min_length=2,
     )
     dispute_notification_reference: bool | None = Field(
         None,

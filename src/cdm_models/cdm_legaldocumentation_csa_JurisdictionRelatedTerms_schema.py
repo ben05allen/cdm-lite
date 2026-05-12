@@ -11,16 +11,29 @@ from . import (
 
 class JurisdictionRelatedTerms(BaseModel):
     japanese_securities_provisions: (
-        cdm_legaldocumentation_csa_JapaneseSecuritiesProvisions_schema.JapaneseSecuritiesProvisions | None
-    ) = Field(None, alias="japaneseSecuritiesProvisions", description="The Japanese Securities Provisions election.")
+        cdm_legaldocumentation_csa_JapaneseSecuritiesProvisions_schema.JapaneseSecuritiesProvisions
+        | None
+    ) = Field(
+        None,
+        alias="japaneseSecuritiesProvisions",
+        description="The Japanese Securities Provisions election.",
+    )
     exclusive_jurisdiction: bool | None = Field(
-        None, alias="exclusiveJurisdiction", description="Classification of optional exclusive jurisdiction terms."
+        None,
+        alias="exclusiveJurisdiction",
+        description="Classification of optional exclusive jurisdiction terms.",
     )
     jury_waiver: bool | None = Field(
-        None, alias="juryWaiver", description="The Jury Waiver conditions specific to the agreement."
+        None,
+        alias="juryWaiver",
+        description="The Jury Waiver conditions specific to the agreement.",
     )
-    french_law_addendum: cdm_legaldocumentation_csa_FrenchLawAddendum_schema.FrenchLawAddendum | None = Field(
-        None, alias="frenchLawAddendum", description="The French Law Addendum Provisions specific to the agreement."
+    french_law_addendum: (
+        cdm_legaldocumentation_csa_FrenchLawAddendum_schema.FrenchLawAddendum | None
+    ) = Field(
+        None,
+        alias="frenchLawAddendum",
+        description="The French Law Addendum Provisions specific to the agreement.",
     )
     belgian_law_security_agreement: bool | None = Field(
         None,

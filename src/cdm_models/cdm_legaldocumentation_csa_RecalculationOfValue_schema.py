@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_RecalculationOfValueElection_schema
 
 class RecalculationOfValue(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_RecalculationOfValueElection_schema.RecalculationOfValueElection] | None
+        list[
+            cdm_legaldocumentation_csa_RecalculationOfValueElection_schema.RecalculationOfValueElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

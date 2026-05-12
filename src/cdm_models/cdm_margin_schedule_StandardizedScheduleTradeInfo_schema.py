@@ -12,10 +12,16 @@ from . import (
 
 class StandardizedScheduleTradeInfo(BaseModel):
     asset_class: (
-        cdm_margin_schedule_StandardizedScheduleAssetClassEnum_schema.StandardizedScheduleAssetClassEnum | None
+        cdm_margin_schedule_StandardizedScheduleAssetClassEnum_schema.StandardizedScheduleAssetClassEnum
+        | None
     ) = Field(None, alias="assetClass")
     product_class: (
-        cdm_margin_schedule_StandardizedScheduleProductClassEnum_schema.StandardizedScheduleProductClassEnum | None
+        cdm_margin_schedule_StandardizedScheduleProductClassEnum_schema.StandardizedScheduleProductClassEnum
+        | None
     ) = Field(None, alias="productClass")
-    gross_initial_margin: cdm_observable_asset_Money_schema.Money | None = Field(None, alias="grossInitialMargin")
-    mark_to_market_value: cdm_observable_asset_Money_schema.Money | None = Field(None, alias="markToMarketValue")
+    gross_initial_margin: cdm_observable_asset_Money_schema.Money | None = Field(
+        None, alias="grossInitialMargin"
+    )
+    mark_to_market_value: cdm_observable_asset_Money_schema.Money | None = Field(
+        None, alias="markToMarketValue"
+    )

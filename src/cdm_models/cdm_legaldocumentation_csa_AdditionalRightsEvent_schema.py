@@ -12,5 +12,6 @@ class AdditionalRightsEvent(BaseModel):
         description="The Pledgor Additional Rights Event election is applicable when True, and not applicable when False.",
     )
     qualification: str | None = Field(
-        None, description="The qualification of the Pledgor Additional Rights Event election, when specified."
+        None,
+        description="The qualification of the Pledgor Additional Rights Event election, when specified.",
     )

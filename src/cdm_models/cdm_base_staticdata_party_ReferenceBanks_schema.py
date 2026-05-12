@@ -7,9 +7,11 @@ from . import cdm_base_staticdata_party_ReferenceBank_schema
 
 
 class ReferenceBanks(BaseModel):
-    reference_bank: list[cdm_base_staticdata_party_ReferenceBank_schema.ReferenceBank] | None = Field(
-        None,
-        alias="referenceBank",
-        description="An institution (party) identified by means of a coding scheme and an optional name.",
-        min_length=1,
+    reference_bank: list[cdm_base_staticdata_party_ReferenceBank_schema.ReferenceBank] | None = (
+        Field(
+            None,
+            alias="referenceBank",
+            description="An institution (party) identified by means of a coding scheme and an optional name.",
+            min_length=1,
+        )
     )

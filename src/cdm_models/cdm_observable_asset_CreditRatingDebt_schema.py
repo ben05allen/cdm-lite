@@ -3,11 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_MultipleDebtTypes_schema, com_rosetta_model_metafields_FieldWithMetaString_schema
+from . import (
+    cdm_observable_asset_MultipleDebtTypes_schema,
+    com_rosetta_model_metafields_FieldWithMetaString_schema,
+)
 
 
 class CreditRatingDebt(BaseModel):
-    debt_type: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    debt_type: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="debtType",
         description="Specifies when there is only one debt type. FpML doesn't specify values in relation to the associated scheme, which is hence not specified as an enumeration as part of the CDM.",

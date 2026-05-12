@@ -15,7 +15,9 @@ from . import (
 
 
 class ForeignExchangeRateIndex(BaseModel):
-    identifier: list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None = Field(
+    identifier: (
+        list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None
+    ) = Field(
         None,
         description="Asset Identifiers are used to uniquely identify an Asset, using a specified Asset Identifier Type.",
         min_length=1,
@@ -26,34 +28,43 @@ class ForeignExchangeRateIndex(BaseModel):
         min_length=0,
     )
     is_exchange_listed: bool | None = Field(
-        None, alias="isExchangeListed", description="Defines whether the Asset is listed on a public exchange."
+        None,
+        alias="isExchangeListed",
+        description="Defines whether the Asset is listed on a public exchange.",
     )
     exchange: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="If the Asset is listed, defines the public exchange of the listing."
     )
     related_exchange: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
-        None, alias="relatedExchange", description="Provides the related Exchanges, if applicable.", min_length=0
+        None,
+        alias="relatedExchange",
+        description="Provides the related Exchanges, if applicable.",
+        min_length=0,
     )
-    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, description="A description of the Index."
+    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(None, description="A description of the Index.")
     )
     provider: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="The organisation that creates or maintains the Index."
     )
-    asset_class: cdm_base_staticdata_asset_common_AssetClassEnum_schema.AssetClassEnum | None = Field(
-        None, alias="assetClass", description="The Asset Class of the Index."
+    asset_class: cdm_base_staticdata_asset_common_AssetClassEnum_schema.AssetClassEnum | None = (
+        Field(None, alias="assetClass", description="The Asset Class of the Index.")
     )
     quoted_currency_pair: cdm_observable_asset_metafields_FieldWithMetaQuotedCurrencyPair_schema.FieldWithMetaQuotedCurrencyPair = Field(
         ...,
         alias="quotedCurrencyPair",
         description="Describes the composition of a rate that has been quoted or is to be quoted.",
     )
-    primary_fx_spot_rate_source: cdm_observable_asset_InformationSource_schema.InformationSource = Field(
-        ...,
-        alias="primaryFxSpotRateSource",
-        description="Specifies the primary source from which a rate should be observed.",
+    primary_fx_spot_rate_source: cdm_observable_asset_InformationSource_schema.InformationSource = (
+        Field(
+            ...,
+            alias="primaryFxSpotRateSource",
+            description="Specifies the primary source from which a rate should be observed.",
+        )
     )
-    secondary_fx_spot_rate_source: cdm_observable_asset_InformationSource_schema.InformationSource | None = Field(
+    secondary_fx_spot_rate_source: (
+        cdm_observable_asset_InformationSource_schema.InformationSource | None
+    ) = Field(
         None,
         alias="secondaryFxSpotRateSource",
         description="Specifies an alternative, or secondary, source from which a rate should be observed.",

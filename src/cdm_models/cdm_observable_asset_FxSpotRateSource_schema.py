@@ -12,8 +12,10 @@ class FxSpotRateSource(BaseModel):
         alias="primarySource",
         description="The primary source for where the rate observation will occur. Will typically be either a page or a reference bank published rate.",
     )
-    secondary_source: cdm_observable_asset_InformationSource_schema.InformationSource | None = Field(
-        None,
-        alias="secondarySource",
-        description="An alternative, or secondary, source for where the rate observation will occur. Will typically be either a page or a reference bank published rate.",
+    secondary_source: cdm_observable_asset_InformationSource_schema.InformationSource | None = (
+        Field(
+            None,
+            alias="secondarySource",
+            description="An alternative, or secondary, source for where the rate observation will occur. Will typically be either a page or a reference bank published rate.",
+        )
     )

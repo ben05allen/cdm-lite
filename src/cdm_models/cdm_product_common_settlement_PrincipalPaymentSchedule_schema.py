@@ -10,16 +10,23 @@ from . import (
 
 
 class PrincipalPaymentSchedule(BaseModel):
-    initial_principal_payment: cdm_product_common_settlement_PrincipalPayment_schema.PrincipalPayment | None = Field(
-        None, alias="initialPrincipalPayment", description="Principal Payment made at Trade inception."
+    initial_principal_payment: (
+        cdm_product_common_settlement_PrincipalPayment_schema.PrincipalPayment | None
+    ) = Field(
+        None,
+        alias="initialPrincipalPayment",
+        description="Principal Payment made at Trade inception.",
     )
     intermediate_principal_payment: (
-        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates | None
+        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates
+        | None
     ) = Field(
         None,
         alias="intermediatePrincipalPayment",
         description="Principal Payment as part of the Trade lifecycle e.g. as part of notional reset adjustements in a Cross Currency Swap with a varying notional leg.",
     )
-    final_principal_payment: cdm_product_common_settlement_PrincipalPayment_schema.PrincipalPayment | None = Field(
+    final_principal_payment: (
+        cdm_product_common_settlement_PrincipalPayment_schema.PrincipalPayment | None
+    ) = Field(
         None, alias="finalPrincipalPayment", description="Principal Payment at Trade maturity"
     )

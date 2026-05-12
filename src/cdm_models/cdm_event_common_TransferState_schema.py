@@ -8,8 +8,11 @@ from . import cdm_event_common_TransferStatusEnum_schema, cdm_event_common_Trans
 
 class TransferState(BaseModel):
     transfer: cdm_event_common_Transfer_schema.Transfer = Field(
-        ..., description="Represents the Transfer that has been effected by a business or life-cycle event."
+        ...,
+        description="Represents the Transfer that has been effected by a business or life-cycle event.",
     )
     transfer_status: cdm_event_common_TransferStatusEnum_schema.TransferStatusEnum | None = Field(
-        None, alias="transferStatus", description="Represents the State of the Transfer through its life-cycle."
+        None,
+        alias="transferStatus",
+        description="Represents the State of the Transfer through its life-cycle.",
     )

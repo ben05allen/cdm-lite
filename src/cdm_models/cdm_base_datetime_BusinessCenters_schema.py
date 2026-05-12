@@ -12,7 +12,10 @@ from . import (
 
 class BusinessCenters(BaseModel):
     business_center: (
-        list[cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum] | None
+        list[
+            cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum
+        ]
+        | None
     ) = Field(
         None,
         alias="businessCenter",
@@ -26,7 +29,8 @@ class BusinessCenters(BaseModel):
         | None
     ) = Field(None, alias="commodityBusinessCalendar", min_length=0)
     business_centers_reference: (
-        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters | None
+        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters
+        | None
     ) = Field(
         None,
         alias="businessCentersReference",

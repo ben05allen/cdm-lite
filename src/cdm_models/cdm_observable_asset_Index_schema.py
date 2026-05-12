@@ -19,10 +19,13 @@ class Index(BaseModel):
         description="An index based on credit risk, typically composed using corporate debt instruments in a region or industry sector, e.g. the iTraxx indices.",
     )
     equity_index: cdm_observable_asset_EquityIndex_schema.EquityIndex | None = Field(
-        None, alias="EquityIndex", description="An index based on equity securities, e.g. the S&P 500."
+        None,
+        alias="EquityIndex",
+        description="An index based on equity securities, e.g. the S&P 500.",
     )
     interest_rate_index: (
-        cdm_observable_asset_metafields_FieldWithMetaInterestRateIndex_schema.FieldWithMetaInterestRateIndex | None
+        cdm_observable_asset_metafields_FieldWithMetaInterestRateIndex_schema.FieldWithMetaInterestRateIndex
+        | None
     ) = Field(
         None,
         alias="InterestRateIndex",

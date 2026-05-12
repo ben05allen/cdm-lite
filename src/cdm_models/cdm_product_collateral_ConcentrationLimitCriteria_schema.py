@@ -19,20 +19,25 @@ class ConcentrationLimitCriteria(BaseModel):
         alias="collateralCriteria",
         description="The specific criteria that applies. It can be created using AND, OR and NOT logic, and both asset and issuer characteristics.",
     )
-    applies_to: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    applies_to: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         alias="appliesTo",
         description="Specifies which of the two counterparties the criteria applies to (either one or both counterparties). This attribute is optional, in case the applicable party is already specified elsewhere within a party election.",
         max_length=2,
         min_length=0,
     )
-    restrict_to: cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None = Field(
+    restrict_to: (
+        cdm_product_collateral_CollateralMarginTypeEnum_schema.CollateralMarginTypeEnum | None
+    ) = Field(
         None,
         alias="restrictTo",
         description="Restrict the criteria to only apply to a specific type of margin, ie IM or VM.",
     )
     rating_priority_resolution: (
-        cdm_product_collateral_RatingPriorityResolutionEnum_schema.RatingPriorityResolutionEnum | None
+        cdm_product_collateral_RatingPriorityResolutionEnum_schema.RatingPriorityResolutionEnum
+        | None
     ) = Field(
         None,
         alias="ratingPriorityResolution",
@@ -41,9 +46,13 @@ class ConcentrationLimitCriteria(BaseModel):
     concentration_limit_type: (
         cdm_product_collateral_ConcentrationLimitTypeEnum_schema.ConcentrationLimitTypeEnum | None
     ) = Field(
-        None, alias="concentrationLimitType", description="Specifies the type of concentration limit to be applied."
+        None,
+        alias="concentrationLimitType",
+        description="Specifies the type of concentration limit to be applied.",
     )
-    average_trading_volume: cdm_product_collateral_AverageTradingVolume_schema.AverageTradingVolume | None = Field(
+    average_trading_volume: (
+        cdm_product_collateral_AverageTradingVolume_schema.AverageTradingVolume | None
+    ) = Field(
         None,
         alias="averageTradingVolume",
         description="Specifies an average trading volume on an exchange in relation to Equity products.",

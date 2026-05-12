@@ -10,13 +10,18 @@ from . import (
 
 
 class FloatingRateIndexFixingDetails(BaseModel):
-    fixing_time: cdm_observable_asset_fro_FloatingRateIndexFixingTime_schema.FloatingRateIndexFixingTime | None = Field(
+    fixing_time: (
+        cdm_observable_asset_fro_FloatingRateIndexFixingTime_schema.FloatingRateIndexFixingTime
+        | None
+    ) = Field(
         None,
         alias="fixingTime",
         description="Parameters defining the normal fixing time (can vary by index tenor / designated maturity).",
     )
-    fixing_offset: cdm_observable_asset_fro_BusinessDayOffset_schema.BusinessDayOffset | None = Field(
-        None,
-        alias="fixingOffset",
-        description="Parameters defining the normal fixing offset (can vary by index tenor / designated maturity).",
+    fixing_offset: cdm_observable_asset_fro_BusinessDayOffset_schema.BusinessDayOffset | None = (
+        Field(
+            None,
+            alias="fixingOffset",
+            description="Parameters defining the normal fixing offset (can vary by index tenor / designated maturity).",
+        )
     )

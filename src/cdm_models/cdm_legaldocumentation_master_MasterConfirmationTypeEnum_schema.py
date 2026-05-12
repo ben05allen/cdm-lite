@@ -21,7 +21,9 @@ class MasterConfirmationTypeEnum(StrEnum):
     ISDA2003_CREDIT_NORTH_AMERICAN = "ISDA2003CreditNorthAmerican"
     ISDA2003_CREDIT_SINGAPORE = "ISDA2003CreditSingapore"
     ISDA2003_CREDIT_SOVEREIGN_ASIA = "ISDA2003CreditSovereignAsia"
-    ISDA2003_CREDIT_SOVEREIGN_CENTRAL_AND_EASTERN_EUROPE = "ISDA2003CreditSovereignCentralAndEasternEurope"
+    ISDA2003_CREDIT_SOVEREIGN_CENTRAL_AND_EASTERN_EUROPE = (
+        "ISDA2003CreditSovereignCentralAndEasternEurope"
+    )
     ISDA2003_CREDIT_SOVEREIGN_JAPAN = "ISDA2003CreditSovereignJapan"
     ISDA2003_CREDIT_SOVEREIGN_LATIN_AMERICA = "ISDA2003CreditSovereignLatinAmerica"
     ISDA2003_CREDIT_SOVEREIGN_MIDDLE_EAST = "ISDA2003CreditSovereignMiddleEast"
@@ -46,10 +48,16 @@ class MasterConfirmationTypeEnum(StrEnum):
         "ISDA2004StandardCreditSovereignEmergingEuropeanAndMiddleEastern"
     )
     ISDA2004_STANDARD_CREDIT_SOVEREIGN_JAPAN = "ISDA2004StandardCreditSovereignJapan"
-    ISDA2004_STANDARD_CREDIT_SOVEREIGN_LATIN_AMERICAN = "ISDA2004StandardCreditSovereignLatinAmerican"
-    ISDA2004_STANDARD_CREDIT_SOVEREIGN_WESTERN_EUROPEAN = "ISDA2004StandardCreditSovereignWesternEuropean"
+    ISDA2004_STANDARD_CREDIT_SOVEREIGN_LATIN_AMERICAN = (
+        "ISDA2004StandardCreditSovereignLatinAmerican"
+    )
+    ISDA2004_STANDARD_CREDIT_SOVEREIGN_WESTERN_EUROPEAN = (
+        "ISDA2004StandardCreditSovereignWesternEuropean"
+    )
     ISDA2005_EQUITY_ASIA_EXCLUDING_JAPAN_INTERDEALER = "ISDA2005EquityAsiaExcludingJapanInterdealer"
-    ISDA2005_EQUITY_ASIA_EXCLUDING_JAPAN_INTERDEALER_REV2 = "ISDA2005EquityAsiaExcludingJapanInterdealerRev2"
+    ISDA2005_EQUITY_ASIA_EXCLUDING_JAPAN_INTERDEALER_REV2 = (
+        "ISDA2005EquityAsiaExcludingJapanInterdealerRev2"
+    )
     ISDA2005_EQUITY_JAPANESE_INTERDEALER = "ISDA2005EquityJapaneseInterdealer"
     ISDA2006_VARIANCE_SWAP_JAPANESE = "ISDA2006VarianceSwapJapanese"
     ISDA2006_VARIANCE_SWAP_JAPANESE_INTERDEALER = "ISDA2006VarianceSwapJapaneseInterdealer"
@@ -102,7 +110,9 @@ class MasterConfirmationTypeEnum(StrEnum):
     FIELD_2014_STANDARD_CREDIT_ASIA = "2014StandardCreditAsia"
     FIELD_2014_STANDARD_CREDIT_ASIA_FINANCIAL = "2014StandardCreditAsiaFinancial"
     FIELD_2014_STANDARD_CREDIT_AUSTRALIA_NEW_ZEALAND = "2014StandardCreditAustraliaNewZealand"
-    FIELD_2014_STANDARD_CREDIT_AUSTRALIA_NEW_ZEALAND_FINANCIAL = "2014StandardCreditAustraliaNewZealandFinancial"
+    FIELD_2014_STANDARD_CREDIT_AUSTRALIA_NEW_ZEALAND_FINANCIAL = (
+        "2014StandardCreditAustraliaNewZealandFinancial"
+    )
     FIELD_2014_STANDARD_CREDIT_EUROPEAN = "2014StandardCreditEuropean"
     FIELD_2014_STANDARD_CREDIT_EUROPEAN_CO_CO_FINANCIAL = "2014StandardCreditEuropeanCoCoFinancial"
     FIELD_2014_STANDARD_CREDIT_EUROPEAN_FINANCIAL = "2014StandardCreditEuropeanFinancial"
@@ -118,4 +128,6 @@ class MasterConfirmationTypeEnum(StrEnum):
     )
     FIELD_2014_STANDARD_CREDIT_SOVEREIGN_JAPAN = "2014StandardCreditSovereignJapan"
     FIELD_2014_STANDARD_CREDIT_SOVEREIGN_LATIN_AMERICAN = "2014StandardCreditSovereignLatinAmerican"
-    FIELD_2014_STANDARD_CREDIT_SOVEREIGN_WESTERN_EUROPEAN = "2014StandardCreditSovereignWesternEuropean"
+    FIELD_2014_STANDARD_CREDIT_SOVEREIGN_WESTERN_EUROPEAN = (
+        "2014StandardCreditSovereignWesternEuropean"
+    )

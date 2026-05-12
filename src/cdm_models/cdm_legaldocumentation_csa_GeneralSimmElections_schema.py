@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_SimmCalculationCurrency_schema, cdm_legaldocumentation_csa_SimmVersion_schema
+from . import (
+    cdm_legaldocumentation_csa_SimmCalculationCurrency_schema,
+    cdm_legaldocumentation_csa_SimmVersion_schema,
+)
 
 
 class GeneralSimmElections(BaseModel):

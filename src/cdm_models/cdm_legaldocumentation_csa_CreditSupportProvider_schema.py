@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_CreditSupportProviderElection_schema
 
 class CreditSupportProvider(BaseModel):
     credit_support_provider_election: (
-        list[cdm_legaldocumentation_csa_CreditSupportProviderElection_schema.CreditSupportProviderElection] | None
+        list[
+            cdm_legaldocumentation_csa_CreditSupportProviderElection_schema.CreditSupportProviderElection
+        ]
+        | None
     ) = Field(
         None,
         alias="creditSupportProviderElection",

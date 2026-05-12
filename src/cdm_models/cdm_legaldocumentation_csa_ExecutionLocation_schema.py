@@ -11,11 +11,17 @@ class ExecutionLocation(BaseModel):
         ..., alias="executionLocation", description="The execution location of the agreement."
     )
     other_language: str | None = Field(
-        None, alias="otherLanguage", description="Bespoke execution location language to be included when specified."
+        None,
+        alias="otherLanguage",
+        description="Bespoke execution location language to be included when specified.",
     )
-    duty_payer: str | None = Field(None, alias="dutyPayer", description="The payer of documentary duty.")
+    duty_payer: str | None = Field(
+        None, alias="dutyPayer", description="The payer of documentary duty."
+    )
     duty_payer_language: str | None = Field(
-        None, alias="dutyPayerLanguage", description="Bespoke terms specific to the payment of documentary duty."
+        None,
+        alias="dutyPayerLanguage",
+        description="Bespoke terms specific to the payment of documentary duty.",
     )
     duty_payment_date: str | None = Field(
         None, alias="dutyPaymentDate", description="The date that documentary duty will be paid."

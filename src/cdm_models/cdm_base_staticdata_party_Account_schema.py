@@ -12,22 +12,34 @@ from . import (
 
 class Account(BaseModel):
     party_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
-    ) = Field(None, alias="partyReference", description="A reference to the party to which the account refers to.")
-    account_number: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
-        ..., alias="accountNumber", description="The account number."
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
+    ) = Field(
+        None,
+        alias="partyReference",
+        description="A reference to the party to which the account refers to.",
     )
-    account_name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, alias="accountName", description="The name by which the account is known."
+    account_number: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = (
+        Field(..., alias="accountNumber", description="The account number.")
     )
+    account_name: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(None, alias="accountName", description="The name by which the account is known.")
     account_type: (
-        cdm_base_staticdata_party_metafields_FieldWithMetaAccountTypeEnum_schema.FieldWithMetaAccountTypeEnum | None
+        cdm_base_staticdata_party_metafields_FieldWithMetaAccountTypeEnum_schema.FieldWithMetaAccountTypeEnum
+        | None
     ) = Field(None, alias="accountType", description="The type of account, e.g. client, house.")
     account_beneficiary: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
-    ) = Field(None, alias="accountBeneficiary", description="A reference to the party beneficiary of the account.")
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
+    ) = Field(
+        None,
+        alias="accountBeneficiary",
+        description="A reference to the party beneficiary of the account.",
+    )
     servicing_party: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty
+        | None
     ) = Field(
         None,
         alias="servicingParty",

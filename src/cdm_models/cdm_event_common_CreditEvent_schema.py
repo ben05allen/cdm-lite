@@ -21,7 +21,9 @@ class CreditEvent(BaseModel):
         description="The date in which the credit event is determined by the Credit Derivatives Determinations Comitee.",
     )
     auction_date: str | None = Field(
-        None, alias="auctionDate", description="The date on which the auction is scheduled to occur."
+        None,
+        alias="auctionDate",
+        description="The date on which the auction is scheduled to occur.",
     )
     final_price: cdm_observable_asset_Price_schema.Price | None = Field(
         None, alias="finalPrice", description="The final price resulting from the auction."
@@ -31,7 +33,9 @@ class CreditEvent(BaseModel):
         alias="recoveryPercent",
         description="The percentage of the original value of the asset affected by the credit event that can be recovered.",
     )
-    publicly_available_information: list[cdm_legaldocumentation_common_Resource_schema.Resource] | None = Field(
+    publicly_available_information: (
+        list[cdm_legaldocumentation_common_Resource_schema.Resource] | None
+    ) = Field(
         None,
         alias="publiclyAvailableInformation",
         description="A public information source, e.g. a particular newspaper or electronic news service, that may publish relevant information used in the determination of whether or not a credit event has occurred.",

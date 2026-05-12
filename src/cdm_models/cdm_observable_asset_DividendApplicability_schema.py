@@ -12,7 +12,9 @@ class DividendApplicability(BaseModel):
         description="If present and true, then options exchange dividends are applicable.",
     )
     additional_dividends: bool | None = Field(
-        None, alias="additionalDividends", description="If present and true, then additional dividends are applicable."
+        None,
+        alias="additionalDividends",
+        description="If present and true, then additional dividends are applicable.",
     )
     all_dividends: bool | None = Field(
         None,

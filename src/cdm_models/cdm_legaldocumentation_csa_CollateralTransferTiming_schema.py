@@ -11,13 +11,16 @@ from . import (
 
 class CollateralTransferTiming(BaseModel):
     transfer_settlement_timing: (
-        cdm_legaldocumentation_csa_LegacyTransferSettlementTiming_schema.LegacyTransferSettlementTiming | None
+        cdm_legaldocumentation_csa_LegacyTransferSettlementTiming_schema.LegacyTransferSettlementTiming
+        | None
     ) = Field(
         None,
         alias="transferSettlementTiming",
         description="Specification of transfer / settlement timing for cash and securities collateral assuming that the notice is provided before the Notification Time (and with a 1LBD lag introduced if the notice is delivered after the Notification Time), and that securities allow for a further Local Business Day for transfer / settlement.",
     )
-    legacy_definition: cdm_legaldocumentation_csa_LegacyDefinition_schema.LegacyDefinition | None = Field(
+    legacy_definition: (
+        cdm_legaldocumentation_csa_LegacyDefinition_schema.LegacyDefinition | None
+    ) = Field(
         None,
         alias="legacyDefinition",
         description="Bespoke language removing the pre-print requirement to transfer legal title of securities collateral through written instructions to the relevant depository institution or other securities intermediaries solely for the purposes of the 1994 New York Law Credit Support Annex.",

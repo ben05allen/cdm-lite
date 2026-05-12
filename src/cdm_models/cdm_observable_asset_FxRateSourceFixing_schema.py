@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_AdjustableDate_schema, cdm_observable_asset_FxSettlementRateSource_schema
+from . import (
+    cdm_base_datetime_AdjustableDate_schema,
+    cdm_observable_asset_FxSettlementRateSource_schema,
+)
 
 
 class FxRateSourceFixing(BaseModel):

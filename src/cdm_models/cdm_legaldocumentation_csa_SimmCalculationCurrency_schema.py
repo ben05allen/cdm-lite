@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_CalculationCurrencyElection_schema
 
 class SimmCalculationCurrency(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_CalculationCurrencyElection_schema.CalculationCurrencyElection] | None
+        list[
+            cdm_legaldocumentation_csa_CalculationCurrencyElection_schema.CalculationCurrencyElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

@@ -15,7 +15,9 @@ class SwapCurveValuation(BaseModel):
         ..., alias="floatingRateIndex"
     )
     index_tenor: cdm_base_datetime_Period_schema.Period | None = Field(
-        None, alias="indexTenor", description="The ISDA Designated Maturity, i.e. the tenor of the floating rate."
+        None,
+        alias="indexTenor",
+        description="The ISDA Designated Maturity, i.e. the tenor of the floating rate.",
     )
     spread: float = Field(..., description="Spread in basis points over the floating rate index.")
     side: cdm_observable_asset_QuotationSideEnum_schema.QuotationSideEnum | None = Field(

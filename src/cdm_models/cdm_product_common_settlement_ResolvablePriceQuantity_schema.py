@@ -35,19 +35,25 @@ class ResolvablePriceQuantity(BaseModel):
         alias="quantityReference",
         description="Reference quantity when resolvable quantity is defined as relative to another (resolvable) quantity. A resolvable quantity needs to contain either an absolute quantity or a reference to another (resolvable) quantity. This requirement is captured by a choice rule on the class.",
     )
-    quantity_multiplier: cdm_product_common_settlement_QuantityMultiplier_schema.QuantityMultiplier | None = Field(
+    quantity_multiplier: (
+        cdm_product_common_settlement_QuantityMultiplier_schema.QuantityMultiplier | None
+    ) = Field(
         None,
         alias="quantityMultiplier",
         description="Quantity multiplier is specified on top of a reference quantity and is used as a multiplying factor when resolving the quantity. A quantity multiplier can only exist when the resolvable quantity specifies a reference quantity.",
     )
     reset: bool | None = Field(None, description="Whether the quantity is resettable")
-    future_value_notional: cdm_product_asset_FutureValueAmount_schema.FutureValueAmount | None = Field(
-        None,
-        alias="futureValueNotional",
-        description="The future value notional is specific to BRL CDI swaps, and is specified alongside the notional amount. The value is calculated as follows: Future Value Notional = Notional Amount * (1 + Fixed Rate) ^ (Fixed Rate Day Count Fraction). The currency should always match that expressed in the notional schedule. The value date should match the adjusted termination date.",
+    future_value_notional: cdm_product_asset_FutureValueAmount_schema.FutureValueAmount | None = (
+        Field(
+            None,
+            alias="futureValueNotional",
+            description="The future value notional is specific to BRL CDI swaps, and is specified alongside the notional amount. The value is calculated as follows: Future Value Notional = Notional Amount * (1 + Fixed Rate) ^ (Fixed Rate Day Count Fraction). The currency should always match that expressed in the notional schedule. The value date should match the adjusted termination date.",
+        )
     )
     price_schedule: (
-        list[cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule]
+        list[
+            cdm_observable_asset_metafields_ReferenceWithMetaPriceSchedule_schema.ReferenceWithMetaPriceSchedule
+        ]
         | None
     ) = Field(
         None,

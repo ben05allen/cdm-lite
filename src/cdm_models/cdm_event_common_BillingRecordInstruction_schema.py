@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_event_common_metafields_ReferenceWithMetaTradeState_schema, cdm_observable_event_Observation_schema
+from . import (
+    cdm_event_common_metafields_ReferenceWithMetaTradeState_schema,
+    cdm_observable_event_Observation_schema,
+)
 
 
 class BillingRecordInstruction(BaseModel):
@@ -14,9 +17,15 @@ class BillingRecordInstruction(BaseModel):
         None, description="The observations used to calculate the billing amount.", min_length=1
     )
     record_start_date: str = Field(
-        ..., alias="recordStartDate", description="The starting date of the period described by this record"
+        ...,
+        alias="recordStartDate",
+        description="The starting date of the period described by this record",
     )
     record_end_date: str = Field(
-        ..., alias="recordEndDate", description="The ending date of the period described by this record"
+        ...,
+        alias="recordEndDate",
+        description="The ending date of the period described by this record",
     )
-    settlement_date: str = Field(..., alias="settlementDate", description="The date for settlement of the transfer.")
+    settlement_date: str = Field(
+        ..., alias="settlementDate", description="The date for settlement of the transfer."
+    )

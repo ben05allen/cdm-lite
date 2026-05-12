@@ -11,20 +11,23 @@ from . import (
 
 
 class CalculationAgent(BaseModel):
-    calculation_agent_party: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = Field(
+    calculation_agent_party: (
+        cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None
+    ) = Field(
         None,
         alias="calculationAgentParty",
         description="Specifies the party which is the ISDA Calculation Agent for the trade. If more than one party is referenced then the parties are assumed to be co-calculation agents, i.e. they have joint responsibility.",
     )
-    calculation_agent_party_enum: cdm_observable_asset_PartyDeterminationEnum_schema.PartyDeterminationEnum | None = (
-        Field(
-            None,
-            alias="calculationAgentPartyEnum",
-            description="Specifies the ISDA calculation agent responsible for performing duties as defined in the applicable product definitions. For example, the Calculation Agent may be defined as being the Non-exercising Party.",
-        )
+    calculation_agent_party_enum: (
+        cdm_observable_asset_PartyDeterminationEnum_schema.PartyDeterminationEnum | None
+    ) = Field(
+        None,
+        alias="calculationAgentPartyEnum",
+        description="Specifies the ISDA calculation agent responsible for performing duties as defined in the applicable product definitions. For example, the Calculation Agent may be defined as being the Non-exercising Party.",
     )
     calculation_agent_business_center: (
-        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum | None
+        cdm_base_datetime_metafields_FieldWithMetaBusinessCenterEnum_schema.FieldWithMetaBusinessCenterEnum
+        | None
     ) = Field(
         None,
         alias="calculationAgentBusinessCenter",

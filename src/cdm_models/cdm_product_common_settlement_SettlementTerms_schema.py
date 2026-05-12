@@ -17,8 +17,12 @@ from . import (
 
 
 class SettlementTerms(BaseModel):
-    settlement_type: cdm_product_common_settlement_SettlementTypeEnum_schema.SettlementTypeEnum | None = Field(
-        None, alias="settlementType", description="Whether the settlement will be cash, physical, by election, ..."
+    settlement_type: (
+        cdm_product_common_settlement_SettlementTypeEnum_schema.SettlementTypeEnum | None
+    ) = Field(
+        None,
+        alias="settlementType",
+        description="Whether the settlement will be cash, physical, by election, ...",
     )
     transfer_settlement_type: (
         cdm_product_common_settlement_TransferSettlementEnum_schema.TransferSettlementEnum | None
@@ -27,34 +31,45 @@ class SettlementTerms(BaseModel):
         alias="transferSettlementType",
         description="The qualification as to how the transfer will settle, e.g. a DvP settlement.",
     )
-    settlement_currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    settlement_currency: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="settlementCurrency",
         description="The settlement currency is to be specified when the Settlement Amount cannot be known in advance. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
     )
-    settlement_date: cdm_product_common_settlement_SettlementDate_schema.SettlementDate | None = Field(
-        None,
-        alias="settlementDate",
-        description="The date on which the settlement amount will be paid, subject to adjustment in accordance with any applicable business day convention. This component would not be present for a mandatory early termination provision where the cash settlement payment date is the mandatory early termination date.",
+    settlement_date: cdm_product_common_settlement_SettlementDate_schema.SettlementDate | None = (
+        Field(
+            None,
+            alias="settlementDate",
+            description="The date on which the settlement amount will be paid, subject to adjustment in accordance with any applicable business day convention. This component would not be present for a mandatory early termination provision where the cash settlement payment date is the mandatory early termination date.",
+        )
     )
-    settlement_centre: cdm_product_common_settlement_SettlementCentreEnum_schema.SettlementCentreEnum | None = Field(
+    settlement_centre: (
+        cdm_product_common_settlement_SettlementCentreEnum_schema.SettlementCentreEnum | None
+    ) = Field(
         None,
         alias="settlementCentre",
         description="Optional settlement centre as an enumerated list: Euroclear, Clearstream.",
     )
-    settlement_provision: cdm_product_common_settlement_SettlementProvision_schema.SettlementProvision | None = Field(
-        None, alias="settlementProvision", description="Optionally defines the parameters that regulate a settlement."
+    settlement_provision: (
+        cdm_product_common_settlement_SettlementProvision_schema.SettlementProvision | None
+    ) = Field(
+        None,
+        alias="settlementProvision",
+        description="Optionally defines the parameters that regulate a settlement.",
     )
     standard_settlement_style: (
-        cdm_product_common_settlement_StandardSettlementStyleEnum_schema.StandardSettlementStyleEnum | None
+        cdm_product_common_settlement_StandardSettlementStyleEnum_schema.StandardSettlementStyleEnum
+        | None
     ) = Field(None, alias="standardSettlementStyle", description="Settlement Style.")
-    cash_settlement_terms: list[cdm_product_common_settlement_CashSettlementTerms_schema.CashSettlementTerms] | None = (
-        Field(
-            None,
-            alias="cashSettlementTerms",
-            description="Specifies the parameters associated with the cash settlement procedure.",
-            min_length=0,
-        )
+    cash_settlement_terms: (
+        list[cdm_product_common_settlement_CashSettlementTerms_schema.CashSettlementTerms] | None
+    ) = Field(
+        None,
+        alias="cashSettlementTerms",
+        description="Specifies the parameters associated with the cash settlement procedure.",
+        min_length=0,
     )
     physical_settlement_terms: (
         cdm_product_common_settlement_PhysicalSettlementTerms_schema.PhysicalSettlementTerms | None

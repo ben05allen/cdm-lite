@@ -10,5 +10,7 @@ from . import (
 
 
 class FieldWithMetaMasterAgreementTypeEnum(BaseModel):
-    value: cdm_legaldocumentation_master_MasterAgreementTypeEnum_schema.MasterAgreementTypeEnum | None = None
+    value: (
+        cdm_legaldocumentation_master_MasterAgreementTypeEnum_schema.MasterAgreementTypeEnum | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

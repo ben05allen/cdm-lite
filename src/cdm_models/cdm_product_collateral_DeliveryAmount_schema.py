@@ -7,8 +7,12 @@ from . import cdm_product_collateral_DeliveryAmountElectionEnum_schema
 
 
 class DeliveryAmount(BaseModel):
-    standard_election: cdm_product_collateral_DeliveryAmountElectionEnum_schema.DeliveryAmountElectionEnum | None = (
-        Field(None, alias="standardElection", description="The standard election as specified by an enumeration.")
+    standard_election: (
+        cdm_product_collateral_DeliveryAmountElectionEnum_schema.DeliveryAmountElectionEnum | None
+    ) = Field(
+        None,
+        alias="standardElection",
+        description="The standard election as specified by an enumeration.",
     )
     custom_election: str | None = Field(
         None,

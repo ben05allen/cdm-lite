@@ -12,8 +12,15 @@ from . import (
 
 
 class PriceQuantity(BaseModel):
-    price: list[cdm_observable_asset_metafields_FieldWithMetaPriceSchedule_schema.FieldWithMetaPriceSchedule] | None = (
-        Field(None, description="Specifies a price to be used for trade amounts and other purposes.", min_length=0)
+    price: (
+        list[
+            cdm_observable_asset_metafields_FieldWithMetaPriceSchedule_schema.FieldWithMetaPriceSchedule
+        ]
+        | None
+    ) = Field(
+        None,
+        description="Specifies a price to be used for trade amounts and other purposes.",
+        min_length=0,
     )
     quantity: (
         list[
@@ -25,11 +32,16 @@ class PriceQuantity(BaseModel):
         description="Specifies a quantity to be associated with an event, for example a trade amount.",
         min_length=0,
     )
-    observable: cdm_observable_asset_metafields_FieldWithMetaObservable_schema.FieldWithMetaObservable | None = Field(
+    observable: (
+        cdm_observable_asset_metafields_FieldWithMetaObservable_schema.FieldWithMetaObservable
+        | None
+    ) = Field(
         None,
         description="Specifies the object to be observed for a price, it could be an asset or an index. The cardinality is optional as some quantity / price cases have no observable (e.g. a fixed rate in a given currency).",
     )
-    effective_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    effective_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="effectiveDate",
         description="Specifies the date at which the price and quantity become effective. This day may be subject to adjustment in accordance with a business day convention, or could be specified as relative to a trade date, for instance. Optional cardinality, as the effective date is usually specified in the product definition, so it may only need to be specified as part of the PriceQuantity in an increase/decrease scenario for an existing trade.",

@@ -3,14 +3,19 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_FloatingRateIndex_schema, cdm_observable_asset_InflationIndex_schema
+from . import (
+    cdm_observable_asset_FloatingRateIndex_schema,
+    cdm_observable_asset_InflationIndex_schema,
+)
 
 
 class InterestRateIndex(BaseModel):
-    floating_rate_index: cdm_observable_asset_FloatingRateIndex_schema.FloatingRateIndex | None = Field(
-        None,
-        alias="FloatingRateIndex",
-        description="An interest rate index which can change over time, e.g. the SONIA (Sterling Overnight Index Average) in the UK.",
+    floating_rate_index: cdm_observable_asset_FloatingRateIndex_schema.FloatingRateIndex | None = (
+        Field(
+            None,
+            alias="FloatingRateIndex",
+            description="An interest rate index which can change over time, e.g. the SONIA (Sterling Overnight Index Average) in the UK.",
+        )
     )
     inflation_index: cdm_observable_asset_InflationIndex_schema.InflationIndex | None = Field(
         None,

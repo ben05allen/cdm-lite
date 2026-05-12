@@ -15,12 +15,17 @@ from . import (
 
 class OptionFeature(BaseModel):
     fx_feature: list[cdm_product_template_FxFeature_schema.FxFeature] | None = Field(
-        None, alias="fxFeature", description="Describes a quanto or composite FX feature.", min_length=0
+        None,
+        alias="fxFeature",
+        description="Describes a quanto or composite FX feature.",
+        min_length=0,
     )
     strategy_feature: cdm_product_template_StrategyFeature_schema.StrategyFeature | None = Field(
         None, alias="strategyFeature", description="Defines a simple strategy feature."
     )
-    averaging_feature: cdm_product_template_AveragingCalculation_schema.AveragingCalculation | None = Field(
+    averaging_feature: (
+        cdm_product_template_AveragingCalculation_schema.AveragingCalculation | None
+    ) = Field(
         None,
         alias="averagingFeature",
         description="Defines an option feature in which an average market observation price is determined on valuation and compared to the strike to determine a settlement amount.",

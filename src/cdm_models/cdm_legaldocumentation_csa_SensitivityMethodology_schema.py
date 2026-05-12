@@ -7,7 +7,9 @@ from . import cdm_legaldocumentation_csa_SensitivitiesEnum_schema
 
 
 class SensitivityMethodology(BaseModel):
-    specified_methodology: cdm_legaldocumentation_csa_SensitivitiesEnum_schema.SensitivitiesEnum | None = Field(
+    specified_methodology: (
+        cdm_legaldocumentation_csa_SensitivitiesEnum_schema.SensitivitiesEnum | None
+    ) = Field(
         None,
         alias="specifiedMethodology",
         description="The methodology according to which sensitivities will be computed, when specified through a normalized election.",

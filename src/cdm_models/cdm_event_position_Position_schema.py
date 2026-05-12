@@ -13,14 +13,18 @@ from ._internal_3 import Product
 
 class Position(BaseModel):
     price_quantity: list[cdm_observable_asset_PriceQuantity_schema.PriceQuantity] | None = Field(
-        None, alias="priceQuantity", description="Position with many price quantities.", min_length=1
+        None,
+        alias="priceQuantity",
+        description="Position with many price quantities.",
+        min_length=1,
     )
     product: Product = Field(..., description="The product underlying the position.")
     cash_balance: cdm_observable_asset_Money_schema.Money | None = Field(
         None, alias="cashBalance", description="The aggregate cost of proceeds"
     )
     trade_reference: (
-        cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState | None
+        cdm_event_common_metafields_ReferenceWithMetaTradeState_schema.ReferenceWithMetaTradeState
+        | None
     ) = Field(
         None,
         alias="tradeReference",

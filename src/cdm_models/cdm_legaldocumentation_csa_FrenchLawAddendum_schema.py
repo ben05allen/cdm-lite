@@ -13,7 +13,8 @@ class FrenchLawAddendum(BaseModel):
         description="The qualification of whether the French Law Addendum is deemed applicable by the parties (True) or not (False).",
     )
     party_election: (
-        list[cdm_legaldocumentation_csa_FrenchLawAddendumElection_schema.FrenchLawAddendumElection] | None
+        list[cdm_legaldocumentation_csa_FrenchLawAddendumElection_schema.FrenchLawAddendumElection]
+        | None
     ) = Field(
         None,
         alias="partyElection",

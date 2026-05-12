@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_Money_schema, cdm_product_common_schedule_CalculationPeriod_schema
+from . import (
+    cdm_observable_asset_Money_schema,
+    cdm_product_common_schedule_CalculationPeriod_schema,
+)
 
 
 class PaymentCalculationPeriod(BaseModel):
@@ -15,7 +18,9 @@ class PaymentCalculationPeriod(BaseModel):
         alias="adjustedPaymentDate",
         description="The adjusted payment date. This date should already be adjusted for any applicable business day convention. This component is not intended for use in trade confirmation but may be specified to allow the fee structure to also serve as a cashflow type component.",
     )
-    calculation_period: list[cdm_product_common_schedule_CalculationPeriod_schema.CalculationPeriod] | None = Field(
+    calculation_period: (
+        list[cdm_product_common_schedule_CalculationPeriod_schema.CalculationPeriod] | None
+    ) = Field(
         None,
         alias="calculationPeriod",
         description="The parameters used in the calculation of a fixed or floating rate calculation period amount. A list of calculation period elements may be ordered in the document by ascending start date. An FpML document which contains an unordered list of calculation periods is still regarded as a conformant document.",

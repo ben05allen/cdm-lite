@@ -11,19 +11,22 @@ from . import (
 
 
 class LegalAgreementIdentification(BaseModel):
-    governing_law: cdm_legaldocumentation_common_GoverningLawEnum_schema.GoverningLawEnum | None = Field(
-        None,
-        alias="governingLaw",
-        description="The law governing the legal agreement, e.g. English Law, New York Law or Japanese Law.",
+    governing_law: cdm_legaldocumentation_common_GoverningLawEnum_schema.GoverningLawEnum | None = (
+        Field(
+            None,
+            alias="governingLaw",
+            description="The law governing the legal agreement, e.g. English Law, New York Law or Japanese Law.",
+        )
     )
     agreement_name: cdm_legaldocumentation_common_AgreementName_schema.AgreementName = Field(
         ...,
         alias="agreementName",
         description="The legal agreement name, e.g. Credit Support Annex for Variation Margin.",
     )
-    publisher: cdm_legaldocumentation_common_LegalAgreementPublisherEnum_schema.LegalAgreementPublisherEnum | None = (
-        Field(None, description="The legal agreement publisher, e.g. ISDA.")
-    )
+    publisher: (
+        cdm_legaldocumentation_common_LegalAgreementPublisherEnum_schema.LegalAgreementPublisherEnum
+        | None
+    ) = Field(None, description="The legal agreement publisher, e.g. ISDA.")
     vintage: int | None = Field(
         None,
         description="In the case where successive definitions of the legal agreement have been developed, the vintage identification. This is typically (but not necessarily) done by referencing the year, e.g. 2013 in the case of the ISDA 2013 Standard Credit Support Annex.",

@@ -3,12 +3,17 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_legaldocumentation_csa_MTAFixedAmount_schema, cdm_legaldocumentation_csa_MTARatingsBased_schema
+from . import (
+    cdm_legaldocumentation_csa_MTAFixedAmount_schema,
+    cdm_legaldocumentation_csa_MTARatingsBased_schema,
+)
 
 
 class MTAType(BaseModel):
     fixed_amount: cdm_legaldocumentation_csa_MTAFixedAmount_schema.MTAFixedAmount | None = Field(
-        None, alias="fixedAmount", description="Defines that the Minimum Transfer Amount (MTA) is a Fixed Amount."
+        None,
+        alias="fixedAmount",
+        description="Defines that the Minimum Transfer Amount (MTA) is a Fixed Amount.",
     )
     ratings_based: cdm_legaldocumentation_csa_MTARatingsBased_schema.MTARatingsBased | None = Field(
         None,

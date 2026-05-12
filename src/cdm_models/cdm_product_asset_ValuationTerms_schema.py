@@ -26,10 +26,16 @@ class ValuationTerms(BaseModel):
         description="The number of valuation dates between valuation start date and valuation end date.",
     )
     dividend_valuation_dates: (
-        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates | None
-    ) = Field(None, alias="dividendValuationDates", description="Specifies the dividend valuation dates of the swap.")
+        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates
+        | None
+    ) = Field(
+        None,
+        alias="dividendValuationDates",
+        description="Specifies the dividend valuation dates of the swap.",
+    )
     f_pv_final_price_election_fallback: (
-        cdm_product_asset_FPVFinalPriceElectionFallbackEnum_schema.FPVFinalPriceElectionFallbackEnum | None
+        cdm_product_asset_FPVFinalPriceElectionFallbackEnum_schema.FPVFinalPriceElectionFallbackEnum
+        | None
     ) = Field(
         None,
         alias="fPVFinalPriceElectionFallback",

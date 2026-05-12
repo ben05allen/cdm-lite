@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_PeriodExtendedEnum_schema, cdm_product_common_schedule_WeeklyRollConventionEnum_schema
+from . import (
+    cdm_base_datetime_PeriodExtendedEnum_schema,
+    cdm_product_common_schedule_WeeklyRollConventionEnum_schema,
+)
 
 
 class ResetFrequency(BaseModel):

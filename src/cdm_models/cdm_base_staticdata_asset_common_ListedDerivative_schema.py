@@ -13,7 +13,9 @@ from . import (
 
 
 class ListedDerivative(BaseModel):
-    identifier: list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None = Field(
+    identifier: (
+        list[cdm_base_staticdata_asset_common_AssetIdentifier_schema.AssetIdentifier] | None
+    ) = Field(
         None,
         description="Asset Identifiers are used to uniquely identify an Asset, using a specified Asset Identifier Type.",
         min_length=1,
@@ -24,16 +26,25 @@ class ListedDerivative(BaseModel):
         min_length=0,
     )
     is_exchange_listed: bool | None = Field(
-        None, alias="isExchangeListed", description="Defines whether the Asset is listed on a public exchange."
+        None,
+        alias="isExchangeListed",
+        description="Defines whether the Asset is listed on a public exchange.",
     )
     exchange: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
         None, description="If the Asset is listed, defines the public exchange of the listing."
     )
     related_exchange: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
-        None, alias="relatedExchange", description="Provides the related Exchanges, if applicable.", min_length=0
+        None,
+        alias="relatedExchange",
+        description="Provides the related Exchanges, if applicable.",
+        min_length=0,
     )
-    instrument_type: cdm_base_staticdata_asset_common_InstrumentTypeEnum_schema.InstrumentTypeEnum | None = Field(
-        None, alias="instrumentType", description="Identifies the type of an instrument using an enumerated list."
+    instrument_type: (
+        cdm_base_staticdata_asset_common_InstrumentTypeEnum_schema.InstrumentTypeEnum | None
+    ) = Field(
+        None,
+        alias="instrumentType",
+        description="Identifies the type of an instrument using an enumerated list.",
     )
     delivery_term: str | None = Field(
         None,
@@ -41,6 +52,8 @@ class ListedDerivative(BaseModel):
         description="Also called contract month or delivery month. However, it's not always a month. It is usually expressed using a code, e.g. Z23 would be the Dec 2023 contract, (Z = December). For crude oil, the corresponding contract might be called CLZ23. Optional as this can be uniquely identified in the identifier.",
     )
     option_type: cdm_base_staticdata_asset_common_PutCallEnum_schema.PutCallEnum | None = Field(
-        None, alias="optionType", description="The type of option, ie Put or Call. Left empty if it is a Future."
+        None,
+        alias="optionType",
+        description="The type of option, ie Put or Call. Left empty if it is a Future.",
     )
     strike: float | None = Field(None, description="Specifies the strike of the option.")

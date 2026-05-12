@@ -3,9 +3,14 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel
-from . import cdm_observable_asset_CommodityReferencePriceEnum_schema, com_rosetta_model_metafields_MetaFields_schema
+from . import (
+    cdm_observable_asset_CommodityReferencePriceEnum_schema,
+    com_rosetta_model_metafields_MetaFields_schema,
+)
 
 
 class FieldWithMetaCommodityReferencePriceEnum(BaseModel):
-    value: cdm_observable_asset_CommodityReferencePriceEnum_schema.CommodityReferencePriceEnum | None = None
+    value: (
+        cdm_observable_asset_CommodityReferencePriceEnum_schema.CommodityReferencePriceEnum | None
+    ) = None
     meta: com_rosetta_model_metafields_MetaFields_schema.MetaFields | None = None

@@ -14,7 +14,9 @@ from . import (
 
 
 class AvailableInventoryRecord(BaseModel):
-    identifer: cdm_base_staticdata_identifier_AssignedIdentifier_schema.AssignedIdentifier | None = Field(
+    identifer: (
+        cdm_base_staticdata_identifier_AssignedIdentifier_schema.AssignedIdentifier | None
+    ) = Field(
         None,
         description="Unique identifier for this record. This can be used to uniquely identify a specific piece of inventory.",
     )
@@ -26,7 +28,9 @@ class AvailableInventoryRecord(BaseModel):
         alias="expirationDateTime",
         description="There may be a set period/time restriction associated to the security.",
     )
-    collateral: list[cdm_product_collateral_CollateralProvisions_schema.CollateralProvisions] | None = Field(
+    collateral: (
+        list[cdm_product_collateral_CollateralProvisions_schema.CollateralProvisions] | None
+    ) = Field(
         None,
         description="The type of collateral can often be required when determining if the piece of availability being described is suitable for a party.",
         min_length=0,
@@ -37,7 +41,9 @@ class AvailableInventoryRecord(BaseModel):
         description="An individual security may be held by several agents. Including the party role at this level allows us to reference the party holding this specific item.",
         min_length=0,
     )
-    quantity: cdm_base_math_Quantity_schema.Quantity | None = Field(None, description="The quantity of the security")
+    quantity: cdm_base_math_Quantity_schema.Quantity | None = Field(
+        None, description="The quantity of the security"
+    )
     interest_rate: cdm_observable_asset_Price_schema.Price | None = Field(
         None,
         alias="interestRate",

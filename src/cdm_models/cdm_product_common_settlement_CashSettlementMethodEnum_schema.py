@@ -15,6 +15,8 @@ class CashSettlementMethodEnum(StrEnum):
     MID_MARKET_INDICATIVE_QUOTATIONS_ALTERNATE = "MidMarketIndicativeQuotationsAlternate"
     PAR_YIELD_CURVE_ADJUSTED_METHOD = "ParYieldCurveAdjustedMethod"
     PAR_YIELD_CURVE_UNADJUSTED_METHOD = "ParYieldCurveUnadjustedMethod"
-    REPLACEMENT_VALUE_CALCULATION_AGENT_DETERMINATION = "ReplacementValueCalculationAgentDetermination"
+    REPLACEMENT_VALUE_CALCULATION_AGENT_DETERMINATION = (
+        "ReplacementValueCalculationAgentDetermination"
+    )
     REPLACEMENT_VALUE_FIRM_QUOTATIONS = "ReplacementValueFirmQuotations"
     ZERO_COUPON_YIELD_ADJUSTED_METHOD = "ZeroCouponYieldAdjustedMethod"

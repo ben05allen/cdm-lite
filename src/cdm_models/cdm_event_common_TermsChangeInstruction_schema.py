@@ -4,12 +4,19 @@
 
 from pydantic import BaseModel, Field
 from ._internal_3 import NonTransferableProduct
-from . import cdm_base_staticdata_party_AncillaryParty_schema, cdm_product_common_NotionalAdjustmentEnum_schema
+from . import (
+    cdm_base_staticdata_party_AncillaryParty_schema,
+    cdm_product_common_NotionalAdjustmentEnum_schema,
+)
 
 
 class TermsChangeInstruction(BaseModel):
     product: NonTransferableProduct | None = Field(None, description="product to be changed")
-    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = Field(
-        None, alias="ancillaryParty", description="ancillary party to be changed", min_length=0
+    ancillary_party: list[cdm_base_staticdata_party_AncillaryParty_schema.AncillaryParty] | None = (
+        Field(
+            None, alias="ancillaryParty", description="ancillary party to be changed", min_length=0
+        )
     )
-    adjustment: cdm_product_common_NotionalAdjustmentEnum_schema.NotionalAdjustmentEnum | None = None
+    adjustment: cdm_product_common_NotionalAdjustmentEnum_schema.NotionalAdjustmentEnum | None = (
+        None
+    )

@@ -12,12 +12,16 @@ from . import (
 
 
 class GeneralInconvertibility(BaseModel):
-    general_inconvertibility_is_applicable: bool = Field(..., alias="generalInconvertibilityIsApplicable")
+    general_inconvertibility_is_applicable: bool = Field(
+        ..., alias="generalInconvertibilityIsApplicable"
+    )
     local_substitute_provision_type: (
         cdm_legaldocumentation_transaction_additionalterms_FxSubstitutionProvisionTypeEnum_schema.FxSubstitutionProvisionTypeEnum
         | None
     ) = Field(None, alias="localSubstituteProvisionType")
-    maximum_days_of_disruption: cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None = Field(
+    maximum_days_of_disruption: (
+        cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None
+    ) = Field(
         None,
         alias="maximumDaysOfDisruption",
         description="Specifies how long to wait to get a quote from a settlement rate option upon a price source disruption.",
@@ -27,7 +31,8 @@ class GeneralInconvertibility(BaseModel):
         | None
     ) = Field(None, alias="nonDeliverableSubstitute")
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(
         None,
         alias="escrowArrangement",

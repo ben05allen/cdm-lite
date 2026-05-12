@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_AdjustableDate_schema, cdm_base_datetime_AdjustedRelativeDateOffset_schema
+from . import (
+    cdm_base_datetime_AdjustableDate_schema,
+    cdm_base_datetime_AdjustedRelativeDateOffset_schema,
+)
 
 
 class AdjustableOrRelativeDate(BaseModel):
@@ -12,6 +15,10 @@ class AdjustableOrRelativeDate(BaseModel):
         alias="adjustableDate",
         description="A date that shall be subject to adjustment if it would otherwise fall on a day that is not a business day in the specified business centers, together with the convention for adjusting the date.",
     )
-    relative_date: cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None = Field(
-        None, alias="relativeDate", description="A date specified as some offset to another date (the anchor date)."
+    relative_date: (
+        cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None
+    ) = Field(
+        None,
+        alias="relativeDate",
+        description="A date specified as some offset to another date (the anchor date).",
     )

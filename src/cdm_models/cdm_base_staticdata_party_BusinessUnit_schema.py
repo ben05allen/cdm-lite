@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_staticdata_identifier_Identifier_schema, cdm_base_staticdata_party_ContactInformation_schema
+from . import (
+    cdm_base_staticdata_identifier_Identifier_schema,
+    cdm_base_staticdata_party_ContactInformation_schema,
+)
 
 
 class BusinessUnit(BaseModel):
@@ -11,7 +14,9 @@ class BusinessUnit(BaseModel):
     identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = Field(
         None, description="An identifier used to uniquely identify the organizational unit"
     )
-    contact_information: cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None = Field(
+    contact_information: (
+        cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None
+    ) = Field(
         None,
         alias="contactInformation",
         description="The contact information for such business unit, when different from the contact information associated with the party.",

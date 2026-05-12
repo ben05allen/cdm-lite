@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_CollateralValuationAgentElection_schema
 
 class CollateralValuationAgent(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_CollateralValuationAgentElection_schema.CollateralValuationAgentElection] | None
+        list[
+            cdm_legaldocumentation_csa_CollateralValuationAgentElection_schema.CollateralValuationAgentElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

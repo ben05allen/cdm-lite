@@ -3,12 +3,16 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_Period_schema, cdm_product_collateral_AverageTradingVolumeMethodologyEnum_schema
+from . import (
+    cdm_base_datetime_Period_schema,
+    cdm_product_collateral_AverageTradingVolumeMethodologyEnum_schema,
+)
 
 
 class AverageTradingVolume(BaseModel):
     period: cdm_base_datetime_Period_schema.Period = Field(
-        ..., description="Represents the period of the equities average trading volume on the exchange/s."
+        ...,
+        description="Represents the period of the equities average trading volume on the exchange/s.",
     )
     methodology: cdm_product_collateral_AverageTradingVolumeMethodologyEnum_schema.AverageTradingVolumeMethodologyEnum = Field(
         ...,

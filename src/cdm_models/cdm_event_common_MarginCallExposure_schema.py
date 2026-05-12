@@ -19,7 +19,9 @@ from . import (
 
 
 class MarginCallExposure(BaseModel):
-    instruction_type: cdm_event_common_MarginCallInstructionType_schema.MarginCallInstructionType | None = Field(
+    instruction_type: (
+        cdm_event_common_MarginCallInstructionType_schema.MarginCallInstructionType | None
+    ) = Field(
         None,
         alias="instructionType",
         description="Identifies the enumeration values to specify the call notification type, direction, specific action type.",
@@ -36,17 +38,21 @@ class MarginCallExposure(BaseModel):
         min_length=0,
     )
     clearing_broker: cdm_base_staticdata_party_Party_schema.Party | None = Field(
-        None, alias="clearingBroker", description="Indicates the name of the Clearing Broker FCM/DCM."
+        None,
+        alias="clearingBroker",
+        description="Indicates the name of the Clearing Broker FCM/DCM.",
     )
     call_identifier: cdm_base_staticdata_identifier_Identifier_schema.Identifier | None = Field(
         None,
         alias="callIdentifier",
         description="Represents a unique Identifier for a margin call message, that can be referenced throughout all points of the process.",
     )
-    call_agreement_type: cdm_legaldocumentation_common_AgreementName_schema.AgreementName | None = Field(
-        None,
-        alias="callAgreementType",
-        description="Specifies the legal agreement type the margin call is generated from and governed by.",
+    call_agreement_type: cdm_legaldocumentation_common_AgreementName_schema.AgreementName | None = (
+        Field(
+            None,
+            alias="callAgreementType",
+            description="Specifies the legal agreement type the margin call is generated from and governed by.",
+        )
     )
     agreement_minimum_transfer_amount: cdm_observable_asset_Money_schema.Money | None = Field(
         None,
@@ -64,7 +70,9 @@ class MarginCallExposure(BaseModel):
         description="Specifies the collateral legal agreement rounding in base currency.",
     )
     reg_margin_type: cdm_event_common_RegMarginTypeEnum_schema.RegMarginTypeEnum | None = Field(
-        None, alias="regMarginType", description="Identifies margin type and if related regulatory mandate"
+        None,
+        alias="regMarginType",
+        description="Identifies margin type and if related regulatory mandate",
     )
     reg_im_role: cdm_event_common_RegIMRoleEnum_schema.RegIMRoleEnum | None = Field(
         None,
@@ -84,7 +92,9 @@ class MarginCallExposure(BaseModel):
         alias="collateralPortfolio",
         description="Represents attributes to define the details of collateral assets within a collateral portfolio to be used in margin call messaging and contribute to collateral balances e.g securities in a collateral account recorded by the principal as held or posted.",
     )
-    independent_amount_balance: cdm_event_common_CollateralBalance_schema.CollateralBalance | None = Field(
+    independent_amount_balance: (
+        cdm_event_common_CollateralBalance_schema.CollateralBalance | None
+    ) = Field(
         None,
         alias="independentAmountBalance",
         description="Represents additional credit support amount over and above mark to market value.",

@@ -3,13 +3,20 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_product_collateral_DeliveryAmount_schema, cdm_product_collateral_ReturnAmount_schema
+from . import (
+    cdm_product_collateral_DeliveryAmount_schema,
+    cdm_product_collateral_ReturnAmount_schema,
+)
 
 
 class InterestAmount(BaseModel):
     return_amount: cdm_product_collateral_ReturnAmount_schema.ReturnAmount = Field(
-        ..., alias="returnAmount", description="The application of Interest Amount with respect the Return Amount."
+        ...,
+        alias="returnAmount",
+        description="The application of Interest Amount with respect the Return Amount.",
     )
     delivery_amount: cdm_product_collateral_DeliveryAmount_schema.DeliveryAmount = Field(
-        ..., alias="deliveryAmount", description="The application of Interest Amount with respect the Delivery Amount."
+        ...,
+        alias="deliveryAmount",
+        description="The application of Interest Amount with respect the Delivery Amount.",
     )

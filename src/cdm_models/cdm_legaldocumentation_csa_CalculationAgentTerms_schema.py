@@ -7,12 +7,16 @@ from . import cdm_base_staticdata_party_CounterpartyRoleEnum_schema
 
 
 class CalculationAgentTerms(BaseModel):
-    party: list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None = Field(
+    party: (
+        list[cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum] | None
+    ) = Field(
         None,
         description="The party which is specified as Calculation Agent for Initial Margin.",
         max_length=2,
         min_length=0,
     )
     bespoke_calculation_agent_terms: str | None = Field(
-        None, alias="bespokeCalculationAgentTerms", description="The Calculation Agent (IM) terms when specified."
+        None,
+        alias="bespokeCalculationAgentTerms",
+        description="The Calculation Agent (IM) terms when specified.",
     )

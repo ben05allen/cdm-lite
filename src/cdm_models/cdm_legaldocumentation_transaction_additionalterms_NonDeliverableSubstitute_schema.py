@@ -3,17 +3,22 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_AdjustedRelativeDateOffset_schema, cdm_observable_asset_SettlementRateOption_schema
+from . import (
+    cdm_base_datetime_AdjustedRelativeDateOffset_schema,
+    cdm_observable_asset_SettlementRateOption_schema,
+)
 
 
 class NonDeliverableSubstitute(BaseModel):
-    non_deliverable_substitute_is_applicable: bool = Field(..., alias="nonDeliverableSubstituteIsApplicable")
-    valuation_date: cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None = Field(
-        None, alias="valuationDate"
+    non_deliverable_substitute_is_applicable: bool = Field(
+        ..., alias="nonDeliverableSubstituteIsApplicable"
     )
-    settlement_date: cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None = Field(
-        None, alias="settlementDate"
-    )
-    settlement_rate_option: cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None = Field(
-        None, alias="settlementRateOption"
-    )
+    valuation_date: (
+        cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None
+    ) = Field(None, alias="valuationDate")
+    settlement_date: (
+        cdm_base_datetime_AdjustedRelativeDateOffset_schema.AdjustedRelativeDateOffset | None
+    ) = Field(None, alias="settlementDate")
+    settlement_rate_option: (
+        cdm_observable_asset_SettlementRateOption_schema.SettlementRateOption | None
+    ) = Field(None, alias="settlementRateOption")

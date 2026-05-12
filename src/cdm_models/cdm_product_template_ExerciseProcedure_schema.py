@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_product_template_AutomaticExercise_schema, cdm_product_template_ManualExercise_schema
+from . import (
+    cdm_product_template_AutomaticExercise_schema,
+    cdm_product_template_ManualExercise_schema,
+)
 
 
 class ExerciseProcedure(BaseModel):
@@ -12,10 +15,12 @@ class ExerciseProcedure(BaseModel):
         alias="manualExercise",
         description="Specifies that the notice of exercise must be given by the buyer to the seller or seller's agent.",
     )
-    automatic_exercise: cdm_product_template_AutomaticExercise_schema.AutomaticExercise | None = Field(
-        None,
-        alias="automaticExercise",
-        description="If automatic is specified, then the notional amount of the underlying swap not previously exercised under the swaption will be automatically exercised at the expiration time on the expiration date if at such time the buyer is in-the-money, provided that the difference between the settlement rate and the fixed rate under the relevant underlying swap is not less than the specified threshold rate. The term in-the-money is assumed to have the meaning defining in the 2000 ISDA Definitions, Section 17.4 In-the-money.",
+    automatic_exercise: cdm_product_template_AutomaticExercise_schema.AutomaticExercise | None = (
+        Field(
+            None,
+            alias="automaticExercise",
+            description="If automatic is specified, then the notional amount of the underlying swap not previously exercised under the swaption will be automatically exercised at the expiration time on the expiration date if at such time the buyer is in-the-money, provided that the difference between the settlement rate and the fixed rate under the relevant underlying swap is not less than the specified threshold rate. The term in-the-money is assumed to have the meaning defining in the 2000 ISDA Definitions, Section 17.4 In-the-money.",
+        )
     )
     follow_up_confirmation: bool = Field(
         ...,

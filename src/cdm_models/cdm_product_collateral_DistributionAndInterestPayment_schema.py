@@ -8,7 +8,10 @@ from . import cdm_product_collateral_CollateralInterestParameters_schema
 
 class DistributionAndInterestPayment(BaseModel):
     interest_parameters: (
-        list[cdm_product_collateral_CollateralInterestParameters_schema.CollateralInterestParameters] | None
+        list[
+            cdm_product_collateral_CollateralInterestParameters_schema.CollateralInterestParameters
+        ]
+        | None
     ) = Field(
         None,
         alias="interestParameters",

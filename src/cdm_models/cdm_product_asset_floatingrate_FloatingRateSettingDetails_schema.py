@@ -8,17 +8,22 @@ from . import cdm_observable_asset_calculatedrate_CalculatedRateDetails_schema
 
 class FloatingRateSettingDetails(BaseModel):
     calculation_details: (
-        cdm_observable_asset_calculatedrate_CalculatedRateDetails_schema.CalculatedRateDetails | None
+        cdm_observable_asset_calculatedrate_CalculatedRateDetails_schema.CalculatedRateDetails
+        | None
     ) = Field(
         None,
         alias="calculationDetails",
         description="Calculated rate details (observation dates, values, and weights).",
     )
     observation_date: str | None = Field(
-        None, alias="observationDate", description="The day upon which the rate was observed (for term rates)."
+        None,
+        alias="observationDate",
+        description="The day upon which the rate was observed (for term rates).",
     )
     reset_date: str | None = Field(
-        None, alias="resetDate", description="The day for which the rate is needed (e.g. period beginning or end date)."
+        None,
+        alias="resetDate",
+        description="The day for which the rate is needed (e.g. period beginning or end date).",
     )
     floating_rate: float = Field(
         ..., alias="floatingRate", description="The resulting rate that was observed or calculated."

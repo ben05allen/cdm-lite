@@ -11,14 +11,22 @@ from . import (
 
 
 class CreditSupportProviderElection(BaseModel):
-    party: cdm_base_staticdata_party_Party_schema.Party = Field(..., description="The elective party.")
-    credit_support_provider_terms: cdm_legaldocumentation_common_CreditSupportProviderTermsEnum_schema.CreditSupportProviderTermsEnum = Field(
-        ..., alias="creditSupportProviderTerms", description="Specification of the Credit Support Provider terms."
+    party: cdm_base_staticdata_party_Party_schema.Party = Field(
+        ..., description="The elective party."
     )
-    credit_support_provider: list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None = Field(
+    credit_support_provider_terms: cdm_legaldocumentation_common_CreditSupportProviderTermsEnum_schema.CreditSupportProviderTermsEnum = Field(
+        ...,
+        alias="creditSupportProviderTerms",
+        description="Specification of the Credit Support Provider terms.",
+    )
+    credit_support_provider: (
+        list[cdm_base_staticdata_party_LegalEntity_schema.LegalEntity] | None
+    ) = Field(
         None,
         alias="creditSupportProvider",
         description="The specified Credit Support Provider(s), if any.",
         min_length=0,
     )
-    bespoke_credit_suppport_provider: str | None = Field(None, alias="bespokeCreditSuppportProvider", description="...")
+    bespoke_credit_suppport_provider: str | None = Field(
+        None, alias="bespokeCreditSuppportProvider", description="..."
+    )

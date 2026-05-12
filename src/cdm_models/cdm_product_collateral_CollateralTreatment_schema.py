@@ -11,13 +11,16 @@ from . import (
 
 class CollateralTreatment(BaseModel):
     valuation_treatment: (
-        cdm_product_collateral_CollateralValuationTreatment_schema.CollateralValuationTreatment | None
+        cdm_product_collateral_CollateralValuationTreatment_schema.CollateralValuationTreatment
+        | None
     ) = Field(
         None,
         alias="valuationTreatment",
         description="Specification of the valuation treatment for the specified collateral.",
     )
-    concentration_limit: list[cdm_product_collateral_ConcentrationLimit_schema.ConcentrationLimit] | None = Field(
+    concentration_limit: (
+        list[cdm_product_collateral_ConcentrationLimit_schema.ConcentrationLimit] | None
+    ) = Field(
         None,
         alias="concentrationLimit",
         description="Specification of concentration limits applicable to the collateral criteria.",

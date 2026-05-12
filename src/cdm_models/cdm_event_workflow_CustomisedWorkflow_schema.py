@@ -7,8 +7,12 @@ from pydantic import BaseModel, Field
 
 class CustomisedWorkflow(BaseModel):
     item_name: str = Field(
-        ..., alias="itemName", description="In this initial iteration, this corresponds to the DTCC TIW element name."
+        ...,
+        alias="itemName",
+        description="In this initial iteration, this corresponds to the DTCC TIW element name.",
     )
     item_value: str = Field(
-        ..., alias="itemValue", description="In this initial iteration, this corresponds to the DTCC value."
+        ...,
+        alias="itemValue",
+        description="In this initial iteration, this corresponds to the DTCC value.",
     )

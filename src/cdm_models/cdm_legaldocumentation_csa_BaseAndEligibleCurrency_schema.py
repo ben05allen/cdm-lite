@@ -20,25 +20,29 @@ class BaseAndEligibleCurrency(BaseModel):
         alias="baseCurrencyTerminationCurrency",
         description="A flag detailing whether the Base Currency is set to  the Termination Currency as defined in the related  Master Agreement.",
     )
-    base_currency_other: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    base_currency_other: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="baseCurrencyOther",
         description="Utilised where the clause data structure is not able to capture a material aspect of the clause.",
     )
-    eligible_currency: list[cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum] | None = (
-        Field(
-            None,
-            alias="eligibleCurrency",
-            description="A definition of a currency agreed by the parties, typically to indicate the currencies of eligible cash collateral.",
-            min_length=0,
-        )
+    eligible_currency: (
+        list[cdm_base_staticdata_asset_common_ISOCurrencyCodeEnum_schema.ISOCurrencyCodeEnum] | None
+    ) = Field(
+        None,
+        alias="eligibleCurrency",
+        description="A definition of a currency agreed by the parties, typically to indicate the currencies of eligible cash collateral.",
+        min_length=0,
     )
     eligible_currency_incl_base_currency: bool = Field(
         ...,
         alias="eligibleCurrencyInclBaseCurrency",
         description="A flag detailing whether the Base Currency is included as an Eligible Currency.",
     )
-    eligible_currency_other: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    eligible_currency_other: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="eligibleCurrencyOther",
         description="Utilised where the clause data structure is not able to capture a material aspect of the clause.",

@@ -12,12 +12,16 @@ from . import (
 
 
 class CalculationPeriodDates(BaseModel):
-    effective_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    effective_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="effectiveDate",
         description="The first day of the terms of the trade. This day may be subject to adjustment in accordance with a business day convention.",
     )
-    termination_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    termination_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="terminationDate",
         description="The last day of the terms of the trade. This date may be subject to adjustments in accordance with the business day convention. It can also be specified in relation to another scheduled date (e.g. the last payment date).",
@@ -29,7 +33,9 @@ class CalculationPeriodDates(BaseModel):
         alias="calculationPeriodDatesAdjustments",
         description="The specification of the business day convention and financial business centers used for adjusting any calculation period date if it would otherwise fall on a day that is not a business day in the specified business center.",
     )
-    first_period_start_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    first_period_start_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="firstPeriodStartDate",
         description="The start date of the calculation period. FpML specifies that for interest rate swaps this date must only be specified if it is not equal to the effective date. It is always specified in the case of equity swaps and credit default swaps with periodic payments. This date may be subject to adjustment in accordance with a business day convention.",
@@ -49,7 +55,9 @@ class CalculationPeriodDates(BaseModel):
         alias="lastRegularPeriodEndDate",
         description="The end date of the regular part of the calculation period schedule. It must only be specified if there is a final stub calculation period. This day may be subject to adjustment in accordance with any adjustments specified in calculationPeriodDatesAdjustments.",
     )
-    stub_period_type: cdm_product_common_schedule_StubPeriodTypeEnum_schema.StubPeriodTypeEnum | None = Field(
+    stub_period_type: (
+        cdm_product_common_schedule_StubPeriodTypeEnum_schema.StubPeriodTypeEnum | None
+    ) = Field(
         None,
         alias="stubPeriodType",
         description="Method to allocate any irregular period remaining after regular periods have been allocated between the effective and termination date.",

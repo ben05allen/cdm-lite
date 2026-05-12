@@ -15,9 +15,13 @@ from . import (
 
 class CollateralInterestHandlingParameters(BaseModel):
     interest_payment_handling: cdm_product_collateral_CollateralInterestHandlingEnum_schema.CollateralInterestHandlingEnum = Field(
-        ..., alias="interestPaymentHandling", description="Specifies how the collateral interest is to be handled."
+        ...,
+        alias="interestPaymentHandling",
+        description="Specifies how the collateral interest is to be handled.",
     )
-    payment_business_center: list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None = Field(
+    payment_business_center: (
+        list[cdm_base_datetime_BusinessCenterEnum_schema.BusinessCenterEnum] | None
+    ) = Field(
         None,
         alias="paymentBusinessCenter",
         description="Specifies applicable business centers for payments.",
@@ -71,16 +75,24 @@ class CollateralInterestHandlingParameters(BaseModel):
         description="Specifies the level below which the interest will be written off; if omitted write-off is not applicable.",
     )
     alternative_to_interest_amount: (
-        cdm_product_collateral_AlternativeToInterestAmountEnum_schema.AlternativeToInterestAmountEnum | None
-    ) = Field(None, alias="alternativeToInterestAmount", description="Specifies the alternative to interest amounts.")
+        cdm_product_collateral_AlternativeToInterestAmountEnum_schema.AlternativeToInterestAmountEnum
+        | None
+    ) = Field(
+        None,
+        alias="alternativeToInterestAmount",
+        description="Specifies the alternative to interest amounts.",
+    )
     alternative_provision: str | None = Field(
         None,
         alias="alternativeProvision",
         description="Specifies an alternative to interest amount, when the alternative provision clause is specified.",
     )
     cutoff_time: str | None = Field(
-        None, alias="cutoffTime", description="Specifies the time of day that interest needs to be confirmed by."
+        None,
+        alias="cutoffTime",
+        description="Specifies the time of day that interest needs to be confirmed by.",
     )
-    notification: cdm_product_collateral_CollateralInterestNotification_schema.CollateralInterestNotification | None = (
-        Field(None, description="Specifies the terms describing notification requirements.")
-    )
+    notification: (
+        cdm_product_collateral_CollateralInterestNotification_schema.CollateralInterestNotification
+        | None
+    ) = Field(None, description="Specifies the terms describing notification requirements.")

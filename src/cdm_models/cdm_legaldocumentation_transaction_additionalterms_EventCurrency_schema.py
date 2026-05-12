@@ -21,7 +21,9 @@ class EventCurrency(BaseModel):
         alias="eventCurrentAmount",
         description="Defines the Event Currency Amount to be exchanged on the Settlement Date.",
     )
-    event_currency_buyer_seller: list[cdm_base_staticdata_party_BuyerSeller_schema.BuyerSeller] | None = Field(
+    event_currency_buyer_seller: (
+        list[cdm_base_staticdata_party_BuyerSeller_schema.BuyerSeller] | None
+    ) = Field(
         None,
         alias="eventCurrencyBuyerSeller",
         description="Unless otherwised specified, the Buyer is the party to which the Event Currency Amount is owed on the Settlement Date and the Seller is the party which owes the Event Currency Amount on the Settlement Date.",

@@ -12,19 +12,22 @@ from . import (
 
 
 class SpecificNonTransferability(BaseModel):
-    specific_non_transferability_is_applicable: bool = Field(..., alias="specificNonTransferabilityIsApplicable")
+    specific_non_transferability_is_applicable: bool = Field(
+        ..., alias="specificNonTransferabilityIsApplicable"
+    )
     relevant_class: list[str] | None = Field(None, alias="relevantClass", min_length=0)
     local_substitute_provision_type: (
         cdm_legaldocumentation_transaction_additionalterms_FxSubstitutionProvisionTypeEnum_schema.FxSubstitutionProvisionTypeEnum
         | None
     ) = Field(None, alias="localSubstituteProvisionType")
-    maximum_days_of_disruption: cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None = Field(
-        None, alias="maximumDaysOfDisruption"
-    )
+    maximum_days_of_disruption: (
+        cdm_observable_asset_ValuationPostponement_schema.ValuationPostponement | None
+    ) = Field(None, alias="maximumDaysOfDisruption")
     non_deliverable_substitute: (
         cdm_legaldocumentation_transaction_additionalterms_NonDeliverableSubstitute_schema.NonDeliverableSubstitute
         | None
     ) = Field(None, alias="nonDeliverableSubstitute")
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")

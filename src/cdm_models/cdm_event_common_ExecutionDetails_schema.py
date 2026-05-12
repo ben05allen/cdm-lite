@@ -12,12 +12,18 @@ from . import (
 
 class ExecutionDetails(BaseModel):
     execution_type: cdm_event_common_ExecutionTypeEnum_schema.ExecutionTypeEnum = Field(
-        ..., alias="executionType", description="Identifies the type of execution, e.g. via voice, electronically..."
+        ...,
+        alias="executionType",
+        description="Identifies the type of execution, e.g. via voice, electronically...",
     )
     execution_venue: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity | None = Field(
-        None, alias="executionVenue", description="Represents the venue on which a trade was executed."
+        None,
+        alias="executionVenue",
+        description="Represents the venue on which a trade was executed.",
     )
-    package_reference: cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None = Field(
+    package_reference: (
+        cdm_base_staticdata_identifier_IdentifiedList_schema.IdentifiedList | None
+    ) = Field(
         None,
         alias="packageReference",
         description="A reference to the package linking the trade with other trades, in case the trade was executed as part of a package (hence this attribute is optional).",

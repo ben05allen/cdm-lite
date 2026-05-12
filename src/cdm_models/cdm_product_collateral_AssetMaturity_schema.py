@@ -3,7 +3,10 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_base_datetime_PeriodRange_schema, cdm_base_staticdata_asset_common_MaturityTypeEnum_schema
+from . import (
+    cdm_base_datetime_PeriodRange_schema,
+    cdm_base_staticdata_asset_common_MaturityTypeEnum_schema,
+)
 
 
 class AssetMaturity(BaseModel):
@@ -13,5 +16,7 @@ class AssetMaturity(BaseModel):
         description="Specifies whether the maturity range is the remaining or original maturity.",
     )
     maturity_range: cdm_base_datetime_PeriodRange_schema.PeriodRange = Field(
-        ..., alias="maturityRange", description="Represents a filter based on the underlying asset maturity."
+        ...,
+        alias="maturityRange",
+        description="Represents a filter based on the underlying asset maturity.",
     )

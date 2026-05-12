@@ -8,7 +8,10 @@ from . import cdm_legaldocumentation_csa_AdditionalRepresentationElection_schema
 
 class AdditionalRepresentation(BaseModel):
     party_election: (
-        list[cdm_legaldocumentation_csa_AdditionalRepresentationElection_schema.AdditionalRepresentationElection] | None
+        list[
+            cdm_legaldocumentation_csa_AdditionalRepresentationElection_schema.AdditionalRepresentationElection
+        ]
+        | None
     ) = Field(
         None,
         alias="partyElection",

@@ -7,12 +7,16 @@ from . import cdm_legaldocumentation_common_OtherAgreementTerms_schema
 
 
 class OtherAgreements(BaseModel):
-    other_csa: cdm_legaldocumentation_common_OtherAgreementTerms_schema.OtherAgreementTerms | None = Field(
+    other_csa: (
+        cdm_legaldocumentation_common_OtherAgreementTerms_schema.OtherAgreementTerms | None
+    ) = Field(
         None,
         alias="otherCsa",
         description="The bespoke definition of Other CSA as specified by the parties to the agreement.",
     )
-    japanese_law_csa: cdm_legaldocumentation_common_OtherAgreementTerms_schema.OtherAgreementTerms | None = Field(
+    japanese_law_csa: (
+        cdm_legaldocumentation_common_OtherAgreementTerms_schema.OtherAgreementTerms | None
+    ) = Field(
         None,
         alias="japaneseLawCsa",
         description="The bespoke definition of whether Japanese Law CSA (VM) are specified by the parties to the agreement.",

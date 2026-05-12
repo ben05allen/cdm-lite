@@ -10,13 +10,24 @@ class MessageInformation(BaseModel):
     message_id: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString = Field(
         ..., alias="messageId", description="A unique identifier assigned to the message."
     )
-    sent_by: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None, alias="sentBy", description="The identifier for the originator of a message instance."
+    sent_by: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            alias="sentBy",
+            description="The identifier for the originator of a message instance.",
+        )
     )
-    sent_to: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
-        None, alias="sentTo", description="The identifier(s) for the recipient(s) of a message instance.", min_length=0
+    sent_to: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
+        None,
+        alias="sentTo",
+        description="The identifier(s) for the recipient(s) of a message instance.",
+        min_length=0,
     )
-    copy_to: list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None = Field(
+    copy_to: (
+        list[com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString] | None
+    ) = Field(
         None,
         alias="copyTo",
         description="A unique identifier (within the specified coding scheme) giving the details of some party to whom a copy of this message will be sent for reference.",

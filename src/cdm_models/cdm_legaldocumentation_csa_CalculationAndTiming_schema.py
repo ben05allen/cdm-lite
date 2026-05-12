@@ -17,24 +17,26 @@ from . import (
 
 
 class CalculationAndTiming(BaseModel):
-    calculation_agent_terms: cdm_legaldocumentation_csa_CalculationAgentTerms_schema.CalculationAgentTerms | None = (
-        Field(
-            None, alias="calculationAgentTerms", description="The calculation agent terms applicable to the agreement."
-        )
+    calculation_agent_terms: (
+        cdm_legaldocumentation_csa_CalculationAgentTerms_schema.CalculationAgentTerms | None
+    ) = Field(
+        None,
+        alias="calculationAgentTerms",
+        description="The calculation agent terms applicable to the agreement.",
     )
-    bespoke_calculation_date: cdm_legaldocumentation_csa_BespokeCalculationDate_schema.BespokeCalculationDate | None = (
-        Field(
-            None,
-            alias="bespokeCalculationDate",
-            description="The specification of bespoke Calculation Date terms for the purposes of Initial or Variation Margin by the parties to the agreement.",
-        )
+    bespoke_calculation_date: (
+        cdm_legaldocumentation_csa_BespokeCalculationDate_schema.BespokeCalculationDate | None
+    ) = Field(
+        None,
+        alias="bespokeCalculationDate",
+        description="The specification of bespoke Calculation Date terms for the purposes of Initial or Variation Margin by the parties to the agreement.",
     )
-    bespoke_calculation_time: cdm_legaldocumentation_csa_BespokeCalculationTime_schema.BespokeCalculationTime | None = (
-        Field(
-            None,
-            alias="bespokeCalculationTime",
-            description="Bespoke terms to describe the time as of which such party (or the Calculation Agent (IM) (if applicale)) computes its end of day valuations of derivatives transactions.",
-        )
+    bespoke_calculation_time: (
+        cdm_legaldocumentation_csa_BespokeCalculationTime_schema.BespokeCalculationTime | None
+    ) = Field(
+        None,
+        alias="bespokeCalculationTime",
+        description="Bespoke terms to describe the time as of which such party (or the Calculation Agent (IM) (if applicale)) computes its end of day valuations of derivatives transactions.",
     )
     calculation_date_location: (
         cdm_legaldocumentation_csa_CalculationDateLocation_schema.CalculationDateLocation | None
@@ -57,17 +59,23 @@ class CalculationAndTiming(BaseModel):
     )
     cash_settlement_day: str | None = Field(None, alias="cashSettlementDay")
     securities_settlement_day: str | None = Field(None, alias="securitiesSettlementDay")
-    legacy_valuation_date: cdm_legaldocumentation_csa_LegacyValuationDate_schema.LegacyValuationDate | None = Field(
+    legacy_valuation_date: (
+        cdm_legaldocumentation_csa_LegacyValuationDate_schema.LegacyValuationDate | None
+    ) = Field(
         None,
         alias="legacyValuationDate",
         description="Details of the days on which calculations are to be made to determine the Delivery Amount and/or Return Amount.",
     )
-    legacy_valuation_time: cdm_legaldocumentation_csa_LegacyValuationTime_schema.LegacyValuationTime | None = Field(
+    legacy_valuation_time: (
+        cdm_legaldocumentation_csa_LegacyValuationTime_schema.LegacyValuationTime | None
+    ) = Field(
         None,
         alias="legacyValuationTime",
         description="The time by which the value of the collateral and obligations to transfer or return collateral are to be calculated relative to the Valuation Date.",
     )
-    legacy_valuation_agent: cdm_legaldocumentation_csa_LegacyValuationAgent_schema.LegacyValuationAgent | None = Field(
+    legacy_valuation_agent: (
+        cdm_legaldocumentation_csa_LegacyValuationAgent_schema.LegacyValuationAgent | None
+    ) = Field(
         None,
         alias="legacyValuationAgent",
         description="Details of the party calculating the value of collateral to be delivered or returned.",

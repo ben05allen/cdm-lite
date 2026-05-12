@@ -21,7 +21,9 @@ class Obligations(BaseModel):
         alias="notSubordinated",
         description="An obligation and deliverable obligation characteristic. An obligation that ranks at least equal with the most senior Reference Obligation in priority of payment or, if no Reference Obligation is specified in the related Confirmation, the obligations of the Reference Entity that are senior. ISDA 2003 Term: Not Subordinated.",
     )
-    specified_currency: cdm_base_staticdata_asset_credit_SpecifiedCurrency_schema.SpecifiedCurrency | None = Field(
+    specified_currency: (
+        cdm_base_staticdata_asset_credit_SpecifiedCurrency_schema.SpecifiedCurrency | None
+    ) = Field(
         None,
         alias="specifiedCurrency",
         description="An obligation and deliverable obligation characteristic. The currency or currencies in which an obligation or deliverable obligation must be payable. ISDA 2003 Term: Specified Currency.",
@@ -31,12 +33,12 @@ class Obligations(BaseModel):
         alias="notSovereignLender",
         description="An obligation and deliverable obligation characteristic. Any obligation that is not primarily (majority) owed to a Sovereign or Supranational Organisation. ISDA 2003 Term: Not Sovereign Lender.",
     )
-    not_domestic_currency: cdm_base_staticdata_asset_credit_NotDomesticCurrency_schema.NotDomesticCurrency | None = (
-        Field(
-            None,
-            alias="notDomesticCurrency",
-            description="An obligation and deliverable obligation characteristic. Any obligation that is payable in any currency other than the domestic currency. Domestic currency is either the currency so specified or, if no currency is specified, the currency of (a) the reference entity, if the reference entity is a sovereign, or (b) the jurisdiction in which the relevant reference entity is organised, if the reference entity is not a sovereign. ISDA 2003 Term: Not Domestic Currency.",
-        )
+    not_domestic_currency: (
+        cdm_base_staticdata_asset_credit_NotDomesticCurrency_schema.NotDomesticCurrency | None
+    ) = Field(
+        None,
+        alias="notDomesticCurrency",
+        description="An obligation and deliverable obligation characteristic. Any obligation that is payable in any currency other than the domestic currency. Domestic currency is either the currency so specified or, if no currency is specified, the currency of (a) the reference entity, if the reference entity is a sovereign, or (b) the jurisdiction in which the relevant reference entity is organised, if the reference entity is not a sovereign. ISDA 2003 Term: Not Domestic Currency.",
     )
     not_domestic_law: bool | None = Field(
         None,
@@ -81,7 +83,9 @@ class Obligations(BaseModel):
         alias="othReferenceEntityObligations",
         description="This element is used to specify any other obligations of a reference entity in both obligations and deliverable obligations. The obligations can be specified free-form. ISDA 2003 Term: Other Obligations of a Reference Entity.",
     )
-    designated_priority: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    designated_priority: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="designatedPriority",
         description="Applies to Loan CDS, to indicate what lien level is appropriate for a deliverable obligation. Applies to European Loan CDS, to indicate the Ranking of the obligation. Example: a 2nd lien Loan CDS would imply that the deliverable obligations are 1st or 2nd lien loans.",

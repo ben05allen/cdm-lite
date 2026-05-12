@@ -24,7 +24,8 @@ class PhysicalSettlementTerms(BaseModel):
         description="Specifies the clearing organization (CCP, DCO) to which the trade should be cleared.",
     )
     physical_settlement_period: (
-        cdm_product_common_settlement_PhysicalSettlementPeriod_schema.PhysicalSettlementPeriod | None
+        cdm_product_common_settlement_PhysicalSettlementPeriod_schema.PhysicalSettlementPeriod
+        | None
     ) = Field(
         None,
         alias="physicalSettlementPeriod",

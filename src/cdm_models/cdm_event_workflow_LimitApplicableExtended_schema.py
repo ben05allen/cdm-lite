@@ -14,7 +14,8 @@ from . import (
 
 class LimitApplicableExtended(BaseModel):
     limit_type: (
-        cdm_event_workflow_metafields_FieldWithMetaCreditLimitTypeEnum_schema.FieldWithMetaCreditLimitTypeEnum | None
+        cdm_event_workflow_metafields_FieldWithMetaCreditLimitTypeEnum_schema.FieldWithMetaCreditLimitTypeEnum
+        | None
     ) = Field(
         None,
         alias="limitType",
@@ -30,23 +31,28 @@ class LimitApplicableExtended(BaseModel):
         alias="amountUtilized",
         description="The limit utilised by all the cleared trades for the limit level and limit type. While the attribute is of type integer in FpML and the CME schema, it has been specified to be of type number in the CDM to take into consideration java size limits as well as for consistency purposes with the way most monetary amounts are expressed.",
     )
-    utilization: cdm_event_workflow_CreditLimitUtilisation_schema.CreditLimitUtilisation | None = None
+    utilization: cdm_event_workflow_CreditLimitUtilisation_schema.CreditLimitUtilisation | None = (
+        None
+    )
     amount_remaining: float | None = Field(
         None,
         alias="amountRemaining",
         description="The limit remaining for the limit level and limit type. This does not take into account any pending trades. While the attribute is of type integer in FpML and the CME schema, it has been specified to be of type number in the CDM to take into consideration java size limits as well as for consistency purposes with the way most monetary amounts are expressed.",
     )
-    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="The currency in which the applicable limit is denominated. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
-    )
-    velocity: cdm_event_workflow_Velocity_schema.Velocity | None = None
-    limit_level: cdm_event_workflow_metafields_FieldWithMetaLimitLevelEnum_schema.FieldWithMetaLimitLevelEnum | None = (
+    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
         Field(
             None,
-            alias="limitLevel",
-            description="The level at which the limit is set: customer business, proprietary business or account level. This attribute is specified as a string as part of the CME clearing confirmation specification.",
+            description="The currency in which the applicable limit is denominated. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
         )
+    )
+    velocity: cdm_event_workflow_Velocity_schema.Velocity | None = None
+    limit_level: (
+        cdm_event_workflow_metafields_FieldWithMetaLimitLevelEnum_schema.FieldWithMetaLimitLevelEnum
+        | None
+    ) = Field(
+        None,
+        alias="limitLevel",
+        description="The level at which the limit is set: customer business, proprietary business or account level. This attribute is specified as a string as part of the CME clearing confirmation specification.",
     )
     limit_amount: float | None = Field(
         None,

@@ -14,6 +14,6 @@ class PartyIdentifier(BaseModel):
         ...,
         description="Provides an identifier associated with a party. The identifier is unique within the public source specified in the source attribute.",
     )
-    identifier_type: cdm_base_staticdata_party_PartyIdentifierTypeEnum_schema.PartyIdentifierTypeEnum | None = Field(
-        None, alias="identifierType", description="Defines the source of the identifier."
-    )
+    identifier_type: (
+        cdm_base_staticdata_party_PartyIdentifierTypeEnum_schema.PartyIdentifierTypeEnum | None
+    ) = Field(None, alias="identifierType", description="Defines the source of the identifier.")

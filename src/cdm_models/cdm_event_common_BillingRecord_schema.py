@@ -18,11 +18,17 @@ class BillingRecord(BaseModel):
         ..., alias="recordTransfer", description="The settlement terms for the billing record"
     )
     record_start_date: str = Field(
-        ..., alias="recordStartDate", description="The starting date of the period described by this record"
+        ...,
+        alias="recordStartDate",
+        description="The starting date of the period described by this record",
     )
     record_end_date: str = Field(
-        ..., alias="recordEndDate", description="The ending date of the period described by this record"
+        ...,
+        alias="recordEndDate",
+        description="The ending date of the period described by this record",
     )
     minimum_fee: cdm_observable_asset_Money_schema.Money | None = Field(
-        None, alias="minimumFee", description="Indicates the minimum fee amount applied to the billing record, if any."
+        None,
+        alias="minimumFee",
+        description="Indicates the minimum fee amount applied to the billing record, if any.",
     )

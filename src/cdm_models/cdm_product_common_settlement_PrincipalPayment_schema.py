@@ -12,7 +12,9 @@ from . import (
 
 class PrincipalPayment(BaseModel):
     principal_payment_date: cdm_base_datetime_AdjustableDate_schema.AdjustableDate | None = Field(
-        None, alias="principalPaymentDate", description="The date where the PrincipalPayment shall be settled."
+        None,
+        alias="principalPaymentDate",
+        description="The date where the PrincipalPayment shall be settled.",
     )
     payer_receiver: cdm_base_staticdata_party_PayerReceiver_schema.PayerReceiver | None = Field(
         None,

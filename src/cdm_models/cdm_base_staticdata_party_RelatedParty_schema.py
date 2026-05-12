@@ -15,7 +15,8 @@ class RelatedParty(BaseModel):
         ..., alias="partyReference", description="Reference to a party."
     )
     account_reference: (
-        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount | None
+        cdm_base_staticdata_party_metafields_ReferenceWithMetaAccount_schema.ReferenceWithMetaAccount
+        | None
     ) = Field(None, alias="accountReference", description="Reference to an account.")
     role: cdm_base_staticdata_party_PartyRoleEnum_schema.PartyRoleEnum = Field(
         ...,

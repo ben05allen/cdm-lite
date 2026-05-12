@@ -7,8 +7,12 @@ from . import com_rosetta_model_metafields_FieldWithMetaString_schema
 
 
 class NotDomesticCurrency(BaseModel):
-    applicable: bool = Field(..., description="Indicates whether the Not Domestic Currency provision is applicable.")
-    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="An explicit specification of the domestic currency. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
+    applicable: bool = Field(
+        ..., description="Indicates whether the Not Domestic Currency provision is applicable."
+    )
+    currency: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="An explicit specification of the domestic currency. The list of valid currencies is not presently positioned as an enumeration as part of the CDM because that scope is limited to the values specified by ISDA and FpML. As a result, implementers have to make reference to the relevant standard, such as the ISO 4217 standard for currency codes.",
+        )
     )

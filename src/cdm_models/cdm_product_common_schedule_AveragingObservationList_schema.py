@@ -8,5 +8,13 @@ from . import cdm_product_common_schedule_WeightedAveragingObservation_schema
 
 class AveragingObservationList(BaseModel):
     averaging_observation: (
-        list[cdm_product_common_schedule_WeightedAveragingObservation_schema.WeightedAveragingObservation] | None
-    ) = Field(None, alias="averagingObservation", description="A single weighted averaging observation.", min_length=1)
+        list[
+            cdm_product_common_schedule_WeightedAveragingObservation_schema.WeightedAveragingObservation
+        ]
+        | None
+    ) = Field(
+        None,
+        alias="averagingObservation",
+        description="A single weighted averaging observation.",
+        min_length=1,
+    )

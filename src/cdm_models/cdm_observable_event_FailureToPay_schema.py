@@ -7,8 +7,12 @@ from . import cdm_observable_asset_Money_schema, cdm_observable_event_GracePerio
 
 
 class FailureToPay(BaseModel):
-    applicable: bool = Field(..., description="Indicates whether the failure to pay provision is applicable.")
-    grace_period_extension: cdm_observable_event_GracePeriodExtension_schema.GracePeriodExtension | None = Field(
+    applicable: bool = Field(
+        ..., description="Indicates whether the failure to pay provision is applicable."
+    )
+    grace_period_extension: (
+        cdm_observable_event_GracePeriodExtension_schema.GracePeriodExtension | None
+    ) = Field(
         None,
         alias="gracePeriodExtension",
         description="If this element is specified, indicates whether or not a grace period extension is applicable. ISDA 2003 Term: Grace Period Extension Applicable.",

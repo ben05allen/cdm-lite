@@ -8,7 +8,9 @@ from . import cdm_base_math_RoundingDirectionEnum_schema
 
 class Rounding(BaseModel):
     rounding_direction: cdm_base_math_RoundingDirectionEnum_schema.RoundingDirectionEnum = Field(
-        ..., alias="roundingDirection", description="Specifies the rounding rounding rule as up, down, or nearest."
+        ...,
+        alias="roundingDirection",
+        description="Specifies the rounding rounding rule as up, down, or nearest.",
     )
     precision: int | None = Field(
         None,

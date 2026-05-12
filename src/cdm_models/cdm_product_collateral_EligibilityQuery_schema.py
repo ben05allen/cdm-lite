@@ -30,7 +30,9 @@ class EligibilityQuery(BaseModel):
         description="The agency rating based on default risk and creditors claim in event of default associated with specific instrument.",
     )
     issuer_type: cdm_base_staticdata_asset_common_CollateralIssuerType_schema.CollateralIssuerType = Field(
-        ..., alias="issuerType", description="Represents a filter based on the type of entity issuing the asset."
+        ...,
+        alias="issuerType",
+        description="Represents a filter based on the type of entity issuing the asset.",
     )
     issuer_name: cdm_base_staticdata_party_LegalEntity_schema.LegalEntity = Field(
         ..., alias="issuerName", description="Specifies the issuing entity name or LEI."

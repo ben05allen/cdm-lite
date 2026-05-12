@@ -17,11 +17,14 @@ class QuantityChangeInstruction(BaseModel):
         min_length=1,
     )
     direction: cdm_base_math_QuantityChangeDirectionEnum_schema.QuantityChangeDirectionEnum = Field(
-        ..., description="Direction of the quantity change specified as either an increase, decrease or replacement."
+        ...,
+        description="Direction of the quantity change specified as either an increase, decrease or replacement.",
     )
-    lot_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = Field(
-        None,
-        alias="lotIdentifier",
-        description="Identifier for the new lot (in case of increase) or for the existing lot to be changed(in case of decrease or replacement). This optional attribute is mandatory in case of a decrease or replacement if the initial trade state contains multiple trade lots.",
-        min_length=0,
+    lot_identifier: list[cdm_base_staticdata_identifier_Identifier_schema.Identifier] | None = (
+        Field(
+            None,
+            alias="lotIdentifier",
+            description="Identifier for the new lot (in case of increase) or for the existing lot to be changed(in case of decrease or replacement). This optional attribute is mandatory in case of a decrease or replacement if the initial trade state contains multiple trade lots.",
+            min_length=0,
+        )
     )

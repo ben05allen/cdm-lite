@@ -17,12 +17,16 @@ class EquityUnderlierProvisions(BaseModel):
         alias="componentSecurityIndexAnnexFallback",
         description="For an index option or swap transaction, a flag to indicate whether a relevant Component Security Index Annex is applicable to the transaction.",
     )
-    local_jurisdiction: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    local_jurisdiction: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="localJurisdiction",
         description="The ISO 3166 standard code for the country within which the postal address is located.",
     )
-    relevant_jurisdiction: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    relevant_jurisdiction: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="relevantJurisdiction",
         description="The ISO 3166 standard code for the country within which the postal address is located.",

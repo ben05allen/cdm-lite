@@ -7,7 +7,9 @@ from . import cdm_legaldocumentation_csa_ApplicableRegime_schema
 
 
 class Regime(BaseModel):
-    applicable_regime: list[cdm_legaldocumentation_csa_ApplicableRegime_schema.ApplicableRegime] | None = Field(
+    applicable_regime: (
+        list[cdm_legaldocumentation_csa_ApplicableRegime_schema.ApplicableRegime] | None
+    ) = Field(
         None,
         alias="applicableRegime",
         description="A class to specify the regime(s) that parties to a legal agreement, such as the ISDA 2016 and 2018 CSA for Initial Margin, might agree to apply to one or both parties when acting as collateral taker, and specific terms associated with that application.",

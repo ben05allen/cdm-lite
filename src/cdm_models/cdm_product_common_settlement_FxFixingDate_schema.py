@@ -31,25 +31,27 @@ class FxFixingDate(BaseModel):
         alias="dayType",
         description="In the case of an offset specified as a number of days, this element defines whether consideration is given as to whether a day is a good business day or not. If a day type of business days is specified then non-business days are ignored when calculating the offset. The financial business centers to use for determination of business days are implied by the context in which this element is used. This element must only be included when the offset is specified as a number of days. If the offset is zero days then the dayType element should not be included.",
     )
-    business_day_convention: cdm_base_datetime_BusinessDayConventionEnum_schema.BusinessDayConventionEnum | None = (
-        Field(
-            None,
-            alias="businessDayConvention",
-            description="The convention for adjusting a date if it would otherwise fall on a day that is not a business day, as specified by an ISDA convention (e.g. Following, Precedent).",
-        )
+    business_day_convention: (
+        cdm_base_datetime_BusinessDayConventionEnum_schema.BusinessDayConventionEnum | None
+    ) = Field(
+        None,
+        alias="businessDayConvention",
+        description="The convention for adjusting a date if it would otherwise fall on a day that is not a business day, as specified by an ISDA convention (e.g. Following, Precedent).",
     )
     business_centers: cdm_base_datetime_BusinessCenters_schema.BusinessCenters | None = Field(
         None, alias="businessCenters"
     )
     business_centers_reference: (
-        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters | None
+        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters
+        | None
     ) = Field(
         None,
         alias="businessCentersReference",
         description="A reference to a set of financial business centers defined elsewhere in the document. This set of business centers is used to determine whether a particular day is a business day or not.",
     )
     date_relative_to_payment_dates: (
-        cdm_product_common_schedule_DateRelativeToPaymentDates_schema.DateRelativeToPaymentDates | None
+        cdm_product_common_schedule_DateRelativeToPaymentDates_schema.DateRelativeToPaymentDates
+        | None
     ) = Field(
         None,
         alias="dateRelativeToPaymentDates",
@@ -64,13 +66,16 @@ class FxFixingDate(BaseModel):
         description="The calculation period references on which settlements in non-deliverable currency are due and will then have to be converted according to the terms specified through the other parts of the nonDeliverableSettlement structure. Implemented for Brazilian-CDI swaps where it will refer to the termination date of the appropriate leg.",
     )
     date_relative_to_valuation_dates: (
-        cdm_product_common_schedule_DateRelativeToValuationDates_schema.DateRelativeToValuationDates | None
+        cdm_product_common_schedule_DateRelativeToValuationDates_schema.DateRelativeToValuationDates
+        | None
     ) = Field(
         None,
         alias="dateRelativeToValuationDates",
         description="The calculation period references on which settlements in non-deliverable currency are due and will then have to be converted according to the terms specified through the other parts of the nonDeliverableSettlement structure. Implemented for Brazilian-CDI swaps where it will refer to the termination date of the appropriate leg.",
     )
-    fx_fixing_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    fx_fixing_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="fxFixingDate",
         description="Describes the specific date when a non-deliverable forward or cash-settled option will 'fix' against a particular rate, which will be used to compute the ultimate cash settlement. This element should be omitted where a single, discrete fixing date cannot be identified e.g. on an american option, where fixing may occur at any date on a continuous range.  This attribute was formerly part of 'fxSettlementTerms', which is now being harmonised into a common 'CashSettlementTerms' that includes a 'ValuationDate'.",

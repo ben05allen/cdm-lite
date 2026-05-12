@@ -11,11 +11,17 @@ from . import (
 
 
 class ThresholdType(BaseModel):
-    fixed_amount: cdm_legaldocumentation_csa_ThresholdFixedAmount_schema.ThresholdFixedAmount | None = Field(
+    fixed_amount: (
+        cdm_legaldocumentation_csa_ThresholdFixedAmount_schema.ThresholdFixedAmount | None
+    ) = Field(
         None, alias="fixedAmount", description="Defines that the Threshold is a Fixed Amount."
     )
-    ratings_based: cdm_legaldocumentation_csa_ThresholdRatingsBased_schema.ThresholdRatingsBased | None = Field(
-        None, alias="ratingsBased", description="Defines that the Threshold is based on a Ratings condition(s)."
+    ratings_based: (
+        cdm_legaldocumentation_csa_ThresholdRatingsBased_schema.ThresholdRatingsBased | None
+    ) = Field(
+        None,
+        alias="ratingsBased",
+        description="Defines that the Threshold is based on a Ratings condition(s).",
     )
     infinity: cdm_legaldocumentation_csa_Infinity_schema.Infinity | None = Field(
         None, description="Defines that the Threshold is Infinity."

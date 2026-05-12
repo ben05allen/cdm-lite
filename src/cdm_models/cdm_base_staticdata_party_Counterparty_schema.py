@@ -15,5 +15,7 @@ class Counterparty(BaseModel):
         description="Specifies the CounterpartyEnum, e.g. either Party1 or Party2, that is associated to the partyReference.",
     )
     party_reference: cdm_base_staticdata_party_metafields_ReferenceWithMetaParty_schema.ReferenceWithMetaParty = Field(
-        ..., alias="partyReference", description="Specifies the party that is associated to the counterparty."
+        ...,
+        alias="partyReference",
+        description="Specifies the party that is associated to the counterparty.",
     )

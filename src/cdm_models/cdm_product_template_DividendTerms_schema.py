@@ -16,7 +16,9 @@ class DividendTerms(BaseModel):
         alias="manufacturedIncomeRequirement",
         description="Specifies the proportion of the value of the dividend on the borrowed shares that the borrower is legally obligated to return to the lender.",
     )
-    dividend_entitlement: cdm_product_asset_DividendEntitlementEnum_schema.DividendEntitlementEnum | None = Field(
+    dividend_entitlement: (
+        cdm_product_asset_DividendEntitlementEnum_schema.DividendEntitlementEnum | None
+    ) = Field(
         None,
         alias="dividendEntitlement",
         description="Defines the date on which the receiver of the equity return is entitled to the dividend.",

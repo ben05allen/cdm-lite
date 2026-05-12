@@ -12,8 +12,12 @@ class SimmVersion(BaseModel):
         alias="isSpecified",
         description="A boolean attribute to determine whether the SIMM version is specified for the purpose of the legal agreement.",
     )
-    party_version: cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None = Field(
-        None, alias="partyVersion", description="The party which the specified SIMM version applies to."
+    party_version: (
+        cdm_base_staticdata_party_CounterpartyRoleEnum_schema.CounterpartyRoleEnum | None
+    ) = Field(
+        None,
+        alias="partyVersion",
+        description="The party which the specified SIMM version applies to.",
     )
     as_specified: str | None = Field(
         None,

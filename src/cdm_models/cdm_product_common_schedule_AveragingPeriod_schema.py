@@ -16,16 +16,22 @@ class AveragingPeriod(BaseModel):
         None, description="A schedule for generating averaging observation dates.", min_length=0
     )
     averaging_date_times: cdm_base_datetime_DateTimeList_schema.DateTimeList | None = Field(
-        None, alias="averagingDateTimes", description="An unweighted list of averaging observation date and times."
+        None,
+        alias="averagingDateTimes",
+        description="An unweighted list of averaging observation date and times.",
     )
     averaging_observations: (
         cdm_product_common_schedule_AveragingObservationList_schema.AveragingObservationList | None
     ) = Field(
-        None, alias="averagingObservations", description="A weighted list of averaging observation date and times."
+        None,
+        alias="averagingObservations",
+        description="A weighted list of averaging observation date and times.",
     )
     market_disruption: (
         cdm_observable_event_metafields_FieldWithMetaMarketDisruptionEnum_schema.FieldWithMetaMarketDisruptionEnum
         | None
     ) = Field(
-        None, alias="marketDisruption", description="The market disruption event as defined by ISDA 2002 Definitions."
+        None,
+        alias="marketDisruption",
+        description="The market disruption event as defined by ISDA 2002 Definitions.",
     )

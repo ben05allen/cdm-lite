@@ -22,13 +22,17 @@ class EvergreenProvision(BaseModel):
         alias="noticePeriod",
         description="The length of each evergreen extension period relative to the effective date of the preceding contract.",
     )
-    notice_deadline_period: cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None = Field(
+    notice_deadline_period: (
+        cdm_base_datetime_RelativeDateOffset_schema.RelativeDateOffset | None
+    ) = Field(
         None,
         alias="noticeDeadlinePeriod",
         description="Defines the minimum period before an evergreen is scheduled to terminate that notice can be given that it will terminate beyond the scheduled termination date.",
     )
     notice_deadline_date_time: str | None = Field(
-        None, alias="noticeDeadlineDateTime", description="A specific date and time for the notice deadline"
+        None,
+        alias="noticeDeadlineDateTime",
+        description="A specific date and time for the notice deadline",
     )
     extension_frequency: cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates = Field(
         ...,

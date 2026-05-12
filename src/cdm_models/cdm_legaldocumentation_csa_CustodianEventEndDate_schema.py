@@ -17,7 +17,9 @@ class CustodianEventEndDate(BaseModel):
         alias="releaseDate",
         description="Election to specify the number of days prior to the termination of the Control Agreement /Collateral Management Event for the purpose of qualifying the CE/CME End Date, in the case where advance notice is given.",
     )
-    safekeeping_period_expiry: cdm_base_datetime_CustomisableOffset_schema.CustomisableOffset | None = Field(
+    safekeeping_period_expiry: (
+        cdm_base_datetime_CustomisableOffset_schema.CustomisableOffset | None
+    ) = Field(
         None,
         alias="safekeepingPeriodExpiry",
         description="The parties' election to specify the number of days prior to the end of the safekeeping period (Clearstream CTA) purpose of qualifying the CE/CME End Date, in the case where advance notice is given.",

@@ -10,12 +10,15 @@ from . import (
 
 
 class TaxonomyValue(BaseModel):
-    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="Specifies the taxonomy value as a simple string, which may be associated to an external scheme.",
+    name: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="Specifies the taxonomy value as a simple string, which may be associated to an external scheme.",
+        )
     )
     classification: (
-        list[cdm_base_staticdata_asset_common_TaxonomyClassification_schema.TaxonomyClassification] | None
+        list[cdm_base_staticdata_asset_common_TaxonomyClassification_schema.TaxonomyClassification]
+        | None
     ) = Field(
         None,
         description="Specifies the taxonomy value as a set of class names and values for each class.",

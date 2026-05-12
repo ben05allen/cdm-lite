@@ -3,14 +3,21 @@
 #   timestamp: 2026-05-07T23:23:14+00:00
 
 from pydantic import BaseModel, Field
-from . import cdm_observable_asset_CreditNotation_schema, cdm_observable_asset_MultipleCreditNotations_schema
+from . import (
+    cdm_observable_asset_CreditNotation_schema,
+    cdm_observable_asset_MultipleCreditNotations_schema,
+)
 
 
 class CreditNotations(BaseModel):
     credit_notation: cdm_observable_asset_CreditNotation_schema.CreditNotation | None = Field(
-        None, alias="creditNotation", description="Specifies only one credit notation is determined."
+        None,
+        alias="creditNotation",
+        description="Specifies only one credit notation is determined.",
     )
-    credit_notations: cdm_observable_asset_MultipleCreditNotations_schema.MultipleCreditNotations | None = Field(
+    credit_notations: (
+        cdm_observable_asset_MultipleCreditNotations_schema.MultipleCreditNotations | None
+    ) = Field(
         None,
         alias="creditNotations",
         description="Specifies if several credit notations exist, alongside an 'any' or 'all' or all condition.",

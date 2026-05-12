@@ -8,7 +8,9 @@ from . import cdm_base_math_AveragingCalculationMethodEnum_schema
 
 class AveragingCalculationMethod(BaseModel):
     is_weighted: bool = Field(
-        ..., alias="isWeighted", description="Identifies whether the average values will be weighted or unweighted."
+        ...,
+        alias="isWeighted",
+        description="Identifies whether the average values will be weighted or unweighted.",
     )
     calculation_method: cdm_base_math_AveragingCalculationMethodEnum_schema.AveragingCalculationMethodEnum = Field(
         ...,

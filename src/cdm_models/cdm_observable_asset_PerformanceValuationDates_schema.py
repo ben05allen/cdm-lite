@@ -19,13 +19,16 @@ class PerformanceValuationDates(BaseModel):
         description="Specifies the method according to which an amount or a date is determined.",
     )
     valuation_dates: (
-        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates | None
+        cdm_base_datetime_AdjustableRelativeOrPeriodicDates_schema.AdjustableRelativeOrPeriodicDates
+        | None
     ) = Field(
         None,
         alias="valuationDates",
         description="2018 ISDA CDM Equity Confirmation for Security Equity Swap: Pricing Date",
     )
-    valuation_date: cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None = Field(
+    valuation_date: (
+        cdm_base_datetime_AdjustableOrRelativeDate_schema.AdjustableOrRelativeDate | None
+    ) = Field(
         None,
         alias="valuationDate",
         description="2018 ISDA CDM Equity Confirmation for Security Equity Swap: Pricing Date",

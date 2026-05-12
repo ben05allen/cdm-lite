@@ -11,7 +11,9 @@ from . import (
 
 class NaturalPerson(BaseModel):
     person_id: (
-        list[cdm_base_staticdata_party_metafields_FieldWithMetaPersonIdentifier_schema.FieldWithMetaPersonIdentifier]
+        list[
+            cdm_base_staticdata_party_metafields_FieldWithMetaPersonIdentifier_schema.FieldWithMetaPersonIdentifier
+        ]
         | None
     ) = Field(
         None,
@@ -19,9 +21,13 @@ class NaturalPerson(BaseModel):
         description="The identifier associated with a person, e.g. the internal identification code.",
         min_length=0,
     )
-    honorific: str | None = Field(None, description="An honorific title, such as Mr., Ms., Dr. etc.")
+    honorific: str | None = Field(
+        None, description="An honorific title, such as Mr., Ms., Dr. etc."
+    )
     first_name: str | None = Field(
-        None, alias="firstName", description="The natural person's first name. It is optional in FpML."
+        None,
+        alias="firstName",
+        description="The natural person's first name. It is optional in FpML.",
     )
     middle_name: list[str] | None = Field(
         None,
@@ -36,8 +42,12 @@ class NaturalPerson(BaseModel):
     )
     surname: str | None = Field(None, description="The natural person's surname.")
     suffix: str | None = Field(None, description="Name suffix, such as Jr., III, etc.")
-    date_of_birth: str | None = Field(None, alias="dateOfBirth", description="The natural person's date of birth.")
-    contact_information: cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None = Field(
+    date_of_birth: str | None = Field(
+        None, alias="dateOfBirth", description="The natural person's date of birth."
+    )
+    contact_information: (
+        cdm_base_staticdata_party_ContactInformation_schema.ContactInformation | None
+    ) = Field(
         None,
         alias="contactInformation",
         description="The contact information for such person, when different from the contact information associated with the party.",

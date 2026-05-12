@@ -13,5 +13,7 @@ class MoneyRange(BaseModel):
         description="The lower bound of a money range, e.g. greater than or equal to 1,000 USD.",
     )
     upper_bound: cdm_base_math_MoneyBound_schema.MoneyBound | None = Field(
-        None, alias="upperBound", description="The upper bound of a money range, e.g. less than 10,000 USD."
+        None,
+        alias="upperBound",
+        description="The upper bound of a money range, e.g. less than 10,000 USD.",
     )

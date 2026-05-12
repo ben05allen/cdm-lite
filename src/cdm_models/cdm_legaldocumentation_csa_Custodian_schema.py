@@ -7,6 +7,12 @@ from . import cdm_legaldocumentation_csa_CustodianElection_schema
 
 
 class Custodian(BaseModel):
-    party_election: list[cdm_legaldocumentation_csa_CustodianElection_schema.CustodianElection] | None = Field(
-        None, alias="partyElection", description="The party specific elections.", max_length=2, min_length=2
+    party_election: (
+        list[cdm_legaldocumentation_csa_CustodianElection_schema.CustodianElection] | None
+    ) = Field(
+        None,
+        alias="partyElection",
+        description="The party specific elections.",
+        max_length=2,
+        min_length=2,
     )

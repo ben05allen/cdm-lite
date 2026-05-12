@@ -13,7 +13,9 @@ from . import (
 
 class Asset(BaseModel):
     cash: cdm_base_staticdata_asset_common_Cash_schema.Cash | None = Field(
-        None, alias="Cash", description="An Asset that consists solely of a monetary holding in a currency."
+        None,
+        alias="Cash",
+        description="An Asset that consists solely of a monetary holding in a currency.",
     )
     commodity: cdm_base_staticdata_asset_common_Commodity_schema.Commodity | None = Field(
         None,

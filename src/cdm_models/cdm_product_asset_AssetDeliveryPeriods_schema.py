@@ -7,10 +7,12 @@ from . import cdm_product_asset_AssetDeliveryProfile_schema
 
 
 class AssetDeliveryPeriods(BaseModel):
-    profile: list[cdm_product_asset_AssetDeliveryProfile_schema.AssetDeliveryProfile] | None = Field(
-        None,
-        description="Defines the delivery profile of the asset, including the load type and the delivery intervals.",
-        min_length=0,
+    profile: list[cdm_product_asset_AssetDeliveryProfile_schema.AssetDeliveryProfile] | None = (
+        Field(
+            None,
+            description="Defines the delivery profile of the asset, including the load type and the delivery intervals.",
+            min_length=0,
+        )
     )
     start_date: str | None = Field(None, alias="startDate", description="Delivery start date")
     end_date: str | None = Field(None, alias="endDate", description="Delivery end date")

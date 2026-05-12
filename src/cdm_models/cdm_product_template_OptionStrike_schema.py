@@ -25,12 +25,16 @@ class OptionStrike(BaseModel):
         alias="strikeReference",
         description="Defines the strike of an option in reference to the spread of the underlying swap (typical practice in the case of an option on a credit single name swaps).",
     )
-    reference_swap_curve: cdm_observable_asset_ReferenceSwapCurve_schema.ReferenceSwapCurve | None = Field(
+    reference_swap_curve: (
+        cdm_observable_asset_ReferenceSwapCurve_schema.ReferenceSwapCurve | None
+    ) = Field(
         None,
         alias="referenceSwapCurve",
         description="Defines the strike of an option when expressed by reference to a swap curve (Typically the case for a convertible bond option).",
     )
-    averaging_strike_feature: cdm_product_template_AveragingStrikeFeature_schema.AveragingStrikeFeature | None = Field(
+    averaging_strike_feature: (
+        cdm_product_template_AveragingStrikeFeature_schema.AveragingStrikeFeature | None
+    ) = Field(
         None,
         alias="averagingStrikeFeature",
         description="Defines an  option strike that is calculated from an average of observed market prices.",

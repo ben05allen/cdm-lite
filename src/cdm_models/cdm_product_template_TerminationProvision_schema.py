@@ -12,7 +12,9 @@ from . import (
 
 
 class TerminationProvision(BaseModel):
-    cancelable_provision: cdm_product_template_CancelableProvision_schema.CancelableProvision | None = Field(
+    cancelable_provision: (
+        cdm_product_template_CancelableProvision_schema.CancelableProvision | None
+    ) = Field(
         None,
         alias="cancelableProvision",
         description="A provision that allows the specification of an embedded option within a swap giving the buyer of the option the right to terminate the swap, in whole or in part, on the early termination date.",
@@ -24,12 +26,16 @@ class TerminationProvision(BaseModel):
         alias="earlyTerminationProvision",
         description="Parameters specifying provisions relating to the optional and mandatory early termination of a swap transaction.",
     )
-    evergreen_provision: cdm_product_template_EvergreenProvision_schema.EvergreenProvision | None = Field(
+    evergreen_provision: (
+        cdm_product_template_EvergreenProvision_schema.EvergreenProvision | None
+    ) = Field(
         None,
         alias="evergreenProvision",
         description="A data defining: the right of a party to exercise an Evergreen option",
     )
-    extendible_provision: cdm_product_template_ExtendibleProvision_schema.ExtendibleProvision | None = Field(
+    extendible_provision: (
+        cdm_product_template_ExtendibleProvision_schema.ExtendibleProvision | None
+    ) = Field(
         None,
         alias="extendibleProvision",
         description="A provision that allows the specification of an embedded option with a swap giving the buyer of the option the right to extend the swap, in whole or in part, to the extended termination date.",

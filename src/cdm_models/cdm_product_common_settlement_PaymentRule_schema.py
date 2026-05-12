@@ -7,8 +7,10 @@ from . import cdm_product_common_settlement_PercentageRule_schema
 
 
 class PaymentRule(BaseModel):
-    percentage_rule: cdm_product_common_settlement_PercentageRule_schema.PercentageRule | None = Field(
-        None,
-        alias="percentageRule",
-        description="This attribute is not present as part of the FpML construct, as the payment rule is specialised by means of runtime type extension through the xsi:type.",
+    percentage_rule: cdm_product_common_settlement_PercentageRule_schema.PercentageRule | None = (
+        Field(
+            None,
+            alias="percentageRule",
+            description="This attribute is not present as part of the FpML construct, as the payment rule is specialised by means of runtime type extension through the xsi:type.",
+        )
     )

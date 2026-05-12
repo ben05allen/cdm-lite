@@ -37,18 +37,19 @@ class RelativeDateOffset(BaseModel):
         None, alias="businessCenters"
     )
     business_centers_reference: (
-        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters | None
+        cdm_base_datetime_metafields_ReferenceWithMetaBusinessCenters_schema.ReferenceWithMetaBusinessCenters
+        | None
     ) = Field(
         None,
         alias="businessCentersReference",
         description="A pointer style reference to a set of financial business centers defined elsewhere in the document. This set of business centers is used to determine whether a particular day is a business day or not.",
     )
-    date_relative_to: com_rosetta_model_metafields_ReferenceWithMetaString_schema.ReferenceWithMetaString | None = (
-        Field(
-            None,
-            alias="dateRelativeTo",
-            description="Specifies the anchor as an href attribute. The href attribute value is a pointer style reference to the element or component elsewhere in the document where the anchor date is defined.",
-        )
+    date_relative_to: (
+        com_rosetta_model_metafields_ReferenceWithMetaString_schema.ReferenceWithMetaString | None
+    ) = Field(
+        None,
+        alias="dateRelativeTo",
+        description="Specifies the anchor as an href attribute. The href attribute value is a pointer style reference to the element or component elsewhere in the document where the anchor date is defined.",
     )
     adjusted_date: str | None = Field(
         None,

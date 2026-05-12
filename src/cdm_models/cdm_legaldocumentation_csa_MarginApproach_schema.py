@@ -7,6 +7,10 @@ from . import cdm_legaldocumentation_csa_MarginApproachEnum_schema
 
 
 class MarginApproach(BaseModel):
-    margin_approach: cdm_legaldocumentation_csa_MarginApproachEnum_schema.MarginApproachEnum = Field(
-        ..., alias="marginApproach", description="Specifies the margin approach specific to Initial Margin agreements."
+    margin_approach: cdm_legaldocumentation_csa_MarginApproachEnum_schema.MarginApproachEnum = (
+        Field(
+            ...,
+            alias="marginApproach",
+            description="Specifies the margin approach specific to Initial Margin agreements.",
+        )
     )

@@ -7,6 +7,7 @@ from . import cdm_observable_asset_fro_FloatingRateIndexExternalMap_schema
 
 
 class FloatingRateIndexExternalMappings(BaseModel):
-    iso_code: cdm_observable_asset_fro_FloatingRateIndexExternalMap_schema.FloatingRateIndexExternalMap | None = Field(
-        None, alias="isoCode"
-    )
+    iso_code: (
+        cdm_observable_asset_fro_FloatingRateIndexExternalMap_schema.FloatingRateIndexExternalMap
+        | None
+    ) = Field(None, alias="isoCode")

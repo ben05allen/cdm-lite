@@ -11,11 +11,14 @@ from . import (
 
 class FxDualExchangeRate(BaseModel):
     dual_exchange_rate_is_applicable: bool = Field(..., alias="dualExchangeRateIsApplicable")
-    fallback_reference_price: cdm_observable_asset_FallbackReferencePrice_schema.FallbackReferencePrice | None = Field(
+    fallback_reference_price: (
+        cdm_observable_asset_FallbackReferencePrice_schema.FallbackReferencePrice | None
+    ) = Field(
         None,
         alias="fallbackReferencePrice",
         description="The method, prioritised by the order it is listed in this element, to get a replacement rate for the disrupted settlement rate option.",
     )
     escrow_arrangement: (
-        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement | None
+        cdm_legaldocumentation_transaction_additionalterms_EscrowArrangement_schema.EscrowArrangement
+        | None
     ) = Field(None, alias="escrowArrangement")

@@ -18,15 +18,16 @@ class FloatingRateIndexDefinition(BaseModel):
         ..., description="The underlying FRO name and designated maturity."
     )
     calculation_defaults: (
-        cdm_observable_asset_fro_FloatingRateIndexCalculationDefaults_schema.FloatingRateIndexCalculationDefaults | None
+        cdm_observable_asset_fro_FloatingRateIndexCalculationDefaults_schema.FloatingRateIndexCalculationDefaults
+        | None
     ) = Field(None, alias="calculationDefaults", description="Any calculation default values.")
-    supported_definition: list[cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition] | None = (
-        Field(
-            None,
-            alias="supportedDefinition",
-            description="The definition version or versions supported by the FRO.",
-            min_length=0,
-        )
+    supported_definition: (
+        list[cdm_observable_asset_fro_ContractualDefinition_schema.ContractualDefinition] | None
+    ) = Field(
+        None,
+        alias="supportedDefinition",
+        description="The definition version or versions supported by the FRO.",
+        min_length=0,
     )
     definitional_source: str | None = Field(
         None,
@@ -34,19 +35,26 @@ class FloatingRateIndexDefinition(BaseModel):
         description="The source of an FRO, particularly if not a Contractual Definition (e.g. the broker rates matrix).",
     )
     designated_maturity_applicable: bool | None = Field(None, alias="designatedMaturityApplicable")
-    mappings: cdm_observable_asset_fro_FloatingRateIndexMappings_schema.FloatingRateIndexMappings | None = Field(
-        None, description="Any mappings to other FRos."
-    )
+    mappings: (
+        cdm_observable_asset_fro_FloatingRateIndexMappings_schema.FloatingRateIndexMappings | None
+    ) = Field(None, description="Any mappings to other FRos.")
     external_mappings: (
-        cdm_observable_asset_fro_FloatingRateIndexExternalMappings_schema.FloatingRateIndexExternalMappings | None
-    ) = Field(None, alias="externalMappings", description="Any mappings to other codes for this index.")
+        cdm_observable_asset_fro_FloatingRateIndexExternalMappings_schema.FloatingRateIndexExternalMappings
+        | None
+    ) = Field(
+        None, alias="externalMappings", description="Any mappings to other codes for this index."
+    )
     in_loan: bool | None = Field(
         None,
         alias="inLoan",
         description="YES / NO to flag FROs identified by the FpML Syndicated Loan WG as having underlying benchmark that may also be referenced in syndicated loans.",
     )
-    history: cdm_observable_asset_fro_FroHistory_schema.FroHistory | None = Field(None, description="FRO History")
+    history: cdm_observable_asset_fro_FroHistory_schema.FroHistory | None = Field(
+        None, description="FRO History"
+    )
     deprecation_reason: str | None = Field(
         None, alias="deprecationReason", description="Deprecation and Code Descriptions"
     )
-    fpml_description: str | None = Field(None, alias="fpmlDescription", description="FpML Description")
+    fpml_description: str | None = Field(
+        None, alias="fpmlDescription", description="FpML Description"
+    )

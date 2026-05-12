@@ -16,7 +16,9 @@ class ExerciseNotice(BaseModel):
         alias="exerciseNoticeGiver",
         description="Specifies the principal party of the trade that has the right to exercise.",
     )
-    exercise_notice_receiver: cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None = Field(
+    exercise_notice_receiver: (
+        cdm_base_staticdata_party_AncillaryRoleEnum_schema.AncillaryRoleEnum | None
+    ) = Field(
         None,
         alias="exerciseNoticeReceiver",
         description="Specifies the party to which notice of exercise should be given, e.g. by the buyer of the option. Although in many cases it is the buyer of the option who sends the exercise notice to the seller of the option, this component is reused, e.g. in case of OptionEarlyTermination, either or both parties have the right to exercise.",

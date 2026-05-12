@@ -16,7 +16,9 @@ class AdjustableDate(BaseModel):
         alias="unadjustedDate",
         description="A date subject to adjustment. While in FpML this date is required, this cardinality constraint has been relaxed as part of the CDM in order to support the FRA representation, which effective and termination dates are specified in FpML as adjusted dates.",
     )
-    date_adjustments: cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None = Field(
+    date_adjustments: (
+        cdm_base_datetime_BusinessDayAdjustments_schema.BusinessDayAdjustments | None
+    ) = Field(
         None,
         alias="dateAdjustments",
         description="The business day convention and financial business centers used for adjusting the date if it would otherwise fall on a day that is not a business date in the specified business centers.",
@@ -29,7 +31,9 @@ class AdjustableDate(BaseModel):
         alias="dateAdjustmentsReference",
         description="A pointer style reference to date adjustments defined elsewhere in the document.",
     )
-    adjusted_date: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
+    adjusted_date: (
+        com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None
+    ) = Field(
         None,
         alias="adjustedDate",
         description="The date once the adjustment has been performed. (Note that this date may change if the business center holidays change).",

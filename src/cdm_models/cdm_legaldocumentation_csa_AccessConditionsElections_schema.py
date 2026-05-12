@@ -11,11 +11,19 @@ class AccessConditionsElections(BaseModel):
         ..., description="The elective party."
     )
     illegality: bool = Field(..., description="Represents an illegality Termination Event.")
-    force_majeure: bool = Field(..., alias="forceMajeure", description="Represents a force Majeure Termination Event.")
-    tax_event: bool = Field(..., alias="taxEvent", description="Represents a Tax Termination Event.")
+    force_majeure: bool = Field(
+        ..., alias="forceMajeure", description="Represents a force Majeure Termination Event."
+    )
+    tax_event: bool = Field(
+        ..., alias="taxEvent", description="Represents a Tax Termination Event."
+    )
     tax_event_upon_merger: bool = Field(
-        ..., alias="taxEventUponMerger", description="Represents a Tax Event Upon Merger Termination Event."
+        ...,
+        alias="taxEventUponMerger",
+        description="Represents a Tax Event Upon Merger Termination Event.",
     )
     credit_event_upon_merger: bool = Field(
-        ..., alias="creditEventUponMerger", description="Represents a Credit Event Upon Merger Termination Event."
+        ...,
+        alias="creditEventUponMerger",
+        description="Represents a Credit Event Upon Merger Termination Event.",
     )

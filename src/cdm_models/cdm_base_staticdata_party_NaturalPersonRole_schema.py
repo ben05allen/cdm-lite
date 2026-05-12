@@ -11,11 +11,17 @@ from . import (
 
 class NaturalPersonRole(BaseModel):
     person_reference: cdm_base_staticdata_party_metafields_ReferenceWithMetaNaturalPerson_schema.ReferenceWithMetaNaturalPerson = Field(
-        ..., alias="personReference", description="A reference to the natural person to whom the role refers to."
+        ...,
+        alias="personReference",
+        description="A reference to the natural person to whom the role refers to.",
     )
     role: (
         list[
             cdm_base_staticdata_party_metafields_FieldWithMetaNaturalPersonRoleEnum_schema.FieldWithMetaNaturalPersonRoleEnum
         ]
         | None
-    ) = Field(None, description="FpML specifies a person role that is distinct from the party role.", min_length=0)
+    ) = Field(
+        None,
+        description="FpML specifies a person role that is distinct from the party role.",
+        min_length=0,
+    )

@@ -13,12 +13,16 @@ from . import (
 
 
 class ValuationDate(BaseModel):
-    single_valuation_date: cdm_observable_asset_SingleValuationDate_schema.SingleValuationDate | None = Field(
+    single_valuation_date: (
+        cdm_observable_asset_SingleValuationDate_schema.SingleValuationDate | None
+    ) = Field(
         None,
         alias="singleValuationDate",
         description="Where single valuation date is specified as being applicable for cash settlement, this element specifies the number of business days after satisfaction of all conditions to settlement when such valuation date occurs. ISDA 2003 Term: Single Valuation Date.",
     )
-    multiple_valuation_dates: cdm_observable_asset_MultipleValuationDates_schema.MultipleValuationDates | None = Field(
+    multiple_valuation_dates: (
+        cdm_observable_asset_MultipleValuationDates_schema.MultipleValuationDates | None
+    ) = Field(
         None,
         alias="multipleValuationDates",
         description="Where multiple valuation dates are specified as being applicable for cash settlement, this element specifies (a) the number of applicable valuation dates, and (b) the number of business days after satisfaction of all conditions to settlement when the first such valuation date occurs, and (c) the number of business days thereafter of each successive valuation date. ISDA 2003 Term: Multiple Valuation Dates.",

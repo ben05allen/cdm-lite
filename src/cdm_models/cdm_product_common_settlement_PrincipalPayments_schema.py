@@ -29,7 +29,8 @@ class PrincipalPayments(BaseModel):
         min_length=0,
     )
     principal_payment_schedule: (
-        cdm_product_common_settlement_PrincipalPaymentSchedule_schema.PrincipalPaymentSchedule | None
+        cdm_product_common_settlement_PrincipalPaymentSchedule_schema.PrincipalPaymentSchedule
+        | None
     ) = Field(
         None,
         alias="principalPaymentSchedule",

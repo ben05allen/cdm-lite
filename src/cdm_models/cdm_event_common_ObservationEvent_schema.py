@@ -8,8 +8,12 @@ from . import cdm_event_common_CorporateAction_schema, cdm_event_common_CreditEv
 
 class ObservationEvent(BaseModel):
     credit_event: cdm_event_common_CreditEvent_schema.CreditEvent | None = Field(
-        None, alias="creditEvent", description="Specifies the necessary information to create a credit event."
+        None,
+        alias="creditEvent",
+        description="Specifies the necessary information to create a credit event.",
     )
     corporate_action: cdm_event_common_CorporateAction_schema.CorporateAction | None = Field(
-        None, alias="corporateAction", description="Specifies the necessary information to create a corporate action."
+        None,
+        alias="corporateAction",
+        description="Specifies the necessary information to create a corporate action.",
     )

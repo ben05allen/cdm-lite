@@ -7,6 +7,6 @@ from . import cdm_event_workflow_LimitApplicableExtended_schema
 
 
 class CreditLimitInformation(BaseModel):
-    limit_applicable: list[cdm_event_workflow_LimitApplicableExtended_schema.LimitApplicableExtended] | None = Field(
-        None, alias="limitApplicable", min_length=1
-    )
+    limit_applicable: (
+        list[cdm_event_workflow_LimitApplicableExtended_schema.LimitApplicableExtended] | None
+    ) = Field(None, alias="limitApplicable", min_length=1)

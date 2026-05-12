@@ -16,6 +16,7 @@ class UmbrellaAgreement(BaseModel):
         None,
         description="The language associated with the umbrella agreement, and which applies to all the parties to the umbrella agreement.",
     )
-    parties: list[cdm_legaldocumentation_common_UmbrellaAgreementEntity_schema.UmbrellaAgreementEntity] | None = Field(
-        None, description="Underlying principals to the umbrella agreement.", min_length=0
-    )
+    parties: (
+        list[cdm_legaldocumentation_common_UmbrellaAgreementEntity_schema.UmbrellaAgreementEntity]
+        | None
+    ) = Field(None, description="Underlying principals to the umbrella agreement.", min_length=0)

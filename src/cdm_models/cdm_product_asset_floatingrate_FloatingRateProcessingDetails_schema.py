@@ -8,12 +8,17 @@ from . import cdm_product_asset_floatingrate_FloatingRateProcessingParameters_sc
 
 class FloatingRateProcessingDetails(BaseModel):
     raw_rate: float = Field(
-        ..., alias="rawRate", description="The raw or untreated rate, prior to any of the rate treatments."
+        ...,
+        alias="rawRate",
+        description="The raw or untreated rate, prior to any of the rate treatments.",
     )
     processing_parameters: (
-        cdm_product_asset_floatingrate_FloatingRateProcessingParameters_schema.FloatingRateProcessingParameters | None
+        cdm_product_asset_floatingrate_FloatingRateProcessingParameters_schema.FloatingRateProcessingParameters
+        | None
     ) = Field(None, alias="processingParameters")
-    processed_rate: float = Field(..., alias="processedRate", description="The value of the rate after processing.")
+    processed_rate: float = Field(
+        ..., alias="processedRate", description="The value of the rate after processing."
+    )
     spread_exclusive_rate: float = Field(
         ...,
         alias="spreadExclusiveRate",

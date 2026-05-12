@@ -21,19 +21,25 @@ class CreditNotation(BaseModel):
         ...,
         description="Specifies The credit rating notation. As it varies among credit rating agencies, FpML doesn't specify a default scheme.",
     )
-    scale: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = Field(
-        None,
-        description="Specifies the credit rating scale, with a typical distinction between short term, long term. FpML doesn't specify a default scheme, which is hence not specified as an enumeration as part of the CDM.",
+    scale: com_rosetta_model_metafields_FieldWithMetaString_schema.FieldWithMetaString | None = (
+        Field(
+            None,
+            description="Specifies the credit rating scale, with a typical distinction between short term, long term. FpML doesn't specify a default scheme, which is hence not specified as an enumeration as part of the CDM.",
+        )
     )
     debt: cdm_observable_asset_CreditRatingDebt_schema.CreditRatingDebt | None = Field(
         None,
         description="Specifies the credit rating debt type (e.g. long term, high yield, deposits, ...) associated with the credit rating notation and scale.",
     )
-    outlook: cdm_observable_asset_CreditRatingOutlookEnum_schema.CreditRatingOutlookEnum | None = Field(
-        None,
-        description="Assesses the potential direction of a long-term credit rating over the intermediate term, which is generally up to two years for investment grade and generally up to one year for speculative grade.",
+    outlook: cdm_observable_asset_CreditRatingOutlookEnum_schema.CreditRatingOutlookEnum | None = (
+        Field(
+            None,
+            description="Assesses the potential direction of a long-term credit rating over the intermediate term, which is generally up to two years for investment grade and generally up to one year for speculative grade.",
+        )
     )
-    credit_watch: cdm_observable_asset_CreditRatingCreditWatchEnum_schema.CreditRatingCreditWatchEnum | None = Field(
+    credit_watch: (
+        cdm_observable_asset_CreditRatingCreditWatchEnum_schema.CreditRatingCreditWatchEnum | None
+    ) = Field(
         None,
         alias="creditWatch",
         description="Indicates the potential direction of a short-term or long-term rating. It focuses on identifiable events and short-term trends that cause ratings to be placed under special surveillance.",
