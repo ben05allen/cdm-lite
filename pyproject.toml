@@ -10,6 +10,7 @@ dependencies = [
   "platformdirs>=4.9.6",
   "pydantic>=2.13.4",
   "datamodel-code-generator[ruff]>=0.56.1",
+  "typer>=0.25.1",
 ]
 
 [project.scripts]
