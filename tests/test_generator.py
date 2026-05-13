@@ -4,7 +4,13 @@ import subprocess
 
 import pytest
 
-from cdm_lite.generator import GenerateResult, GenerationError, generate_models, MIN_PYTHON_VERSION
+from cdm_lite.generator import (
+    GenerateResult,
+    GenerationError,
+    generate_models,
+    generate_package_metadata,
+    MIN_PYTHON_VERSION,
+)
 
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
@@ -146,6 +152,43 @@ class TestGenerateModels:
 
         assert result.stdout == "some output"
         assert result.stderr == "some warning"
+
+
+# ── Generated Meta Data ──────────────────────────────────────────────────────────
+
+
+class TestGeneratePackageMetadata:
+    def test_creates_pyproject_toml(self, tmp_path: Path):
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        assert (tmp_path / "pyproject.toml").exists()
+
+    def test_creates_readme(self, tmp_path: Path):
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        assert (tmp_path / "README.md").exists()
+
+    def test_pyproject_contains_cdm_version(self, tmp_path: Path):
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        content = (tmp_path / "pyproject.toml").read_text()
+        assert "6.19.0" in content
+
+    def test_pyproject_contains_python_version(self, tmp_path: Path):
+        generate_package_metadata(tmp_path, cdm_version="6.19.0", python_version="3.13")
+        content = (tmp_path / "pyproject.toml").read_text()
+        assert "3.13" in content
+
+    def test_readme_contains_cdm_version(self, tmp_path: Path):
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        content = (tmp_path / "README.md").read_text()
+        assert "6.19.0" in content
+
+    def test_pyproject_is_valid_toml(self, tmp_path: Path):
+        import tomllib
+
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        content = (tmp_path / "pyproject.toml").read_bytes()
+        parsed = tomllib.loads(content.decode())
+        assert parsed["project"]["name"] == "cdm-models"
+        assert parsed["project"]["version"] == "6.19.0"
 
 
 # ── Integration test ──────────────────────────────────────────────────────────

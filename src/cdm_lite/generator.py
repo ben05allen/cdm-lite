@@ -1,9 +1,39 @@
-import subprocess
-import sys
 from dataclasses import dataclass
 from pathlib import Path
+import subprocess
+import sys
+
+from cdm_lite.templates.pyproject_toml import generate_pyproject
+from cdm_lite.templates.readme_md import generate_readme
+
 
 MIN_PYTHON_VERSION = 3.11
+
+
+def generate_package_metadata(
+    models_dir: Path,
+    cdm_version: str,
+    python_version: str = f"{MIN_PYTHON_VERSION}",
+) -> None:
+    """
+    Write pyproject.toml and README.md into the models directory
+    so it can be used as a standalone installable package.
+    """
+    from datetime import datetime, timezone
+
+    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    pyproject = generate_pyproject(
+        cdm_version=cdm_version,
+        python_version=python_version,
+    )
+    readme = generate_readme(
+        cdm_version=cdm_version,
+        generated_at=generated_at,
+    )
+
+    (models_dir / "pyproject.toml").write_text(pyproject, encoding="utf-8")
+    (models_dir / "README.md").write_text(readme, encoding="utf-8")
 
 
 class GenerationError(Exception):

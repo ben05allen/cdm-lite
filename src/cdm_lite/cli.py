@@ -1,15 +1,11 @@
-import sys
-from pathlib import Path
-
 import typer
 from rich.console import Console
 from rich.table import Table
-from rich import print as rprint
 
 from cdm_lite.cleaner import clean_schemas
 from cdm_lite.downloader import DownloadError, download_schemas
-from cdm_lite.generator import GenerationError, generate_models
-from cdm_lite.registry import CdmRegistry, CdmVersion
+from cdm_lite.generator import GenerationError, generate_models, generate_package_metadata
+from cdm_lite.registry import CdmRegistry
 from cdm_lite.store import CdmStore
 
 app = typer.Typer(
@@ -211,6 +207,13 @@ def install(
             _abort(f"Model generation failed:\n{result.stderr}")
 
         store.mark_generated(cdm_version, cdm_lite_version=_get_version())
+
+        generate_package_metadata(
+            store.models_dir(cdm_version),
+            cdm_version=cdm_version.version,
+            python_version=python_version,
+        )
+
         console.print(f"  [dim]{result}[/dim]")
 
     console.print(f"\n[bold green]✔ CDM {cdm_version} installed successfully.[/bold green]")
@@ -266,7 +269,7 @@ def status():
     except FileNotFoundError:
         _abort(f"Version {current} is set as current but not found in cache.")
 
-    console.print(f"\n[bold]CDM Lite Status[/bold]\n")
+    console.print("\n[bold]CDM Lite Status[/bold]\n")
     console.print(f"  Current version : [bold cyan]{current}[/bold cyan]")
     console.print(f"  Downloaded      : {'[green]✔[/green]' if s.downloaded else '[red]✘[/red]'}")
     console.print(f"  Cleaned         : {'[green]✔[/green]' if s.cleaned else '[red]✘[/red]'}")
@@ -296,8 +299,8 @@ def clear(
 
     cached = store.cached_versions()
 
-    console.print(f"\n[bold yellow]⚠ Warning[/bold yellow]")
-    console.print(f"  This will delete the entire CDM cache at:")
+    console.print("\n[bold yellow]⚠ Warning[/bold yellow]")
+    console.print("  This will delete the entire CDM cache at:")
     console.print(f"  [cyan]{cache_dir}[/cyan]")
     console.print(f"  {len(cached)} version(s) will be removed.\n")
 
@@ -310,7 +313,7 @@ def clear(
     import shutil
 
     shutil.rmtree(cache_dir)
-    console.print(f"\n[bold green]✔ Cache cleared.[/bold green]\n")
+    console.print("\n[bold green]✔ Cache cleared.[/bold green]\n")
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
