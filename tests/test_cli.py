@@ -204,6 +204,7 @@ class TestInstallCommand:
             patch("cdm_lite.cli.download_schemas"),
             patch("cdm_lite.cli.clean_schemas") as mock_clean,
             patch("cdm_lite.cli.generate_models") as mock_generate,
+            patch("cdm_lite.cli.generate_package_metadata"),
         ):
             mock_registry.get.return_value = version
             mock_registry.latest_stable.return_value = version
@@ -252,6 +253,7 @@ class TestInstallCommand:
             patch("cdm_lite.cli.download_schemas") as mock_download,
             patch("cdm_lite.cli.clean_schemas") as mock_clean,
             patch("cdm_lite.cli.generate_models") as mock_generate,
+            patch("cdm_lite.cli.generate_package_metadata"),
         ):
             mock_registry.get.return_value = version
             mock_store.status.return_value = status
