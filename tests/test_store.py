@@ -257,3 +257,23 @@ class TestConfigPersistence:
         cached = initialised_store.cached_versions()
         assert version in cached
         assert other_version in cached
+
+
+# ── Sym Link Manangement  ──────────────────────────────────────────────────────────────
+
+
+class TestSymLinkManagement:
+    def test_update_current_symlink(self, initialised_store: CdmStore, version: CdmVersion):
+        initialised_store.update_current_symlink(version)
+        current = initialised_store.current_models_dir()
+        assert current.is_symlink()
+        assert current.resolve() == initialised_store.models_dir(version).resolve()
+
+    def test_update_current_symlink_replaces_existing(
+        self, initialised_store: CdmStore, version: CdmVersion, other_version: CdmVersion
+    ):
+        initialised_store.init_version(other_version)
+        initialised_store.update_current_symlink(other_version)
+        initialised_store.update_current_symlink(version)
+        current = initialised_store.current_models_dir()
+        assert current.resolve() == initialised_store.models_dir(version).resolve()

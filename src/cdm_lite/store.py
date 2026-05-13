@@ -199,3 +199,22 @@ class CdmStore:
         """Return all versions that have been initialised in the cache."""
         config = self.load_config()
         return [CdmVersion(v) for v in config.versions]
+
+    def current_models_dir(self) -> Path:
+        """The stable symlink path — always points to the active version's models."""
+        return self.cache_dir / "current"
+
+    # ── Symlink Management ────────────────────────────────────────────────────────
+
+    def update_current_symlink(self, version: CdmVersion) -> None:
+        """Point the current/ symlink at the given version's models directory."""
+        current = self.current_models_dir()
+        target = self.models_dir(version)
+
+        # Remove existing symlink or directory
+        if current.is_symlink():
+            current.unlink()
+        elif current.exists():
+            raise RuntimeError(f"{current} exists and is not a symlink — refusing to overwrite.")
+
+        current.symlink_to(target)
