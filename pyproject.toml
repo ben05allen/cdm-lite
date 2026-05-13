@@ -15,7 +15,7 @@ dependencies = [
 ]
 
 [project.scripts]
-try = "cdm_lite:main"
+tbd = "cdm_lite:main"
 
 [build-system]
 requires = ["uv_build>=0.11.7,<0.12.0"]
