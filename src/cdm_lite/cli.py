@@ -26,12 +26,12 @@ registry = CdmRegistry()
 def _show_current_path(store: CdmStore) -> None:
     """Print the current models path prominently."""
     current = store.current_models_dir()
-    console.print(f"\n[bold]Models available at:[/bold]")
+    console.print("\n[bold]Models available at:[/bold]")
     console.print(f"  [cyan]{current}[/cyan]")
-    console.print(f"\n[dim]Add to your project:[/dim]")
+    console.print("\n[dim]Add to your project:[/dim]")
     console.print(f'  [green]export PYTHONPATH="{current}:$PYTHONPATH"[/green]')
-    console.print(f"\n[dim]Or in pyproject.toml (uv):[/dim]")
-    console.print(f"  [green][tool.uv.sources][/green]")
+    console.print("\n[dim]Or in pyproject.toml (uv):[/dim]")
+    console.print("  [green][tool.uv.sources][/green]")
     console.print(f'  [green]cdm-models = {{ path = "{current}" }}[/green]\n')
 
 
