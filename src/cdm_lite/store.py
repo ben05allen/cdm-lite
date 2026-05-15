@@ -1,5 +1,5 @@
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -44,7 +44,12 @@ class Config:
 
     @classmethod
     def from_json(cls, text: str) -> "Config":
-        return cls(**json.loads(text))
+        data = json.loads(text)
+
+        # Only pass kwargs that exist as fields on the dataclass
+        valid_keys = {f.name for f in fields(cls)}
+        filtered_data = {k: v for k, v in data.items() if k in valid_keys}
+        return cls(**filtered_data)
 
 
 # ── Store ─────────────────────────────────────────────────────────────────────
