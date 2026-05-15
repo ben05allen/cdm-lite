@@ -93,7 +93,7 @@ def list_installed():
     if not cached:
         console.print(
             "\n[yellow]No versions installed yet.[/yellow] "
-            "Run [bold]cdm-lite install --version <version>[/bold] to get started.\n"
+            "Run [bold]cdm-lite install  <version>[/bold] to get started.\n"
         )
         raise typer.Exit()
 
@@ -135,9 +135,7 @@ def list_installed():
 
 @app.command()
 def install(
-    version: str = typer.Option(
-        None, "--version", "-v", help="CDM version to install (e.g. 6.19.0)."
-    ),
+    version: str | None = typer.Argument(None, help="CDM version to install (e.g. 6.19.0)."),
     python_version: str = typer.Option(
         "3.11", "--python", help="Target Python version for generated models."
     ),
@@ -218,7 +216,7 @@ def install(
 
     console.print(f"\n[bold green]✔ CDM {cdm_version} installed successfully.[/bold green]")
     console.print(
-        f"\n[dim]Run [bold]cdm-lite use --version {cdm_version}[/bold] "
+        f"\n[dim]Run [bold]cdm-lite use  {cdm_version}[/bold] "
         f"to make this the active version.[/dim]\n"
     )
 
@@ -228,7 +226,7 @@ def install(
 
 @app.command()
 def use(
-    version: str = typer.Option(..., "--version", "-v", help="CDM version to activate."),
+    version: str = typer.Argument(..., help="CDM version to activate."),
 ):
     """Set the active CDM version and update the current/ symlink."""
     try:
@@ -239,7 +237,7 @@ def use(
     if not store.is_generated(cdm_version):
         _abort(
             f"CDM {version} is not fully installed. "
-            f"Run [bold]cdm-lite install --version {version}[/bold] first."
+            f"Run [bold]cdm-lite install {version}[/bold] first."
         )
 
     store.set_current_version(cdm_version)

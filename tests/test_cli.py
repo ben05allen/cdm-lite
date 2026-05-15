@@ -215,7 +215,7 @@ class TestInstallCommand:
             mock_clean.return_value = MagicMock(__str__=lambda s: "Cleaned.")
             mock_generate.return_value = MagicMock(success=True, __str__=lambda s: "Done.")
 
-            result = runner.invoke(app, ["install", "--version", "6.19.0"])
+            result = runner.invoke(app, ["install", "6.19.0"])
 
         assert result.exit_code == 0
         assert "successfully" in result.output
@@ -263,7 +263,7 @@ class TestInstallCommand:
             mock_clean.return_value = MagicMock(__str__=lambda s: "Cleaned.")
             mock_generate.return_value = MagicMock(success=True, __str__=lambda s: "Done.")
 
-            result = runner.invoke(app, ["install", "--version", "6.19.0"])
+            result = runner.invoke(app, ["install", "6.19.0"])
 
         mock_download.assert_not_called()
         assert result.exit_code == 0
@@ -282,7 +282,7 @@ class TestInstallCommand:
             mock_store.schema_clean_dir.return_value = Path("/tmp/clean")
             mock_store.models_dir.return_value = Path("/tmp/models")
 
-            result = runner.invoke(app, ["install", "--version", "6.19.0"])
+            result = runner.invoke(app, ["install", "6.19.0"])
 
         mock_download.assert_not_called()
         mock_clean.assert_not_called()
@@ -304,7 +304,7 @@ class TestInstallCommand:
             mock_store.schema_raw_dir.return_value = Path("/tmp/raw")
             mock_download.side_effect = DownloadError("Timeout")
 
-            result = runner.invoke(app, ["install", "--version", "6.19.0"])
+            result = runner.invoke(app, ["install", "6.19.0"])
 
         assert result.exit_code == 1
         assert "Error" in result.output
@@ -325,7 +325,7 @@ class TestInstallCommand:
             mock_clean.return_value = MagicMock(__str__=lambda s: "Cleaned.")
             mock_generate.return_value = MagicMock(success=False, stderr="Unknown flag")
 
-            result = runner.invoke(app, ["install", "--version", "6.19.0"])
+            result = runner.invoke(app, ["install", "6.19.0"])
 
         assert result.exit_code == 1
         assert "Error" in result.output
@@ -346,7 +346,7 @@ class TestInstallCommand:
             mock_clean.return_value = MagicMock(__str__=lambda s: "Cleaned.")
             mock_generate.return_value = MagicMock(success=True, __str__=lambda s: "Done.")
 
-            runner.invoke(app, ["install", "--version", "6.19.0", "--python", "3.13"])
+            runner.invoke(app, ["install", "6.19.0", "--python", "3.13"])
 
         mock_generate.assert_called_once_with(
             Path("/tmp/clean"),
@@ -368,7 +368,7 @@ class TestUseCommand:
             mock_store.is_generated.return_value = True
             mock_store.current_models_dir.return_value = Path("/home/user/.cache/cdm-lite/current")
 
-            result = runner.invoke(app, ["use", "--version", "6.19.0"])
+            result = runner.invoke(app, ["use", "6.19.0"])
 
         assert result.exit_code == 0
         assert "6.19.0" in result.output
@@ -384,7 +384,7 @@ class TestUseCommand:
             mock_store.is_generated.return_value = True
             mock_store.current_models_dir.return_value = Path("/home/user/.cache/cdm-lite/current")
 
-            result = runner.invoke(app, ["use", "--version", "6.19.0"])
+            result = runner.invoke(app, ["use", "6.19.0"])
 
         assert "/home/user/.cache/cdm-lite/current" in result.output
 
@@ -396,7 +396,7 @@ class TestUseCommand:
             mock_registry.get.return_value = version
             mock_store.is_generated.return_value = False
 
-            result = runner.invoke(app, ["use", "--version", "6.19.0"])
+            result = runner.invoke(app, ["use", "6.19.0"])
 
         assert result.exit_code == 1
         assert "Error" in result.output
@@ -405,7 +405,7 @@ class TestUseCommand:
         with patch("cdm_lite.cli.registry") as mock_registry:
             mock_registry.get.side_effect = ValueError("Version not found")
 
-            result = runner.invoke(app, ["use", "--version", "99.0.0"])
+            result = runner.invoke(app, ["use", "99.0.0"])
 
         assert result.exit_code == 1
         assert "Error" in result.output

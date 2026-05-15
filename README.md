@@ -19,10 +19,10 @@ Download and compile the CDM models for your required schema version:
 cdm-lite versions
 
 # Download schemas and compile Pydantic models locally
-cdm-lite install --version 6.19.0
+cdm-lite install 6.19.0
 
 # Activate the version (updates a local symlink)
-cdm-lite use --version 6.19.0
+cdm-lite use 6.19.0
 ```
 
 _Note: Models are compiled into a user-level cache directory (e.g., `~/.cache/cdm-lite/`). Run `cdm-lite status` to view your specific path._
