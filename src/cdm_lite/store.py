@@ -1,5 +1,5 @@
 import json
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -38,7 +38,6 @@ class VersionStatus:
 @dataclass
 class Config:
     current_version: str | None = None
-    versions: list[str] = field(default_factory=list)
 
     def to_json(self) -> str:
         return json.dumps(asdict(self), indent=2)
@@ -75,6 +74,9 @@ class CdmStore:
     def _version_dir(self, version: CdmVersion) -> Path:
         return self.cache_dir / "versions" / version.version
 
+    def _versions_base_dir(self) -> Path:
+        return self.cache_dir / "versions"
+
     def _status_path(self, version: CdmVersion) -> Path:
         return self._version_dir(version) / "status.json"
 
@@ -87,6 +89,7 @@ class CdmStore:
     def init(self) -> None:
         """Create the cache root directory if it doesn't exist."""
         self.cache_dir.mkdir(parents=True, exist_ok=True)
+        self._versions_base_dir().mkdir(parents=True, exist_ok=True)
 
     def init_version(self, version: CdmVersion) -> None:
         """Create the directory structure for a specific version."""
@@ -185,8 +188,6 @@ class CdmStore:
     def set_current_version(self, version: CdmVersion) -> None:
         config = self.load_config()
         config.current_version = version.version
-        if version.version not in config.versions:
-            config.versions.append(version.version)
         self.save_config(config)
 
     def current_version(self) -> CdmVersion | None:
@@ -197,8 +198,16 @@ class CdmStore:
 
     def cached_versions(self) -> list[CdmVersion]:
         """Return all versions that have been initialised in the cache."""
-        config = self.load_config()
-        return [CdmVersion(v) for v in config.versions]
+        base = self._versions_base_dir()
+        if not base.exists():
+            return []
+
+        versions = []
+        for v_dir in base.iterdir():
+            if v_dir.is_dir() and (v_dir / "status.json").exists():
+                versions.append(CdmVersion(v_dir.name))
+
+        return sorted(versions)
 
     def current_models_dir(self) -> Path:
         """The stable symlink path — always points to the active version's models."""

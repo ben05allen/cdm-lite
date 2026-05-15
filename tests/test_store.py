@@ -68,15 +68,14 @@ class TestConfig:
     def test_defaults(self):
         c = Config()
         assert c.current_version is None
-        assert c.versions == []
 
     def test_round_trip_json(self):
-        c = Config(current_version="6.19.0", versions=["6.0.0", "6.19.0"])
+        c = Config(current_version="6.19.0")
         restored = Config.from_json(c.to_json())
         assert restored == c
 
     def test_to_json_is_valid_json(self):
-        c = Config(current_version="6.19.0", versions=["6.19.0"])
+        c = Config(current_version="6.19.0")
         parsed = json.loads(c.to_json())
         assert parsed["current_version"] == "6.19.0"
 
@@ -215,11 +214,10 @@ class TestConfigPersistence:
         store.init()
         config = store.load_config()
         assert config.current_version is None
-        assert config.versions == []
 
     def test_save_and_load_config(self, store: CdmStore):
         store.init()
-        config = Config(current_version="6.19.0", versions=["6.19.0"])
+        config = Config(current_version="6.19.0")
         store.save_config(config)
         restored = store.load_config()
         assert restored == config
@@ -227,20 +225,6 @@ class TestConfigPersistence:
     def test_set_current_version(self, initialised_store: CdmStore, version: CdmVersion):
         initialised_store.set_current_version(version)
         assert initialised_store.current_version() == version
-
-    def test_set_current_version_adds_to_versions_list(
-        self, initialised_store: CdmStore, version: CdmVersion
-    ):
-        initialised_store.set_current_version(version)
-        assert version.version in initialised_store.load_config().versions
-
-    def test_set_current_version_no_duplicates(
-        self, initialised_store: CdmStore, version: CdmVersion
-    ):
-        initialised_store.set_current_version(version)
-        initialised_store.set_current_version(version)
-        config = initialised_store.load_config()
-        assert config.versions.count(version.version) == 1
 
     def test_current_version_returns_none_if_not_set(self, store: CdmStore):
         store.init()
@@ -252,8 +236,7 @@ class TestConfigPersistence:
         version: CdmVersion,
         other_version: CdmVersion,
     ):
-        initialised_store.set_current_version(version)
-        initialised_store.set_current_version(other_version)
+        initialised_store.init_version(other_version)
         cached = initialised_store.cached_versions()
         assert version in cached
         assert other_version in cached
