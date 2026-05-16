@@ -222,13 +222,37 @@ class CdmStore:
 
     def update_current_symlink(self, version: CdmVersion) -> None:
         """Point the current/ symlink at the given version's models directory."""
+        import os
+        import platform
+
         current = self.current_models_dir()
         target = self.models_dir(version)
 
-        # Remove existing symlink or directory
-        if current.is_symlink():
-            current.unlink()
-        elif current.exists():
-            raise RuntimeError(f"{current} exists and is not a symlink — refusing to overwrite.")
+        # Remove existing symlink, junction or directory
+        if os.path.lexists(current):
+            if os.path.islink(current):
+                os.unlink(current)
+            elif current.exists():
+                raise RuntimeError(f"{current} exists and is not a symlink — refusing to overwrite.")
 
-        current.symlink_to(target)
+        if platform.system() == "Windows":
+            import subprocess
+
+            # Use junctions on Windows to avoid privilege issues with symlinks
+            try:
+                # cmd /c is required for mklink as it's a shell builtin
+                subprocess.run(
+                    ["cmd", "/c", "mklink", "/j", str(current), str(target)],
+                    check=True,
+                    capture_output=True,
+                )
+            except subprocess.CalledProcessError as e:
+                # Fallback to standard symlink if junction fails
+                try:
+                    current.symlink_to(target, target_is_directory=True)
+                except OSError:
+                    raise RuntimeError(
+                        f"Failed to create junction or symlink at {current}: {e.stderr.decode()}"
+                    ) from e
+        else:
+            current.symlink_to(target)
