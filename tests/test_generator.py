@@ -1,16 +1,15 @@
 from pathlib import Path
-from unittest.mock import MagicMock, patch
-import subprocess
+from unittest.mock import patch
 
 import pytest
 
 from cdm_lite.generator import (
     GenerateResult,
-    GenerationError,
     generate_models,
     generate_package_metadata,
-    MIN_PYTHON_VERSION,
 )
+from datamodel_code_generator.format import Formatter
+from datamodel_code_generator.enums import DataModelType, InputFileType
 
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
@@ -30,38 +29,26 @@ def output_dir(tmp_path: Path) -> Path:
     return d
 
 
-def make_completed_process(
-    returncode: int = 0,
-    stdout: str = "",
-    stderr: str = "",
-) -> MagicMock:
-    result = MagicMock(spec=subprocess.CompletedProcess)
-    result.returncode = returncode
-    result.stdout = stdout
-    result.stderr = stderr
-    return result
-
-
 # ── GenerateResult ────────────────────────────────────────────────────────────
 
 
 class TestGenerateResult:
-    def test_success_when_returncode_zero(self):
-        result = GenerateResult(returncode=0, stdout="", stderr="")
+    def test_success(self):
+        result = GenerateResult(success=True, stdout="Generation successful.", stderr="")
         assert result.success is True
 
-    def test_failure_when_nonzero_returncode(self):
-        result = GenerateResult(returncode=1, stdout="", stderr="Something went wrong")
+    def test_failure(self):
+        result = GenerateResult(success=False, stdout="", stderr="Something went wrong")
         assert result.success is False
 
     def test_str_on_success(self):
-        result = GenerateResult(returncode=0, stdout="", stderr="")
+        result = GenerateResult(success=True, stdout="Generation successful.", stderr="")
         assert "successfully" in str(result)
 
     def test_str_on_failure_includes_stderr(self):
-        result = GenerateResult(returncode=1, stdout="", stderr="Bad argument")
+        result = GenerateResult(success=False, stdout="", stderr="Bad argument")
         assert "Bad argument" in str(result)
-        assert "1" in str(result)
+        assert "failed" in str(result)
 
 
 # ── generate_models ───────────────────────────────────────────────────────────
@@ -69,15 +56,15 @@ class TestGenerateResult:
 
 class TestGenerateModels:
     def test_returns_success_result(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process(returncode=0)
+        with patch("cdm_lite.generator.generate") as mock_generate:
             result = generate_models(input_dir, output_dir)
 
         assert result.success is True
+        mock_generate.assert_called_once()
 
-    def test_returns_failure_result_on_nonzero_exit(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process(returncode=1, stderr="Unknown argument")
+    def test_returns_failure_result_on_exception(self, input_dir: Path, output_dir: Path):
+        with patch("cdm_lite.generator.generate") as mock_generate:
+            mock_generate.side_effect = ValueError("Unknown argument")
             result = generate_models(input_dir, output_dir)
 
         assert result.success is False
@@ -87,71 +74,36 @@ class TestGenerateModels:
         output_dir = tmp_path / "does" / "not" / "exist"
         assert not output_dir.exists()
 
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process()
+        with patch("cdm_lite.generator.generate"):
             generate_models(input_dir, output_dir)
 
         assert output_dir.exists()
 
-    def test_calls_correct_command(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process()
+    def test_passes_correct_config(self, input_dir: Path, output_dir: Path):
+        with patch("cdm_lite.generator.generate") as mock_generate:
             generate_models(input_dir, output_dir)
 
-        cmd = mock_run.call_args[0][0]
-        assert "-m" in cmd
-        assert "datamodel_code_generator" in cmd
-        assert "--input" in cmd
-        assert str(input_dir) in cmd
-        assert "--output" in cmd
-        assert str(output_dir) in cmd
+        mock_generate.assert_called_once()
+        kwargs = mock_generate.call_args.kwargs
+        assert "input_" in kwargs
+        assert kwargs["input_"] == input_dir
 
-    def test_passes_correct_flags(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process()
-            generate_models(input_dir, output_dir)
-
-        cmd = mock_run.call_args[0][0]
-        assert "--reuse-model" in cmd
-        assert "--snake-case-field" in cmd
-        assert "--capitalise-enum-members" in cmd
-        assert "--use-standard-collections" in cmd
-
-    def test_default_python_version(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process()
-            generate_models(input_dir, output_dir)
-
-        cmd = mock_run.call_args[0][0]
-        assert "--target-python-version" in cmd
-        idx = cmd.index("--target-python-version")
-        assert cmd[idx + 1] == f"{MIN_PYTHON_VERSION}"
+        config = kwargs["config"]
+        assert config.output == output_dir
+        assert config.input_file_type == InputFileType.JsonSchema
+        assert config.output_model_type == DataModelType.PydanticV2BaseModel
+        assert config.reuse_model is True
+        assert config.use_standard_collections is True
+        assert config.snake_case_field is True
+        assert config.capitalise_enum_members is True
+        assert Formatter.RUFF_FORMAT in config.formatters
 
     def test_custom_python_version(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process()
-            generate_models(input_dir, output_dir, python_version="3.14")
+        with patch("cdm_lite.generator.generate") as mock_generate:
+            generate_models(input_dir, output_dir, python_version="3.12")
 
-        cmd = mock_run.call_args[0][0]
-        idx = cmd.index("--target-python-version")
-        assert cmd[idx + 1] == "3.14"
-
-    def test_raises_generation_error_if_not_found(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.side_effect = FileNotFoundError("No such file")
-            with pytest.raises(GenerationError, match="datamodel-codegen not found"):
-                generate_models(input_dir, output_dir)
-
-    def test_captures_stdout_and_stderr(self, input_dir: Path, output_dir: Path):
-        with patch("cdm_lite.generator.subprocess.run") as mock_run:
-            mock_run.return_value = make_completed_process(
-                stdout="some output",
-                stderr="some warning",
-            )
-            result = generate_models(input_dir, output_dir)
-
-        assert result.stdout == "some output"
-        assert result.stderr == "some warning"
+        config = mock_generate.call_args.kwargs["config"]
+        assert config.target_python_version.value == "3.12"
 
 
 # ── Generated Meta Data ──────────────────────────────────────────────────────────

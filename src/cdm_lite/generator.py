@@ -1,7 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
-import subprocess
-import sys
+
+from datamodel_code_generator import generate, GenerateConfig
+from datamodel_code_generator.enums import DataModelType, InputFileType
+from datamodel_code_generator.format import Formatter, PythonVersion
 
 from cdm_lite.templates.pyproject_toml import generate_pyproject
 from cdm_lite.templates.readme_md import generate_readme
@@ -42,18 +44,14 @@ class GenerationError(Exception):
 
 @dataclass
 class GenerateResult:
-    returncode: int
+    success: bool
     stdout: str
     stderr: str
-
-    @property
-    def success(self) -> bool:
-        return self.returncode == 0
 
     def __str__(self) -> str:
         if self.success:
             return "Model generation completed successfully."
-        return f"Model generation failed (exit code {self.returncode}).\n{self.stderr}".strip()
+        return f"Model generation failed:\n{self.stderr}".strip()
 
 
 def generate_models(
@@ -70,41 +68,32 @@ def generate_models(
     # Ensure output directory exists
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    cmd = [
-        sys.executable,
-        "-m",
-        "datamodel_code_generator",
-        "--input",
-        str(input_dir),
-        "--input-file-type",
-        "jsonschema",
-        "--output-model-type",
-        "pydantic_v2.BaseModel",
-        "--output",
-        str(output_dir),
-        "--reuse-model",
-        "--use-standard-collections",
-        "--snake-case-field",
-        "--capitalise-enum-members",
-        "--formatter",
-        "ruff-format",
-        "--target-python-version",
-        python_version,
-    ]
-
     try:
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
+        config = GenerateConfig(
+            input_file_type=InputFileType.JsonSchema,
+            output_model_type=DataModelType.PydanticV2BaseModel,
+            target_python_version=PythonVersion(python_version),
+            reuse_model=True,
+            use_standard_collections=True,
+            snake_case_field=True,
+            capitalise_enum_members=True,
+            formatters=[Formatter.RUFF_FORMAT],
+            output=output_dir,
         )
-    except FileNotFoundError as e:
-        raise GenerationError(
-            "datamodel-codegen not found. Is it installed? Try: uv add datamodel-code-generator"
-        ) from e
+
+        # Datamodel-codegen's generate function handles reading input directory
+        # and writing to the output directory specified in the config.
+        generate(input_=input_dir, config=config)
+
+    except Exception as e:
+        return GenerateResult(
+            success=False,
+            stdout="",
+            stderr=str(e),
+        )
 
     return GenerateResult(
-        returncode=result.returncode,
-        stdout=result.stdout,
-        stderr=result.stderr,
+        success=True,
+        stdout="Generation successful.",
+        stderr="",
     )
