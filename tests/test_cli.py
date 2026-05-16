@@ -190,7 +190,10 @@ class TestListCommand:
 
             result = runner.invoke(app, ["list"])
 
-        assert "/home/user/.cache/cdm-lite/current" in result.output
+        assert (
+            "/home/user/.cache/cdm-lite/current" in result.output
+            or "home\\user\\.cache\\cdm-lite\\current" in result.output  # windows
+        )
 
 
 # ── install command ───────────────────────────────────────────────────────────
@@ -386,7 +389,10 @@ class TestUseCommand:
 
             result = runner.invoke(app, ["use", "6.19.0"])
 
-        assert "/home/user/.cache/cdm-lite/current" in result.output
+        assert (
+            "/home/user/.cache/cdm-lite/current" in result.output
+            or "home\\user\\.cache\\cdm-lite\\current" in result.output  # windows
+        )
 
     def test_aborts_if_not_installed(self, runner: CliRunner, version: CdmVersion):
         with (
@@ -444,7 +450,10 @@ class TestStatusCommand:
 
             result = runner.invoke(app, ["status"])
 
-        assert "/home/user/.cache/cdm-lite/current" in result.output
+        assert (
+            "/home/user/.cache/cdm-lite/current" in result.output
+            or "home\\user\\.cache\\cdm-lite\\current" in result.output  # windows
+        )
 
     def test_shows_message_when_no_current_version(self, runner: CliRunner):
         with patch("cdm_lite.cli.store") as mock_store:
