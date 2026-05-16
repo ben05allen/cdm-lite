@@ -249,7 +249,7 @@ class TestSymLinkManagement:
     def test_update_current_symlink(self, initialised_store: CdmStore, version: CdmVersion):
         initialised_store.update_current_symlink(version)
         current = initialised_store.current_models_dir()
-        assert current.is_symlink()
+        assert current.is_symlink() or (hasattr(current, "is_junction") and current.is_junction())
         assert current.resolve() == initialised_store.models_dir(version).resolve()
 
     def test_update_current_symlink_replaces_existing(

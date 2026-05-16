@@ -231,11 +231,13 @@ class CdmStore:
         # Remove existing symlink, junction or directory
         if os.path.lexists(current):
             # Python 3.12+: is_junction() is available on Path
-            if current.is_symlink() or (hasattr(current, 'is_junction') and current.is_junction()):
+            if current.is_symlink() or (hasattr(current, "is_junction") and current.is_junction()):
                 # Unlink works for symlinks and junctions on modern Python
                 current.unlink()
             elif current.exists():
-                raise RuntimeError(f"{current} exists and is not a symlink or junction — refusing to overwrite.")
+                raise RuntimeError(
+                    f"{current} exists and is not a symlink or junction — refusing to overwrite."
+                )
 
         if platform.system() == "Windows":
             import subprocess
