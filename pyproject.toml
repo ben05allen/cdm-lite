@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.2.4"
+version = "0.2.5"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
@@ -14,17 +14,31 @@ dependencies = [
   "rich>=15.0.0",
 ]
 license-files = ["LICEN[CS]E*"]
+keywords = [
+  "FINOS",
+  "CDM",
+  "Common Domain Model",
+  "ISDA",
+  "Pydantic",
+  "JSON-Schema",
+  "finance",
+  "regulation",
+  "code-generation",
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
-
+  "Environment :: Console",
   "Intended Audience :: Developers",
-  "Topic :: Software Development :: Finance CLI Tools",
-
+  "Intended Audience :: Financial and Insurance Industry",
+  "License :: OSI Approved :: Apache Software License",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
   "Programming Language :: Python :: 3.14",
+  "Topic :: Office/Business :: Financial",
+  "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 [project.scripts]
 cdm-lite = "cdm_lite.cli:main"
