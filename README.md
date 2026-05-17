@@ -4,6 +4,12 @@ Python Pydantic models for the [FINOS Common Domain Model (CDM)](https://github.
 
 `cdm-lite` provides a lightweight CLI to download, clean, and compile official FINOS CDM JSON schemas into Pydantic v2 models. This enables strict validation, autocompletion, and robust deserialization of CDM JSON payloads in Python codebases without heavy Java dependencies.
 
+## Scope & Limitations
+
+**⚠️ Disclaimer:** `cdm-lite` is intended primarily as a lightweight **deserializer**. The generated Python models are derived directly from the published JSON Schemas. While they provide close structural validation, we cannot guarantee that the generated models perfectly match the behavioral constraints of the full Common Domain Model.
+
+Pydantic classes inherently cannot capture the full extent of the CDM's functionality, such as complex cross-field cardinality checks, conditions, or rosetta-injected logic. For robust **serialization** and comprehensive domain validation, we strongly recommend using the [official, full CDM project implementations](https://github.com/finos/common-domain-model) (e.g., the Java distribution).
+
 ## Installation
 
 ```bash
