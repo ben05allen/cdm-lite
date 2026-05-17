@@ -2,13 +2,21 @@
 
 Python Pydantic models for the [FINOS Common Domain Model (CDM)](https://github.com/finos/common-domain-model).
 
-`cdm-lite` provides a lightweight CLI to download, clean, and compile official FINOS CDM JSON schemas into Pydantic v2 models. This enables strict validation, autocompletion, and robust deserialization of CDM JSON payloads in Python codebases without heavy Java dependencies.
+`cdm-lite` provides a lightweight CLI to download, clean, and compile official FINOS CDM JSON
+schemas into Pydantic v2 models. This enables strict validation, autocompletion, and robust
+deserialization of CDM JSON payloads in Python codebases without heavy Java dependencies.
 
 ## Scope & Limitations
 
-**⚠️ Disclaimer:** `cdm-lite` is intended primarily as a lightweight **deserializer**. The generated Python models are derived directly from the published JSON Schemas. While they provide close structural validation, we cannot guarantee that the generated models perfectly match the behavioral constraints of the full Common Domain Model.
+**⚠️ Disclaimer:** `cdm-lite` is intended primarily as a lightweight **deserializer**. The generated
+Python models are derived directly from the published JSON Schemas. While they provide close
+structural validation, we cannot guarantee that the generated models perfectly match the
+behavioral constraints of the full Common Domain Model.
 
-Pydantic classes inherently cannot capture the full extent of the CDM's functionality, such as complex cross-field cardinality checks, conditions, or rosetta-injected logic. For robust **serialization** and comprehensive domain validation, we strongly recommend using the [official, full CDM project implementations](https://github.com/finos/common-domain-model) (e.g., the Java distribution).
+Pydantic classes inherently cannot capture the full extent of the CDM's functionality,
+such as complex cross-field cardinality checks, conditions, or rosetta-injected logic.
+For robust **serialization** and comprehensive domain validation, we strongly recommend
+using the [official, full CDM project implementations](https://github.com/finos/common-domain-model) (e.g., the Java distribution).
 
 ## Installation
 
@@ -60,15 +68,15 @@ export PYTHONPATH="/home/user/.cache/cdm-lite/current:$PYTHONPATH"
 Once the models are available in your path, use standard Pydantic APIs to parse, validate, and interact with incoming JSON objects:
 
 ```python
-from TradeState import TradeState  # Exact import paths depend on the CDM schema
+from cdm-models.models.cdm_event_common_TradeState_schema import TradeState  # Exact import paths depend on the CDM schema
 
-payload = '{"trade": {"tradeDate": {"date": "2023-10-25"}}}'
+payload = '{"trade": {"tradeDate": {"value": "2023-10-25"}}}'
 
 # Deserialize and strictly validate the JSON string
 trade_state = TradeState.model_validate_json(payload)
 
 # Access typed and autocompleted attributes
-print(trade_state.trade.tradeDate.date)
+print(trade_state.trade.trade_date.value)
 ```
 
 ## Reference Commands

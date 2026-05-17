@@ -40,6 +40,10 @@ classifiers = [
   "Topic :: Office/Business :: Financial",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
+
+[project.urls]
+Homepage = "https://github.com/ben05allen/cdm-lite"
+
 [project.scripts]
 cdm-lite = "cdm_lite.cli:main"
 
