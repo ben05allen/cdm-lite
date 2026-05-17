@@ -27,6 +27,23 @@ class CdmVersion:
     version: str
 
     @cached_property
+    def pep440(self) -> str:
+        """
+        Sanitize Maven-style versions to be PEP 440 compliant.
+        Example: 0.0.0-test.1 -> 0.0.0.dev1
+        """
+        # Replace common Maven/FINOS pre-release markers with PEP 440 equivalents
+        s = self.version.replace("-test.", ".dev")
+        s = s.replace("-dev.", ".dev")
+        s = s.replace("-SNAPSHOT", ".dev0")
+
+        # Handle hyphenated pre-release keywords (e.g., -rc.1 -> .rc1)
+        # PEP 440 prefers .rc1, .dev1, .a1 over -rc.1
+        s = re.sub(r"-(?P<pre>rc|alpha|beta|dev|a|b)\.?", r".\g<pre>", s, flags=re.IGNORECASE)
+
+        return s
+
+    @cached_property
     def is_stable(self) -> bool:
         return not bool(_DEV_RE.search(self.version))
 

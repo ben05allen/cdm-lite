@@ -35,10 +35,13 @@ def generate_package_metadata(
     """
     from datetime import datetime, timezone
 
+    from cdm_lite.registry import CdmVersion
+
     generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    v = CdmVersion(cdm_version)
 
     pyproject = generate_pyproject(
-        cdm_version=cdm_version,
+        cdm_version=v.pep440,
         python_version=python_version,
     )
     readme = generate_readme(
@@ -73,12 +76,31 @@ def generate_models(
 ) -> GenerateResult:
     """
     Run datamodel-codegen against the cleaned schema directory,
-    writing Pydantic v2 models to output_dir.
+    writing Pydantic v2 models to output_dir using a 'src' layout.
 
     Raises GenerationError if the process cannot be started.
     """
-    # Ensure output directory exists
-    output_dir.mkdir(parents=True, exist_ok=True)
+    # ── Target layout ─────────────────────────────────────────────────────────
+
+    # We use a standard 'src' layout to make the package clean and installable.
+    # Expected structure: output_dir/src/cdm_models/models/
+    package_root = output_dir / "src" / "cdm_models"
+    models_target_dir = package_root / "models"
+    models_target_dir.mkdir(parents=True, exist_ok=True)
+
+    # Create __init__.py files to ensure it's a valid package
+    (package_root / "__init__.py").touch()
+    (models_target_dir / "__init__.py").touch()
+
+    # ── Input Resolution ──────────────────────────────────────────────────────
+
+    # CDM schemas are often in a single subdirectory (like 'jsonschema').
+    # If we point datamodel-codegen at the root, it mirrors that directory name
+    # in the output. We point it directly at the inner folder if only one exists.
+    actual_input = input_dir
+    subdirs = [p for p in input_dir.iterdir() if p.is_dir()]
+    if len(subdirs) == 1 and not any(p.is_file() for p in input_dir.iterdir()):
+        actual_input = subdirs[0]
 
     try:
         config = GenerateConfig(
@@ -90,12 +112,12 @@ def generate_models(
             snake_case_field=True,
             capitalise_enum_members=True,
             formatters=[Formatter.RUFF_FORMAT],
-            output=output_dir,
+            output=models_target_dir,
         )
 
         # Datamodel-codegen's generate function handles reading input directory
         # and writing to the output directory specified in the config.
-        generate(input_=input_dir, config=config)
+        generate(input_=actual_input, config=config)
 
     except Exception as e:
         return GenerateResult(

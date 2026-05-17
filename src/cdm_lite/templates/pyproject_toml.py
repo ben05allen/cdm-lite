@@ -26,6 +26,10 @@ dependencies = [
 
 [project.urls]
 Homepage = "https://github.com/finos/common-domain-model"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
         """
 
     return template.format(cdm_version=cdm_version, python_version=python_version)

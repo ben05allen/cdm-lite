@@ -37,7 +37,7 @@ def _show_current_path(store: CdmStore) -> None:
     console.print("\n[bold]Models available at:[/bold]")
     console.print(f"  [cyan]{current}[/cyan]")
     console.print("\n[dim]Add to your project:[/dim]")
-    console.print(f'  [green]export PYTHONPATH="{current}:$PYTHONPATH"[/green]')
+    console.print(f'  [green]export PYTHONPATH="{current}/src:$PYTHONPATH"[/green]')
     console.print("\n[dim]Or in pyproject.toml (uv):[/dim]")
     console.print("  [green][tool.uv.sources][/green]")
     console.print(f'  [green]cdm-models = {{ path = "{current}" }}[/green]\n')

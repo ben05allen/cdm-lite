@@ -70,6 +70,20 @@ class TestCdmVersion:
         with pytest.raises(AttributeError):
             v.version = "7.0.0"  # type: ignore
 
+    @pytest.mark.parametrize(
+        "maven,pep440",
+        [
+            ("6.19.0", "6.19.0"),
+            ("0.0.0-test.1", "0.0.0.dev1"),
+            ("0.0.0-dev.1", "0.0.0.dev1"),
+            ("6.19.0-dev.5", "6.19.0.dev5"),
+            ("6.19.0-SNAPSHOT", "6.19.0.dev0"),
+            ("6.0.0-rc.1", "6.0.0.rc1"),
+        ],
+    )
+    def test_pep440_sanitization(self, maven, pep440):
+        assert CdmVersion(maven).pep440 == pep440
+
 
 class TestCdmRegistry:
     def test_all_versions_excludes_dev_by_default(self, registry):

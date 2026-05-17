@@ -101,7 +101,7 @@ class TestGenerateModels:
         assert kwargs["input_"] == input_dir
 
         config = kwargs["config"]
-        assert config.output == output_dir
+        assert config.output == output_dir / "src" / "cdm_models" / "models"
         assert config.input_file_type == InputFileType.JsonSchema
         assert config.output_model_type == DataModelType.PydanticV2BaseModel
         assert config.reuse_model is True
@@ -109,6 +109,24 @@ class TestGenerateModels:
         assert config.snake_case_field is True
         assert config.capitalise_enum_members is True
         assert Formatter.RUFF_FORMAT in config.formatters
+
+    def test_resolves_inner_input_directory(self, input_dir: Path, output_dir: Path):
+        # Create a single subdirectory 'jsonschema' inside input_dir
+        inner_dir = input_dir / "jsonschema"
+        inner_dir.mkdir()
+        (inner_dir / "Schema.json").touch()
+
+        with patch("cdm_lite.generator.generate") as mock_generate:
+            generate_models(input_dir, output_dir)
+
+        assert mock_generate.call_args.kwargs["input_"] == inner_dir
+
+    def test_creates_init_files(self, input_dir: Path, output_dir: Path):
+        with patch("cdm_lite.generator.generate"):
+            generate_models(input_dir, output_dir)
+
+        assert (output_dir / "src" / "cdm_models" / "__init__.py").exists()
+        assert (output_dir / "src" / "cdm_models" / "models" / "__init__.py").exists()
 
     def test_custom_python_version(self, input_dir: Path, output_dir: Path):
         with patch("cdm_lite.generator.generate") as mock_generate:
