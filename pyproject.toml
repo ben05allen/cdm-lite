@@ -13,7 +13,19 @@ dependencies = [
   "typer>=0.25.1",
   "rich>=15.0.0",
 ]
+license-files = ["LICEN[CS]E*"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
 
+  "Intended Audience :: Developers",
+  "Topic :: Software Development :: Finance CLI Tools",
+
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
+]
 [project.scripts]
 cdm-lite = "cdm_lite.cli:main"
 
