@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Test (Python ${{ matrix.python-version }} on ${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ["3.11", "3.12", "3.13", "3.14"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked --dev
+
+      # Step A: Run ONLY unit tests across the whole matrix
+      - name: Run Unit Tests
+        run: uv run pytest -m "not integration"
+
+      # Step B: Run integration tests ONLY on a single designated runner
+      - name: Run Integration Tests
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.11'
+        run: uv run pytest -m "integration"
