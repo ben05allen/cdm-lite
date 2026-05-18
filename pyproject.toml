@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.3.0a2"
+version = "0.3.1a1"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]

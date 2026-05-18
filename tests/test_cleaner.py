@@ -200,14 +200,14 @@ class TestCleanSchemas:
     def test_strips_one_of_from_enum_schemas(self, input_dir: Path, output_dir: Path):
         write_schema(input_dir, "EnumSchema.json", ENUM_SCHEMA)
         clean_schemas(input_dir, output_dir)
-        output = json.loads((output_dir / "EnumSchema.json").read_text())
+        output = json.loads((output_dir / "EnumSchema.json").read_text(encoding="utf-8"))
         assert "oneOf" not in output
         assert output["enum"] == ["Party1", "Party2"]
 
     def test_copies_non_enum_schemas_unchanged(self, input_dir: Path, output_dir: Path):
         write_schema(input_dir, "NonEnumSchema.json", NON_ENUM_SCHEMA)
         clean_schemas(input_dir, output_dir)
-        output = json.loads((output_dir / "NonEnumSchema.json").read_text())
+        output = json.loads((output_dir / "NonEnumSchema.json").read_text(encoding="utf-8"))
         assert output == NON_ENUM_SCHEMA
 
     def test_mirrors_directory_structure(self, input_dir: Path, output_dir: Path):
@@ -248,4 +248,4 @@ class TestCleanSchemas:
         write_schema(input_dir, "NonEnumSchema.json", NON_ENUM_SCHEMA)
         clean_schemas(input_dir, output_dir)
         for out_file in output_dir.rglob("*.json"):
-            assert json.loads(out_file.read_text())  # must not raise
+            assert json.loads(out_file.read_text(encoding="utf-8"))  # must not raise

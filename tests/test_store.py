@@ -118,7 +118,7 @@ class TestInit:
         store.init_version(version)
         status_path = store._status_path(version)
         assert status_path.exists()
-        status = VersionStatus.from_json(status_path.read_text())
+        status = VersionStatus.from_json(status_path.read_text(encoding="utf-8"))
         assert status.version == version.version
         assert status.downloaded is False
 

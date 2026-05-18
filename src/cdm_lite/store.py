@@ -118,7 +118,7 @@ class CdmStore:
         status_path = self._status_path(version)
         if not status_path.exists():
             status = VersionStatus(version=version.version)
-            status_path.write_text(status.to_json())
+            status_path.write_text(status.to_json(), encoding="utf-8")
 
     # ── Path resolution ───────────────────────────────────────────────────────
 
@@ -140,7 +140,7 @@ class CdmStore:
             raise FileNotFoundError(
                 f"Version {version} not found in cache. Run `cdm-lite init --version {version}` first."
             )
-        return VersionStatus.from_json(path.read_text())
+        return VersionStatus.from_json(path.read_text(encoding="utf-8"))
 
     def is_downloaded(self, version: CdmVersion) -> bool:
         try:
@@ -165,10 +165,10 @@ class CdmStore:
     def _update_status(self, version: CdmVersion, **kwargs) -> None:
         """Read-modify-write the status file."""
         path = self._status_path(version)
-        status = VersionStatus.from_json(path.read_text())
+        status = VersionStatus.from_json(path.read_text(encoding="utf-8"))
         for key, value in kwargs.items():
             setattr(status, key, value)
-        path.write_text(status.to_json())
+        path.write_text(status.to_json(), encoding="utf-8")
 
     def mark_downloaded(self, version: CdmVersion) -> None:
         self._update_status(
@@ -197,10 +197,10 @@ class CdmStore:
     def load_config(self) -> Config:
         if not self.config_path.exists():
             return Config()
-        return Config.from_json(self.config_path.read_text())
+        return Config.from_json(self.config_path.read_text(encoding="utf-8"))
 
     def save_config(self, config: Config) -> None:
-        self.config_path.write_text(config.to_json())
+        self.config_path.write_text(config.to_json(), encoding="utf-8")
 
     def set_current_version(self, version: CdmVersion) -> None:
         config = self.load_config()
@@ -236,16 +236,33 @@ class CdmStore:
         """Point the current/ symlink at the given version's models directory."""
         import os
         import platform
+        import stat
 
         current = self.current_models_dir()
         target = self.models_dir(version)
 
         # Remove existing symlink, junction or directory
         if os.path.lexists(current):
-            # Python 3.12+: is_junction() is available on Path
-            if current.is_symlink() or (hasattr(current, "is_junction") and current.is_junction()):
-                # Unlink works for symlinks and junctions on modern Python
-                current.unlink()
+            is_junction = False
+            if hasattr(current, "is_junction"):
+                is_junction = current.is_junction()
+            elif platform.system() == "Windows":
+                # Manual check for junctions on Python < 3.12
+                try:
+                    # On Windows, junctions are directories with a reparse point attribute.
+                    # FILE_ATTRIBUTE_REPARSE_POINT = 0x400
+                    reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+                    is_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)
+                except (AttributeError, OSError):
+                    is_junction = False
+
+            if current.is_symlink() or is_junction:
+                # Unlink works for symlinks always, and for junctions on 3.12+
+                # For junctions on < 3.12, we must use rmdir
+                if is_junction and not hasattr(current, "is_junction"):
+                    current.rmdir()
+                else:
+                    current.unlink()
             elif current.exists():
                 raise RuntimeError(
                     f"{current} exists and is not a symlink or junction — refusing to overwrite."
@@ -267,8 +284,9 @@ class CdmStore:
                 try:
                     current.symlink_to(target, target_is_directory=True)
                 except OSError:
+                    stderr_msg = e.stderr.decode() if e.stderr else "Unknown error"
                     raise RuntimeError(
-                        f"Failed to create junction or symlink at {current}: {e.stderr.decode()}"
+                        f"Failed to create junction or symlink at {current}: {stderr_msg}"
                     ) from e
         else:
             current.symlink_to(target)

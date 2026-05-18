@@ -510,7 +510,7 @@ class TestClearCommand:
     def test_clears_cache_on_confirmation(self, runner: CliRunner, tmp_path: Path):
         cache_dir = tmp_path / "cdm-lite"
         cache_dir.mkdir()
-        (cache_dir / "config.json").write_text("{}")
+        (cache_dir / "config.json").write_text("{}", encoding="utf-8")
 
         with patch("cdm_lite.cli.store") as mock_store:
             mock_store.cache_dir = cache_dir

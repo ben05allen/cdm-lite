@@ -165,7 +165,7 @@ class TestDownloadSchemas:
             download_schemas(version, output_dir)
 
         for path in output_dir.rglob("*.json"):
-            assert json.loads(path.read_text())  # must not raise
+            assert json.loads(path.read_text(encoding="utf-8"))  # must not raise
 
     def test_unpacked_file_content_matches_source(
         self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
@@ -175,7 +175,9 @@ class TestDownloadSchemas:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
-        schema = json.loads((output_dir / "cdm/event/common/TradeState.json").read_text())
+        schema = json.loads(
+            (output_dir / "cdm/event/common/TradeState.json").read_text(encoding="utf-8")
+        )
         assert schema["title"] == "TradeState"
 
     def test_calls_correct_url(self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes):

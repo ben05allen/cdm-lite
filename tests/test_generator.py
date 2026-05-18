@@ -150,17 +150,17 @@ class TestGeneratePackageMetadata:
 
     def test_pyproject_contains_cdm_version(self, tmp_path: Path):
         generate_package_metadata(tmp_path, cdm_version="6.19.0")
-        content = (tmp_path / "pyproject.toml").read_text()
+        content = (tmp_path / "pyproject.toml").read_text(encoding="utf-8")
         assert "6.19.0" in content
 
     def test_pyproject_contains_python_version(self, tmp_path: Path):
         generate_package_metadata(tmp_path, cdm_version="6.19.0", python_version="3.13")
-        content = (tmp_path / "pyproject.toml").read_text()
+        content = (tmp_path / "pyproject.toml").read_text(encoding="utf-8")
         assert "3.13" in content
 
     def test_readme_contains_cdm_version(self, tmp_path: Path):
         generate_package_metadata(tmp_path, cdm_version="6.19.0")
-        content = (tmp_path / "README.md").read_text()
+        content = (tmp_path / "README.md").read_text(encoding="utf-8")
         assert "6.19.0" in content
 
     def test_pyproject_is_valid_toml(self, tmp_path: Path):
@@ -195,7 +195,8 @@ def test_real_generation(tmp_path: Path):
                 "description": "Counterparty roles.",
                 "enum": ["Party1", "Party2"],
             }
-        )
+        ),
+        encoding="utf-8",
     )
 
     result = generate_models(input_dir, output_dir)
