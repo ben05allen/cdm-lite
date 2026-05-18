@@ -6,6 +6,14 @@ Python Pydantic models for the [FINOS Common Domain Model (CDM)](https://github.
 schemas into Pydantic v2 models. This enables strict validation, autocompletion, and robust
 deserialization of CDM JSON payloads in Python codebases without heavy Java dependencies.
 
+## Status
+
+**Current Phase:** Alpha
+
+`cdm-lite` is currently in an alpha development stage. While the core functionality is operational, we are actively refining the cleaning and generation logic.
+
+**Feedback Welcome:** We strongly encourage users to provide comments, recommendations, or report any issues found during usage. Your input is vital to reaching a stable 1.0 release.
+
 ## Scope & Limitations
 
 **⚠️ Disclaimer:** `cdm-lite` is intended primarily as a lightweight **deserializer**. The generated
