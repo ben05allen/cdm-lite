@@ -259,9 +259,24 @@ class TestConfigPersistence:
 
 class TestSymLinkManagement:
     def test_update_current_symlink(self, initialised_store: CdmStore, version: CdmVersion):
+        import platform
+        import stat
+
         initialised_store.update_current_symlink(version)
         current = initialised_store.current_models_dir()
-        assert current.is_symlink() or (hasattr(current, "is_junction") and current.is_junction())
+        
+        is_symlink_or_junction = current.is_symlink()
+        if not is_symlink_or_junction:
+            if hasattr(current, "is_junction"):
+                is_symlink_or_junction = current.is_junction()
+            elif platform.system() == "Windows":
+                try:
+                    reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+                    is_symlink_or_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)
+                except (AttributeError, OSError):
+                    pass
+
+        assert is_symlink_or_junction
         assert current.resolve() == initialised_store.models_dir(version).resolve()
 
     def test_update_current_symlink_replaces_existing(
