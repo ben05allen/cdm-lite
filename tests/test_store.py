@@ -289,3 +289,47 @@ class TestSymLinkManagement:
         initialised_store.update_current_symlink(version)
         current = initialised_store.current_models_dir()
         assert current.resolve() == initialised_store.models_dir(version).resolve()
+
+
+# ── Version Removal ───────────────────────────────────────────────────────────
+
+
+class TestRemoveVersion:
+    def test_remove_version_deletes_directory(
+        self, initialised_store: CdmStore, version: CdmVersion
+    ):
+        v_dir = initialised_store._version_dir(version)
+        assert v_dir.exists()
+        initialised_store.remove_version(version)
+        assert not v_dir.exists()
+
+    def test_remove_active_version_unsets_config(
+        self, initialised_store: CdmStore, version: CdmVersion
+    ):
+        initialised_store.set_current_version(version)
+        assert initialised_store.current_version() == version
+
+        initialised_store.remove_version(version)
+        assert initialised_store.current_version() is None
+
+    def test_remove_active_version_deletes_symlink(
+        self, initialised_store: CdmStore, version: CdmVersion
+    ):
+        initialised_store.update_current_symlink(version)
+        current = initialised_store.current_models_dir()
+        assert current.exists()
+
+        initialised_store.remove_version(version)
+        assert not current.exists()
+
+    def test_remove_inactive_version_preserves_current(
+        self, initialised_store: CdmStore, version: CdmVersion, other_version: CdmVersion
+    ):
+        initialised_store.init_version(other_version)
+        initialised_store.set_current_version(version)
+        initialised_store.update_current_symlink(version)
+
+        initialised_store.remove_version(other_version)
+
+        assert initialised_store.current_version() == version
+        assert initialised_store.current_models_dir().exists()

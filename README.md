@@ -90,8 +90,9 @@ print(trade_state.trade.trade_date.value)
 ## Reference Commands
 
 - `cdm-lite versions`: View available versions on Maven Central.
-- `cdm-lite install -v <version>`: Fetch schemas and compile models.
-- `cdm-lite use -v <version>`: Set the active version for the `current` symlink.
+- `cdm-lite install <version>`: Fetch schemas and compile models.
+- `cdm-lite use <version>`: Set the active version for the `current` symlink.
 - `cdm-lite list`: Show locally compiled versions.
 - `cdm-lite status`: Print active version and system cache location.
+- `cdm-lite remove <version>`: Delete a specific version from the local cache.
 - `cdm-lite clear`: Remove all local schemas and generated models.

@@ -23,8 +23,9 @@ The project uses `uv` for dependency management and execution.
 -   **Available Commands:**
     -   `cdm-lite versions`: List available CDM versions on Maven Central.
     -   `cdm-lite list`: List locally installed/generated versions.
-    -   `cdm-lite install --version <version>`: Download, clean, and generate models.
-    -   `cdm-lite use --version <version>`: Set the active CDM version (updates symlinks).
+    -   `cdm-lite install <version>`: Download, clean, and generate models.
+    -   `cdm-lite use <version>`: Set the active CDM version (updates symlinks).
+    -   `cdm-lite remove <version>`: Remove a specific CDM version from the cache.
     -   `cdm-lite status`: Show currently active version and cache location.
     -   `cdm-lite clear`: Remove all cached versions and models.
 

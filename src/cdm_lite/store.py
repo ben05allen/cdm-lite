@@ -232,16 +232,13 @@ class CdmStore:
 
     # ── Symlink Management ────────────────────────────────────────────────────────
 
-    def update_current_symlink(self, version: CdmVersion) -> None:
-        """Point the current/ symlink at the given version's models directory."""
+    def remove_current_symlink(self) -> None:
+        """Remove the current/ symlink or junction if it exists."""
         import os
         import platform
         import stat
 
         current = self.current_models_dir()
-        target = self.models_dir(version)
-
-        # Remove existing symlink, junction or directory
         if os.path.lexists(current):
             is_junction = False
             if hasattr(current, "is_junction"):
@@ -268,6 +265,16 @@ class CdmStore:
                     f"{current} exists and is not a symlink or junction — refusing to overwrite."
                 )
 
+    def update_current_symlink(self, version: CdmVersion) -> None:
+        """Point the current/ symlink at the given version's models directory."""
+        import platform
+
+        current = self.current_models_dir()
+        target = self.models_dir(version)
+
+        # Remove existing symlink, junction or directory
+        self.remove_current_symlink()
+
         if platform.system() == "Windows":
             import subprocess
 
@@ -290,3 +297,18 @@ class CdmStore:
                     ) from e
         else:
             current.symlink_to(target)
+
+    def remove_version(self, version: CdmVersion) -> None:
+        """Remove a version from the cache, unsetting it if it is current."""
+        import shutil
+
+        # If this is the active version, clean up config and symlink first
+        if self.current_version() == version:
+            config = self.load_config()
+            config.current_version = None
+            self.save_config(config)
+            self.remove_current_symlink()
+
+        v_dir = self._version_dir(version)
+        if v_dir.exists():
+            shutil.rmtree(v_dir)

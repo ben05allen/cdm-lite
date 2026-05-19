@@ -13,6 +13,7 @@
 import typer
 from rich.console import Console
 from rich.table import Table
+from rich.prompt import Confirm
 
 from cdm_lite.cleaner import clean_schemas
 from cdm_lite.downloader import DownloadError, download_schemas
@@ -256,6 +257,54 @@ def use(
     _show_current_path(store)
 
 
+# ── remove ────────────────────────────────────────────────────────────────────
+
+
+@app.command()
+def remove(
+    version: str = typer.Argument(..., help="CDM version to remove."),
+    force: bool = typer.Option(False, "--force", "-f", help="Skip confirmation prompt."),
+):
+    """Remove a CDM version from the local cache."""
+    try:
+        cdm_version = registry.get(version)
+    except Exception as e:
+        # If it's not on Maven Central, we still want to be able to remove it from cache
+        # so we'll just use the version string directly if it's in our cached list.
+        cached_versions = {v.version for v in store.cached_versions()}
+        if version in cached_versions:
+            from cdm_lite.registry import CdmVersion
+
+            cdm_version = CdmVersion(version)
+        else:
+            _abort(str(e))
+
+    if cdm_version not in store.cached_versions():
+        _abort(f"CDM {version} is not installed.")
+
+    is_current = store.current_version() == cdm_version
+
+    if not force:
+        msg = f"Are you sure you want to remove CDM {version}?"
+        if is_current:
+            msg += " [bold yellow](This is the active version)[/bold yellow]"
+
+        if not Confirm.ask(msg, default=False):
+            console.print("\n[dim]Aborted.[/dim]\n")
+            raise typer.Exit()
+
+    store.remove_version(cdm_version)
+    console.print(f"\n[bold green]✔ Removed CDM {version}[/bold green]")
+
+    if is_current:
+        console.print("[yellow]The active version has been unset.[/yellow]")
+        console.print(
+            "[dim]Run [bold]cdm-lite use <version>[/bold] to set a new active version.[/dim]\n"
+        )
+    else:
+        console.print("")
+
+
 # ── status ────────────────────────────────────────────────────────────────────
 
 
@@ -312,8 +361,7 @@ def clear(
     console.print(f"  {len(cached)} version(s) will be removed.\n")
 
     if not force:
-        confirmed = typer.confirm("Are you sure you want to continue?", default=False)
-        if not confirmed:
+        if not Confirm.ask("Are you sure you want to continue?", default=False):
             console.print("\n[dim]Aborted.[/dim]\n")
             raise typer.Exit()
 

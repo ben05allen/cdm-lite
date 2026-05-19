@@ -543,3 +543,83 @@ class TestClearCommand:
 
         assert result.exit_code == 0
         assert "already empty" in result.output
+
+
+# ── remove command ────────────────────────────────────────────────────────────
+
+
+class TestRemoveCommand:
+    def test_remove_success(self, runner: CliRunner, version: CdmVersion):
+        with (
+            patch("cdm_lite.cli.registry") as mock_registry,
+            patch("cdm_lite.cli.store") as mock_store,
+        ):
+            mock_registry.get.return_value = version
+            mock_store.cached_versions.return_value = [version]
+            mock_store.current_version.return_value = None
+
+            result = runner.invoke(app, ["remove", "6.19.0"], input="y\n")
+
+        assert result.exit_code == 0
+        assert "Removed CDM 6.19.0" in result.output
+        mock_store.remove_version.assert_called_once_with(version)
+
+    def test_force_flag_skips_prompt(self, runner: CliRunner, version: CdmVersion):
+        with (
+            patch("cdm_lite.cli.registry") as mock_registry,
+            patch("cdm_lite.cli.store") as mock_store,
+        ):
+            mock_registry.get.return_value = version
+            mock_store.cached_versions.return_value = [version]
+            mock_store.current_version.return_value = None
+
+            result = runner.invoke(app, ["remove", "6.19.0", "--force"])
+
+        assert result.exit_code == 0
+        assert "Removed CDM 6.19.0" in result.output
+        mock_store.remove_version.assert_called_once_with(version)
+
+    def test_aborts_if_not_installed(self, runner: CliRunner):
+        with (
+            patch("cdm_lite.cli.registry") as mock_registry,
+            patch("cdm_lite.cli.store") as mock_store,
+        ):
+            mock_registry.get.return_value = CdmVersion("6.19.0")
+            mock_store.cached_versions.return_value = []
+
+            result = runner.invoke(app, ["remove", "6.19.0"])
+
+        assert result.exit_code == 1
+        assert "is not installed" in result.output
+
+    def test_warns_if_removing_active_version(self, runner: CliRunner, version: CdmVersion):
+        with (
+            patch("cdm_lite.cli.registry") as mock_registry,
+            patch("cdm_lite.cli.store") as mock_store,
+        ):
+            mock_registry.get.return_value = version
+            mock_store.cached_versions.return_value = [version]
+            mock_store.current_version.return_value = version
+
+            result = runner.invoke(app, ["remove", "6.19.0"], input="y\n")
+
+        assert "active version" in result.output
+        assert "unset" in result.output
+
+    def test_handles_version_not_on_registry_but_in_cache(
+        self, runner: CliRunner, version: CdmVersion
+    ):
+        """Allows removing a version that might have been removed from Maven Central."""
+        with (
+            patch("cdm_lite.cli.registry") as mock_registry,
+            patch("cdm_lite.cli.store") as mock_store,
+        ):
+            mock_registry.get.side_effect = ValueError("Not on registry")
+            mock_store.cached_versions.return_value = [version]
+            mock_store.current_version.return_value = None
+
+            result = runner.invoke(app, ["remove", "6.19.0"], input="y\n")
+
+        assert result.exit_code == 0
+        assert "Removed CDM 6.19.0" in result.output
+        mock_store.remove_version.assert_called_once_with(version)
