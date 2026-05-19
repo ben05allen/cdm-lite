@@ -1,5 +1,9 @@
 # cdm-lite
 
+[![CI](https://github.com/ben05allen/cdm-lite/actions/workflows/ci.yml/badge.svg)](https://github.com/ben05allen/cdm-lite/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg)](https://www.python.org/downloads/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 Python Pydantic models for the [FINOS Common Domain Model (CDM)](https://github.com/finos/common-domain-model).
 
 `cdm-lite` provides a lightweight CLI to download, clean, and compile official FINOS CDM JSON
