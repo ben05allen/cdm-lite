@@ -264,15 +264,17 @@ class TestSymLinkManagement:
 
         initialised_store.update_current_symlink(version)
         current = initialised_store.current_models_dir()
-        
+
         is_symlink_or_junction = current.is_symlink()
         if not is_symlink_or_junction:
             if hasattr(current, "is_junction"):
-                is_symlink_or_junction = current.is_junction()
+                is_symlink_or_junction = current.is_junction()  # type: ignore
             elif platform.system() == "Windows":
                 try:
                     reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
-                    is_symlink_or_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)
+                    is_symlink_or_junction = bool(
+                        current.lstat().st_file_attributes & reparse_point_mask  # type: ignore
+                    )
                 except (AttributeError, OSError):
                     pass
 

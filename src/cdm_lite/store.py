@@ -245,14 +245,14 @@ class CdmStore:
         if os.path.lexists(current):
             is_junction = False
             if hasattr(current, "is_junction"):
-                is_junction = current.is_junction()
+                is_junction = current.is_junction()  # type: ignore
             elif platform.system() == "Windows":
                 # Manual check for junctions on Python < 3.12
                 try:
                     # On Windows, junctions are directories with a reparse point attribute.
                     # FILE_ATTRIBUTE_REPARSE_POINT = 0x400
                     reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
-                    is_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)
+                    is_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)  # type: ignore
                 except (AttributeError, OSError):
                     is_junction = False
 

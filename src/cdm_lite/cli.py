@@ -191,40 +191,37 @@ def install(
         console.print("[dim]  Step 2/3: Schemas already cleaned, skipping.[/dim]")
     else:
         console.print("[bold]  Step 2/3: Cleaning schemas...[/bold]")
-        result = clean_schemas(
+        _ = clean_schemas(
             store.schema_raw_dir(cdm_version),
             store.schema_clean_dir(cdm_version),
         )
         store.mark_cleaned(cdm_version)
-        console.print(f"  [dim]{result}[/dim]")
 
-    # ── Step 3: Generate ──────────────────────────────────────────────────────
+        if status.generated:
+            console.print("[dim]  Step 3/3: Models already generated, skipping.[/dim]")
+        else:
+            console.print("[bold]  Step 3/3: Generating Pydantic models...[/bold]")
+            try:
+                gen_result = generate_models(
+                    store.schema_clean_dir(cdm_version),
+                    store.models_dir(cdm_version),
+                    python_version=python_version,
+                )
+            except GenerationError as e:
+                _abort(str(e))
 
-    if status.generated:
-        console.print("[dim]  Step 3/3: Models already generated, skipping.[/dim]")
-    else:
-        console.print("[bold]  Step 3/3: Generating Pydantic models...[/bold]")
-        try:
-            result = generate_models(
-                store.schema_clean_dir(cdm_version),
+            if not gen_result.success:
+                _abort(f"Model generation failed:\n{gen_result.stderr}")
+
+            store.mark_generated(cdm_version, cdm_lite_version=_get_version())
+
+            generate_package_metadata(
                 store.models_dir(cdm_version),
+                cdm_version=cdm_version.version,
                 python_version=python_version,
             )
-        except GenerationError as e:
-            _abort(str(e))
 
-        if not result.success:
-            _abort(f"Model generation failed:\n{result.stderr}")
-
-        store.mark_generated(cdm_version, cdm_lite_version=_get_version())
-
-        generate_package_metadata(
-            store.models_dir(cdm_version),
-            cdm_version=cdm_version.version,
-            python_version=python_version,
-        )
-
-        console.print(f"  [dim]{result}[/dim]")
+            console.print(f"  [dim]{gen_result}[/dim]")
 
     console.print(f"\n[bold green]✔ CDM {cdm_version} installed successfully.[/bold green]")
     console.print(
