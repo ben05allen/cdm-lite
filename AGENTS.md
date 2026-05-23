@@ -13,6 +13,7 @@ This project strictly uses `uv` for dependency management, execution, and tool i
   - Unit tests: `uv run pytest`
   - Integration tests: `uv run pytest -m integration`
   - Informal multi-version testing: `./check_versions.sh`
+  - Formal CI multi-version and os testing.
 
 ## Agent Rules & Conventions
 

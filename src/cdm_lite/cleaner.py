@@ -18,7 +18,7 @@ from pathlib import Path
 
 # Control characters that are illegal unescaped in JSON strings.
 # Excludes \n (0x0a) and \r (0x0d) which are valid between tokens.
-_CONTROL_CHAR_RE = re.compile(r"[\x00-\x08\x09\x0b\x0c\x0e-\x1f]")
+_CONTROL_CHAR_RE = re.compile(r"[\t\n\x00-\x08\x09\x0b\x0c\x0e-\x1f]")
 
 # Matches literal tabs and newlines inside JSON string values
 _STRING_CONTENT_RE = re.compile(r'"(?:[^"\\]|\\.)*"', re.DOTALL)
@@ -34,8 +34,6 @@ def _fix_control_chars(content: str) -> str:
 
     def clean_string(match: re.Match) -> str:
         s = match.group(0)
-        s = s.replace("\t", " ")
-        s = s.replace("\n", " ")
         s = _CONTROL_CHAR_RE.sub(" ", s)
         return s
 
