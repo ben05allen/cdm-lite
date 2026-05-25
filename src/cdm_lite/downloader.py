@@ -11,8 +11,10 @@
 # limitations under the License.
 
 import io
-from pathlib import Path
 import tarfile
+import zipfile
+from collections.abc import Generator
+from pathlib import Path
 
 import httpx
 from rich.progress import (
@@ -31,12 +33,54 @@ class DownloadError(Exception):
     pass
 
 
+def unpack_tar(data: bytes, output_dir: Path) -> Generator[int, None, None]:
+    try:
+        # mode="r:*" handles transparent decompression (gz, bz2, xz) and plain tar
+        with tarfile.open(fileobj=io.BytesIO(data), mode="r:*") as tf:
+            json_members = [m for m in tf.getmembers() if m.name.endswith(".json")]
+            yield len(json_members)
+            for member in json_members:
+                # Security: Manual path traversal protection for Python 3.11 compatibility
+                rel_path = Path(member.name)
+                if rel_path.is_absolute() or ".." in rel_path.parts:
+                    yield 1
+                    continue
+
+                f = tf.extractfile(member)
+                if f is None:
+                    yield 1
+                    continue
+
+                output_path = output_dir / rel_path
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_bytes(f.read())
+                yield 1
+
+    except (tarfile.TarError, EOFError) as e:
+        raise DownloadError(f"not a valid tar.gz file: {e}") from e
+
+
+def unpack_zip(data: bytes, output_dir: Path) -> Generator[int, None, None]:
+    try:
+        with zipfile.ZipFile(io.BytesIO(data), mode="r") as zf:
+            json_members = [m for m in zf.infolist() if m.filename.endswith(".json")]
+            yield len(json_members)
+            for member in json_members:
+                # zipfile.extract strips dangerous path components by default
+                zf.extract(member, path=output_dir)
+                yield 1
+
+    except (zipfile.BadZipFile, EOFError) as e:
+        raise DownloadError(f"not a valid .zip file: {e}") from e
+
+
 def download_schemas(version: CdmVersion, output_dir: Path) -> None:
     """
     Download the CDM JSON Schema zip for the given version and
     unpack it into output_dir.
     """
     url = version.schema_url
+    unpack_total = 0
 
     with Progress(
         SpinnerColumn(),
@@ -68,23 +112,23 @@ def download_schemas(version: CdmVersion, output_dir: Path) -> None:
 
         # ── Unpack ────────────────────────────────────────────────────────────
 
+        unpack_task = progress.add_task("Unpacking schemas...", total=None)
+
+        # Detect format via magic numbers
+        if data.startswith(b"PK\x03\x04"):
+            gen = unpack_zip(data, output_dir)
+        else:
+            # Default to tar (handles .tar.gz and .tar)
+            gen = unpack_tar(data, output_dir)
+
         try:
-            with tarfile.open(fileobj=io.BytesIO(data), mode="r:gz") as tf:
-                json_members = [m for m in tf.getmembers() if m.name.endswith(".json")]
-                unpack_task = progress.add_task("Unpacking schemas...", total=len(json_members))
-                for member in json_members:
-                    f = tf.extractfile(member)
-                    if f is None:
-                        continue
-                    out_path = output_dir / member.name
-                    out_path.parent.mkdir(parents=True, exist_ok=True)
-                    out_path.write_bytes(f.read())
-                    progress.advance(unpack_task)
+            unpack_total = next(gen)
+            progress.update(unpack_task, total=unpack_total)
 
-        except tarfile.TarError as e:
-            raise DownloadError(
-                f"Downloaded file for CDM {version} is not a valid tar.gz: {e}"
-            ) from e
+            for _ in gen:
+                progress.advance(unpack_task)
+        except StopIteration:
+            pass
 
-    if json_members:
-        print(f"✔ Downloaded and unpacked {len(json_members)} schema files to {output_dir}")
+    if unpack_total:
+        print(f"✔ Downloaded and unpacked {unpack_total} schema files to {output_dir}")
