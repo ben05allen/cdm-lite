@@ -114,8 +114,8 @@ def download_schemas(version: CdmVersion, output_dir: Path) -> None:
 
         unpack_task = progress.add_task("Unpacking schemas...", total=None)
 
-        # Detect format via magic numbers
-        if data.startswith(b"PK\x03\x04"):
+        # Detect zip files otherwise fall back to tar files
+        if zipfile.is_zipfile(io.BytesIO(data)):
             gen = unpack_zip(data, output_dir)
         else:
             # Default to tar (handles .tar.gz and .tar)
