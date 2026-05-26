@@ -12,6 +12,7 @@ dependencies = [
   "datamodel-code-generator[ruff]>=0.56.1",
   "typer>=0.25.1",
   "rich>=15.0.0",
+  "idna>=3.14",
 ]
 license-files = ["LICEN[CS]E*"]
 keywords = [
@@ -49,6 +50,9 @@ cdm-lite = "cdm_lite.cli:main"
 [build-system]
 requires = ["uv_build>=0.11.7,<0.12.0"]
 build-backend = "uv_build"
+
+[tool.uv]
+constraint-dependencies = ["idna>=3.15"]
 
 [tool.ruff]
 line-length = 100
