@@ -88,7 +88,7 @@ wheels = [
 
 [[package]]
 name = "cdm-lite"
-version = "0.3.2a1"
+version = "0.4.0b1"
 source = { editable = "." }
 dependencies = [
     { name = "datamodel-code-generator", extra = ["ruff"] },

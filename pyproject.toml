@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.3.2a1"
+version = "0.4.0b1"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
@@ -27,7 +27,7 @@ keywords = [
   "code-generation",
 ]
 classifiers = [
-  "Development Status :: 3 - Alpha",
+  "Development Status :: 4 - Beta",
   "Environment :: Console",
   "Intended Audience :: Developers",
   "Intended Audience :: Financial and Insurance Industry",

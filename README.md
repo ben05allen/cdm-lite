@@ -14,11 +14,12 @@ deserialization of CDM JSON payloads in Python codebases without heavy Java depe
 
 ## Status
 
-**Current Phase:** Alpha
+**Current Phase:** Beta
 
-`cdm-lite` is currently in an alpha development stage. While the core functionality is operational, we are actively refining the cleaning and generation logic.
+`cdm-lite` is currently in a beta development stage. While the core functionality is stable, we are actively refining the cleaning and generation logic based on community feedback.
 
-**Feedback Welcome:** We strongly encourage users to provide comments, recommendations, or report any issues found during usage. Your input is vital to reaching a stable 1.0 release.
+**Feedback Welcome:** We gratefully encourage users to provide comments, recommendations, or report any issues found during usage. Your input
+will help in reaching a stable 1.0 release.
 
 ## Scope & Limitations
 
@@ -29,8 +30,7 @@ behavioral constraints of the full Common Domain Model.
 
 Pydantic classes inherently cannot capture the full extent of the CDM's functionality,
 such as complex cross-field cardinality checks, conditions, or rosetta-injected logic.
-For robust **serialization** and comprehensive domain validation, we strongly recommend
-using the [official, full CDM project implementations](https://github.com/finos/common-domain-model) (e.g., the Java distribution).
+For robust **serialization** and comprehensive domain validation, we strongly recommend using the [official, full CDM project implementations](https://github.com/finos/common-domain-model) (e.g., the Java distribution).
 
 ## Installation
 
