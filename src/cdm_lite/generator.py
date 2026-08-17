@@ -11,15 +11,15 @@
 # limitations under the License.
 
 from dataclasses import dataclass
+from datetime import UTC
 from pathlib import Path
 
-from datamodel_code_generator import generate, GenerateConfig
+from datamodel_code_generator import GenerateConfig, generate
 from datamodel_code_generator.enums import DataModelType, InputFileType
 from datamodel_code_generator.format import Formatter, PythonVersion
 
 from cdm_lite.templates.pyproject_toml import generate_pyproject
 from cdm_lite.templates.readme_md import generate_readme
-
 
 MIN_PYTHON_VERSION = 3.11
 
@@ -33,11 +33,11 @@ def generate_package_metadata(
     Write pyproject.toml and README.md into the models directory
     so it can be used as a standalone installable package.
     """
-    from datetime import datetime, timezone
+    from datetime import datetime
 
     from cdm_lite.registry import CdmVersion
 
-    generated_at = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    generated_at = datetime.now(UTC).strftime("%Y-%m-%d")
     v = CdmVersion(cdm_version)
 
     pyproject = generate_pyproject(

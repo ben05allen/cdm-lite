@@ -18,7 +18,6 @@ import pytest
 from cdm_lite.registry import CdmVersion
 from cdm_lite.store import CdmStore, Config, VersionStatus
 
-
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 
 

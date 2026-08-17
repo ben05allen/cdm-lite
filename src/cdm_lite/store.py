@@ -12,7 +12,7 @@
 
 import json
 from dataclasses import asdict, dataclass, fields
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from platformdirs import user_cache_dir
@@ -99,7 +99,7 @@ class CdmStore:
 
     @staticmethod
     def _now() -> str:
-        return datetime.now(timezone.utc).isoformat()
+        return datetime.now(UTC).isoformat()
 
     # ── Initialisation ────────────────────────────────────────────────────────
 

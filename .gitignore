@@ -9,5 +9,8 @@ wheels/
 # Virtual environments
 .venv
 
+# Tool caches
+.complexipy_cache/
+
 # JSON libs
 /lib

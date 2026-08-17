@@ -1,0 +1,10 @@
+line-length = 100
+
+[lint]
+extend-select = ["C901"]
+ignore = [
+  "BLE001", # blind-except: deliberate `except Exception` + `_abort()` pattern in the CLI
+]
+
+[lint.mccabe]
+max-complexity = 18

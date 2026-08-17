@@ -10,11 +10,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from dataclasses import dataclass
-import httpx
-from functools import cached_property
 import re
 import xml.etree.ElementTree as ET
+from dataclasses import dataclass
+from functools import cached_property
+
+import httpx
 
 MAVEN_BASE = "https://repo1.maven.org/maven2/org/finos/cdm/cdm-json-schema"
 METADATA_URL = f"{MAVEN_BASE}/maven-metadata.xml"

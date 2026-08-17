@@ -14,15 +14,14 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
+from datamodel_code_generator.enums import DataModelType, InputFileType
+from datamodel_code_generator.format import Formatter
 
 from cdm_lite.generator import (
     GenerateResult,
     generate_models,
     generate_package_metadata,
 )
-from datamodel_code_generator.format import Formatter
-from datamodel_code_generator.enums import DataModelType, InputFileType
-
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 

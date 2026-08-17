@@ -12,8 +12,8 @@
 
 import typer
 from rich.console import Console
-from rich.table import Table
 from rich.prompt import Confirm
+from rich.table import Table
 
 from cdm_lite.cleaner import clean_schemas
 from cdm_lite.downloader import DownloadError, download_schemas
@@ -360,10 +360,9 @@ def clear(
     console.print(f"  [cyan]{cache_dir}[/cyan]")
     console.print(f"  {len(cached)} version(s) will be removed.\n")
 
-    if not force:
-        if not Confirm.ask("Are you sure you want to continue?", default=False):
-            console.print("\n[dim]Aborted.[/dim]\n")
-            raise typer.Exit()
+    if not force and not Confirm.ask("Are you sure you want to continue?", default=False):
+        console.print("\n[dim]Aborted.[/dim]\n")
+        raise typer.Exit()
 
     import shutil
 

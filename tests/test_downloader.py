@@ -22,7 +22,6 @@ import pytest
 from cdm_lite.downloader import DownloadError, download_schemas
 from cdm_lite.registry import CdmVersion
 
-
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 

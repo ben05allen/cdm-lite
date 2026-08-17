@@ -20,7 +20,6 @@ from cdm_lite.cli import app
 from cdm_lite.registry import CdmVersion
 from cdm_lite.store import CdmStore, VersionStatus
 
-
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 
 

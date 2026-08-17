@@ -11,8 +11,8 @@
 # limitations under the License.
 
 import pytest
-from cdm_lite.registry import CdmRegistry, CdmVersion
 
+from cdm_lite.registry import CdmRegistry, CdmVersion
 
 # ── Unit tests (no network) ───────────────────────────────────────────────────
 
@@ -57,7 +57,7 @@ class TestCdmVersion:
 
     def test_ordering(self):
         versions = [CdmVersion("6.19.0"), CdmVersion("6.0.0"), CdmVersion("6.1.0")]
-        assert sorted(versions)[0] == CdmVersion("6.0.0")
+        assert min(versions) == CdmVersion("6.0.0")
 
     def test_schema_url(self):
         v = CdmVersion("6.19.0")
