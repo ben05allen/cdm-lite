@@ -30,12 +30,9 @@ hooks = [
 ]
 
 [[repos]]
-repo = "https://github.com/rohaquinlop/complexipy-pre-commit"
-rev = "v7.0.1"
+repo = "local"
 hooks = [
-  { id = "complexipy", pass_filenames = false, args = [
-    ".",
-    "--max-complexity-allowed",
-    "18",
-  ] },
+  { id = "complexipy", name = "complexipy", entry = "uv run complexipy . --max-complexity-allowed 10", language = "system", types = [
+    "python",
+  ], pass_filenames = false },
 ]

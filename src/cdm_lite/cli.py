@@ -10,6 +10,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from typing import Never
+
 import typer
 from rich.console import Console
 from rich.prompt import Confirm
@@ -18,8 +20,8 @@ from rich.table import Table
 from cdm_lite.cleaner import clean_schemas
 from cdm_lite.downloader import DownloadError, download_schemas
 from cdm_lite.generator import GenerationError, generate_models, generate_package_metadata
-from cdm_lite.registry import CdmRegistry
-from cdm_lite.store import CdmStore
+from cdm_lite.registry import CdmRegistry, CdmVersion
+from cdm_lite.store import CdmStore, VersionStatus
 
 app = typer.Typer(
     name="cdm-lite",
@@ -44,10 +46,30 @@ def _show_current_path(store: CdmStore) -> None:
     console.print(f'  [green]cdm-models = {{ path = "{current}" }}[/green]\n')
 
 
-def _abort(message: str) -> None:
+def _abort(message: str) -> Never:
     """Print an error and exit with a non-zero code."""
     console.print(f"[bold red]Error:[/bold red] {message}")
     raise typer.Exit(code=1)
+
+
+def _render_version_row(
+    table: Table,
+    cdm_version: CdmVersion,
+    cached: set[str],
+    latest: CdmVersion,
+    current: CdmVersion | None,
+) -> None:
+    """Add a single row to the versions table."""
+    tags = []
+    if cdm_version.version in cached:
+        tags.append("[green]✔ installed[/green]")
+    if cdm_version == latest:
+        tags.append("[dim]latest stable[/dim]")
+    if not cdm_version.is_stable:
+        tags.append("[yellow]dev[/yellow]")
+
+    marker = "[bold cyan]← current[/bold cyan]" if cdm_version == current else ""
+    table.add_row(cdm_version.version, " ".join(tags), marker)
 
 
 # ── versions ──────────────────────────────────────────────────────────────────
@@ -76,16 +98,7 @@ def versions(
     table.add_column("")
 
     for v in reversed(all_versions):
-        tags = []
-        if v.version in cached:
-            tags.append("[green]✔ installed[/green]")
-        if v == latest:
-            tags.append("[dim]latest stable[/dim]")
-        if not v.is_stable:
-            tags.append("[yellow]dev[/yellow]")
-
-        current_marker = "[bold cyan]← current[/bold cyan]" if v == current else ""
-        table.add_row(v.version, " ".join(tags), current_marker)
+        _render_version_row(table, v, cached, latest, current)
 
     console.print(table)
     console.print(
@@ -146,17 +159,8 @@ def list_installed():
 # ── install ───────────────────────────────────────────────────────────────────
 
 
-@app.command()
-def install(
-    version: str | None = typer.Argument(None, help="CDM version to install (e.g. 6.19.0)."),
-    python_version: str = typer.Option(
-        "3.11", "--python", help="Target Python version for generated models."
-    ),
-):
-    """Download, clean and generate Pydantic models for a CDM version."""
-    store.init()
-
-    # Resolve version
+def _resolve_install_version(version: str | None) -> CdmVersion:
+    """Resolve the CDM version to install, defaulting to the latest stable."""
     try:
         if version is None:
             cdm_version = registry.latest_stable()
@@ -168,61 +172,90 @@ def install(
             cdm_version = registry.get(version)
     except Exception as e:
         _abort(str(e))
+    return cdm_version
 
+
+def _download_if_needed(cdm_version: CdmVersion, status: VersionStatus) -> None:
+    """Step 1/3: Download schemas unless they are already cached."""
+    if status.downloaded:
+        console.print("[dim]  Step 1/3: Schemas already downloaded, skipping.[/dim]")
+        return
+
+    console.print("[bold]  Step 1/3: Downloading schemas...[/bold]")
+    try:
+        download_schemas(cdm_version, store.schema_raw_dir(cdm_version))
+        store.mark_downloaded(cdm_version)
+    except DownloadError as e:
+        _abort(f"Download failed: {e}")
+
+
+def _clean_if_needed(cdm_version: CdmVersion, status: VersionStatus) -> None:
+    """Step 2/3: Clean schemas unless they are already cleaned."""
+    if status.cleaned:
+        console.print("[dim]  Step 2/3: Schemas already cleaned, skipping.[/dim]")
+        return
+
+    console.print("[bold]  Step 2/3: Cleaning schemas...[/bold]")
+    _ = clean_schemas(
+        store.schema_raw_dir(cdm_version),
+        store.schema_clean_dir(cdm_version),
+    )
+    store.mark_cleaned(cdm_version)
+
+
+def _generate_if_needed(
+    cdm_version: CdmVersion,
+    status: VersionStatus,
+    python_version: str,
+) -> None:
+    """Step 3/3: Generate Pydantic models unless they are already generated."""
+    if status.generated:
+        console.print("[dim]  Step 3/3: Models already generated, skipping.[/dim]")
+        return
+
+    console.print("[bold]  Step 3/3: Generating Pydantic models...[/bold]")
+    try:
+        gen_result = generate_models(
+            store.schema_clean_dir(cdm_version),
+            store.models_dir(cdm_version),
+            python_version=python_version,
+        )
+    except GenerationError as e:
+        _abort(str(e))
+
+    if not gen_result.success:
+        _abort(f"Model generation failed:\n{gen_result.stderr}")
+
+    store.mark_generated(cdm_version, cdm_lite_version=_get_version())
+
+    generate_package_metadata(
+        store.models_dir(cdm_version),
+        cdm_version=cdm_version.version,
+        python_version=python_version,
+    )
+
+    console.print(f"  [dim]{gen_result}[/dim]")
+
+
+@app.command()
+def install(
+    version: str | None = typer.Argument(None, help="CDM version to install (e.g. 6.19.0)."),
+    python_version: str = typer.Option(
+        "3.11", "--python", help="Target Python version for generated models."
+    ),
+):
+    """Download, clean and generate Pydantic models for a CDM version."""
+    store.init()
+
+    cdm_version = _resolve_install_version(version)
     store.init_version(cdm_version)
     status = store.status(cdm_version)
 
     console.print(f"\n[bold]Installing CDM {cdm_version}[/bold]\n")
 
-    # ── Step 1: Download ──────────────────────────────────────────────────────
-
-    if status.downloaded:
-        console.print("[dim]  Step 1/3: Schemas already downloaded, skipping.[/dim]")
-    else:
-        console.print("[bold]  Step 1/3: Downloading schemas...[/bold]")
-        try:
-            download_schemas(cdm_version, store.schema_raw_dir(cdm_version))
-            store.mark_downloaded(cdm_version)
-        except DownloadError as e:
-            _abort(f"Download failed: {e}")
-
-    # ── Step 2: Clean ─────────────────────────────────────────────────────────
-
-    if status.cleaned:
-        console.print("[dim]  Step 2/3: Schemas already cleaned, skipping.[/dim]")
-    else:
-        console.print("[bold]  Step 2/3: Cleaning schemas...[/bold]")
-        _ = clean_schemas(
-            store.schema_raw_dir(cdm_version),
-            store.schema_clean_dir(cdm_version),
-        )
-        store.mark_cleaned(cdm_version)
-
-        if status.generated:
-            console.print("[dim]  Step 3/3: Models already generated, skipping.[/dim]")
-        else:
-            console.print("[bold]  Step 3/3: Generating Pydantic models...[/bold]")
-            try:
-                gen_result = generate_models(
-                    store.schema_clean_dir(cdm_version),
-                    store.models_dir(cdm_version),
-                    python_version=python_version,
-                )
-            except GenerationError as e:
-                _abort(str(e))
-
-            if not gen_result.success:
-                _abort(f"Model generation failed:\n{gen_result.stderr}")
-
-            store.mark_generated(cdm_version, cdm_lite_version=_get_version())
-
-            generate_package_metadata(
-                store.models_dir(cdm_version),
-                cdm_version=cdm_version.version,
-                python_version=python_version,
-            )
-
-            console.print(f"  [dim]{gen_result}[/dim]")
+    _download_if_needed(cdm_version, status)
+    _clean_if_needed(cdm_version, status)
+    _generate_if_needed(cdm_version, status, python_version)
 
     console.print(f"\n[bold green]✔ CDM {cdm_version} installed successfully.[/bold green]")
     console.print(
@@ -260,24 +293,24 @@ def use(
 # ── remove ────────────────────────────────────────────────────────────────────
 
 
+def _resolve_remove_version(version: str) -> CdmVersion:
+    """Resolve a version for removal, allowing versions only present in the cache."""
+    try:
+        return registry.get(version)
+    except Exception as e:
+        cached_versions = {v.version for v in store.cached_versions()}
+        if version in cached_versions:
+            return CdmVersion(version)
+        _abort(str(e))
+
+
 @app.command()
 def remove(
     version: str = typer.Argument(..., help="CDM version to remove."),
     force: bool = typer.Option(False, "--force", "-f", help="Skip confirmation prompt."),
 ):
     """Remove a CDM version from the local cache."""
-    try:
-        cdm_version = registry.get(version)
-    except Exception as e:
-        # If it's not on Maven Central, we still want to be able to remove it from cache
-        # so we'll just use the version string directly if it's in our cached list.
-        cached_versions = {v.version for v in store.cached_versions()}
-        if version in cached_versions:
-            from cdm_lite.registry import CdmVersion
-
-            cdm_version = CdmVersion(version)
-        else:
-            _abort(str(e))
+    cdm_version = _resolve_remove_version(version)
 
     if cdm_version not in store.cached_versions():
         _abort(f"CDM {version} is not installed.")

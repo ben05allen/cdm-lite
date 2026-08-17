@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.4.0b2"
+version = "0.4.0b3"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
@@ -60,4 +60,9 @@ testpaths = ["tests"]
 addopts = ["--strict-markers", "-ra", "--tb=short"]
 
 [dependency-groups]
-dev = ["pytest>=9.0.3", "ruff>=0.16.3", "ty>=0.0.72"]
+dev = [
+    "complexipy>=7.0.1",
+    "pytest>=9.0.3",
+    "ruff>=0.16.3",
+    "ty>=0.0.72",
+]

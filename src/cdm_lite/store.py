@@ -232,38 +232,68 @@ class CdmStore:
 
     # ── Symlink Management ────────────────────────────────────────────────────────
 
-    def remove_current_symlink(self) -> None:
-        """Remove the current/ symlink or junction if it exists."""
-        import os
+    @staticmethod
+    def _is_junction(path: Path) -> bool:
+        """Return True if path is a Windows junction (directory reparse point)."""
         import platform
         import stat
 
-        current = self.current_models_dir()
-        if os.path.lexists(current):
-            is_junction = False
-            if hasattr(current, "is_junction"):
-                is_junction = current.is_junction()  # type: ignore
-            elif platform.system() == "Windows":
-                # Manual check for junctions on Python < 3.12
-                try:
-                    # On Windows, junctions are directories with a reparse point attribute.
-                    # FILE_ATTRIBUTE_REPARSE_POINT = 0x400
-                    reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
-                    is_junction = bool(current.lstat().st_file_attributes & reparse_point_mask)  # type: ignore
-                except (AttributeError, OSError):
-                    is_junction = False
+        if hasattr(path, "is_junction"):
+            return path.is_junction()  # type: ignore
+        if platform.system() != "Windows":
+            return False
 
-            if current.is_symlink() or is_junction:
-                # Unlink works for symlinks always, and for junctions on 3.12+
-                # For junctions on < 3.12, we must use rmdir
-                if is_junction and not hasattr(current, "is_junction"):
-                    current.rmdir()
-                else:
-                    current.unlink()
-            elif current.exists():
+        try:
+            # On Windows, junctions are directories with a reparse point attribute.
+            # FILE_ATTRIBUTE_REPARSE_POINT = 0x400
+            reparse_point_mask = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400)
+            return bool(path.lstat().st_file_attributes & reparse_point_mask)  # type: ignore
+        except (AttributeError, OSError):
+            return False
+
+    def remove_current_symlink(self) -> None:
+        """Remove the current/ symlink or junction if it exists."""
+        import os
+
+        current = self.current_models_dir()
+        if not os.path.lexists(current):
+            return
+
+        is_junction = self._is_junction(current)
+        if current.is_symlink() or is_junction:
+            # Unlink works for symlinks always, and for junctions on 3.12+
+            # For junctions on < 3.12, we must use rmdir
+            if is_junction and not hasattr(current, "is_junction"):
+                current.rmdir()
+            else:
+                current.unlink()
+        elif current.exists():
+            raise RuntimeError(
+                f"{current} exists and is not a symlink or junction — refusing to overwrite."
+            )
+
+    @staticmethod
+    def _create_windows_link(current: Path, target: Path) -> None:
+        """Create a junction (with a symlink fallback) on Windows."""
+        import subprocess
+
+        # Use junctions on Windows to avoid privilege issues with symlinks
+        try:
+            # cmd /c is required for mklink as it's a shell builtin
+            subprocess.run(
+                ["cmd", "/c", "mklink", "/j", str(current), str(target)],
+                check=True,
+                capture_output=True,
+            )
+        except subprocess.CalledProcessError as e:
+            # Fallback to standard symlink if junction fails
+            try:
+                current.symlink_to(target, target_is_directory=True)
+            except OSError:
+                stderr_msg = e.stderr.decode() if e.stderr else "Unknown error"
                 raise RuntimeError(
-                    f"{current} exists and is not a symlink or junction — refusing to overwrite."
-                )
+                    f"Failed to create junction or symlink at {current}: {stderr_msg}"
+                ) from e
 
     def update_current_symlink(self, version: CdmVersion) -> None:
         """Point the current/ symlink at the given version's models directory."""
@@ -276,25 +306,7 @@ class CdmStore:
         self.remove_current_symlink()
 
         if platform.system() == "Windows":
-            import subprocess
-
-            # Use junctions on Windows to avoid privilege issues with symlinks
-            try:
-                # cmd /c is required for mklink as it's a shell builtin
-                subprocess.run(
-                    ["cmd", "/c", "mklink", "/j", str(current), str(target)],
-                    check=True,
-                    capture_output=True,
-                )
-            except subprocess.CalledProcessError as e:
-                # Fallback to standard symlink if junction fails
-                try:
-                    current.symlink_to(target, target_is_directory=True)
-                except OSError:
-                    stderr_msg = e.stderr.decode() if e.stderr else "Unknown error"
-                    raise RuntimeError(
-                        f"Failed to create junction or symlink at {current}: {stderr_msg}"
-                    ) from e
+            self._create_windows_link(current, target)
         else:
             current.symlink_to(target)
 

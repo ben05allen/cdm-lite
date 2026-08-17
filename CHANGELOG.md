@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.4.0b3] - 2026-08-18
+
+### Changed
+
+- Cyclomatic complexity threshold lowered from 18 to 10 (enforced by `ruff` `C901` and `complexipy`).
+- `complexipy` pre-commit hook now uses a local `uv run` invocation, matching the `ruff` and `ty` hooks.
+- Added `complexipy` to the dev dependency group.
+
+### Fixed
+
+- `install` no longer skips model generation for versions that are cleaned but not yet generated.
+
 ## [0.4.0b2] - 2026-08-17
 
 ### Added
