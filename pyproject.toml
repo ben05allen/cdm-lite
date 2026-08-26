@@ -9,7 +9,7 @@ dependencies = [
   "httpx>=0.28.1",
   "platformdirs>=4.9.6",
   "pydantic>=2.13.4",
-  "datamodel-code-generator[ruff]>=0.56.1",
+  "datamodel-code-generator[ruff]>=0.64.0",
   "typer>=0.25.1",
   "rich>=15.0.0",
   "idna>=3.14",
@@ -60,9 +60,4 @@ testpaths = ["tests"]
 addopts = ["--strict-markers", "-ra", "--tb=short"]
 
 [dependency-groups]
-dev = [
-    "complexipy>=7.0.1",
-    "pytest>=9.0.3",
-    "ruff>=0.16.3",
-    "ty>=0.0.72",
-]
+dev = ["complexipy>=7.0.1", "pytest>=9.0.3", "ruff>=0.16.3", "ty>=0.0.72"]
