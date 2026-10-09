@@ -13,6 +13,6 @@
 # limitations under the License.
 
 
-for ver in 3.11 3.12 3.13 3.14; do
+for ver in 3.11 3.12 3.13 3.14 3.15; do
     uv run --python $ver pytest
 done
