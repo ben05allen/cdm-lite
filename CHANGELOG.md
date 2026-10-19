@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0b1] - 2026-10-19
+
+### Added
+
+- Official support for Python 3.15 (trove classifier, README badge and `check_versions.sh` coverage).
+- PEP 810 explicit lazy imports via `__lazy_modules__` in `cli.py`, `registry.py` and `downloader.py`. On Python 3.15+ the CLI defers `cdm_lite.generator` (and its `datamodel-code-generator` dependency tree), `cdm_lite.downloader`, `cdm_lite.cleaner` and `httpx` until first use, reducing `import cdm_lite.cli` time from ~360 ms to ~95 ms. On Python < 3.15 the declaration is ignored and imports remain eager, so behaviour is unchanged.
+
+### Changed
+
+- Minimum dependency versions raised for Python 3.15 support: `pydantic>=2.14.0` and `datamodel-code-generator[ruff]>=0.86.0`.
+- Added `anyio>=4.14.2` constraint for downstream dependency resolution.
+
 ## [0.4.0b3] - 2026-08-18
 
 ### Changed

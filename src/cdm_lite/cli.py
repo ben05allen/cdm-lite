@@ -10,6 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# PEP 810 explicit lazy imports: on Python 3.15+ the imports listed here are
+# deferred until first use (faster CLI startup); on older versions the
+# declaration is ignored and imports remain eager. `cdm_lite.store` and
+# `cdm_lite.registry` stay eager because they are instantiated at module level.
+__lazy_modules__ = [
+    "cdm_lite.cleaner",
+    "cdm_lite.downloader",
+    "cdm_lite.generator",
+]
+
 from typing import Never
 
 import typer

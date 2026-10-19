@@ -10,6 +10,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# PEP 810 explicit lazy imports: defer httpx until a download is attempted
+# (Python 3.15+ only; ignored on older versions).
+__lazy_modules__ = ["httpx"]
+
 import io
 import tarfile
 import zipfile

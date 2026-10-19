@@ -10,6 +10,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# PEP 810 explicit lazy imports: defer httpx until a network request is made
+# (Python 3.15+ only; ignored on older versions).
+__lazy_modules__ = ["httpx"]
+
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
