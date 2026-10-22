@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0b2] - 2026-10-22
+
+### Changed
+
+- Build backend `uv_build` minimum version bumped from 0.12.5 to 0.13.0.
+- Dependency upgrades across the board: `platformdirs` 4.9.6 → 4.13.5, `pydantic` 2.14.0 → 2.14.1, `typer` 0.25.1 → 0.27.3, `pytest` 9.0.3 → 9.1.1, `complexipy` 7.0.1 → 8.1.0, `ruff` 0.16.3 → 0.17.1, `ty` 0.0.72 → 0.0.90.
+- Dev dependency minimums raised to match: `ruff>=0.17.1`, `ty>=0.0.90`.
+
+### Security
+
+- Dependency constraints tightened: `idna>=3.16`, `anyio>=4.15.1`, `certifi>=2026.10.19` (resolved `idna` 3.20, `anyio` 4.15.1, `certifi` 2026.10.19).
+- Removed the now-redundant direct `idna` dependency in favour of `[tool.uv]` constraints.
+
 ## [0.5.0b1] - 2026-10-19
 
 ### Added
