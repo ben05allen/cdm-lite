@@ -16,7 +16,7 @@ import tarfile
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-import httpx
+import httpx2
 import pytest
 
 from cdm_lite.downloader import DownloadError, download_schemas
@@ -45,8 +45,8 @@ def make_response(
     status_code: int = 200,
     content_type: str = "application/gzip",
 ) -> MagicMock:
-    """Build a mock httpx.Response."""
-    response = MagicMock(spec=httpx.Response)
+    """Build a mock httpx2.Response."""
+    response = MagicMock(spec=httpx2.Response)
     response.status_code = status_code
     response.content = content
     response.headers = {
@@ -55,7 +55,7 @@ def make_response(
     }
     # raise_for_status raises on 4xx/5xx
     if status_code >= 400:
-        response.raise_for_status.side_effect = httpx.HTTPStatusError(
+        response.raise_for_status.side_effect = httpx2.HTTPStatusError(
             message=f"HTTP {status_code}",
             request=MagicMock(),
             response=response,
@@ -115,7 +115,7 @@ def sample_tar_gz() -> bytes:
 
 class MockHttpxClient:
     """
-    Context manager that mimics httpx.Client, returning
+    Context manager that mimics httpx2.Client, returning
     a pre-configured response from client.get().
     """
 
@@ -136,7 +136,7 @@ class MockHttpxClient:
 class TestDownloadSchemas:
     def test_unpacks_json_files(self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes):
         response = make_response(sample_tar_gz)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
@@ -147,7 +147,7 @@ class TestDownloadSchemas:
         self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
     ):
         response = make_response(sample_tar_gz)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
@@ -159,7 +159,7 @@ class TestDownloadSchemas:
         self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
     ):
         response = make_response(sample_tar_gz)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
@@ -170,7 +170,7 @@ class TestDownloadSchemas:
         self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
     ):
         response = make_response(sample_tar_gz)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
@@ -182,7 +182,7 @@ class TestDownloadSchemas:
     def test_calls_correct_url(self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes):
         response = make_response(sample_tar_gz)
         mock_client = MockHttpxClient(response)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = mock_client
             download_schemas(version, output_dir)
 
@@ -202,7 +202,7 @@ class TestDownloadSchemas:
                 tf.addfile(info, io.BytesIO(encoded))
 
         response = make_response(buf.getvalue())
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             download_schemas(version, output_dir)
 
@@ -217,14 +217,14 @@ class TestDownloadSchemas:
 class TestDownloadErrors:
     def test_raises_on_404(self, version: CdmVersion, output_dir: Path):
         response = make_response(b"Not Found", status_code=404)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="404"):
                 download_schemas(version, output_dir)
 
     def test_raises_on_500(self, version: CdmVersion, output_dir: Path):
         response = make_response(b"Server Error", status_code=500)
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="500"):
                 download_schemas(version, output_dir)
@@ -233,23 +233,23 @@ class TestDownloadErrors:
         mock_client = MagicMock()
         mock_client.__enter__ = MagicMock(return_value=mock_client)
         mock_client.__exit__ = MagicMock(return_value=False)
-        mock_client.get.side_effect = httpx.RequestError("Connection refused")
+        mock_client.get.side_effect = httpx2.RequestError("Connection refused")
 
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = mock_client
             with pytest.raises(DownloadError, match="Connection refused"):
                 download_schemas(version, output_dir)
 
     def test_raises_on_bad_tar(self, version: CdmVersion, output_dir: Path):
         response = make_response(b"this is not a tar.gz file")
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="not a valid tar.gz"):
                 download_schemas(version, output_dir)
 
     def test_raises_on_empty_response(self, version: CdmVersion, output_dir: Path):
         response = make_response(b"")
-        with patch("cdm_lite.downloader.httpx.Client") as mock_client_cls:
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="not a valid tar.gz"):
                 download_schemas(version, output_dir)

@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
 requires-python = ">=3.11"
 dependencies = [
-  "httpx>=0.28.1",
+  "httpx2>=2.16.0",
   "platformdirs>=4.9.6",
   "pydantic>=2.14.0",
   "datamodel-code-generator[ruff]>=0.86.0",
@@ -53,7 +53,7 @@ requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"
 
 [tool.uv]
-constraint-dependencies = ["idna>=3.16", "anyio>=4.15.1", "certifi>=2026.10.19"]
+constraint-dependencies = ["idna>=3.18", "anyio>=4.15.1"]
 
 [tool.pytest.ini_options]
 markers = ["integration: hits external services, not run in normal CI"]

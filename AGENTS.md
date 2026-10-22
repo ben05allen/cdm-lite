@@ -27,7 +27,7 @@ This project strictly uses `uv` for dependency management, execution, and tool i
 
 - `cli.py`: Typer-based CLI interface.
 - `registry.py`: Version discovery via Maven Central metadata.
-- `downloader.py`: Asynchronous-capable downloads using `httpx`.
+- `downloader.py`: Asynchronous-capable downloads using `httpx2`.
 - `cleaner.py`: JSON schema mutation to ensure `datamodel-codegen` compatibility.
 - `generator.py`: Wrapper for `datamodel-code-generator`.
 - `store.py`: Local cache management using `platformdirs`.

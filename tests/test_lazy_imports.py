@@ -23,8 +23,8 @@ _HAS_LAZY_IMPORTS = sys.version_info >= (3, 15)
 # Modules that declare lazy imports, mapped to the module names they defer.
 EXPECTED_LAZY_MODULES = {
     "cdm_lite.cli": {"cdm_lite.cleaner", "cdm_lite.downloader", "cdm_lite.generator"},
-    "cdm_lite.registry": {"httpx"},
-    "cdm_lite.downloader": {"httpx"},
+    "cdm_lite.registry": {"httpx2"},
+    "cdm_lite.downloader": {"httpx2"},
 }
 
 
@@ -56,7 +56,7 @@ def test_lazy_modules_declared(module_name: str) -> None:
     reason="PEP 810 lazy imports require Python 3.15+",
 )
 def test_cli_import_defers_heavy_modules() -> None:
-    """Importing the CLI must not load generator, downloader or httpx on 3.15+."""
+    """Importing the CLI must not load generator, downloader or httpx2 on 3.15+."""
     _run_in_subprocess(
         """
 import sys
@@ -69,7 +69,7 @@ deferred = {
     "cdm_lite.generator",
     "cdm_lite.templates.pyproject_toml",
     "datamodel_code_generator",
-    "httpx",
+    "httpx2",
 }
 loaded = deferred & set(sys.modules)
 assert not loaded, f"eagerly imported: {sorted(loaded)}"
@@ -81,15 +81,15 @@ assert not loaded, f"eagerly imported: {sorted(loaded)}"
     not _HAS_LAZY_IMPORTS,
     reason="PEP 810 lazy imports require Python 3.15+",
 )
-def test_registry_import_defers_httpx() -> None:
-    """Importing the registry alone must not load httpx until a request is made."""
+def test_registry_import_defers_httpx2() -> None:
+    """Importing the registry alone must not load httpx2 until a request is made."""
     _run_in_subprocess(
         """
 import sys
 
 import cdm_lite.registry
 
-assert "httpx" not in sys.modules, "httpx was eagerly imported"
+assert "httpx2" not in sys.modules, "httpx2 was eagerly imported"
 """
     )
 

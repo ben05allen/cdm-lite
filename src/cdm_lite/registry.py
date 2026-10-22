@@ -10,16 +10,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# PEP 810 explicit lazy imports: defer httpx until a network request is made
+# PEP 810 explicit lazy imports: defer httpx2 until a network request is made
 # (Python 3.15+ only; ignored on older versions).
-__lazy_modules__ = ["httpx"]
+__lazy_modules__ = ["httpx2"]
 
 import re
 import xml.etree.ElementTree as ET
 from dataclasses import dataclass
 from functools import cached_property
 
-import httpx
+import httpx2
 
 MAVEN_BASE = "https://repo1.maven.org/maven2/org/finos/cdm/cdm-json-schema"
 METADATA_URL = f"{MAVEN_BASE}/maven-metadata.xml"
@@ -72,7 +72,7 @@ class CdmRegistry:
 
     def _fetch_metadata(self) -> ET.Element:
         if self._metadata is None:
-            response = httpx.get(METADATA_URL, timeout=self._timeout, follow_redirects=True)
+            response = httpx2.get(METADATA_URL, timeout=self._timeout, follow_redirects=True)
             response.raise_for_status()
             self._metadata = ET.fromstring(response.text)
         return self._metadata

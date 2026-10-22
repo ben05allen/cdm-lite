@@ -10,9 +10,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# PEP 810 explicit lazy imports: defer httpx until a download is attempted
+# PEP 810 explicit lazy imports: defer httpx2 until a download is attempted
 # (Python 3.15+ only; ignored on older versions).
-__lazy_modules__ = ["httpx"]
+__lazy_modules__ = ["httpx2"]
 
 import io
 import tarfile
@@ -20,7 +20,7 @@ import zipfile
 from collections.abc import Generator
 from pathlib import Path
 
-import httpx
+import httpx2
 from rich.progress import (
     BarColumn,
     DownloadColumn,
@@ -97,15 +97,15 @@ def download_schemas(version: CdmVersion, output_dir: Path) -> None:
 
         task = progress.add_task(f"Downloading CDM {version} schemas...", total=None)
 
-        with httpx.Client(follow_redirects=True, timeout=30.0) as client:
+        with httpx2.Client(follow_redirects=True, timeout=30.0) as client:
             try:
                 response = client.get(url)
                 response.raise_for_status()
-            except httpx.HTTPStatusError as e:
+            except httpx2.HTTPStatusError as e:
                 raise DownloadError(
                     f"Failed to download CDM {version}: HTTP {e.response.status_code}"
                 ) from e
-            except httpx.RequestError as e:
+            except httpx2.RequestError as e:
                 raise DownloadError(f"Failed to download CDM {version}: {e}") from e
 
             content_length = int(response.headers.get("content-length", 0))
