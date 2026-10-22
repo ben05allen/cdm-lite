@@ -95,6 +95,7 @@ print(trade_state.trade.trade_date.value)
 
 ## Reference Commands
 
+- `cdm-lite --version`: Print the installed version.
 - `cdm-lite versions`: View available versions on Maven Central.
 - `cdm-lite install <version>`: Fetch schemas and compile models.
 - `cdm-lite use <version>`: Set the active version for the `current` symlink.
