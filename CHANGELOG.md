@@ -5,19 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.5.0b3] - 2026-10-22
+
+### Changed
+
+- Switched the HTTP client from `httpx` to `httpx2` (>=2.16.0), the actively maintained fork of `httpx` 0.28.1 under Pydantic stewardship. `httpx` had not seen a stable release since December 2024. `httpx2` is API-compatible apart from the package rename, so the only source change is `import httpx` -> `import httpx2`. Note that `httpx2.alias_httpx()` is deliberately not used: it globally aliases `import httpx` process-wide and is documented for applications, not libraries.
+- TLS certificate verification now uses the operating system trust store via `truststore` instead of a bundled `certifi` CA bundle. This drops `certifi` from the dependency tree entirely.
+- `idna` constraint raised from `>=3.16` to `>=3.18` to match the floor required by `httpx2`.
+
+### Security
+
+- The `certifi>=2026.10.19` constraint was removed as `certifi` is no longer part of the dependency tree. TLS trust now comes from the OS trust store via `truststore`, which still honours `SSL_CERT_FILE` and `SSL_CERT_DIR` for custom CA bundles.
+
 ## [0.5.0b2] - 2026-10-22
 
 ### Changed
 
-- Switched the HTTP client from `httpx` to `httpx2` (>=2.16.0), the actively maintained fork of `httpx` 0.28.1 under Pydantic stewardship. `httpx` had not seen a stable release since December 2024. `httpx2` is API-compatible apart from the package rename, so the only source change is `import httpx` -> `import httpx2`. Note that `httpx2.alias_httpx()` is deliberately not used: it is intended for applications, not libraries.
-- TLS certificate verification now uses the operating system trust store via `truststore` instead of a bundled `certifi` CA bundle. This drops `certifi` from the dependency tree entirely.
 - Build backend `uv_build` minimum version bumped from 0.12.5 to 0.13.0.
 - Dependency upgrades across the board: `platformdirs` 4.9.6 → 4.13.5, `pydantic` 2.14.0 → 2.14.1, `typer` 0.25.1 → 0.27.3, `pytest` 9.0.3 → 9.1.1, `complexipy` 7.0.1 → 8.1.0, `ruff` 0.16.3 → 0.17.1, `ty` 0.0.72 → 0.0.90.
 - Dev dependency minimums raised to match: `ruff>=0.17.1`, `ty>=0.0.90`.
 
 ### Security
 
-- Dependency constraints tightened: `idna>=3.18`, `anyio>=4.15.1` (resolved `idna` 3.20, `anyio` 4.15.1). The previous `certifi>=2026.10.19` constraint was dropped as `certifi` is no longer part of the dependency tree.
+- Dependency constraints tightened: `idna>=3.16`, `anyio>=4.15.1`, `certifi>=2026.10.19` (resolved `idna` 3.20, `anyio` 4.15.1, `certifi` 2026.10.19).
 - Removed the now-redundant direct `idna` dependency in favour of `[tool.uv]` constraints.
 
 ## [0.5.0b1] - 2026-10-19
