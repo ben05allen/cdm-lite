@@ -14,9 +14,12 @@ deserialization of CDM JSON payloads in Python codebases without heavy Java depe
 
 ## Status
 
-**Current Phase:** Beta
+**Current Phase:** Stable (v0.6.0)
 
-`cdm-lite` is currently in a beta development stage. While the core functionality is stable, we are actively refining the cleaning and generation logic based on community feedback.
+`cdm-lite` is a stable release. The CLI surface, the on-disk cache layout and the layout of the
+generated models follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html): breaking
+changes will only be made in a major release. The schemas published by FINOS are cleaned and
+compiled on your machine, so the models you get always match the CDM version you installed.
 
 **Feedback Welcome:** We gratefully encourage users to provide comments, recommendations, or report any issues found during usage. Your input
 will help in reaching a stable 1.0 release.
@@ -51,9 +54,15 @@ cdm-lite install 6.19.0
 
 # Activate the version (updates a local symlink)
 cdm-lite use 6.19.0
+
+# Or: install the latest stable version and activate it in one step
+cdm-lite upgrade
 ```
 
 _Note: Models are compiled into a user-level cache directory (e.g., `~/.cache/cdm-lite/`). Run `cdm-lite status` to view your specific path._
+
+_Downloads are verified against the SHA-1 checksum published on Maven Central, and version
+discovery caches the Maven metadata so `cdm-lite versions` keeps working offline._
 
 ## Project Integration
 
@@ -74,7 +83,7 @@ dependencies = ["cdm-models"]
 
 ```bash
 # Use the exact absolute path returned by `cdm-lite use`
-export PYTHONPATH="/home/user/.cache/cdm-lite/current:$PYTHONPATH"
+export PYTHONPATH="/home/user/.cache/cdm-lite/current/src:$PYTHONPATH"
 ```
 
 ## Deserializing JSON
@@ -82,7 +91,7 @@ export PYTHONPATH="/home/user/.cache/cdm-lite/current:$PYTHONPATH"
 Once the models are available in your path, use standard Pydantic APIs to parse, validate, and interact with incoming JSON objects:
 
 ```python
-from cdm-models.models.cdm_event_common_TradeState_schema import TradeState  # Exact import paths depend on the CDM schema
+from cdm_models.models.cdm_event_common_TradeState_schema import TradeState  # Exact import paths depend on the CDM schema
 
 payload = '{"trade": {"tradeDate": {"value": "2023-10-25"}}}'
 
@@ -93,11 +102,45 @@ trade_state = TradeState.model_validate_json(payload)
 print(trade_state.trade.trade_date.value)
 ```
 
+## Releasing
+
+Releases are published to PyPI automatically from a git tag, using
+[Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC) — no API token is
+stored in GitHub.
+
+1. Bump the version and update every version reference in one command:
+
+   ```bash
+   uv run python scripts/bump_version.py 0.6.1 --note "Add a cdm-lite upgrade command."
+   ```
+
+   This updates `pyproject.toml` (version and development status classifier), the README status
+   line and the CHANGELOG in a single commit.
+
+2. Open a pull request. CI checks that the CHANGELOG documents the version in `pyproject.toml`.
+
+3. Merge, then tag and push the tag:
+
+   ```bash
+   git tag v0.6.1
+   git push origin v0.6.1
+   ```
+
+4. The `Release` workflow verifies the tag matches the project version, builds the sdist and
+   wheel, and publishes them to PyPI.
+
+**One-time PyPI setup:** on the [cdm-lite project page](https://pypi.org/manage/project/cdm-lite/settings/publishing),
+add a GitHub trusted publisher with owner `ben05allen`, repository `cdm-lite`, workflow
+`release.yml` and environment `pypi`. The `pypi` environment must therefore be referenced by the
+release workflow; if you configure the publisher without an environment name, remove the
+`environment:` block from `.github/workflows/release.yml`.
+
 ## Reference Commands
 
 - `cdm-lite --version`: Print the installed version.
 - `cdm-lite versions`: View available versions on Maven Central.
 - `cdm-lite install <version>`: Fetch schemas and compile models.
+- `cdm-lite upgrade [version]`: Install the latest stable version (or a specific one) and make it active.
 - `cdm-lite use <version>`: Set the active version for the `current` symlink.
 - `cdm-lite list`: Show locally compiled versions.
 - `cdm-lite status`: Print active version and system cache location.

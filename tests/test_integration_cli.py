@@ -56,7 +56,7 @@ def test_cli_lifecycle(runner: CliRunner, temp_store: CdmStore, tmp_path: Path):
     with (
         patch("cdm_lite.cli.store", temp_store),
         patch("cdm_lite.cli.registry") as mock_registry,
-        patch("cdm_lite.cli.download_schemas"),
+        patch("cdm_lite.cli.download_schemas") as mock_download,
         patch("cdm_lite.cli.clean_schemas"),
         patch("cdm_lite.cli.generate_models") as mock_generate,
         patch("cdm_lite.cli.generate_package_metadata"),
@@ -64,6 +64,7 @@ def test_cli_lifecycle(runner: CliRunner, temp_store: CdmStore, tmp_path: Path):
         mock_registry.get.return_value = version
         mock_registry.latest_stable.return_value = version
         mock_registry.all_versions.return_value = [version]
+        mock_download.return_value = "e" * 40
 
         # Mocking generation result
         from unittest.mock import MagicMock

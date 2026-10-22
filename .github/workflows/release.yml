@@ -1,0 +1,57 @@
+name: Release
+
+# Releases are published from tags only. Push a `v*` tag whose version matches
+# the version in pyproject.toml and the CHANGELOG entry for that version.
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  id-token: write  # mint a short-lived PyPI upload token (PEP 740 trusted publishing)
+
+jobs:
+  publish:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    # The `pypi` environment must match the environment name configured in the
+    # PyPI trusted publisher settings.
+    environment:
+      name: pypi
+      url: https://pypi.org/project/cdm-lite/
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Verify tag matches the project version
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          project_version="$(uv run --no-project python -c \
+            "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")"
+          if [ "$tag_version" != "$project_version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match pyproject.toml version $project_version"
+            exit 1
+          fi
+          echo "Releasing version $project_version"
+
+      - name: Verify the CHANGELOG documents this version
+        run: |
+          version="$(uv run --no-project python -c \
+            "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")"
+          if ! grep -qF "## [$version]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no entry for $version. Run scripts/bump_version.py first."
+            exit 1
+          fi
+
+      - name: Build distributions
+        run: uv build
+
+      - name: Publish to PyPI
+        run: uv publish --trusted-publishing always

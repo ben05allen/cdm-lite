@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2026-10-22
+
+First stable (non-beta) release. The CLI surface, the on-disk cache layout and the layout of the
+generated models are now covered by semantic versioning guarantees.
+
+### Added
+
+- `cdm-lite upgrade` installs the target CDM version (default: latest stable) and makes it active in one step, regenerating stale models along the way.
+- Generated models are invalidated automatically when the installed `cdm-lite` or `datamodel-code-generator` version changes: `cdm-lite install` re-cleans and re-generates only the affected stages, and `cdm-lite status` warns when the local models are stale.
+- Schema downloads are verified against the SHA-1 checksum published on Maven Central; when the index publishes none, verification is skipped. The digest is stored in `status.json` and shown by `cdm-lite status`.
+- Version discovery works offline: the last Maven Central metadata response is cached in the cache directory and reused when the network is unavailable; `cdm-lite versions` says so when it serves the cached copy.
+- CI now runs the `prek` hooks (`ruff`, `ruff format`, `ty`, `complexipy`) on every push and pull request, so the checks can no longer be bypassed by skipping local hooks.
+- CI gained a build job that builds the sdist and wheel, installs the wheel into a clean environment and smoke tests `cdm-lite --version`.
+- CI now tests Python 3.15, matching the versions advertised in the README and the trove classifiers.
+- Coverage is measured in CI and enforced at a floor of 85% (`pytest-cov` added to the development dependencies).
+- Dependabot configuration for the `uv` lock file and GitHub Actions.
+- Releases are published to PyPI automatically from a `v*` tag using Trusted Publishing (OIDC), so no API token is stored in GitHub. The workflow verifies the tag matches the project version and that the CHANGELOG documents it.
+- `scripts/bump_version.py` updates the version, the development status classifier, the README status line and the CHANGELOG in a single command, so those references can no longer drift apart.
+- CI fails when the CHANGELOG has no entry for the version in `pyproject.toml`.
+
+### Fixed
+
+- README: the example import used the distribution name `cdm-models` as a module name, which is not importable Python. It now shows the real path, `from cdm_models.models.cdm_event_common_TradeState_schema import TradeState`.
+- README: the documented `PYTHONPATH` pointed at the models directory rather than its `src` directory, so the documented setup did not make the models importable. It now matches the path printed by `cdm-lite use`.
+- The README generated inside the compiled model package now shows the correct import path.
+- The "version not found in cache" error pointed at `cdm-lite init --version`, a command that does not exist. It now points at `cdm-lite install <version>`.
+- Pre-release CDM versions are no longer reported as stable. `-dev`, `-test`, `-rc`, `-alpha`, `-beta` and `-SNAPSHOT` are all treated as pre-releases, so `cdm-lite versions` and `cdm-lite install` never pick one as the latest stable.
+- `status.json` files written by a newer `cdm-lite` are now read without error. Unknown fields are ignored on read and preserved on write, so upgrading and later downgrading no longer breaks the local cache.
+
+### Changed
+
+- `cdm-lite use`, `install <version>` and `remove` resolve versions from the local cache before consulting Maven Central, so installed versions can be managed without network access.
+- Transient download failures (connection errors, HTTP 5xx) are retried with backoff; 4xx responses still fail immediately.
+- Schema archives unpack into a temporary directory and are swapped into place only on success, so a failed or corrupt download never leaves partial files in the cache and never destroys previously downloaded schemas.
+- Development status classifier changed from `4 - Beta` to `5 - Production/Stable`.
+
 ## [0.5.0b4] - 2026-10-22
 
 ### Added

@@ -7,6 +7,82 @@ on:
     branches: [main]
 
 jobs:
+  version-check:
+    name: Version Consistency
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      # Guards against the version in pyproject.toml drifting away from the
+      # CHANGELOG, which is how releases used to be missed.
+      - name: Verify the CHANGELOG documents the current version
+        run: |
+          version="$(uv run --no-project python -c \
+            "import tomllib,pathlib;print(tomllib.loads(pathlib.Path('pyproject.toml').read_text())['project']['version'])")"
+          if ! grep -qF "## [$version]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no entry for $version. Run scripts/bump_version.py first."
+            exit 1
+          fi
+          echo "CHANGELOG documents version $version"
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked --dev
+
+      # The prek hooks in prek.toml are the single source of truth for
+      # formatting, linting, type checking and complexity limits.
+      - name: Install prek
+        run: uv tool install prek
+
+      - name: Run pre-commit hooks
+        run: prek run --all-files --show-diff-on-failure
+
+  build:
+    name: Build and Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up uv
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b
+        with:
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --locked --dev
+
+      - name: Build sdist and wheel
+        run: uv build
+
+      - name: Install the wheel into a clean environment
+        run: |
+          uv venv /tmp/smoke
+          uv pip install --python /tmp/smoke/bin/python dist/*.whl
+
+      - name: Smoke test the installed CLI
+        run: /tmp/smoke/bin/cdm-lite --version
+
   test:
     name: Test (Python ${{ matrix.python-version }} on ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -14,7 +90,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.11", "3.12", "3.13", "3.14"]
+        python-version: ["3.11", "3.12", "3.13", "3.14", "3.15"]
 
     steps:
       - name: Checkout repository
@@ -33,7 +109,17 @@ jobs:
       - name: Run Unit Tests
         run: uv run pytest -m "not integration"
 
-      # Step B: Run integration tests ONLY on a single designated runner
+      # Step B: Enforce the coverage floor on a single designated runner
+      - name: Check Coverage
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
+        run: >-
+          uv run pytest -m "not integration"
+          --cov=cdm_lite
+          --cov-report=term-missing
+          --cov-report=xml
+          --cov-fail-under=85
+
+      # Step C: Run integration tests ONLY on a single designated runner
       - name: Run Integration Tests
         if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         run: uv run pytest -m "integration"

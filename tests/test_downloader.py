@@ -49,6 +49,7 @@ def make_response(
     response = MagicMock(spec=httpx2.Response)
     response.status_code = status_code
     response.content = content
+    response.text = content.decode("utf-8", errors="replace")
     response.headers = {
         "content-length": str(len(content)),
         "content-type": content_type,
@@ -122,6 +123,7 @@ class MockHttpxClient:
     def __init__(self, response: MagicMock):
         self._response = response
         self.get = MagicMock(return_value=response)
+        self.close = MagicMock()
 
     def __enter__(self):
         return self
@@ -186,7 +188,21 @@ class TestDownloadSchemas:
             mock_client_cls.return_value = mock_client
             download_schemas(version, output_dir)
 
-        mock_client.get.assert_called_once_with(version.schema_url)
+        first_url = mock_client.get.call_args_list[0].args[0]
+        assert first_url == version.schema_url
+
+    def test_requests_the_published_checksum(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        """The .sha1 sidecar must be fetched so the archive can be verified."""
+        response = make_response(sample_tar_gz)
+        mock_client = MockHttpxClient(response)
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = mock_client
+            download_schemas(version, output_dir)
+
+        requested = [c.args[0] for c in mock_client.get.call_args_list]
+        assert f"{version.schema_url}.sha1" in requested
 
     def test_ignores_non_json_files_in_archive(self, version: CdmVersion, output_dir: Path):
         buf = io.BytesIO()
@@ -227,7 +243,41 @@ class TestDownloadErrors:
         with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="500"):
-                download_schemas(version, output_dir)
+                download_schemas(version, output_dir, sleep=lambda _s: None)
+
+    def test_retries_transient_500_then_succeeds(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        """A 5xx is transient: the client must back off and retry."""
+        good = make_response(sample_tar_gz)
+        bad = make_response(b"Server Error", status_code=500)
+        no_checksum = make_response(b"", status_code=404)
+        mock_client = MockHttpxClient(good)
+        # two 500s, then success, then the .sha1 sidecar request
+        mock_client.get = MagicMock(side_effect=[bad, bad, good, no_checksum])
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = mock_client
+            download_schemas(version, output_dir, sleep=lambda _s: None)
+
+        archive_calls = [
+            c for c in mock_client.get.call_args_list if c.args[0] == version.schema_url
+        ]
+        assert len(archive_calls) == 3
+        assert len(list(output_dir.rglob("*.json"))) == len(SAMPLE_SCHEMAS)
+
+    def test_does_not_retry_4xx(self, version: CdmVersion, output_dir: Path):
+        """A 404 is permanent; retrying would only delay the error."""
+        mock_client = MockHttpxClient(make_response(b"nope", status_code=404))
+        sleeps: list[float] = []
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = mock_client
+            with pytest.raises(DownloadError, match="404"):
+                download_schemas(version, output_dir, sleep=sleeps.append)
+
+        assert mock_client.get.call_count == 1
+        assert sleeps == []
 
     def test_raises_on_network_error(self, version: CdmVersion, output_dir: Path):
         mock_client = MagicMock()
@@ -238,7 +288,7 @@ class TestDownloadErrors:
         with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
             mock_client_cls.return_value = mock_client
             with pytest.raises(DownloadError, match="Connection refused"):
-                download_schemas(version, output_dir)
+                download_schemas(version, output_dir, sleep=lambda _s: None)
 
     def test_raises_on_bad_tar(self, version: CdmVersion, output_dir: Path):
         response = make_response(b"this is not a tar.gz file")
@@ -253,6 +303,116 @@ class TestDownloadErrors:
             mock_client_cls.return_value = MockHttpxClient(response)
             with pytest.raises(DownloadError, match="not a valid tar.gz"):
                 download_schemas(version, output_dir)
+
+
+# ── Checksum verification ───────────────────────────────────────────────────
+
+
+def routed_client(archive: MagicMock, checksum: MagicMock) -> MockHttpxClient:
+    """A client that serves the archive for the artifact URL and the sidecar for .sha1."""
+
+    def get(url: str, **_kwargs):
+        return checksum if url.endswith(".sha1") else archive
+
+    client = MockHttpxClient(archive)
+    client.get = MagicMock(side_effect=get)
+    return client
+
+
+class TestChecksumVerification:
+    def test_verifies_and_returns_the_published_digest(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        import hashlib
+
+        expected = hashlib.sha1(sample_tar_gz).hexdigest()
+        archive = make_response(sample_tar_gz)
+        client = routed_client(archive, make_response(expected.encode()))
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = client
+            digest = download_schemas(version, output_dir)
+
+        assert digest == expected
+        assert len(list(output_dir.rglob("*.json"))) == len(SAMPLE_SCHEMAS)
+
+    def test_rejects_a_mismatched_digest(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        archive = make_response(sample_tar_gz)
+        client = routed_client(archive, make_response(("0" * 40).encode()))
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = client
+            with pytest.raises(DownloadError, match="checksum mismatch"):
+                download_schemas(version, output_dir)
+
+        # Nothing must be unpacked when verification fails
+        assert not list(output_dir.iterdir())
+
+    def test_proceeds_when_no_checksum_is_published(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        archive = make_response(sample_tar_gz)
+        missing = make_response(b"", status_code=404)
+        client = routed_client(archive, missing)
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = client
+            digest = download_schemas(version, output_dir)
+
+        assert digest is None
+        assert len(list(output_dir.rglob("*.json"))) == len(SAMPLE_SCHEMAS)
+
+    def test_ignores_a_malformed_checksum(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        archive = make_response(sample_tar_gz)
+        client = routed_client(archive, make_response(b"this is not a digest"))
+
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = client
+            digest = download_schemas(version, output_dir)
+
+        assert digest is None
+        assert len(list(output_dir.rglob("*.json"))) == len(SAMPLE_SCHEMAS)
+
+
+# ── Atomic unpack ───────────────────────────────────────────────────────────
+
+
+class TestAtomicUnpack:
+    def test_failed_unpack_leaves_existing_schemas_untouched(
+        self, version: CdmVersion, output_dir: Path
+    ):
+        """A corrupt archive must not destroy what is already cached."""
+        existing = output_dir / "keepme.json"
+        existing.write_text('{"keep": true}', encoding="utf-8")
+
+        response = make_response(b"this is not a tar.gz file")
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = MockHttpxClient(response)
+            with pytest.raises(DownloadError, match="not a valid tar.gz"):
+                download_schemas(version, output_dir)
+
+        assert existing.read_text(encoding="utf-8") == '{"keep": true}'
+        # The partial directory must be cleaned up
+        assert not (output_dir.parent / "schema-raw.partial").exists()
+
+    def test_successful_unpack_replaces_previous_contents(
+        self, version: CdmVersion, output_dir: Path, sample_tar_gz: bytes
+    ):
+        stale = output_dir / "stale.json"
+        stale.write_text("{}", encoding="utf-8")
+
+        response = make_response(sample_tar_gz)
+        with patch("cdm_lite.downloader.httpx2.Client") as mock_client_cls:
+            mock_client_cls.return_value = MockHttpxClient(response)
+            download_schemas(version, output_dir)
+
+        assert not stale.exists()
+        assert (output_dir / "cdm/event/common/TradeState.json").exists()
+        assert not (output_dir.parent / "schema-raw.partial").exists()
 
 
 # ── Integration test ──────────────────────────────────────────────────────────

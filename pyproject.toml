@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.5.0b4"
+version = "0.6.0"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
@@ -27,7 +27,7 @@ keywords = [
   "code-generation",
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  "Development Status :: 5 - Production/Stable",
   "Environment :: Console",
   "Intended Audience :: Developers",
   "Intended Audience :: Financial and Insurance Industry",
@@ -60,5 +60,23 @@ markers = ["integration: hits external services, not run in normal CI"]
 testpaths = ["tests"]
 addopts = ["--strict-markers", "-ra", "--tb=short"]
 
+[tool.coverage.run]
+source = ["cdm_lite"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+]
+
 [dependency-groups]
-dev = ["complexipy>=7.0.1", "pytest>=9.0.3", "ruff>=0.17.1", "ty>=0.0.90"]
+dev = [
+  "complexipy>=7.0.1",
+  "pytest>=9.0.3",
+  "pytest-cov>=7.1.0",
+  "ruff>=0.17.1",
+  "ty>=0.0.90",
+]

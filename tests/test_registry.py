@@ -10,6 +10,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from unittest.mock import MagicMock
+
+import httpx2
 import pytest
 
 from cdm_lite.registry import CdmRegistry, CdmVersion
@@ -51,6 +54,28 @@ class TestCdmVersion:
 
     def test_dev_version(self):
         assert CdmVersion("7.0.0-dev.99").is_stable is False
+
+    @pytest.mark.parametrize(
+        "version",
+        [
+            "7.0.0-dev.1",
+            "6.19.0-dev.5",
+            "0.0.0-test.1",
+            "6.19.0-SNAPSHOT",
+            "6.19.0-rc.1",
+            "6.19.0-alpha",
+            "6.19.0-beta",
+        ],
+    )
+    def test_pre_release_versions_are_not_stable(self, version: str):
+        assert CdmVersion(version).is_stable is False
+
+    @pytest.mark.parametrize(
+        "version",
+        ["6.19.0", "7.7.0", "8.0.0", "1.0.0-1", "2024.1.2"],
+    )
+    def test_release_versions_are_stable(self, version: str):
+        assert CdmVersion(version).is_stable is True
 
     def test_str(self):
         assert str(CdmVersion("6.19.0")) == "6.19.0"
@@ -116,6 +141,81 @@ class TestCdmRegistry:
     def test_get_dev_version(self, registry):
         v = registry.get("7.0.0-dev.1")
         assert v.is_stable is False
+
+
+# ── Offline metadata cache ────────────────────────────────────────────────────
+
+
+class TestOfflineMetadata:
+    @staticmethod
+    def _fake_get(text: str):
+        def get(*_args, **_kwargs):
+            response = MagicMock()
+            response.text = text
+            response.raise_for_status.return_value = None
+            return response
+
+        return get
+
+    @staticmethod
+    def _offline(*_args, **_kwargs):
+        raise httpx2.RequestError("Connection refused")
+
+    def test_caches_metadata_after_a_successful_fetch(self, monkeypatch, tmp_path):
+
+        monkeypatch.setattr("cdm_lite.registry.httpx2.get", self._fake_get(SAMPLE_METADATA))
+        cache = tmp_path / "maven-metadata.xml"
+        registry = CdmRegistry(metadata_cache=cache)
+
+        registry.all_versions()
+
+        assert registry.served_from_cache is False
+        assert cache.is_file()
+        assert "6.19.0" in cache.read_text(encoding="utf-8")
+
+    def test_falls_back_to_the_cache_when_offline(self, monkeypatch, tmp_path):
+
+        cache = tmp_path / "maven-metadata.xml"
+        cache.write_text(SAMPLE_METADATA, encoding="utf-8")
+        monkeypatch.setattr("cdm_lite.registry.httpx2.get", self._offline)
+        registry = CdmRegistry(metadata_cache=cache)
+
+        versions = registry.all_versions()
+
+        assert registry.served_from_cache is True
+        assert CdmVersion("6.19.0") in versions
+        assert registry.latest_stable() == CdmVersion("6.19.0")
+        # A cached response must also serve version lookups
+        assert registry.get("6.19.0").version == "6.19.0"
+
+    def test_reports_a_helpful_error_without_cache_or_network(self, monkeypatch, tmp_path):
+
+        monkeypatch.setattr("cdm_lite.registry.httpx2.get", self._offline)
+        registry = CdmRegistry(metadata_cache=tmp_path / "missing.xml")
+
+        with pytest.raises(RuntimeError, match="Maven Central"):
+            registry.all_versions()
+
+    def test_survives_a_corrupt_cache(self, monkeypatch, tmp_path):
+
+        cache = tmp_path / "maven-metadata.xml"
+        cache.write_text("<<< not xml", encoding="utf-8")
+        monkeypatch.setattr("cdm_lite.registry.httpx2.get", self._fake_get(SAMPLE_METADATA))
+        registry = CdmRegistry(metadata_cache=cache)
+
+        # The corrupt cache is overwritten by the fresh fetch
+        assert registry.all_versions()
+        assert "6.19.0" in cache.read_text(encoding="utf-8")
+
+    def test_corrupt_cache_falls_back_to_a_parse_error_offline(self, monkeypatch, tmp_path):
+
+        cache = tmp_path / "maven-metadata.xml"
+        cache.write_text("<<< not xml", encoding="utf-8")
+        monkeypatch.setattr("cdm_lite.registry.httpx2.get", self._offline)
+        registry = CdmRegistry(metadata_cache=cache)
+
+        with pytest.raises(RuntimeError, match="corrupt"):
+            registry.all_versions()
 
 
 # ── Integration test (real network, skipped in CI) ───────────────────────────

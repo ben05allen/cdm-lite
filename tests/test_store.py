@@ -16,7 +16,7 @@ from pathlib import Path
 import pytest
 
 from cdm_lite.registry import CdmVersion
-from cdm_lite.store import CdmStore, Config, VersionStatus
+from cdm_lite.store import CdmStore, Config, VersionStatus, staleness
 
 # ── Fixtures ──────────────────────────────────────────────────────────────────
 
@@ -70,6 +70,23 @@ class TestVersionStatus:
         s = VersionStatus(version="6.19.0")
         parsed = json.loads(s.to_json())
         assert parsed["version"] == "6.19.0"
+
+    def test_ignores_fields_written_by_a_newer_version(self):
+        """A newer cdm-lite may add fields; an older one must still read them."""
+        text = json.dumps(
+            {
+                "version": "6.19.0",
+                "downloaded": True,
+                "schema_digest": "sha256:abc123",
+            }
+        )
+        status = VersionStatus.from_json(text)
+        assert status.version == "6.19.0"
+        assert status.downloaded is True
+
+    def test_requires_a_version(self):
+        with pytest.raises(ValueError, match="version"):
+            VersionStatus.from_json(json.dumps({"downloaded": True}))
 
 
 # ── Config ────────────────────────────────────────────────────────────────────
@@ -159,6 +176,15 @@ class TestStatusReads:
         with pytest.raises(FileNotFoundError, match="not found in cache"):
             store.status(version)
 
+    def test_status_error_points_at_an_existing_command(self, store: CdmStore, version: CdmVersion):
+        """The error must reference a command that actually exists."""
+        store.init()
+        with pytest.raises(FileNotFoundError) as excinfo:
+            store.status(version)
+        message = str(excinfo.value)
+        assert "cdm-lite install 6.19.0" in message
+        assert "cdm-lite init" not in message
+
     def test_is_downloaded_false_if_not_initialised(self, store: CdmStore, version: CdmVersion):
         assert store.is_downloaded(version) is False
 
@@ -187,6 +213,21 @@ class TestStatusWrites:
         status = initialised_store.status(version)
         assert status.downloaded_at is not None
 
+    def test_update_preserves_fields_written_by_a_newer_version(
+        self, initialised_store: CdmStore, version: CdmVersion
+    ):
+        """Writing status must not drop fields a newer cdm-lite added."""
+        path = initialised_store._status_path(version)
+        data = json.loads(path.read_text(encoding="utf-8"))
+        data["schema_digest"] = "sha256:abc123"
+        path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+
+        initialised_store.mark_downloaded(version)
+
+        written = json.loads(path.read_text(encoding="utf-8"))
+        assert written["schema_digest"] == "sha256:abc123"
+        assert written["downloaded"] is True
+
     def test_mark_cleaned(self, initialised_store: CdmStore, version: CdmVersion):
         initialised_store.mark_cleaned(version)
         assert initialised_store.is_cleaned(version)
@@ -197,16 +238,28 @@ class TestStatusWrites:
         assert status.cleaned_at is not None
 
     def test_mark_generated(self, initialised_store: CdmStore, version: CdmVersion):
-        initialised_store.mark_generated(version, cdm_lite_version="0.1.0")
+        initialised_store.mark_generated(
+            version, cdm_lite_version="0.1.0", generator_version="0.30.0"
+        )
         assert initialised_store.is_generated(version)
 
     def test_mark_generated_sets_timestamp_and_version(
         self, initialised_store: CdmStore, version: CdmVersion
     ):
-        initialised_store.mark_generated(version, cdm_lite_version="0.1.0")
+        initialised_store.mark_generated(
+            version, cdm_lite_version="0.1.0", generator_version="0.30.0"
+        )
         status = initialised_store.status(version)
         assert status.generated_at is not None
         assert status.cdm_lite_version == "0.1.0"
+        assert status.generator_version == "0.30.0"
+
+    def test_mark_downloaded_records_the_schema_checksum(
+        self, initialised_store: CdmStore, version: CdmVersion
+    ):
+        digest = "a" * 40
+        initialised_store.mark_downloaded(version, schema_sha1=digest)
+        assert initialised_store.status(version).schema_sha1 == digest
 
     def test_marks_are_independent(self, initialised_store: CdmStore, version: CdmVersion):
         """Marking downloaded should not affect cleaned or generated."""
@@ -215,6 +268,88 @@ class TestStatusWrites:
         assert status.downloaded is True
         assert status.cleaned is False
         assert status.generated is False
+
+
+# ── Staleness ───────────────────────────────────────────────────────────────
+
+
+def _fresh_status(**overrides) -> VersionStatus:
+    status = VersionStatus(
+        version="6.19.0",
+        downloaded=True,
+        cleaned=True,
+        generated=True,
+        cdm_lite_version="0.6.0",
+        generator_version="0.30.0",
+    )
+    for key, value in overrides.items():
+        setattr(status, key, value)
+    return status
+
+
+class TestStaleness:
+    def test_not_generated_is_never_stale(self):
+        status = _fresh_status(generated=False)
+        assert staleness(status, cdm_lite_version="9.9.9", generator_version="9.9.9") is None
+
+    def test_matching_versions_are_fresh(self):
+        status = _fresh_status()
+        result = staleness(status, cdm_lite_version="0.6.0", generator_version="0.30.0")
+        assert result is None
+
+    def test_cdm_lite_upgrade_invalidates_everything(self):
+        status = _fresh_status()
+        result = staleness(status, cdm_lite_version="0.7.0", generator_version="0.30.0")
+        assert result is not None
+        assert result.reclean is True
+        assert result.regenerate is True
+        assert "0.6.0" in result.reason and "0.7.0" in result.reason
+
+    def test_generator_upgrade_only_regenerates(self):
+        status = _fresh_status()
+        result = staleness(status, cdm_lite_version="0.6.0", generator_version="0.31.0")
+        assert result is not None
+        assert result.reclean is False
+        assert result.regenerate is True
+        assert "datamodel-code-generator" in result.reason
+
+    def test_cache_without_provenance_is_stale(self):
+        status = _fresh_status(cdm_lite_version=None, generator_version=None)
+        result = staleness(status, cdm_lite_version="0.6.0", generator_version="0.30.0")
+        assert result is not None
+        assert result.reclean is True
+        assert "unknown version" in result.reason
+
+
+class TestInvalidateGenerated:
+    def test_reclean_clears_cleaned_and_generated(self, initialised_store: CdmStore):
+        version = CdmVersion("6.19.0")
+        initialised_store.mark_cleaned(version)
+        initialised_store.mark_generated(
+            version, cdm_lite_version="0.6.0", generator_version="0.30.0"
+        )
+
+        initialised_store.invalidate_generated(version, reclean=True)
+
+        status = initialised_store.status(version)
+        assert status.cleaned is False
+        assert status.generated is False
+
+    def test_regenerate_only_clears_generated(self, initialised_store: CdmStore):
+        version = CdmVersion("6.19.0")
+        initialised_store.mark_downloaded(version, schema_sha1="a" * 40)
+        initialised_store.mark_cleaned(version)
+        initialised_store.mark_generated(
+            version, cdm_lite_version="0.6.0", generator_version="0.30.0"
+        )
+
+        initialised_store.invalidate_generated(version, reclean=False)
+
+        status = initialised_store.status(version)
+        assert status.cleaned is True
+        assert status.generated is False
+        assert status.downloaded is True
+        assert status.schema_sha1 == "a" * 40
 
 
 # ── Config ────────────────────────────────────────────────────────────────────

@@ -24,6 +24,16 @@ from cdm_lite.templates.readme_md import generate_readme
 MIN_PYTHON_VERSION = 3.11
 
 
+def generator_version() -> str:
+    """Return the installed datamodel-code-generator version."""
+    try:
+        from importlib.metadata import version
+
+        return version("datamodel-code-generator")
+    except Exception:
+        return "unknown"
+
+
 def generate_package_metadata(
     models_dir: Path,
     cdm_version: str,

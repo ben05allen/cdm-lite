@@ -12,5 +12,11 @@ wheels/
 # Tool caches
 .complexipy_cache/
 
+# Coverage artifacts
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
 # JSON libs
 /lib
