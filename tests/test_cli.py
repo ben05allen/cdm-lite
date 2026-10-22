@@ -622,3 +622,49 @@ class TestRemoveCommand:
         assert result.exit_code == 0
         assert "Removed CDM 6.19.0" in result.output
         mock_store.remove_version.assert_called_once_with(version)
+
+
+# ── --version flag ────────────────────────────────────────────────────────────
+
+
+class TestVersionFlag:
+    """The app-level ``--version`` flag."""
+
+    def test_prints_version(self, runner: CliRunner):
+        """``--version`` prints the installed version and exits successfully."""
+        with patch("cdm_lite.cli._get_version", return_value="1.2.3"):
+            result = runner.invoke(app, ["--version"])
+
+        assert result.exit_code == 0
+        assert "cdm-lite 1.2.3" in result.output
+
+    def test_short_flag_prints_version(self, runner: CliRunner):
+        """``-V`` is an alias for ``--version``."""
+        with patch("cdm_lite.cli._get_version", return_value="1.2.3"):
+            result = runner.invoke(app, ["-V"])
+
+        assert result.exit_code == 0
+        assert "cdm-lite 1.2.3" in result.output
+
+    def test_reports_unknown_when_metadata_unavailable(self, runner: CliRunner):
+        """A missing package metadata degrades to ``unknown`` rather than crashing."""
+        with patch("cdm_lite.cli._get_version", return_value="unknown"):
+            result = runner.invoke(app, ["--version"])
+
+        assert result.exit_code == 0
+        assert "cdm-lite unknown" in result.output
+
+    def test_matches_packaged_version(self, runner: CliRunner):
+        """The reported version matches the installed distribution metadata."""
+        from importlib.metadata import version
+
+        result = runner.invoke(app, ["--version"])
+
+        assert result.exit_code == 0
+        assert version("cdm-lite") in result.output
+
+    def test_no_args_still_shows_help(self, runner: CliRunner):
+        """Adding the callback does not change the no-arguments behaviour."""
+        result = runner.invoke(app, [])
+
+        assert "Usage:" in result.output

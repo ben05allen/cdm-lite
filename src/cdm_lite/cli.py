@@ -44,6 +44,27 @@ store = CdmStore()
 registry = CdmRegistry()
 
 
+def _version_callback(value: bool) -> None:
+    """Print the installed cdm-lite version and exit."""
+    if value:
+        typer.echo(f"cdm-lite {_get_version()}")
+        raise typer.Exit()
+
+
+@app.callback()
+def main_callback(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        "-V",
+        callback=_version_callback,
+        is_eager=True,
+        help="Show the cdm-lite version and exit.",
+    ),
+) -> None:
+    """Manage CDM Pydantic model versions generated from the FINOS CDM JSON Schema."""
+
+
 def _show_current_path(store: CdmStore) -> None:
     """Print the current models path prominently."""
     current = store.current_models_dir()
