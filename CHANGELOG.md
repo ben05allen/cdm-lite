@@ -21,7 +21,7 @@ generated models are now covered by semantic versioning guarantees.
 - CI now tests Python 3.15, matching the versions advertised in the README and the trove classifiers.
 - Coverage is measured in CI and enforced at a floor of 85% (`pytest-cov` added to the development dependencies).
 - Dependabot configuration for the `uv` lock file and GitHub Actions.
-- Releases are published to PyPI automatically from a `v*` tag using Trusted Publishing (OIDC), so no API token is stored in GitHub. The workflow verifies the tag matches the project version and that the CHANGELOG documents it.
+- Releases are published to PyPI automatically from a `v*` tag using Trusted Publishing (OIDC), so no API token is stored in GitHub. The workflow verifies the tag matches the project version and that the CHANGELOG documents it, and skips files already present on PyPI so re-runs and manual-first releases cannot fail on duplicate uploads.
 - `scripts/bump_version.py` updates the version, the development status classifier, the README status line and the CHANGELOG in a single command, so those references can no longer drift apart.
 - CI fails when the CHANGELOG has no entry for the version in `pyproject.toml`.
 

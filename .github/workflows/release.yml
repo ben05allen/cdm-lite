@@ -54,4 +54,7 @@ jobs:
         run: uv build
 
       - name: Publish to PyPI
-        run: uv publish --trusted-publishing always
+        # --check-url skips files that already exist on the index, so a
+        # re-run (or a release published manually first) cannot fail on
+        # duplicate uploads.
+        run: uv publish --trusted-publishing always --check-url https://pypi.org/simple/
