@@ -14,7 +14,7 @@ deserialization of CDM JSON payloads in Python codebases without heavy Java depe
 
 ## Status
 
-**Current Phase:** Stable (v0.6.0)
+**Current Phase:** Stable (v0.6.1)
 
 `cdm-lite` is a stable release. The CLI surface, the on-disk cache layout and the layout of the
 generated models follow [Semantic Versioning](https://semver.org/spec/v2.0.0.html): breaking

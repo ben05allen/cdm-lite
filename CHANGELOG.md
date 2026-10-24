@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.1] - 2026-10-24
+
+Release automation hardening. No changes to the CLI or to the generated models.
+
+### Changed
+
+- The release workflow now checks whether every artifact for the version already exists on PyPI (by filename) and skips the upload entirely when the release is complete, making tag pushes and workflow re-runs idempotent. Partial uploads send only the files missing from the index. Hash-based duplicate detection does not work across build environments because the wheel embeds the `Generator: uv <version>` stamp.
+- The release process documentation (bump script, tag flow, PyPI trusted publisher setup) moved from the README into CONTRIBUTING.md, which also covers local development commands.
+
 ## [0.6.0] - 2026-10-22
 
 First stable (non-beta) release. The CLI surface, the on-disk cache layout and the layout of the
