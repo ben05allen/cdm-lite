@@ -53,8 +53,45 @@ jobs:
       - name: Build distributions
         run: uv build
 
+      # Idempotency guard: a tag for a version that is already fully on PyPI
+      # (released manually first, or a re-run of this workflow) must not fail
+      # on duplicate uploads. Compared by filename on purpose: the wheel hash
+      # includes the `Generator: uv <version>` stamp of whatever uv built it,
+      # so two valid builds of identical sources never hash-match.
+      - name: Check whether the release is already complete on PyPI
+        id: published
+        run: |
+          uv run --no-project python - >> "$GITHUB_OUTPUT" <<'PY'
+          import json
+          import pathlib
+          import tomllib
+          import urllib.request
+
+          version = tomllib.loads(pathlib.Path("pyproject.toml").read_text())["project"]["version"]
+          # uv build drops a .gitignore into dist/; only real artifacts count
+          local = {
+              path.name
+              for path in pathlib.Path("dist").iterdir()
+              if not path.name.startswith(".")
+          }
+
+          try:
+              url = f"https://pypi.org/pypi/cdm-lite/{version}/json"
+              with urllib.request.urlopen(url, timeout=15) as response:
+                  remote = {item["filename"] for item in json.load(response)["urls"]}
+          except Exception:
+              remote = set()  # version not published yet -> upload everything
+
+          missing = sorted(local - remote)
+          complete = bool(local) and not missing
+          print(f"complete={'true' if complete else 'false'}")
+          print(f"missing={' '.join(missing)}")
+          PY
+
       - name: Publish to PyPI
-        # --check-url skips files that already exist on the index, so a
-        # re-run (or a release published manually first) cannot fail on
-        # duplicate uploads.
+        if: steps.published.outputs.complete != 'true'
         run: uv publish --trusted-publishing always --check-url https://pypi.org/simple/
+
+      - name: Release already published
+        if: steps.published.outputs.complete == 'true'
+        run: echo "All files for this version are already on PyPI; nothing to upload."

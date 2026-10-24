@@ -45,7 +45,9 @@ stored in GitHub.
    ```
 
 4. The `Release` workflow verifies the tag matches the project version, builds the sdist and
-   wheel, and publishes them to PyPI (skipping files already present on the index).
+   wheel, and publishes them to PyPI. The upload is skipped entirely when the version is already
+   fully published (for example when it was released manually first, or when a run is re-triggered),
+   and partial uploads pick up only the files missing from the index.
 
 **One-time PyPI setup:** on the [cdm-lite project page](https://pypi.org/manage/project/cdm-lite/settings/publishing),
 add a GitHub trusted publisher with owner `ben05allen`, repository `cdm-lite`, workflow
