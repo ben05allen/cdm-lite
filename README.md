@@ -102,39 +102,6 @@ trade_state = TradeState.model_validate_json(payload)
 print(trade_state.trade.trade_date.value)
 ```
 
-## Releasing
-
-Releases are published to PyPI automatically from a git tag, using
-[Trusted Publishing](https://docs.pypi.org/trusted-publishers/) (OIDC) — no API token is
-stored in GitHub.
-
-1. Bump the version and update every version reference in one command:
-
-   ```bash
-   uv run python scripts/bump_version.py 0.6.1 --note "Add a cdm-lite upgrade command."
-   ```
-
-   This updates `pyproject.toml` (version and development status classifier), the README status
-   line and the CHANGELOG in a single commit.
-
-2. Open a pull request. CI checks that the CHANGELOG documents the version in `pyproject.toml`.
-
-3. Merge, then tag and push the tag:
-
-   ```bash
-   git tag v0.6.1
-   git push origin v0.6.1
-   ```
-
-4. The `Release` workflow verifies the tag matches the project version, builds the sdist and
-   wheel, and publishes them to PyPI.
-
-**One-time PyPI setup:** on the [cdm-lite project page](https://pypi.org/manage/project/cdm-lite/settings/publishing),
-add a GitHub trusted publisher with owner `ben05allen`, repository `cdm-lite`, workflow
-`release.yml` and environment `pypi`. The `pypi` environment must therefore be referenced by the
-release workflow; if you configure the publisher without an environment name, remove the
-`environment:` block from `.github/workflows/release.yml`.
-
 ## Reference Commands
 
 - `cdm-lite --version`: Print the installed version.
