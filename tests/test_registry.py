@@ -84,6 +84,19 @@ class TestCdmVersion:
         versions = [CdmVersion("6.19.0"), CdmVersion("6.0.0"), CdmVersion("6.1.0")]
         assert min(versions) == CdmVersion("6.0.0")
 
+    @pytest.mark.parametrize(
+        "older,newer",
+        [
+            ("6.9.0", "6.19.0"),
+            ("6.19.9", "6.19.10"),
+            ("9.0.0", "10.0.0"),
+            ("7.0.0-dev.9", "7.0.0-dev.10"),
+            ("7.0.0-dev.10", "7.0.0"),
+        ],
+    )
+    def test_numeric_and_prerelease_ordering(self, older: str, newer: str):
+        assert CdmVersion(older) < CdmVersion(newer)
+
     def test_schema_url(self):
         v = CdmVersion("6.19.0")
         assert v.schema_url == (
@@ -125,6 +138,18 @@ class TestCdmRegistry:
         assert versions == sorted(versions)
 
     def test_latest_stable(self, registry):
+        assert registry.latest_stable() == CdmVersion("6.19.0")
+
+    def test_latest_stable_uses_numeric_ordering(self):
+        import xml.etree.ElementTree as ET
+
+        registry = CdmRegistry()
+        registry._metadata = ET.fromstring(
+            "<metadata><versioning><versions>"
+            "<version>6.9.0</version><version>6.19.0</version>"
+            "<version>7.0.0-dev.1</version>"
+            "</versions></versioning></metadata>"
+        )
         assert registry.latest_stable() == CdmVersion("6.19.0")
 
     def test_latest_includes_dev(self, registry):

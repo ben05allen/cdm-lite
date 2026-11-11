@@ -1,6 +1,6 @@
 [project]
 name = "cdm-lite"
-version = "0.6.1"
+version = "0.7.0"
 description = "Python CDM Models"
 readme = "README.md"
 authors = [{ name = "Ben Allen", email = "ben05allen@hotmail.com" }]
@@ -12,6 +12,7 @@ dependencies = [
   "datamodel-code-generator[ruff]>=0.86.0",
   "typer>=0.25.1",
   "rich>=15.0.0",
+  "packaging>=26.3",
 ]
 
 license-files = ["LICEN[CS]E*"]

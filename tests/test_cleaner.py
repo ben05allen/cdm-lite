@@ -228,6 +228,19 @@ class TestCleanSchemas:
         path.write_bytes(raw.replace(b"\\t", b"\t"))
         result = clean_schemas(input_dir, output_dir)
         assert result.fixed == 1
+        output = json.loads((output_dir / "dirty.json").read_text(encoding="utf-8"))
+        assert output["description"] == "Bad tab."
+
+    @pytest.mark.parametrize("control", ["\t", "\n"])
+    def test_writes_repaired_non_enum_schema(self, input_dir: Path, output_dir: Path, control: str):
+        (input_dir / "dirty.json").write_text(
+            '{"type": "object", "description": "Bad' + control + 'description."}',
+            encoding="utf-8",
+        )
+        result = clean_schemas(input_dir, output_dir)
+        output = json.loads((output_dir / "dirty.json").read_text(encoding="utf-8"))
+        assert output == {"type": "object", "description": "Bad description."}
+        assert result.fixed == 1
 
     def test_empty_directory(self, input_dir: Path, output_dir: Path):
         result = clean_schemas(input_dir, output_dir)

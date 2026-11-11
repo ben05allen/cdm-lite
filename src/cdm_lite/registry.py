@@ -21,6 +21,7 @@ from functools import cached_property
 from pathlib import Path
 
 import httpx2
+from packaging.version import Version
 
 MAVEN_BASE = "https://repo1.maven.org/maven2/org/finos/cdm/cdm-json-schema"
 METADATA_URL = f"{MAVEN_BASE}/maven-metadata.xml"
@@ -64,7 +65,7 @@ class CdmVersion:
         return self.version
 
     def __lt__(self, other: "CdmVersion") -> bool:
-        return self.version < other.version
+        return Version(self.pep440) < Version(other.pep440)
 
 
 class CdmRegistry:

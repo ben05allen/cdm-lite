@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2026-11-11
+
+### Fixed
+
+- Compare CDM versions numerically, including pre-release numbers, so default installs and upgrades select the latest stable release correctly.
+- Preserve control-character repairs in cleaned schemas even when no enum `oneOf` is removed.
+- Mark model generation complete only after package metadata is written, allowing failed metadata writes to be retried on the next install.
+
+### Changed
+
+- Add `packaging` as a direct dependency for version comparisons.
+
 ## [0.6.1] - 2026-10-24
 
 Release automation hardening. No changes to the CLI or to the generated models.

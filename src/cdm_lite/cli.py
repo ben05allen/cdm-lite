@@ -287,16 +287,16 @@ def _generate_if_needed(
     if not gen_result.success:
         _abort(f"Model generation failed:\n{gen_result.stderr}")
 
-    store.mark_generated(
-        cdm_version,
-        cdm_lite_version=_get_version(),
-        generator_version=generator_version(),
-    )
-
     generate_package_metadata(
         store.models_dir(cdm_version),
         cdm_version=cdm_version.version,
         python_version=python_version,
+    )
+
+    store.mark_generated(
+        cdm_version,
+        cdm_lite_version=_get_version(),
+        generator_version=generator_version(),
     )
 
     console.print(f"  [dim]{gen_result}[/dim]")

@@ -216,6 +216,28 @@ class TestListCommand:
 
 
 class TestInstallCommand:
+    def test_metadata_failure_can_be_retried(
+        self, runner: CliRunner, mock_store: CdmStore, version: CdmVersion
+    ):
+        mock_store.init_version(version)
+        mock_store.mark_downloaded(version)
+        mock_store.mark_cleaned(version)
+        with (
+            patch("cdm_lite.cli.store", mock_store),
+            patch("cdm_lite.cli.generate_models", return_value=MagicMock(success=True)),
+            patch("cdm_lite.cli.generate_package_metadata") as metadata,
+        ):
+            metadata.side_effect = OSError("Metadata write failed")
+            failed = runner.invoke(app, ["install", version.version])
+            assert failed.exit_code != 0
+            assert not mock_store.status(version).generated
+
+            metadata.side_effect = None
+            retried = runner.invoke(app, ["install", version.version])
+            assert retried.exit_code == 0
+            assert mock_store.status(version).generated
+            assert metadata.call_count == 2
+
     def test_full_install_success(self, runner: CliRunner, version: CdmVersion):
         with (
             patch("cdm_lite.cli.registry") as mock_registry,

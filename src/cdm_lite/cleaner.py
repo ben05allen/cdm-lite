@@ -104,9 +104,11 @@ def clean_schemas(input_dir: Path, output_dir: Path) -> CleanResult:
         if was_fixed:
             result.fixed += 1
 
-        if _is_enum_schema(schema) and "oneOf" in schema:
+        enum_cleaned = _is_enum_schema(schema) and "oneOf" in schema
+        if enum_cleaned:
             schema = _strip_redundant_one_of(schema)
             result.cleaned += 1
+        if was_fixed or enum_cleaned:
             out_path.write_text(json.dumps(schema, indent=2), encoding="utf-8")
         else:
             shutil.copy2(in_path, out_path)
