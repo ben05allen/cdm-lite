@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.1] - 2026-11-11
+
+### Security
+
+- Require `pydantic>=2.14.2` in both cdm-lite and generated model packages, excluding versions affected by GHSA-qpmf-fgh3-ff25 and GHSA-3r8g-cqwr-jr29. The lockfile selects Pydantic 2.14.3.
+
+### Changed
+
+- Update runtime dependencies: platformdirs 4.14.5, Pydantic 2.14.3, and Typer 0.28.0.
+- Update development tools: complexipy 8.3.0, pytest 9.2.0, Ruff 0.17.4, and ty 0.0.99.
+- Update `astral-sh/setup-uv` to 10.3.1 in CI and release workflows.
+
 ## [0.7.0] - 2026-11-11
 
 ### Fixed

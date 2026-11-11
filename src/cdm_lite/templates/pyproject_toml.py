@@ -21,7 +21,7 @@ readme = "README.md"
 requires-python = ">={python_version}"
 license = {{ text = "Apache-2.0" }}
 dependencies = [
-    "pydantic>=2.0",
+    "pydantic>=2.14.2",
 ]
 
 [project.urls]

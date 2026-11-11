@@ -96,7 +96,7 @@ wheels = [
 
 [[package]]
 name = "cdm-lite"
-version = "0.7.0"
+version = "0.7.1"
 source = { editable = "." }
 dependencies = [
     { name = "datamodel-code-generator", extra = ["ruff"] },
@@ -123,7 +123,7 @@ requires-dist = [
     { name = "httpx2", specifier = ">=2.16.0" },
     { name = "packaging", specifier = ">=26.3" },
     { name = "platformdirs", specifier = ">=4.9.6" },
-    { name = "pydantic", specifier = ">=2.14.0" },
+    { name = "pydantic", specifier = ">=2.14.2" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "typer", specifier = ">=0.25.1" },
 ]

@@ -139,6 +139,31 @@ class TestGenerateModels:
 
 
 class TestGeneratePackageMetadata:
+    @pytest.mark.parametrize(
+        "version,allowed",
+        [
+            ("2.0.0", False),
+            ("2.14.0", False),
+            ("2.14.1", False),
+            ("2.14.2", True),
+            ("2.14.3", True),
+        ],
+    )
+    def test_pydantic_requirements_exclude_vulnerable_versions(
+        self, tmp_path: Path, version: str, allowed: bool
+    ):
+        import tomllib
+
+        from packaging.requirements import Requirement
+
+        generate_package_metadata(tmp_path, cdm_version="6.19.0")
+        project = Path(__file__).resolve().parents[1] / "pyproject.toml"
+        for path in (project, tmp_path / "pyproject.toml"):
+            metadata = tomllib.loads(path.read_text(encoding="utf-8"))
+            requirements = [Requirement(dep) for dep in metadata["project"]["dependencies"]]
+            pydantic = next(dep for dep in requirements if dep.name == "pydantic")
+            assert (version in pydantic.specifier) is allowed
+
     def test_creates_pyproject_toml(self, tmp_path: Path):
         generate_package_metadata(tmp_path, cdm_version="6.19.0")
         assert (tmp_path / "pyproject.toml").exists()
