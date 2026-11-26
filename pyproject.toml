@@ -76,6 +76,7 @@ exclude_also = [
 [dependency-groups]
 dev = [
   "complexipy>=7.0.1",
+  "prek>=0.5.11",
   "pytest>=9.0.3",
   "pytest-cov>=7.1.0",
   "ruff>=0.17.1",

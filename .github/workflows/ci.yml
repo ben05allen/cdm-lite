@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up uv
         uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa
@@ -37,7 +37,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up uv
         uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa
@@ -50,18 +50,15 @@ jobs:
 
       # The prek hooks in prek.toml are the single source of truth for
       # formatting, linting, type checking and complexity limits.
-      - name: Install prek
-        run: uv tool install prek
-
       - name: Run pre-commit hooks
-        run: prek run --all-files --show-diff-on-failure
+        run: uv run --locked prek run --all-files --show-diff-on-failure
 
   build:
     name: Build and Smoke Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up uv
         uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa
@@ -94,7 +91,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Set up uv
         uses: astral-sh/setup-uv@18d369b23da25a81e9458561248e1aafff6a70fa

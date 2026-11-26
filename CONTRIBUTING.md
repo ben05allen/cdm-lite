@@ -11,7 +11,7 @@ This project uses [`uv`](https://docs.astral.sh/uv/) for everything:
 uv sync                 # install dependencies (including the dev group)
 uv run pytest           # unit tests
 uv run pytest -m integration   # tests that hit external services
-prek run --all-files    # ruff, ruff format, ty, complexipy (prek.toml)
+uv run --locked prek run --all-files  # ruff, ruff format, ty, complexipy (prek.toml)
 ```
 
 CI runs the same checks on every push and pull request: linting via `prek`, a build smoke test,
